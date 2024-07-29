@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "start:dev": "NODE_ENV=development nodemon index.js",
+    "start:staging": "NODE_ENV=staging nodemon index.js",
+    "start:prod": "NODE_ENV=production node index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,8 +19,11 @@
     "express-async-errors": "^3.1.1",
     "helmet": "^7.1.0",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.1",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4",
     "winston": "^3.13.1"
   }
