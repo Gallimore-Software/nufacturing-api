@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon NODE_ENV=local index.js",
     "start:dev": "NODE_ENV=development nodemon index.js",
     "start:staging": "NODE_ENV=staging nodemon index.js",
-    "start:prod": "NODE_ENV=production node index.js"
+    "start:prod": "NODE_ENV=production node index.js",
+    "swag": "node swagger.js"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,9 @@
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4",
-    "winston": "^3.13.1"
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.13.1",
+    "winston-mongodb": "^5.1.1"
   }
 }

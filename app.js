@@ -8,17 +8,22 @@ const quoteRoutes = require('./src/routes/sales-routes/quoteRoutes');
 const orderRoutes = require('./src/routes/sales-routes/orderRoutes');
 const customerRoutes = require('./src/routes/sales-routes/customerRoutes');
 const inventoryRoutes = require('./src/routes/inventoryRoutes');
-const logger = require('./src/config/logger');
-require('./src/utils/scheduledTasks');
+const swaggerUI = require('swagger-ui-express');
+const openapi_swagger_specification_file = require('./swagger_output.json');
 
+// Schedule tasks
+require('./src/utils/scheduledTasks');
 
 const app = express();
 
-// Connect to the database
-connectDB();
+// Serve Swagger documentation
+app.use('/api', swaggerUI.serve, swaggerUI.setup(openapi_swagger_specification_file));
 
 // Middleware
 app.use(express.json());
+
+// Connect to the database
+connectDB();
 
 // Routes
 app.use('/api/users', userRoutes);
