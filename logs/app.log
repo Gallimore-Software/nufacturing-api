@@ -92,6 +92,7 @@
 {"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-01T00:33:29.259Z"}
 {"level":"info","message":"Logger initialized.","timestamp":"2024-08-01T00:34:38.539Z"}
 {"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-01T00:34:38.726Z"}
+<<<<<<< HEAD
 {"level":"info","message":"Logger initialized.","timestamp":"2024-08-02T09:15:33.437Z"}
 {"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-02T09:15:35.266Z"}
 {"level":"info","message":"Logger initialized.","timestamp":"2024-08-02T09:16:29.977Z"}
@@ -142,3 +143,9 @@
 {"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-02T13:13:27.802Z"}
 {"level":"info","message":"Logger initialized.","timestamp":"2024-08-02T13:15:28.948Z"}
 {"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-02T13:15:29.641Z"}
+=======
+{"level":"info","message":"Logger initialized.","timestamp":"2024-08-02T09:10:47.612Z"}
+{"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-02T09:10:47.815Z"}
+>>>>>>> 5b2b86cd90b48c0ec771e63cfb4ffe7886844d21
+{"level":"info","message":"Logger initialized.","timestamp":"2024-08-02T13:32:41.824Z"}
+{"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-02T13:32:52.336Z"}
