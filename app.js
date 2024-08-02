@@ -16,9 +16,6 @@ require('./src/utils/scheduledTasks');
 
 const app = express();
 
-// Serve Swagger documentation
-app.use('/api', swaggerUI.serve, swaggerUI.setup(openapi_swagger_specification_file));
-
 // Middleware
 app.use(express.json());
 
@@ -37,5 +34,8 @@ app.use('/api/sales/orders', orderRoutes);
 app.use('/api/sales/customers', customerRoutes);
 
 app.use('/api/inventory', inventoryRoutes);
+
+// Serve Swagger documentation
+app.use('/api', swaggerUI.serve, swaggerUI.setup(openapi_swagger_specification_file));
 
 module.exports = app;
