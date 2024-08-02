@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon NODE_ENV=local index.js",
-    "start:dev": "NODE_ENV=development nodemon index.js",
-    "start:staging": "NODE_ENV=staging nodemon index.js",
-    "start:prod": "NODE_ENV=production node index.js",
-    "swag": "node swagger.js"
+    "start": "cross-env NODE_ENV=local nodemon index.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start:staging": "cross-env NODE_ENV=staging nodemon index.js",
+    "start:prod": "cross-env NODE_ENV=production node index.js",
+    "swag": "node swagger.js",
+    "openapi:generate": "openapi-generator-cli generate",
+    "openapi:install": "openapi-generator-cli version-manager set 5.3.1"
   },
   "keywords": [],
   "author": "",
@@ -30,5 +32,9 @@
     "swagger-ui-express": "^5.0.1",
     "winston": "^3.13.1",
     "winston-mongodb": "^5.1.1"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.13.4",
+    "cross-env": "^7.0.3"
   }
 }
