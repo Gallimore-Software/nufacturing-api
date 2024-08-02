@@ -6,19 +6,24 @@ on:
       - "NFG-*"
 
 jobs:
-  create-integration-pull-request:
+  create_pr:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         with:
           source_branch: ${{ github.ref }}
           destination_branch: development
-          pr_title: "PR for feature branch ${{ github.ref }}"
-          pr_body: "Automatically created pull request for ${{ github.ref }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "Merge ${{ github.ref }} into development"
+          pr_body: "Automated PR to merge changes from feature to development"
