@@ -1,5 +1,5 @@
-
 # Created by https://www.gitignore.io/api/node,vim,git,macos,linux,sublimetext
+logs/**
 
 ### Git ###
 *.orig
@@ -106,7 +106,7 @@ typings/
 
 # dotenv environment variables file
 .env
-
+.env.*
 
 ### SublimeText ###
 # cache files for sublime text
