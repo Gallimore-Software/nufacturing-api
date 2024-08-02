@@ -92,3 +92,5 @@
 {"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-01T00:33:29.259Z"}
 {"level":"info","message":"Logger initialized.","timestamp":"2024-08-01T00:34:38.539Z"}
 {"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-01T00:34:38.726Z"}
+{"level":"info","message":"Logger initialized.","timestamp":"2024-08-02T09:10:47.612Z"}
+{"level":"info","message":"Connected to MongoDB for logging.","timestamp":"2024-08-02T09:10:47.815Z"}
