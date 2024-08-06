@@ -4,6 +4,8 @@
 
 The Nufacturing App employs a comprehensive multi-environment setup to facilitate streamlined development, rigorous testing, and seamless deployment. The environments include Local, Development, Testing, Staging, and Production. This structured setup, combined with a well-defined branching strategy and continuous integration processes, ensures robust and efficient development cycles.
 
+[![Coverage Status](https://coveralls.io/repos/github/gallimore-software/nufacturing/badge.svg?branch=main)](https://coveralls.io/github/gallimore-software/nufacturing?branch=main)
+
 ### Environments
 
 #### 1. Local Environment

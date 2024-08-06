@@ -9,7 +9,9 @@
     "start:prod": "cross-env NODE_ENV=production node index.js",
     "swag": "node swagger.js",
     "openapi:generate": "openapi-generator-cli generate",
-    "openapi:install": "openapi-generator-cli version-manager set 5.3.1"
+    "openapi:install": "openapi-generator-cli version-manager set 5.3.1",
+    "test": "jest --coverage",
+    "coverage": "nyc npm test"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +37,8 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.13.4",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "jest": "^26.6.0",
+    "nyc": "^15.1.0"
   }
 }
