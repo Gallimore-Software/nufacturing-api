@@ -1,6 +1,6 @@
 #!/bin/sh
-# This hook checks that branches are named according to the convention.
 
+# This hook checks that branches are named according to the convention.
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 branch_regex="^(feature|bugfix|hotfix|release)/NFG-[0-9]+-.+$"
 
@@ -9,3 +9,7 @@ if ! echo "$current_branch" | grep -Eq "$branch_regex"; then
   echo "Please rename your branch to follow the convention: )/NFG-12(feature|bugfix|hotfix|release3-description."
   exit 1
 fi
+
+# Lint staged files
+prettier $(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g') --write --ignore-unknown
+git update-index --again
