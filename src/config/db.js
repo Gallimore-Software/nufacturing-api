@@ -7,7 +7,7 @@ require('dotenv').config();
 const connectDB = async () => {
   try {
     console.log(process.env.DB_URI);
-    await mongoose.connect(process.env.DB_URI);
+    await mongoose.connect(`${process.env.DB_URI}`);
     logger.add(new transports.MongoDB({
       db: process.env.DB_URI,
       collection: 'logs',

@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const connectDB = require('./src/config/db');
 const userRoutes = require('./src/routes/userRoutes');
 const formulaRoutes = require('./src/routes/product-development-routes/formulaRoutes');
@@ -17,6 +18,7 @@ require('./src/utils/scheduledTasks');
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // Connect to the database
