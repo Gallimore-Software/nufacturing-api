@@ -1,6 +1,14 @@
 module.exports = {
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
   testEnvironment: "node",
   collectCoverage: true,
   coverageDirectory: "coverage",
-  testMatch: ["**/__tests__/**/*.js", "**/?(*.)+(spec|test).js"],
+  testPathIgnorePatterns: ["/node_modules/"],
 };
