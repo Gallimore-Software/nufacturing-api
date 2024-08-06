@@ -1,20 +1,20 @@
 {
-  "name": "node_nufacturing",
+  "name": "nufacturing-api",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "start": "cross-env NODE_ENV=local nodemon index.js",
     "start:dev": "cross-env NODE_ENV=development nodemon index.js",
     "start:staging": "cross-env NODE_ENV=staging nodemon index.js",
     "start:prod": "cross-env NODE_ENV=production node index.js",
-    "swag": "node swagger.js",
+    "docs": "node swagger.js",
     "openapi:generate": "openapi-generator-cli generate",
-    "openapi:install": "openapi-generator-cli version-manager set 5.3.1"
+    "openapi:install": "openapi-generator-cli version-manager set 5.3.1",
+    "test": "jest --config jest.config.js --coverage",
+    "test:coverage": "nyc npm test",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -36,6 +36,14 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.13.4",
-    "cross-env": "^7.0.3"
+    "@pact-foundation/pact": "^13.1.1",
+    "@pact-foundation/pact-node": "^10.18.0",
+    "cross-env": "^7.0.3",
+    "cypress": "^13.13.2",
+    "husky": "^9.1.4",
+    "jest": "^26.6.3",
+    "nyc": "^15.1.0",
+    "supertest": "^7.0.0",
+    "prettier": "^3.3.3"
   }
 }
