@@ -1,19 +1,94 @@
-┣ 📂.githooks
-┃ ┗ 📜commit-msg
+┣ 📂__tests__
+┃ ┗ 📜integration.test.js
 ┣ 📂.github
-┃ ┗ 📂workflows
-┃   ┗ 📜create-pr.yml
+┃ ┣ 📂workflows
+┃ ┃ ┣ 📜ci.yaml
+┃ ┃ ┣ 📜enforce-branch-naming.yml
+┃ ┃ ┣ 📜node-test-coverage.yml
+┃ ┃ ┗ 📜test.yml
+┃ ┗ 📜dependabot.yml
+┣ 📂.husky
+┃ ┣ 📂_
+┃ ┃ ┣ 📜.gitignore
+┃ ┃ ┣ 📜applypatch-msg
+┃ ┃ ┣ 📜commit-msg
+┃ ┃ ┣ 📜h
+┃ ┃ ┣ 📜husky.sh
+┃ ┃ ┣ 📜post-applypatch
+┃ ┃ ┣ 📜post-checkout
+┃ ┃ ┣ 📜post-commit
+┃ ┃ ┣ 📜post-merge
+┃ ┃ ┣ 📜post-rewrite
+┃ ┃ ┣ 📜pre-applypatch
+┃ ┃ ┣ 📜pre-auto-gc
+┃ ┃ ┣ 📜pre-commit
+┃ ┃ ┣ 📜pre-push
+┃ ┃ ┣ 📜pre-rebase
+┃ ┃ ┗ 📜prepare-commit-msg
+┃ ┣ 📜commit-msg
+┃ ┣ 📜pre-commit
+┃ ┗ 📜pre-push
 ┣ 📂.vscode
 ┃ ┗ 📜settings.json
 ┣ 📂clients
 ┃ ┗ 📂nufacturing
+┃   ┣ 📂.angular
+┃   ┃ ┗ 📂cache
+┃   ┃   ┗ 📂16.2.14
+┃   ┃     ┣ 📂angular-webpack
+┃   ┃     ┗ 📂babel-webpack
 ┃   ┣ 📂.github
-┃   ┃ ┗ 📂workflows
-┃   ┃   ┗ 📜azure-static-web-apps-orange-plant-0f4cef90f.yml
+┃   ┃ ┣ 📂workflows
+┃   ┃ ┃ ┣ 📜angular-test-coverage.yml
+┃   ┃ ┃ ┣ 📜azure-static-web-apps-deploy.yml
+┃   ┃ ┃ ┣ 📜ci.yaml
+┃   ┃ ┃ ┣ 📜enforce-branch-naming.yml
+┃   ┃ ┃ ┗ 📜test.yml
+┃   ┃ ┗ 📜dependabot.yml
+┃   ┣ 📂.husky
+┃   ┃ ┣ 📂_
+┃   ┃ ┃ ┣ 📜.gitignore
+┃   ┃ ┃ ┣ 📜applypatch-msg
+┃   ┃ ┃ ┣ 📜commit-msg
+┃   ┃ ┃ ┣ 📜h
+┃   ┃ ┃ ┣ 📜husky.sh
+┃   ┃ ┃ ┣ 📜post-applypatch
+┃   ┃ ┃ ┣ 📜post-checkout
+┃   ┃ ┃ ┣ 📜post-commit
+┃   ┃ ┃ ┣ 📜post-merge
+┃   ┃ ┃ ┣ 📜post-rewrite
+┃   ┃ ┃ ┣ 📜pre-applypatch
+┃   ┃ ┃ ┣ 📜pre-auto-gc
+┃   ┃ ┃ ┣ 📜pre-commit
+┃   ┃ ┃ ┣ 📜pre-push
+┃   ┃ ┃ ┣ 📜pre-rebase
+┃   ┃ ┃ ┗ 📜prepare-commit-msg
+┃   ┃ ┣ 📜commit-msg
+┃   ┃ ┣ 📜pre-commit
+┃   ┃ ┗ 📜pre-push
 ┃   ┣ 📂.vscode
 ┃   ┃ ┣ 📜extensions.json
 ┃   ┃ ┣ 📜launch.json
 ┃   ┃ ┗ 📜tasks.json
+┃   ┣ 📂coverage
+┃   ┃ ┣ 📂lcov-report
+┃   ┃ ┃ ┣ 📜base.css
+┃   ┃ ┃ ┣ 📜block-navigation.js
+┃   ┃ ┃ ┣ 📜favicon.png
+┃   ┃ ┃ ┣ 📜index.html
+┃   ┃ ┃ ┣ 📜prettify.css
+┃   ┃ ┃ ┣ 📜prettify.js
+┃   ┃ ┃ ┣ 📜sort-arrow-sprite.png
+┃   ┃ ┃ ┗ 📜sorter.js
+┃   ┃ ┣ 📜clover.xml
+┃   ┃ ┣ 📜coverage-final.json
+┃   ┃ ┗ 📜lcov.info
+┃   ┣ 📂docs
+┃   ┃ ┣ 📜FILETREE.txt
+┃   ┃ ┣ 📜MERGING_STRATEGY.md
+┃   ┃ ┣ 📜SCHEMA.md
+┃   ┃ ┣ 📜TESTING.md
+┃   ┃ ┗ 📜workflow.png
 ┃   ┣ 📂environment
 ┃   ┃ ┣ 📜environment.prod.ts
 ┃   ┃ ┗ 📜environment.ts
@@ -89,6 +164,11 @@
 ┃   ┃ ┃ ┃ ┃ ┃   ┣ 📜inventory-items-table.component.scss
 ┃   ┃ ┃ ┃ ┃ ┃   ┣ 📜inventory-items-table.component.spec.ts
 ┃   ┃ ┃ ┃ ┃ ┃   ┗ 📜inventory-items-table.component.ts
+┃   ┃ ┃ ┃ ┃ ┣ 📂view-inventory
+┃   ┃ ┃ ┃ ┃ ┃ ┣ 📜view-inventory.component.contract.spec.ts
+┃   ┃ ┃ ┃ ┃ ┃ ┣ 📜view-inventory.component.integration.spec.ts
+┃   ┃ ┃ ┃ ┃ ┃ ┣ 📜view-inventory.component.spec.ts
+┃   ┃ ┃ ┃ ┃ ┃ ┗ 📜view-inventory.e2e-spec.ts
 ┃   ┃ ┃ ┃ ┃ ┣ 📜inventory-routing.module.ts
 ┃   ┃ ┃ ┃ ┃ ┣ 📜inventory.component.html
 ┃   ┃ ┃ ┃ ┃ ┣ 📜inventory.component.scss
@@ -578,28 +658,50 @@
 ┃   ┃ ┃ ┣ 📜Liquid Sachet Layout 5.webp
 ┃   ┃ ┃ ┣ 📜Nufacturing - White Logo Stacked.webp
 ┃   ┃ ┃ ┗ 📜Stick Pack Layout (vertical).webp
+┃   ┃ ┣ 📂e2e
+┃   ┃ ┃ ┗ 📜inventory.cypress.ts
+┃   ┃ ┣ 📂integration-tests
 ┃   ┃ ┣ 📜.npmrc
 ┃   ┃ ┣ 📜favicon.ico
 ┃   ┃ ┣ 📜index.html
 ┃   ┃ ┣ 📜main.ts
+┃   ┃ ┣ 📜setup-jest.ts
 ┃   ┃ ┗ 📜styles.scss
 ┃   ┣ 📜.editorconfig
 ┃   ┣ 📜.gitignore
 ┃   ┣ 📜angular.json
+┃   ┣ 📜jest.config.js
+┃   ┣ 📜karma.conf.js
 ┃   ┣ 📜package.json
 ┃   ┣ 📜README.md
+┃   ┣ 📜SECURITY.md
 ┃   ┣ 📜staticwebapp.config
 ┃   ┣ 📜tsconfig.app.json
 ┃   ┣ 📜tsconfig.json
 ┃   ┗ 📜tsconfig.spec.json
+┣ 📂cypress
+┃ ┗ 📂integration
+┃   ┗ 📜index_spec.js
 ┣ 📂docs
-┣ 📂logs
-┃ ┗ 📜app.log
+┃ ┣ 📜BUG_CATEGORIES.md
+┃ ┣ 📜filetree.txt
+┃ ┣ 📜MERGING_STRATEGY.md
+┃ ┣ 📜SCHEMA.md
+┃ ┣ 📜TESTING_PROCESS.md
+┃ ┣ 📜TESTING_SETUP.md
+┃ ┗ 📜workflow.png
+┣ 📂pact
+┃ ┗ 📜consumerPact.spec.js
 ┣ 📂src
 ┃ ┣ 📂config
 ┃ ┃ ┣ 📜db.js
 ┃ ┃ ┗ 📜logger.js
 ┃ ┣ 📂controllers
+┃ ┃ ┣ 📂inventory-controller
+┃ ┃ ┃ ┣ 📜inventoryController.contract.test.js
+┃ ┃ ┃ ┣ 📜inventoryController.e2e.test.js
+┃ ┃ ┃ ┣ 📜inventoryController.integration.test.js
+┃ ┃ ┃ ┗ 📜inventoryController.unit.test.js
 ┃ ┃ ┣ 📂product-development-controller
 ┃ ┃ ┃ ┣ 📜formulaController.js
 ┃ ┃ ┃ ┣ 📜productSkuController.js
@@ -640,14 +742,18 @@
 ┃   ┣ 📜scheduledTasks.js
 ┃   ┗ 📜sendEmail.js
 ┣ 📜.env.development
-┣ 📜.env.local
 ┣ 📜.env.production
 ┣ 📜.env.staging
+┣ 📜.env.testing
 ┣ 📜.gitignore
 ┣ 📜.gitmodules
 ┣ 📜app.js
+┣ 📜cypress.json
 ┣ 📜index.js
+┣ 📜jest.config.js
+┣ 📜openapitools.json
 ┣ 📜package.json
 ┣ 📜README.md
+┣ 📜SECURITY.md
 ┣ 📜swagger_output.json
 ┗ 📜swagger.js
