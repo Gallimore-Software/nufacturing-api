@@ -1,5 +1,5 @@
 const express = require("express");
-const customerController = require("../../controllers/sales-controller/customerController");
+const purchaseOrderController = require("../../controllers/receiving-controller/purchaseOrderController");
 const roleMiddleware = require("../../middleware/roleMiddlewaree");
 
 const router = express.Router();
@@ -8,27 +8,27 @@ const router = express.Router();
 router.get(
   "/",
   roleMiddleware(["admin", "manager"]),
-  customerController.getAllCustomers,
+  purchaseOrderController.getAllPurchaseOrders,
 );
 router.get(
-  "/:labTestId",
+  "/:purchaseOrderId",
   roleMiddleware(["admin", "manager", "user"]),
-  customerController.getCustomerById,
+  purchaseOrderController.getPurchaseOrderById,
 );
 router.post(
   "/",
   roleMiddleware(["admin", "manager"]),
-  customerController.createCustomer,
+  purchaseOrderController.createPurchaseOrder,
 );
 router.put(
-  "/:labTestId",
+  "/:purchaseOrderId",
   roleMiddleware(["admin", "manager"]),
-  customerController.updateCustomer,
+  purchaseOrderController.updatePurchaseOrderById,
 );
 router.delete(
-  "/:labTestId",
+  "/:purchaseOrderId",
   roleMiddleware(["admin"]),
-  customerController.deleteCustomer,
+  purchaseOrderController.deletePurchaseOrderById,
 );
 
 module.exports = router;

@@ -1,111 +1,136 @@
-const Inventory = require('../models/inventoryModel');
-const Joi = require('joi');
-
-// Joi validation schema
-const inventorySchema = Joi.object({
-  type: Joi.string().valid('Nufacturing', 'Customer Supplied', 'R&D/Lab', 'Ancillary').required(),
-  category: Joi.string().valid('Raw Materials', 'Capsules', 'Packaging', 'Labels', 'Finished Products').required(),
-  subCategory: Joi.string().optional(),
-  items: Joi.array().items(Joi.object({
-    ingredientName: Joi.string().required(),
-    pricePerKg: Joi.number().required(),
-    stockQuantity: Joi.number().required()
-  })).required()
-});
+const InventoryItem = require("../models/inventoryModel");
+const mongoose = require("mongoose");
 
 // Get all inventory items
 exports.getAllInventoryItems = async (req, res) => {
   try {
-    const inventoryItems = await Inventory.find();
-    res.status(200).json(inventoryItems);
+    const inventoryItems = await InventoryItem.find()
+      .populate("vendor")
+      .populate("createdBy")
+      .populate("associatedFormulas.refId")
+      .populate("associatedProductSKUs.refId")
+      .populate("associatedBatchNumbers.refId")
+      .populate("associatedPOs.refId")
+      .populate("associatedLabTests.refId")
+      .populate("associatedReceivements.refId");
+    res.status(200).json({ success: true, data: inventoryItems });
   } catch (err) {
-    res.status(500).json({ message: 'Error fetching inventory items', error: err });
+    console.error(err);
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error fetching inventory items",
+        error: err.message,
+      });
   }
 };
 
 // Get inventory item by ID
 exports.getInventoryItemById = async (req, res) => {
   try {
-    const inventoryItem = await Inventory.findById(req.params.inventoryId);
+    const inventoryItem = await InventoryItem.findById(req.params.inventoryId)
+      .populate("vendor")
+      .populate("createdBy")
+      .populate("associatedFormulas.refId")
+      .populate("associatedProductSKUs.refId")
+      .populate("associatedBatchNumbers.refId")
+      .populate("associatedPOs.refId")
+      .populate("associatedLabTests.refId")
+      .populate("associatedReceivements.refId");
     if (!inventoryItem) {
-      return res.status(404).json({ message: 'Inventory item not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: "Inventory item not found" });
     }
-    res.status(200).json(inventoryItem);
+    res.status(200).json({ success: true, data: inventoryItem });
   } catch (err) {
-    res.status(500).json({ message: 'Error fetching inventory item', error: err });
+    console.error(err);
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error fetching inventory item",
+        error: err.message,
+      });
   }
 };
 
 // Create a new inventory item
 exports.createInventoryItem = async (req, res) => {
   try {
-    // Validate request body
-    const { error } = inventorySchema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ message: 'Validation error', error: error.details });
-    }
-
-    const { type, category, subCategory, items } = req.body;
-
-    // Create a new inventory entry
-    const newInventory = new Inventory({
-      type,
-      category,
-      subCategory,
-      items,
-      createdBy: req.user._id
-    });
-
-    await newInventory.save();
-    res.status(201).json(newInventory);
+    const newInventoryItem = new InventoryItem(req.body);
+    await newInventoryItem.save();
+    res.status(201).json({ success: true, data: newInventoryItem });
   } catch (err) {
-    res.status(400).json({ message: 'Error creating inventory item', error: err });
+    console.error(err);
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error creating inventory item",
+        error: err.message,
+      });
   }
 };
 
 // Update inventory item
 exports.updateInventoryItem = async (req, res) => {
   try {
-    // Validate request body
-    const { error } = inventorySchema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ message: 'Validation error', error: error.details });
-    }
-
-    const { type, category, subCategory, items } = req.body;
-
-    const updatedInventoryItem = await Inventory.findByIdAndUpdate(
+    const updatedInventoryItem = await InventoryItem.findByIdAndUpdate(
       req.params.inventoryId,
-      {
-        type,
-        category,
-        subCategory,
-        items
-      },
-      {
-        new: true,
-        runValidators: true
-      }
-    );
+      req.body,
+      { new: true, runValidators: true },
+    )
+      .populate("vendor")
+      .populate("createdBy")
+      .populate("associatedFormulas.refId")
+      .populate("associatedProductSKUs.refId")
+      .populate("associatedBatchNumbers.refId")
+      .populate("associatedPOs.refId")
+      .populate("associatedLabTests.refId")
+      .populate("associatedReceivements.refId");
 
     if (!updatedInventoryItem) {
-      return res.status(404).json({ message: 'Inventory item not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: "Inventory item not found" });
     }
-    res.status(200).json(updatedInventoryItem);
+    res.status(200).json({ success: true, data: updatedInventoryItem });
   } catch (err) {
-    res.status(400).json({ message: 'Error updating inventory item', error: err });
+    console.error(err);
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error updating inventory item",
+        error: err.message,
+      });
   }
 };
 
 // Delete inventory item
 exports.deleteInventoryItem = async (req, res) => {
   try {
-    const deletedInventoryItem = await Inventory.findByIdAndDelete(req.params.inventoryId);
+    const deletedInventoryItem = await InventoryItem.findByIdAndDelete(
+      req.params.inventoryId,
+    );
     if (!deletedInventoryItem) {
-      return res.status(404).json({ message: 'Inventory item not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: "Inventory item not found" });
     }
-    res.status(200).json({ message: 'Inventory item deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: "Inventory item deleted successfully" });
   } catch (err) {
-    res.status(500).json({ message: 'Error deleting inventory item', error: err });
+    console.error(err);
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: "Error deleting inventory item",
+        error: err.message,
+      });
   }
 };
