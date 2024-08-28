@@ -22,6 +22,7 @@
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
     "helmet": "^7.1.0",
+    "http": "^0.0.1-security",
     "jest-dom": "^4.0.0",
     "jest-fetch-mock": "^3.0.3",
     "joi": "^17.13.3",
