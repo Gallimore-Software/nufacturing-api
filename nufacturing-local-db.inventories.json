@@ -1,0 +1,108 @@
+[{
+  "_id": {
+    "$oid": "66b10a070832a64c4be3fc3b"
+  },
+  "type": "Nufacturing",
+  "category": "Raw Materials",
+  "subCategory": "Customer 1",
+  "items": [
+    {
+      "ingredientName": "Ingredient A",
+      "pricePerKg": 25.5,
+      "stockQuantity": 100,
+      "_id": {
+        "$oid": "66b10a070832a64c4be3fc3c"
+      }
+    },
+    {
+      "ingredientName": "Ingredient B",
+      "pricePerKg": 30.75,
+      "stockQuantity": 200,
+      "_id": {
+        "$oid": "66b10a070832a64c4be3fc3d"
+      }
+    }
+  ],
+  "createdBy": {
+    "$oid": "66acbdd0f935ee75c29eb4cd"
+  },
+  "createdAt": {
+    "$date": "2024-08-05T17:21:11.236Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-05T17:21:11.236Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66b10a4f0832a64c4be3fc40"
+  },
+  "type": "Customer Supplied",
+  "category": "Packaging",
+  "subCategory": "Supplier X",
+  "items": [
+    {
+      "ingredientName": "Packaging Material A",
+      "pricePerKg": 12,
+      "stockQuantity": 500,
+      "_id": {
+        "$oid": "66b10a4f0832a64c4be3fc41"
+      }
+    },
+    {
+      "ingredientName": "Packaging Material B",
+      "pricePerKg": 8.5,
+      "stockQuantity": 750,
+      "_id": {
+        "$oid": "66b10a4f0832a64c4be3fc42"
+      }
+    }
+  ],
+  "createdBy": {
+    "$oid": "66acbdd0f935ee75c29eb4cd"
+  },
+  "createdAt": {
+    "$date": "2024-08-05T17:22:23.837Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-05T17:22:23.837Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66b10d8f0832a64c4be3fc8a"
+  },
+  "type": "R&D/Lab",
+  "category": "Labels",
+  "subCategory": "Test Batch",
+  "items": [
+    {
+      "ingredientName": "Label A",
+      "pricePerKg": 5.25,
+      "stockQuantity": 300,
+      "_id": {
+        "$oid": "66b10d8f0832a64c4be3fc8b"
+      }
+    },
+    {
+      "ingredientName": "Label B",
+      "pricePerKg": 6.75,
+      "stockQuantity": 150,
+      "_id": {
+        "$oid": "66b10d8f0832a64c4be3fc8c"
+      }
+    }
+  ],
+  "createdBy": {
+    "$oid": "66acbdd0f935ee75c29eb4cd"
+  },
+  "createdAt": {
+    "$date": "2024-08-05T17:36:15.331Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-05T17:36:15.331Z"
+  },
+  "__v": 0
+}]
