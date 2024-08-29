@@ -43,7 +43,7 @@ app.use("/api/sales/customers", customerRoutes);
 app.use("/api/quality-audits/batch-records", batchRecordsRoutes);
 app.use("/api/receiving/purchase-order", purchaseOrderRoutes);
 
-app.use("/api/research-and-development/lab-testing", purchaseOrderRoutes);
+app.use("/api/research-and-development/lab-testing", labTestingRoutes);
 
 app.use("/api/receiving/receiving", receivingRoutes);
 app.use("/api/vendor", vendorRoutes);
