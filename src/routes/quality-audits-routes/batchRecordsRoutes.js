@@ -1,5 +1,5 @@
 const express = require("express");
-const customerController = require("../../controllers/sales-controller/customerController");
+const batchRecordsController = require("../../controllers/quality-audits-controller/batchRecordsController");
 const roleMiddleware = require("../../middleware/roleMiddlewaree");
 
 const router = express.Router();
@@ -8,27 +8,27 @@ const router = express.Router();
 router.get(
   "/",
   roleMiddleware(["admin", "manager"]),
-  customerController.getAllCustomers,
+  batchRecordsController.getAllBatchRecords,
 );
 router.get(
   "/:labTestId",
   roleMiddleware(["admin", "manager", "user"]),
-  customerController.getCustomerById,
+  batchRecordsController.getBatchRecordById,
 );
 router.post(
   "/",
   roleMiddleware(["admin", "manager"]),
-  customerController.createCustomer,
+  batchRecordsController.createBatchRecord,
 );
 router.put(
   "/:labTestId",
   roleMiddleware(["admin", "manager"]),
-  customerController.updateCustomer,
+  batchRecordsController.updateBatchRecordById,
 );
 router.delete(
   "/:labTestId",
   roleMiddleware(["admin"]),
-  customerController.deleteCustomer,
+  batchRecordsController.deleteBatchRecordById,
 );
 
 module.exports = router;

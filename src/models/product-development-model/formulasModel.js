@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ingredientSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -7,18 +7,18 @@ const ingredientSchema = new mongoose.Schema({
 });
 
 const formulaSchema = new mongoose.Schema({
-  code: { type: String, required: true, unique: true }, 
+  code: { type: String, unique: true },
   name: { type: String, required: true },
   productType: {
     type: String,
     enum: [
-      'Capsules',
-      'Powder',
-      'Gummies',
-      'Tinctures',
-      'Powder Stickpacks',
-      'Liquid Stickpacks',
-      'Pouches',
+      "Capsules",
+      "Powder",
+      "Gummies",
+      "Tinctures",
+      "Powder Stickpacks",
+      "Liquid Stickpacks",
+      "Pouches",
     ],
     required: true,
   },
@@ -29,6 +29,6 @@ const formulaSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Formula = mongoose.model('Formula', formulaSchema);
+const Formula = mongoose.model("Formula", formulaSchema);
 
 module.exports = Formula;
