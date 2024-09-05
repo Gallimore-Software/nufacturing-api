@@ -1,0 +1,6 @@
+[submodule "nufacturing"]
+	path = nufacturing
+	url = https://github.com/gallimore-software/nufacturing
+[submodule "clients/nufacturing"]
+	path = clients/nufacturing
+	url = https://github.com/gallimore-software/nufacturing
