@@ -3,8 +3,16 @@ const mongoose = require("mongoose");
 // Define the schema for Batch Records
 const batchRecordsSchema = new mongoose.Schema({
   batchNumber: { type: String, required: true, unique: true }, // Unique identifier for the batch
-  productSKU: { type: String, required: true }, // Associated Product SKU
-  formulaCode: { type: String, required: true }, // Associated Formula Code
+  productSKU: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductSKU",
+    required: true,
+  }, // Reference to Product SKU
+  formula: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Formula",
+    required: true,
+  }, // Reference to Formula
   productionDate: { type: Date, required: true }, // Date of Production
   expirationDate: { type: Date, required: true }, // Expiration Date of the Batch
   productionLine: { type: String, required: true }, // Production Line or Machine used
