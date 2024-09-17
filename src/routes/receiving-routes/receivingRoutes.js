@@ -1,5 +1,5 @@
 const express = require("express");
-const customerController = require("../../controllers/sales-controller/customerController");
+const receivingController = require("../../controllers/receiving-controller/receivingController");
 const roleMiddleware = require("../../middleware/roleMiddlewaree");
 
 const router = express.Router();
@@ -8,27 +8,27 @@ const router = express.Router();
 router.get(
   "/",
   roleMiddleware(["admin", "manager"]),
-  customerController.getAllCustomers,
+  receivingController.getAllReceivings,
 );
 router.get(
-  "/:labTestId",
+  "/:receivingId",
   roleMiddleware(["admin", "manager", "user"]),
-  customerController.getCustomerById,
+  receivingController.getReceivingById,
 );
 router.post(
   "/",
   roleMiddleware(["admin", "manager"]),
-  customerController.createCustomer,
+  receivingController.createReceiving,
 );
 router.put(
-  "/:labTestId",
+  "/:receivingId",
   roleMiddleware(["admin", "manager"]),
-  customerController.updateCustomer,
+  receivingController.updateReceivingById,
 );
 router.delete(
-  "/:labTestId",
+  "/:receivingId",
   roleMiddleware(["admin"]),
-  customerController.deleteCustomer,
+  receivingController.deleteReceiving,
 );
 
 module.exports = router;

@@ -49,8 +49,8 @@ Temporary Items
 
 ### Node ###
 # Logs
-logs
-*.log
+# logs
+#*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -87,7 +87,7 @@ node_modules/
 jspm_packages/
 
 # Typescript v1 declaration files
-typings/
+typings/ 
 
 # Optional npm cache directory
 .npm
@@ -106,6 +106,11 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.testing
+.env.production
+.env.development
+.env.staging
+.env.local
 .env.*
 
 ### SublimeText ###
