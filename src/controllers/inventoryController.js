@@ -16,13 +16,11 @@ exports.getAllInventoryItems = async (req, res) => {
     res.status(200).json({ success: true, data: inventoryItems });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error fetching inventory items",
-        error: err.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error fetching inventory items",
+      error: err.message,
+    });
   }
 };
 
@@ -46,13 +44,11 @@ exports.getInventoryItemById = async (req, res) => {
     res.status(200).json({ success: true, data: inventoryItem });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error fetching inventory item",
-        error: err.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error fetching inventory item",
+      error: err.message,
+    });
   }
 };
 
@@ -64,13 +60,11 @@ exports.createInventoryItem = async (req, res) => {
     res.status(201).json({ success: true, data: newInventoryItem });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error creating inventory item",
-        error: err.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error creating inventory item",
+      error: err.message,
+    });
   }
 };
 
@@ -99,13 +93,11 @@ exports.updateInventoryItem = async (req, res) => {
     res.status(200).json({ success: true, data: updatedInventoryItem });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error updating inventory item",
-        error: err.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error updating inventory item",
+      error: err.message,
+    });
   }
 };
 
@@ -125,12 +117,10 @@ exports.deleteInventoryItem = async (req, res) => {
       .json({ success: true, message: "Inventory item deleted successfully" });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        success: false,
-        message: "Error deleting inventory item",
-        error: err.message,
-      });
+    res.status(500).json({
+      success: false,
+      message: "Error deleting inventory item",
+      error: err.message,
+    });
   }
 };
