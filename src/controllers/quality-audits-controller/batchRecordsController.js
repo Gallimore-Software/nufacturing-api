@@ -24,7 +24,7 @@ exports.getAllBatchRecords = async (req, res) => {
 // Get a single batch record by ID
 exports.getBatchRecordById = async (req, res) => {
   try {
-    const batchRecord = await BatchRecords.findById(req.params.id);
+    const batchRecord = await BatchRecords.findById(req.params._id);
     if (!batchRecord)
       return res.status(404).json({ message: "Batch record not found" });
     res.status(200).json(batchRecord);
@@ -37,7 +37,7 @@ exports.getBatchRecordById = async (req, res) => {
 exports.updateBatchRecordById = async (req, res) => {
   try {
     const batchRecord = await BatchRecords.findByIdAndUpdate(
-      req.params.id,
+      req.params._id,
       req.body,
       { new: true },
     );
@@ -52,7 +52,7 @@ exports.updateBatchRecordById = async (req, res) => {
 // Delete a batch record by ID
 exports.deleteBatchRecordById = async (req, res) => {
   try {
-    const batchRecord = await BatchRecords.findByIdAndDelete(req.params.id);
+    const batchRecord = await BatchRecords.findByIdAndDelete(req.params._id);
     if (!batchRecord)
       return res.status(404).json({ message: "Batch record not found" });
     res.status(200).json({ message: "Batch record deleted successfully" });

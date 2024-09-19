@@ -68,7 +68,7 @@ exports.createUser = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }, // Token expires in 1 hour
+      { expiresIn: "5h" }, // Token expires in 5 hour
     );
 
     // Generate verification token
