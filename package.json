@@ -39,7 +39,7 @@
     "winston-mongodb": "^5.1.1"
   },
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.13.4",
+    "@openapitools/openapi-generator-cli": "^2.13.12",
     "@pact-foundation/pact": "^13.1.1",
     "@pact-foundation/pact-node": "^10.18.0",
     "cross-env": "^7.0.3",
