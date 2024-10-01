@@ -1,6 +1,8 @@
-const { createLogger, format, transports } = require("winston");
-require("winston-mongodb");
-require("dotenv").config();
+import { format, transports } from "winston";
+import "winston-mongodb";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const logLevel = process.env.LOG_LEVEL || "info";
 
@@ -30,4 +32,4 @@ if (process.env.MONGODB_URI) {
   );
 }
 
-module.exports = loggerConfig;
+export default loggerConfig;

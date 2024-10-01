@@ -1,24 +1,24 @@
-const express = require("express");
-const cors = require("cors");
-const connectDB = require("./src/config/db");
-const userRoutes = require("./src/routes/userRoutes");
-const formulaRoutes = require("./src/routes/product-development-routes/formulaRoutes");
-const productSkuRoutes = require("./src/routes/product-development-routes/productSkusRoutes");
-const productTypeRoutes = require("./src/routes/product-development-routes/productTypeRoutes");
-const quoteRoutes = require("./src/routes/sales-routes/quoteRoutes");
-const orderRoutes = require("./src/routes/sales-routes/orderRoutes");
-const customerRoutes = require("./src/routes/sales-routes/customerRoutes");
-const vendorRoutes = require("./src/routes/vendorRoutes");
-const inventoryRoutes = require("./src/routes/inventoryRoutes");
-const purchaseOrderRoutes = require("./src/routes/receiving-routes/purchaseOrderRoutes");
-const labTestingRoutes = require("./src/routes/research-and-development-routes/labTestingRoutes");
-const receivingRoutes = require("./src/routes/receiving-routes/receivingRoutes");
-const batchRecordsRoutes = require("./src/routes/quality-audits-routes/batchRecordsRoutes");
-const swaggerUI = require("swagger-ui-express");
-const openapi_swagger_specification_file = require("./swagger_output.json");
+import express from "express";
+import cors from "cors";
+import connectDB from "./src/config/db.js";
+import userRoutes from "./src/routes/userRoutes.js";
+import formulaRoutes from "./src/routes/product-development-routes/formulaRoutes.js";
+import productSkuRoutes from "./src/routes/product-development-routes/productSkusRoutes.js";
+import productTypeRoutes from "./src/routes/product-development-routes/productTypeRoutes.js";
+import quoteRoutes from "./src/routes/sales-routes/quoteRoutes.js";
+import orderRoutes from "./src/routes/sales-routes/orderRoutes.js";
+import customerRoutes from "./src/routes/sales-routes/customerRoutes.js";
+import vendorRoutes from "./src/routes/vendorRoutes.js";
+import inventoryRoutes from "./src/routes/inventoryRoutes.js";
+import purchaseOrderRoutes from "./src/routes/receiving-routes/purchaseOrderRoutes.js";
+import labTestingRoutes from "./src/routes/research-and-development-routes/labTestingRoutes.js";
+import receivingRoutes from "./src/routes/receiving-routes/receivingRoutes.js";
+import batchRecordsRoutes from "./src/routes/quality-audits-routes/batchRecordsRoutes.js";
+import swaggerUI from "swagger-ui-express";
+import swaggerDocument from "./swagger_output.json" assert { type: "json" };
 
 // Schedule tasks
-require("./src/utils/scheduledTasks");
+import "./src/utils/scheduledTasks.js";
 
 const app = express();
 
@@ -50,10 +50,6 @@ app.use("/api/vendor", vendorRoutes);
 app.use("/api/inventory", inventoryRoutes);
 
 // Serve Swagger documentation
-app.use(
-  "/api",
-  swaggerUI.serve,
-  swaggerUI.setup(openapi_swagger_specification_file),
-);
+app.use("/api", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-module.exports = app;
+export default app;

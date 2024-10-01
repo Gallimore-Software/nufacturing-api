@@ -1,10 +1,15 @@
+import "module-alias/register";
+import logger from "./src/infrastructure/logging/logger";
+
 // Load the environment variables based on the NODE_ENV
-console.log("Starting API in :", process.env.NODE_ENV);
+logger.info("Starting API in :", process.env.NODE_ENV);
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV || "development"}`,
 });
 
-const app = require("./app");
+import app from "./app";
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

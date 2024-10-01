@@ -1,8 +1,8 @@
-const { createLogger } = require("winston");
-const loggerConfig = require("../../config/loggerConfig");
+import { createLogger } from "winston";
+import loggerConfig from "./loggerConfig.js";
 
 const logger = createLogger(loggerConfig);
 
 logger.info("Logger initialized.");
 
-module.exports = logger;
+export default logger;
