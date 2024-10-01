@@ -1,6 +1,6 @@
 import express from "express";
-import vendorController from "../../../../controllers/vendorController";
-import roleMiddleware from "../middleware/roleMiddlewaree";
+import * as vendorController from "@controllers/vendors/vendorController";
+import roleMiddleware from "@middleware/roleMiddleware";
 
 const router = express.Router();
 

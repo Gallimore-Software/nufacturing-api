@@ -8,7 +8,14 @@
     "strict": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@models/*": ["src/infrastructure/persistence/models/*"],
+      "@controllers/*": ["src/interfaces/http/controllers/*"],
+      "@middleware/*": ["src/interfaces/http/middlewares/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "__tests__"]

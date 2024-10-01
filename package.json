@@ -65,10 +65,5 @@
     "supertest": "^7.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
-  },
-  "_moduleAliases": {
-    "@config": "./src/config",
-    "@routes": "./src/routes",
-    "@utils": "./src/utils"
   }
 }

@@ -1,7 +1,10 @@
-const mongoose = require("mongoose");
-const { transports, format } = require("winston");
-const logger = require("./loggerConfig");
-require("dotenv").config();
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import { transports, format } from "winston";
+import logger from "./loggerConfig.js";
+
+// Load environment variables
+dotenv.config();
 
 // Connect to MongoDB and add MongoDB transport
 const connectDB = async () => {
@@ -34,4 +37,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+export default connectDB;

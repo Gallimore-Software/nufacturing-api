@@ -1,7 +1,7 @@
 import Vendor from "../models/vendorModel";
 
 // Create a new vendor
-exports.createVendor = async (req, res) => {
+export const createVendor = async (req, res) => {
   try {
     const vendor = new Vendor(req.body);
     await vendor.save();
@@ -12,7 +12,7 @@ exports.createVendor = async (req, res) => {
 };
 
 // Get all vendors
-exports.getAllVendors = async (req, res) => {
+export const getAllVendors = async (req, res) => {
   try {
     const vendors = await Vendor.find();
     res.status(200).json(vendors);
@@ -22,7 +22,7 @@ exports.getAllVendors = async (req, res) => {
 };
 
 // Get a single vendor by ID
-exports.getVendorById = async (req, res) => {
+export const getVendorById = async (req, res) => {
   try {
     const vendor = await Vendor.findById(req.params.id);
     if (!vendor) return res.status(404).json({ message: "Vendor not found" });
@@ -33,7 +33,7 @@ exports.getVendorById = async (req, res) => {
 };
 
 // Update a vendor by ID
-exports.updateVendorById = async (req, res) => {
+export const updateVendorById = async (req, res) => {
   try {
     const vendor = await Vendor.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -46,7 +46,7 @@ exports.updateVendorById = async (req, res) => {
 };
 
 // Delete a vendor by ID
-exports.deleteVendorById = async (req, res) => {
+export const deleteVendorById = async (req, res) => {
   try {
     const vendor = await Vendor.findByIdAndDelete(req.params.id);
     if (!vendor) return res.status(404).json({ message: "Vendor not found" });

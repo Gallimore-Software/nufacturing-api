@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/userModel";
+import User from "@models/userModel";
 
 const roleMiddleware = (roles) => {
   return async (req, res, next) => {
@@ -19,9 +19,9 @@ const roleMiddleware = (roles) => {
       req.user = user;
       next();
     } catch (error) {
-      res.status(401).json({ message: "Unauthorized", error });
+      res.status(401).json({ message: "Unauthorized", error: error.message });
     }
   };
 };
 
-module.exports = roleMiddleware;
+export default roleMiddleware;

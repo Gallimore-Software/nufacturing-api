@@ -1,7 +1,7 @@
-const { Pact } = require("@pact-foundation/pact");
-const path = require("path");
-const request = require("supertest");
-const app = require("../../index"); // Your Express app
+import { Pact } from "@pact-foundation/pact";
+import path from "path";
+import request from "supertest";
+import app from "../../index"; // Your Express app
 
 const provider = new Pact({
   consumer: "FrontendConsumer",

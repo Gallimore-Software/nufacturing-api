@@ -1,8 +1,8 @@
-import InventoryItem from "../models/inventoryModel";
-import mongoose from "mongoose";
+import InventoryItem from "@models/inventoryModel.js";
+import CreateInventoryItemUseCase from "../../../../application/inventory/createInventoryItemUseCase.js";
 
 // Get all inventory items
-exports.getAllInventoryItems = async (req, res) => {
+export const getAllInventoryItems = async (req, res) => {
   try {
     const inventoryItems = await InventoryItem.find()
       .populate("vendor")
@@ -25,7 +25,7 @@ exports.getAllInventoryItems = async (req, res) => {
 };
 
 // Get inventory item by ID
-exports.getInventoryItemById = async (req, res) => {
+export const getInventoryItemById = async (req, res) => {
   try {
     const inventoryItem = await InventoryItem.findById(req.params.inventoryId)
       .populate("vendor")
@@ -52,7 +52,8 @@ exports.getInventoryItemById = async (req, res) => {
   }
 };
 
-exports.createInventoryItem = async (req, res) => {
+// Create a new inventory item
+export const createInventoryItem = async (req, res) => {
   try {
     const newInventoryItem = await CreateInventoryItemUseCase.execute(req.body);
     res.status(201).json({ success: true, data: newInventoryItem });
@@ -67,7 +68,7 @@ exports.createInventoryItem = async (req, res) => {
 };
 
 // Update inventory item
-exports.updateInventoryItem = async (req, res) => {
+export const updateInventoryItem = async (req, res) => {
   try {
     const updatedInventoryItem = await InventoryItem.findByIdAndUpdate(
       req.params.inventoryId,
@@ -100,7 +101,7 @@ exports.updateInventoryItem = async (req, res) => {
 };
 
 // Delete inventory item
-exports.deleteInventoryItem = async (req, res) => {
+export const deleteInventoryItem = async (req, res) => {
   try {
     const deletedInventoryItem = await InventoryItem.findByIdAndDelete(
       req.params.inventoryId,

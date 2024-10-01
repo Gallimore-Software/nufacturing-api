@@ -1,6 +1,6 @@
-const { spawn } = require("child_process");
-const request = require("supertest");
-const app = require("../../index"); // Your Express app
+import { spawn } from "child_process";
+import request from "supertest";
+import app from "../../index"; // Your Express app
 
 describe("Inventory E2E Tests", () => {
   let server;
