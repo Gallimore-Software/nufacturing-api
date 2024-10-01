@@ -1,33 +1,43 @@
 "use strict";
-const express = require("express");
-const productSkuController = require("../../controllers/product-development-controller/productSkuController");
-const roleMiddleware = require("../../middleware/roleMiddlewaree");
-const router = express.Router();
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const productSkuController_1 = __importDefault(
+  require("../../controllers/product-development-controller/productSkuController"),
+);
+const roleMiddlewaree_1 = __importDefault(
+  require("../../middleware/roleMiddlewaree"),
+);
+const router = express_1.default.Router();
 // Define routes with role-based access control
 router.get(
   "/",
-  roleMiddleware(["admin", "manager"]),
-  productSkuController.getAllProductSKUs,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  productSkuController_1.default.getAllProductSKUs,
 );
 router.get(
   "/:skuId",
-  roleMiddleware(["admin", "manager", "user"]),
-  productSkuController.getProductSKUById,
+  (0, roleMiddlewaree_1.default)(["admin", "manager", "user"]),
+  productSkuController_1.default.getProductSKUById,
 );
 router.post(
   "/",
-  roleMiddleware(["admin", "manager"]),
-  productSkuController.createProductSKU,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  productSkuController_1.default.createProductSKU,
 );
 router.put(
   "/:skuId",
-  roleMiddleware(["admin", "manager"]),
-  productSkuController.updateProductSKU,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  productSkuController_1.default.updateProductSKU,
 );
 router.delete(
   "/:skuId",
-  roleMiddleware(["admin"]),
-  productSkuController.deleteProductSKU,
+  (0, roleMiddlewaree_1.default)(["admin"]),
+  productSkuController_1.default.deleteProductSKU,
 );
 module.exports = router;
 //# sourceMappingURL=productSkusRoutes.js.map

@@ -1,5 +1,5 @@
-const Receiving = require("../../models/receiving-model/receivingModel");
-const PurchaseOrder = require("../../models/receiving-model/purchaseOrderModel");
+import Receiving from "../../models/receiving-model/receivingModel";
+import PurchaseOrder from "../../models/receiving-model/purchaseOrderModel";
 
 // Create a new receiving entry
 exports.createReceiving = async (req, res) => {

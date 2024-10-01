@@ -1,8 +1,14 @@
 "use strict";
-const mongoose = require("mongoose");
-const quoteSchema = new mongoose.Schema({
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const quoteSchema = new mongoose_1.default.Schema({
   accountManager: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
@@ -10,18 +16,20 @@ const quoteSchema = new mongoose.Schema({
   brandName: { type: String, required: true },
   customerCode: { type: String, required: true },
   productType: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "ProductType",
     required: true,
   },
   formula: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "Formula",
     required: true,
   },
   customerProvidedLotCode: { type: String },
   customerProvidedSku: { type: String },
-  ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" }],
+  ingredients: [
+    { type: mongoose_1.default.Schema.Types.ObjectId, ref: "Ingredient" },
+  ],
   packaging: {
     capsuleInfo: String,
     bottlingInfo: String,
@@ -40,6 +48,6 @@ const quoteSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
-const Quote = mongoose.model("Quote", quoteSchema);
+const Quote = mongoose_1.default.model("Quote", quoteSchema);
 module.exports = Quote;
 //# sourceMappingURL=quoteModel.js.map

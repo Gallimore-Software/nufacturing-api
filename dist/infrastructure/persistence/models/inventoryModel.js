@@ -1,6 +1,12 @@
 "use strict";
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const { Schema } = mongoose_1.default;
 // Define schemas for new entities
 const categorySchema = new Schema({
   name: { type: String, required: true, unique: true },
@@ -115,10 +121,13 @@ quantityPriceSchema.pre("save", function (next) {
   next();
 });
 // Create models for the main inventory and related entities
-const InventoryItem = mongoose.model("InventoryItem", inventoryItemSchema);
-const Category = mongoose.model("Category", categorySchema);
-const Supplier = mongoose.model("Supplier", supplierSchema);
-const WarehouseLocation = mongoose.model(
+const InventoryItem = mongoose_1.default.model(
+  "InventoryItem",
+  inventoryItemSchema,
+);
+const Category = mongoose_1.default.model("Category", categorySchema);
+const Supplier = mongoose_1.default.model("Supplier", supplierSchema);
+const WarehouseLocation = mongoose_1.default.model(
   "WarehouseLocation",
   warehouseLocationSchema,
 );

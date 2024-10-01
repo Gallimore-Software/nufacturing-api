@@ -32,12 +32,18 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const Vendor = require("../models/vendorModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const vendorModel_1 = __importDefault(require("../models/vendorModel"));
 // Create a new vendor
 exports.createVendor = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const vendor = new Vendor(req.body);
+      const vendor = new vendorModel_1.default(req.body);
       yield vendor.save();
       res.status(201).json(vendor);
     } catch (error) {
@@ -48,7 +54,7 @@ exports.createVendor = (req, res) =>
 exports.getAllVendors = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const vendors = yield Vendor.find();
+      const vendors = yield vendorModel_1.default.find();
       res.status(200).json(vendors);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -58,7 +64,7 @@ exports.getAllVendors = (req, res) =>
 exports.getVendorById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const vendor = yield Vendor.findById(req.params.id);
+      const vendor = yield vendorModel_1.default.findById(req.params.id);
       if (!vendor) return res.status(404).json({ message: "Vendor not found" });
       res.status(200).json(vendor);
     } catch (error) {
@@ -69,9 +75,13 @@ exports.getVendorById = (req, res) =>
 exports.updateVendorById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const vendor = yield Vendor.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-      });
+      const vendor = yield vendorModel_1.default.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+          new: true,
+        },
+      );
       if (!vendor) return res.status(404).json({ message: "Vendor not found" });
       res.status(200).json(vendor);
     } catch (error) {
@@ -82,7 +92,9 @@ exports.updateVendorById = (req, res) =>
 exports.deleteVendorById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const vendor = yield Vendor.findByIdAndDelete(req.params.id);
+      const vendor = yield vendorModel_1.default.findByIdAndDelete(
+        req.params.id,
+      );
       if (!vendor) return res.status(404).json({ message: "Vendor not found" });
       res.status(200).json({ message: "Vendor deleted successfully" });
     } catch (error) {

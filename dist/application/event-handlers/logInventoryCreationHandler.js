@@ -32,9 +32,19 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const EventDispatcher = require("../utils/eventDispatcher");
-const InventoryItemCreatedEvent = require("../events/inventoryItemCreatedEvent");
-const logger = require("../../infrastructure/logging/logger");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const eventDispatcher_1 = __importDefault(require("../utils/eventDispatcher"));
+const inventoryItemCreatedEvent_1 = __importDefault(
+  require("../events/inventoryItemCreatedEvent"),
+);
+const logger_1 = __importDefault(
+  require("../../infrastructure/logging/logger"),
+);
 class LogInventoryCreationHandler {
   handle(event) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -43,14 +53,14 @@ class LogInventoryCreationHandler {
           throw new Error("Invalid event: inventoryItem is missing");
         }
         // Log inventory creation with relevant details
-        logger.info("Inventory item created", {
+        logger_1.default.info("Inventory item created", {
           itemId: event.inventoryItem._id,
           sku: event.inventoryItem.sku,
           createdAt: event.inventoryItem.createdAt,
           createdBy: event.inventoryItem.createdBy,
         });
       } catch (err) {
-        logger.error("Error handling InventoryItemCreatedEvent", {
+        logger_1.default.error("Error handling InventoryItemCreatedEvent", {
           error: err.message,
           stack: err.stack,
           event: event,
@@ -61,12 +71,12 @@ class LogInventoryCreationHandler {
 }
 // Register the handler with a reusable function
 function registerEventHandler(eventName, handlerInstance) {
-  EventDispatcher.register(eventName, handlerInstance);
+  eventDispatcher_1.default.register(eventName, handlerInstance);
 }
 // Instantiate and register the LogInventoryCreationHandler
 const logInventoryCreationHandler = new LogInventoryCreationHandler();
 registerEventHandler(
-  InventoryItemCreatedEvent.name,
+  inventoryItemCreatedEvent_1.default.name,
   logInventoryCreationHandler,
 );
 //# sourceMappingURL=logInventoryCreationHandler.js.map

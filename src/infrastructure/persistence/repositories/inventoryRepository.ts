@@ -1,4 +1,4 @@
-const InventoryItem = require("../models/inventoryModel");
+import InventoryItem from "../models/inventoryModel";
 
 class MongooseInventoryRepository {
   // Find inventory item by name or SKU (used for checking duplicates)

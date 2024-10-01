@@ -1,4 +1,4 @@
-const LabTest = require("../../models/research-and-development-model/labTestingModel");
+import LabTest from "../../models/research-and-development-model/labTestingModel";
 
 // Get all lab tests
 exports.getAllLabTests = async (req, res) => {

@@ -1,4 +1,4 @@
-const Quote = require("../../models/sales-model/quoteModel");
+import Quote from "../../models/sales-model/quoteModel";
 
 // Get all quotes
 exports.getAllQuotes = async (req, res) => {

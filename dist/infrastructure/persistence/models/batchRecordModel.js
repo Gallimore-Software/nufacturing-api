@@ -1,15 +1,21 @@
 "use strict";
-const mongoose = require("mongoose");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
 // Define the schema for Batch Records
-const batchRecordsSchema = new mongoose.Schema({
+const batchRecordsSchema = new mongoose_1.default.Schema({
   batchNumber: { type: String, required: true, unique: true }, // Unique identifier for the batch
   productSKU: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "ProductSKU",
     required: true,
   }, // Reference to Product SKU
   formula: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "Formula",
     required: true,
   }, // Reference to Formula
@@ -35,6 +41,9 @@ const batchRecordsSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
-const BatchRecords = mongoose.model("BatchRecord", batchRecordsSchema);
+const BatchRecords = mongoose_1.default.model(
+  "BatchRecord",
+  batchRecordsSchema,
+);
 module.exports = BatchRecords;
 //# sourceMappingURL=batchRecordModel.js.map

@@ -1,6 +1,6 @@
-const express = require("express");
-const labTestingController = require("../../controllers/research-and-development/labTestingController");
-const roleMiddleware = require("../../middleware/roleMiddlewaree");
+import express from "express";
+import labTestingController from "../../controllers/research-and-development/labTestingController";
+import roleMiddleware from "../../middleware/roleMiddlewaree";
 
 const router = express.Router();
 

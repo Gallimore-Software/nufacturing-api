@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const purchaseOrderSchema = new mongoose.Schema({
   poNumber: { type: String, required: true, unique: true },

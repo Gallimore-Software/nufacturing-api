@@ -1,6 +1,12 @@
 "use strict";
-const mongoose = require("mongoose");
-const customerSchema = new mongoose.Schema({
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const customerSchema = new mongoose_1.default.Schema({
   companyName: { type: String, required: true },
   displayName: { type: String, required: true },
   primaryContact: {
@@ -39,6 +45,6 @@ const customerSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
-const Customer = mongoose.model("Customer", customerSchema);
+const Customer = mongoose_1.default.model("Customer", customerSchema);
 module.exports = Customer;
 //# sourceMappingURL=customerModel.js.map

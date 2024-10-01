@@ -1,4 +1,4 @@
-const PurchaseOrder = require("../../models/receiving-model/purchaseOrderModel");
+import PurchaseOrder from "../../models/receiving-model/purchaseOrderModel";
 
 // Create a new purchase order
 exports.createPurchaseOrder = async (req, res) => {

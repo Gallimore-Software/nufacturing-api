@@ -1,4 +1,4 @@
-const Formula = require("../../models/product-development-model/formulasModel");
+import Formula from "../../models/product-development-model/formulasModel";
 
 // Get all formulas
 exports.getAllFormulas = async (req, res) => {

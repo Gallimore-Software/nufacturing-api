@@ -1,4 +1,4 @@
-const Vendor = require("../models/vendorModel");
+import Vendor from "../models/vendorModel";
 
 // Create a new vendor
 exports.createVendor = async (req, res) => {

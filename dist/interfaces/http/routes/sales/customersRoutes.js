@@ -1,33 +1,43 @@
 "use strict";
-const express = require("express");
-const customerController = require("../../controllers/sales-controller/customerController");
-const roleMiddleware = require("../../middleware/roleMiddlewaree");
-const router = express.Router();
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const customerController_1 = __importDefault(
+  require("../../controllers/sales-controller/customerController"),
+);
+const roleMiddlewaree_1 = __importDefault(
+  require("../../middleware/roleMiddlewaree"),
+);
+const router = express_1.default.Router();
 // Define routes with role-based access control
 router.get(
   "/",
-  roleMiddleware(["admin", "manager"]),
-  customerController.getAllCustomers,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  customerController_1.default.getAllCustomers,
 );
 router.get(
   "/:labTestId",
-  roleMiddleware(["admin", "manager", "user"]),
-  customerController.getCustomerById,
+  (0, roleMiddlewaree_1.default)(["admin", "manager", "user"]),
+  customerController_1.default.getCustomerById,
 );
 router.post(
   "/",
-  roleMiddleware(["admin", "manager"]),
-  customerController.createCustomer,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  customerController_1.default.createCustomer,
 );
 router.put(
   "/:labTestId",
-  roleMiddleware(["admin", "manager"]),
-  customerController.updateCustomer,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  customerController_1.default.updateCustomer,
 );
 router.delete(
   "/:labTestId",
-  roleMiddleware(["admin"]),
-  customerController.deleteCustomer,
+  (0, roleMiddlewaree_1.default)(["admin"]),
+  customerController_1.default.deleteCustomer,
 );
 module.exports = router;
 //# sourceMappingURL=customersRoutes.js.map

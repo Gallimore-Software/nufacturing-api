@@ -32,8 +32,14 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const userModel_1 = __importDefault(require("../models/userModel"));
 exports.verifyEmail = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -43,13 +49,16 @@ exports.verifyEmail = (req, res) =>
         return res.status(400).json({ message: "Invalid token format" });
       }
       // Verify token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jsonwebtoken_1.default.verify(
+        token,
+        process.env.JWT_SECRET,
+      );
       // Ensure token is not expired (if expiration was set during token creation)
       if (Date.now() >= decoded.exp * 1000) {
         return res.status(400).json({ message: "Token has expired" });
       }
       // Find user by ID from the decoded token
-      const user = yield User.findById(decoded.id);
+      const user = yield userModel_1.default.findById(decoded.id);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }

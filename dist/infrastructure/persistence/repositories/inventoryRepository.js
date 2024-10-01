@@ -32,37 +32,45 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const InventoryItem = require("../models/inventoryModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const inventoryModel_1 = __importDefault(require("../models/inventoryModel"));
 class MongooseInventoryRepository {
   // Find inventory item by name or SKU (used for checking duplicates)
   static findByNameOrSKU(name, sku) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.findOne({ $or: [{ name }, { sku }] });
+      return yield inventoryModel_1.default.findOne({
+        $or: [{ name }, { sku }],
+      });
     });
   }
   // Create a new inventory item
   static create(data) {
     return __awaiter(this, void 0, void 0, function* () {
-      const newInventoryItem = new InventoryItem(data);
+      const newInventoryItem = new inventoryModel_1.default(data);
       return yield newInventoryItem.save();
     });
   }
   // Find inventory item by ID
   static findById(id) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.findById(id);
+      return yield inventoryModel_1.default.findById(id);
     });
   }
   // Find all inventory items (with optional filtering)
   static findAll() {
     return __awaiter(this, arguments, void 0, function* (filter = {}) {
-      return yield InventoryItem.find(filter);
+      return yield inventoryModel_1.default.find(filter);
     });
   }
   // Update inventory item by ID
   static updateById(id, updateData) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.findByIdAndUpdate(id, updateData, {
+      return yield inventoryModel_1.default.findByIdAndUpdate(id, updateData, {
         new: true,
       });
     });
@@ -70,13 +78,13 @@ class MongooseInventoryRepository {
   // Delete inventory item by ID
   static deleteById(id) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.findByIdAndDelete(id);
+      return yield inventoryModel_1.default.findByIdAndDelete(id);
     });
   }
   // Find inventory items by date range (for tracking inventory over time)
   static findByDateRange(startDate, endDate) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.find({
+      return yield inventoryModel_1.default.find({
         createdAt: {
           $gte: startDate,
           $lte: endDate,
@@ -87,7 +95,7 @@ class MongooseInventoryRepository {
   // Combine inventory items by a given attribute (e.g., date for batch processing)
   static combineByAttribute(attribute) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.aggregate([
+      return yield inventoryModel_1.default.aggregate([
         {
           $group: {
             _id: `$${attribute}`,
@@ -100,7 +108,7 @@ class MongooseInventoryRepository {
   // Handle unfinished or customer-supplied products
   static findUnfinishedOrCustomerSupplied() {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.find({
+      return yield inventoryModel_1.default.find({
         $or: [{ status: "unfinished" }, { customerSupplied: true }],
       });
     });
@@ -108,13 +116,13 @@ class MongooseInventoryRepository {
   // Live updates (fetch inventory item with real-time locking, if necessary)
   static findAndLock(id) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.findById(id).session(); // Requires transaction support for locking
+      return yield inventoryModel_1.default.findById(id).session(); // Requires transaction support for locking
     });
   }
   // Generate stale price alerts (find inventory items with outdated prices)
   static findStalePrices(lastUpdatedThreshold) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.find({
+      return yield inventoryModel_1.default.find({
         priceLastUpdated: { $lt: lastUpdatedThreshold },
       });
     });
@@ -122,7 +130,7 @@ class MongooseInventoryRepository {
   // Update inventory stock quantity
   static updateStockQuantity(id, quantityChange) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.findByIdAndUpdate(
+      return yield inventoryModel_1.default.findByIdAndUpdate(
         id,
         { $inc: { stockQuantity: quantityChange } },
         { new: true },
@@ -132,7 +140,7 @@ class MongooseInventoryRepository {
   // Update price information
   static updatePrice(id, newPrice) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.findByIdAndUpdate(
+      return yield inventoryModel_1.default.findByIdAndUpdate(
         id,
         { price: newPrice, priceLastUpdated: new Date() },
         { new: true },
@@ -142,7 +150,7 @@ class MongooseInventoryRepository {
   // Mark inventory as processed (e.g., for batch completion)
   static markAsProcessed(id) {
     return __awaiter(this, void 0, void 0, function* () {
-      return yield InventoryItem.findByIdAndUpdate(
+      return yield inventoryModel_1.default.findByIdAndUpdate(
         id,
         { status: "processed" },
         { new: true },

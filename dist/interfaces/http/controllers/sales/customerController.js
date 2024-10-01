@@ -32,12 +32,20 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const Customer = require("../../models/sales-model/customerModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const customerModel_1 = __importDefault(
+  require("../../models/sales-model/customerModel"),
+);
 // Get all customers
 exports.getAllCustomers = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const customers = yield Customer.find();
+      const customers = yield customerModel_1.default.find();
       res.status(200).json(customers);
     } catch (err) {
       res.status(500).json({ message: "Error fetching customers", error: err });
@@ -47,7 +55,9 @@ exports.getAllCustomers = (req, res) =>
 exports.getCustomerById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const customer = yield Customer.findById(req.params.customerId);
+      const customer = yield customerModel_1.default.findById(
+        req.params.customerId,
+      );
       if (!customer) {
         return res.status(404).json({ message: "Customer not found" });
       }
@@ -60,7 +70,7 @@ exports.getCustomerById = (req, res) =>
 exports.createCustomer = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const newCustomer = new Customer(req.body);
+      const newCustomer = new customerModel_1.default(req.body);
       yield newCustomer.save();
       res.status(201).json(newCustomer);
     } catch (err) {
@@ -71,7 +81,7 @@ exports.createCustomer = (req, res) =>
 exports.updateCustomer = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const updatedCustomer = yield Customer.findByIdAndUpdate(
+      const updatedCustomer = yield customerModel_1.default.findByIdAndUpdate(
         req.params.customerId,
         req.body,
         {
@@ -91,7 +101,7 @@ exports.updateCustomer = (req, res) =>
 exports.deleteCustomer = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const deletedCustomer = yield Customer.findByIdAndDelete(
+      const deletedCustomer = yield customerModel_1.default.findByIdAndDelete(
         req.params.customerId,
       );
       if (!deletedCustomer) {

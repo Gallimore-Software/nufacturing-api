@@ -1,33 +1,43 @@
 "use strict";
-const express = require("express");
-const purchaseOrderController = require("../../../../controllers/receiving-controller/purchaseOrderController");
-const roleMiddleware = require("../../middleware/roleMiddlewaree");
-const router = express.Router();
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const purchaseOrderController_1 = __importDefault(
+  require("../../../../controllers/receiving-controller/purchaseOrderController"),
+);
+const roleMiddlewaree_1 = __importDefault(
+  require("../../middleware/roleMiddlewaree"),
+);
+const router = express_1.default.Router();
 // Define routes with role-based access control
 router.get(
   "/",
-  roleMiddleware(["admin", "manager"]),
-  purchaseOrderController.getAllPurchaseOrders,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  purchaseOrderController_1.default.getAllPurchaseOrders,
 );
 router.get(
   "/:purchaseOrderId",
-  roleMiddleware(["admin", "manager", "user"]),
-  purchaseOrderController.getPurchaseOrderById,
+  (0, roleMiddlewaree_1.default)(["admin", "manager", "user"]),
+  purchaseOrderController_1.default.getPurchaseOrderById,
 );
 router.post(
   "/",
-  roleMiddleware(["admin", "manager"]),
-  purchaseOrderController.createPurchaseOrder,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  purchaseOrderController_1.default.createPurchaseOrder,
 );
 router.put(
   "/:purchaseOrderId",
-  roleMiddleware(["admin", "manager"]),
-  purchaseOrderController.updatePurchaseOrderById,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  purchaseOrderController_1.default.updatePurchaseOrderById,
 );
 router.delete(
   "/:purchaseOrderId",
-  roleMiddleware(["admin"]),
-  purchaseOrderController.deletePurchaseOrderById,
+  (0, roleMiddlewaree_1.default)(["admin"]),
+  purchaseOrderController_1.default.deletePurchaseOrderById,
 );
 module.exports = router;
 //# sourceMappingURL=purchaseOrdersRoutes.js.map

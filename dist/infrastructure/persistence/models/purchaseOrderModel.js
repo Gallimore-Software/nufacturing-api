@@ -1,9 +1,15 @@
 "use strict";
-const mongoose = require("mongoose");
-const purchaseOrderSchema = new mongoose.Schema({
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const purchaseOrderSchema = new mongoose_1.default.Schema({
   poNumber: { type: String, required: true, unique: true },
   vendor: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "Vendor",
     required: true,
   },
@@ -25,13 +31,16 @@ const purchaseOrderSchema = new mongoose.Schema({
     default: "Unreceived",
   },
   createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
-const PurchaseOrder = mongoose.model("PurchaseOrder", purchaseOrderSchema);
+const PurchaseOrder = mongoose_1.default.model(
+  "PurchaseOrder",
+  purchaseOrderSchema,
+);
 module.exports = PurchaseOrder;
 //# sourceMappingURL=purchaseOrderModel.js.map

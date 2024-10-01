@@ -32,12 +32,22 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const ProductSKU = require("../../models/product-development-model/productSkuModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const productSkuModel_1 = __importDefault(
+  require("../../models/product-development-model/productSkuModel"),
+);
 // Get all product SKUs
 exports.getAllProductSKUs = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const productSKUs = yield ProductSKU.find().populate("formula");
+      const productSKUs = yield productSkuModel_1.default
+        .find()
+        .populate("formula");
       res.status(200).json(productSKUs);
     } catch (err) {
       res
@@ -49,9 +59,9 @@ exports.getAllProductSKUs = (req, res) =>
 exports.getProductSKUById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const productSKU = yield ProductSKU.findById(req.params.skuId).populate(
-        "formula",
-      );
+      const productSKU = yield productSkuModel_1.default
+        .findById(req.params.skuId)
+        .populate("formula");
       if (!productSKU) {
         return res.status(404).json({ message: "Product SKU not found" });
       }
@@ -66,7 +76,7 @@ exports.getProductSKUById = (req, res) =>
 exports.createProductSKU = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const newProductSKU = new ProductSKU(req.body);
+      const newProductSKU = new productSkuModel_1.default(req.body);
       yield newProductSKU.save();
       res.status(201).json(newProductSKU);
     } catch (err) {
@@ -79,14 +89,15 @@ exports.createProductSKU = (req, res) =>
 exports.updateProductSKU = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const updatedProductSKU = yield ProductSKU.findByIdAndUpdate(
-        req.params.skuId,
-        req.body,
-        {
-          new: true,
-          runValidators: true,
-        },
-      );
+      const updatedProductSKU =
+        yield productSkuModel_1.default.findByIdAndUpdate(
+          req.params.skuId,
+          req.body,
+          {
+            new: true,
+            runValidators: true,
+          },
+        );
       if (!updatedProductSKU) {
         return res.status(404).json({ message: "Product SKU not found" });
       }
@@ -101,9 +112,8 @@ exports.updateProductSKU = (req, res) =>
 exports.deleteProductSKU = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const deletedProductSKU = yield ProductSKU.findByIdAndDelete(
-        req.params.skuId,
-      );
+      const deletedProductSKU =
+        yield productSkuModel_1.default.findByIdAndDelete(req.params.skuId);
       if (!deletedProductSKU) {
         return res.status(404).json({ message: "Product SKU not found" });
       }

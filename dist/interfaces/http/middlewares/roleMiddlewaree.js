@@ -32,15 +32,24 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const userModel_1 = __importDefault(require("../models/userModel"));
 const roleMiddleware = (roles) => {
   return (req, res, next) =>
     __awaiter(void 0, void 0, void 0, function* () {
       try {
         const token = req.headers.authorization.split(" ")[1];
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = yield User.findById(decoded.id);
+        const decoded = jsonwebtoken_1.default.verify(
+          token,
+          process.env.JWT_SECRET,
+        );
+        const user = yield userModel_1.default.findById(decoded.id);
         if (!user) {
           return res.status(404).json({ message: "User not found" });
         }

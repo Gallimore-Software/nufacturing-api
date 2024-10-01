@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const productSKUSchema = new mongoose.Schema({
   sku: { type: String, required: true, unique: true },

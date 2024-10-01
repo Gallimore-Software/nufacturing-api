@@ -1,6 +1,6 @@
-const request = require("supertest");
-const app = require("../../index"); // Your Express app
-const db = require("../../models"); // Your DB models
+import request from "supertest";
+import app from "../../index";
+import db from "../../models";
 
 describe("Inventory Integration Tests", () => {
   beforeAll(async () => {

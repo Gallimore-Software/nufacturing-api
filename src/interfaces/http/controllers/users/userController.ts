@@ -1,8 +1,8 @@
-const Joi = require("joi");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
-const sendEmail = require("../utils/sendEmail");
+import Joi from "joi";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "../models/userModel";
+import sendEmail from "../utils/sendEmail";
 
 // Joi validation schema
 const userSchema = Joi.object({

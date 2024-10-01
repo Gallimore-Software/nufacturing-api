@@ -32,30 +32,40 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const Joi = require("joi");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
-const sendEmail = require("../utils/sendEmail");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const joi_1 = __importDefault(require("joi"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const userModel_1 = __importDefault(require("../models/userModel"));
+const sendEmail_1 = __importDefault(require("../utils/sendEmail"));
 // Joi validation schema
-const userSchema = Joi.object({
-  username: Joi.string().min(3).max(30).required(),
-  password: Joi.string().min(6).required(),
-  email: Joi.string().email().required(),
-  role: Joi.string().valid("user", "admin", "manager").default("user"),
-  phoneNumber: Joi.string()
+const userSchema = joi_1.default.object({
+  username: joi_1.default.string().min(3).max(30).required(),
+  password: joi_1.default.string().min(6).required(),
+  email: joi_1.default.string().email().required(),
+  role: joi_1.default
+    .string()
+    .valid("user", "admin", "manager")
+    .default("user"),
+  phoneNumber: joi_1.default
+    .string()
     .pattern(/^[0-9]{10,15}$/)
     .required(),
 });
-const loginSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
+const loginSchema = joi_1.default.object({
+  email: joi_1.default.string().email().required(),
+  password: joi_1.default.string().min(6).required(),
 });
 // Get all users
 exports.getAllUsers = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const users = yield User.find();
+      const users = yield userModel_1.default.find();
       res.status(200).json(users);
     } catch (err) {
       res.status(500).json({ message: "Error fetching users", error: err });
@@ -65,7 +75,7 @@ exports.getAllUsers = (req, res) =>
 exports.getUserById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const user = yield User.findById(req.params._id);
+      const user = yield userModel_1.default.findById(req.params._id);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -89,8 +99,11 @@ exports.createUser = (req, res) =>
       }
       // Hash the password before saving
       const saltRounds = 10;
-      const hashedPassword = yield bcrypt.hash(req.body.password, saltRounds);
-      const user = new User(
+      const hashedPassword = yield bcrypt_1.default.hash(
+        req.body.password,
+        saltRounds,
+      );
+      const user = new userModel_1.default(
         Object.assign(Object.assign({}, req.body), {
           password: hashedPassword,
           verified: false,
@@ -98,13 +111,13 @@ exports.createUser = (req, res) =>
       );
       yield user.save();
       // Generate JWT token
-      const token = jwt.sign(
+      const token = jsonwebtoken_1.default.sign(
         { id: user._id, role: user.role },
         process.env.JWT_SECRET,
         { expiresIn: "5h" },
       );
       // Generate verification token
-      const verificationToken = jwt.sign(
+      const verificationToken = jsonwebtoken_1.default.sign(
         { id: user._id },
         process.env.JWT_SECRET,
         { expiresIn: "7d" },
@@ -113,7 +126,7 @@ exports.createUser = (req, res) =>
       const verificationLink = process.env.LIVE_API_URL
         ? `${process.env.LIVE_API_URL}/api/users/verify/${verificationToken}`
         : `http://localhost:3000/api/users/verify/${verificationToken}`;
-      yield sendEmail(
+      yield (0, sendEmail_1.default)(
         user.email,
         "Email Verification",
         `Please verify your email by clicking on the following link: ${verificationLink}`,
@@ -136,10 +149,14 @@ exports.updateUser = (req, res) =>
             error: error.details[0].message,
           });
       }
-      const user = yield User.findByIdAndUpdate(req.params._id, req.body, {
-        new: true,
-        runValidators: true,
-      });
+      const user = yield userModel_1.default.findByIdAndUpdate(
+        req.params._id,
+        req.body,
+        {
+          new: true,
+          runValidators: true,
+        },
+      );
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -152,7 +169,7 @@ exports.updateUser = (req, res) =>
 exports.deleteUser = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const user = yield User.findByIdAndDelete(req.params._id);
+      const user = yield userModel_1.default.findByIdAndDelete(req.params._id);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -175,7 +192,7 @@ exports.loginUser = (req, res) =>
       }
       const { email, password } = req.body;
       // Find user by email
-      const user = yield User.findOne({ email });
+      const user = yield userModel_1.default.findOne({ email });
       if (!user) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
@@ -184,12 +201,12 @@ exports.loginUser = (req, res) =>
         return res.status(401).json({ message: "Email not verified" });
       }
       // Compare passwords
-      const isMatch = yield bcrypt.compare(password, user.password);
+      const isMatch = yield bcrypt_1.default.compare(password, user.password);
       if (!isMatch) {
         return res.status(401).json({ message: "Invalid email or password" });
       }
       // Generate JWT token
-      const token = jwt.sign(
+      const token = jsonwebtoken_1.default.sign(
         { id: user._id, role: user.role },
         process.env.JWT_SECRET,
         { expiresIn: "1h" },

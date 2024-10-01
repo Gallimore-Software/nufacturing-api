@@ -32,11 +32,17 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const nodemailer = require("nodemailer");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const nodemailer_1 = __importDefault(require("nodemailer"));
 const sendEmail = (to, subject, text) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const transporter = nodemailer.createTransport({
+      const transporter = nodemailer_1.default.createTransport({
         host: "mail.brcodex.com.np",
         port: 465,
         secure: true, // Use true for 465, false for other ports

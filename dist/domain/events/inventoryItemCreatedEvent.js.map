@@ -1,1 +1,1 @@
-{"version":3,"file":"inventoryItemCreatedEvent.js","sourceRoot":"","sources":["../../../src/domain/events/inventoryItemCreatedEvent.ts"],"names":[],"mappings":";AAAA,MAAM,yBAAyB;IAC3B,YAAY,aAAa;QACvB,IAAI,CAAC,aAAa,GAAG,aAAa,CAAC;IACrC,CAAC;CACF;AAED,MAAM,CAAC,OAAO,GAAG,yBAAyB,CAAC"}
+{"version":3,"file":"inventoryItemCreatedEvent.js","sourceRoot":"","sources":["../../../src/domain/events/inventoryItemCreatedEvent.ts"],"names":[],"mappings":";AAAA,MAAM,yBAAyB;IAC7B,YAAY,aAAa;QACvB,IAAI,CAAC,aAAa,GAAG,aAAa,CAAC;IACrC,CAAC;CACF;AAED,MAAM,CAAC,OAAO,GAAG,yBAAyB,CAAC"}

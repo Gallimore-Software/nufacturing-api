@@ -1,6 +1,6 @@
-const express = require("express");
-const vendorController = require("../../../../controllers/vendorController");
-const roleMiddleware = require("../middleware/roleMiddlewaree");
+import express from "express";
+import vendorController from "../../../../controllers/vendorController";
+import roleMiddleware from "../middleware/roleMiddlewaree";
 
 const router = express.Router();
 

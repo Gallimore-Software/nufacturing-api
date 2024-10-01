@@ -1,4 +1,4 @@
-const Customer = require("../../models/sales-model/customerModel");
+import Customer from "../../models/sales-model/customerModel";
 
 // Get all customers
 exports.getAllCustomers = async (req, res) => {

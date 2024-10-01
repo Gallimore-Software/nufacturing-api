@@ -32,12 +32,20 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const PurchaseOrder = require("../../models/receiving-model/purchaseOrderModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const purchaseOrderModel_1 = __importDefault(
+  require("../../models/receiving-model/purchaseOrderModel"),
+);
 // Create a new purchase order
 exports.createPurchaseOrder = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const purchaseOrder = new PurchaseOrder(req.body);
+      const purchaseOrder = new purchaseOrderModel_1.default(req.body);
       yield purchaseOrder.save();
       res.status(201).json(purchaseOrder);
     } catch (error) {
@@ -58,8 +66,9 @@ exports.getAllPurchaseOrders = (req, res) =>
         );
         filters.dueDate = { $lte: dueDate };
       }
-      const purchaseOrders =
-        yield PurchaseOrder.find(filters).populate("vendor");
+      const purchaseOrders = yield purchaseOrderModel_1.default
+        .find(filters)
+        .populate("vendor");
       res.status(200).json(purchaseOrders);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -69,9 +78,9 @@ exports.getAllPurchaseOrders = (req, res) =>
 exports.getPurchaseOrderById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const purchaseOrder = yield PurchaseOrder.findById(
-        req.params.id,
-      ).populate("vendor");
+      const purchaseOrder = yield purchaseOrderModel_1.default
+        .findById(req.params.id)
+        .populate("vendor");
       if (!purchaseOrder)
         return res.status(404).json({ message: "Purchase Order not found" });
       res.status(200).json(purchaseOrder);
@@ -83,11 +92,12 @@ exports.getPurchaseOrderById = (req, res) =>
 exports.updatePurchaseOrderById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const purchaseOrder = yield PurchaseOrder.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        { new: true },
-      );
+      const purchaseOrder =
+        yield purchaseOrderModel_1.default.findByIdAndUpdate(
+          req.params.id,
+          req.body,
+          { new: true },
+        );
       if (!purchaseOrder)
         return res.status(404).json({ message: "Purchase Order not found" });
       res.status(200).json(purchaseOrder);
@@ -99,9 +109,8 @@ exports.updatePurchaseOrderById = (req, res) =>
 exports.deletePurchaseOrderById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const purchaseOrder = yield PurchaseOrder.findByIdAndDelete(
-        req.params.id,
-      );
+      const purchaseOrder =
+        yield purchaseOrderModel_1.default.findByIdAndDelete(req.params.id);
       if (!purchaseOrder)
         return res.status(404).json({ message: "Purchase Order not found" });
       res.status(200).json({ message: "Purchase Order deleted successfully" });

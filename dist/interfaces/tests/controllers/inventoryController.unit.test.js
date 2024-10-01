@@ -32,17 +32,25 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const request = require("supertest");
-const app = require("../../index"); // Your Express app
-const inventoryController = require("./inventoryController");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const supertest_1 = __importDefault(require("supertest"));
+const index_1 = __importDefault(require("../../index"));
+const inventoryController_1 = __importDefault(require("./inventoryController"));
 describe("Inventory Controller Unit Tests", () => {
   it("should fetch inventory", () =>
     __awaiter(void 0, void 0, void 0, function* () {
       const inventory = [{ id: 1, name: "item1", quantity: 100 }];
       jest
-        .spyOn(inventoryController, "getInventory")
+        .spyOn(inventoryController_1.default, "getInventory")
         .mockImplementation(() => inventory);
-      const res = yield request(app).get("/api/inventory");
+      const res = yield (0, supertest_1.default)(index_1.default).get(
+        "/api/inventory",
+      );
       expect(res.statusCode).toEqual(200);
       expect(res.body).toEqual(inventory);
     }));

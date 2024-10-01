@@ -1,4 +1,4 @@
-const ProductSKU = require("../../models/product-development-model/productSkuModel");
+import ProductSKU from "../../models/product-development-model/productSkuModel";
 
 // Get all product SKUs
 exports.getAllProductSKUs = async (req, res) => {

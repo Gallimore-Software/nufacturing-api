@@ -32,12 +32,20 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const BatchRecords = require("../../models/quality-audits-model/batchRecordsModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const batchRecordsModel_1 = __importDefault(
+  require("../../models/quality-audits-model/batchRecordsModel"),
+);
 // Create a new batch record
 exports.createBatchRecord = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const batchRecord = new BatchRecords(req.body);
+      const batchRecord = new batchRecordsModel_1.default(req.body);
       yield batchRecord.save();
       res.status(201).json(batchRecord);
     } catch (error) {
@@ -48,7 +56,7 @@ exports.createBatchRecord = (req, res) =>
 exports.getAllBatchRecords = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const batchRecords = yield BatchRecords.find();
+      const batchRecords = yield batchRecordsModel_1.default.find();
       res.status(200).json(batchRecords);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -58,7 +66,9 @@ exports.getAllBatchRecords = (req, res) =>
 exports.getBatchRecordById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const batchRecord = yield BatchRecords.findById(req.params._id);
+      const batchRecord = yield batchRecordsModel_1.default.findById(
+        req.params._id,
+      );
       if (!batchRecord)
         return res.status(404).json({ message: "Batch record not found" });
       res.status(200).json(batchRecord);
@@ -70,7 +80,7 @@ exports.getBatchRecordById = (req, res) =>
 exports.updateBatchRecordById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const batchRecord = yield BatchRecords.findByIdAndUpdate(
+      const batchRecord = yield batchRecordsModel_1.default.findByIdAndUpdate(
         req.params._id,
         req.body,
         { new: true },
@@ -86,7 +96,9 @@ exports.updateBatchRecordById = (req, res) =>
 exports.deleteBatchRecordById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const batchRecord = yield BatchRecords.findByIdAndDelete(req.params._id);
+      const batchRecord = yield batchRecordsModel_1.default.findByIdAndDelete(
+        req.params._id,
+      );
       if (!batchRecord)
         return res.status(404).json({ message: "Batch record not found" });
       res.status(200).json({ message: "Batch record deleted successfully" });

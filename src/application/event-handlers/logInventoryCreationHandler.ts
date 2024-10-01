@@ -1,6 +1,6 @@
-const EventDispatcher = require("../utils/eventDispatcher");
-const InventoryItemCreatedEvent = require("../events/inventoryItemCreatedEvent");
-const logger = require("../../infrastructure/logging/logger");
+import EventDispatcher from "../utils/eventDispatcher";
+import InventoryItemCreatedEvent from "../events/inventoryItemCreatedEvent";
+import logger from "../../infrastructure/logging/logger";
 
 class LogInventoryCreationHandler {
   async handle(event) {

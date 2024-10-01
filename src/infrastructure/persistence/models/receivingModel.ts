@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // Define the schema for Receiving
 const receivingSchema = new mongoose.Schema({

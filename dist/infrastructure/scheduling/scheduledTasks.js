@@ -32,16 +32,22 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const cron = require("node-cron");
-const User = require("../models/userModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_cron_1 = __importDefault(require("node-cron"));
+const userModel_1 = __importDefault(require("../models/userModel"));
 // Schedule the task to run daily
-cron.schedule("0 0 * * *", () =>
+node_cron_1.default.schedule("0 0 * * *", () =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
       const oneWeekAgo = new Date();
       oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
       // Delete unverified users older than a week
-      const result = yield User.deleteMany({
+      const result = yield userModel_1.default.deleteMany({
         verified: false,
         createdAt: { $lte: oneWeekAgo },
       });

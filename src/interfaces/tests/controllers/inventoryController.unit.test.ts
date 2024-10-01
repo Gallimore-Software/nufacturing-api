@@ -1,6 +1,6 @@
-const request = require("supertest");
-const app = require("../../index"); // Your Express app
-const inventoryController = require("./inventoryController");
+import request from "supertest";
+import app from "../../index";
+import inventoryController from "./inventoryController";
 
 describe("Inventory Controller Unit Tests", () => {
   it("should fetch inventory", async () => {

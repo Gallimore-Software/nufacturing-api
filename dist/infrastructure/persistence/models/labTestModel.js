@@ -1,6 +1,12 @@
 "use strict";
-const mongoose = require("mongoose");
-const labTestSchema = new mongoose.Schema({
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const labTestSchema = new mongoose_1.default.Schema({
   testName: {
     type: String,
     required: true,
@@ -22,7 +28,7 @@ const labTestSchema = new mongoose.Schema({
     required: true,
   },
   relatedInventoryItem: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "InventoryItem",
     required: true,
   },
@@ -41,6 +47,6 @@ const labTestSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-const LabTest = mongoose.model("LabTest", labTestSchema);
+const LabTest = mongoose_1.default.model("LabTest", labTestSchema);
 module.exports = LabTest;
 //# sourceMappingURL=labTestModel.js.map

@@ -32,12 +32,22 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const Order = require("../../models/sales-model/orderModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const orderModel_1 = __importDefault(
+  require("../../models/sales-model/orderModel"),
+);
 // Get all orders
 exports.getAllOrders = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const orders = yield Order.find().populate("customer products.productId");
+      const orders = yield orderModel_1.default
+        .find()
+        .populate("customer products.productId");
       res.status(200).json(orders);
     } catch (err) {
       res.status(500).json({ message: "Error fetching orders", error: err });
@@ -47,9 +57,9 @@ exports.getAllOrders = (req, res) =>
 exports.getOrderById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const order = yield Order.findById(req.params.orderId).populate(
-        "customer products.productId",
-      );
+      const order = yield orderModel_1.default
+        .findById(req.params.orderId)
+        .populate("customer products.productId");
       if (!order) {
         return res.status(404).json({ message: "Order not found" });
       }
@@ -62,7 +72,7 @@ exports.getOrderById = (req, res) =>
 exports.createOrder = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const newOrder = new Order(req.body);
+      const newOrder = new orderModel_1.default(req.body);
       yield newOrder.save();
       res.status(201).json(newOrder);
     } catch (err) {
@@ -73,7 +83,7 @@ exports.createOrder = (req, res) =>
 exports.updateOrder = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const updatedOrder = yield Order.findByIdAndUpdate(
+      const updatedOrder = yield orderModel_1.default.findByIdAndUpdate(
         req.params.orderId,
         req.body,
         {
@@ -93,7 +103,9 @@ exports.updateOrder = (req, res) =>
 exports.deleteOrder = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const deletedOrder = yield Order.findByIdAndDelete(req.params.orderId);
+      const deletedOrder = yield orderModel_1.default.findByIdAndDelete(
+        req.params.orderId,
+      );
       if (!deletedOrder) {
         return res.status(404).json({ message: "Order not found" });
       }

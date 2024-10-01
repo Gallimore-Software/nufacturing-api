@@ -1,5 +1,5 @@
-const InventoryItem = require("../models/inventoryModel");
-const mongoose = require("mongoose");
+import InventoryItem from "../models/inventoryModel";
+import mongoose from "mongoose";
 
 // Get all inventory items
 exports.getAllInventoryItems = async (req, res) => {
@@ -51,9 +51,6 @@ exports.getInventoryItemById = async (req, res) => {
     });
   }
 };
-
-// Create a new inventory item
-const CreateInventoryItemUseCase = require("../use-cases/createInventoryItem");
 
 exports.createInventoryItem = async (req, res) => {
   try {

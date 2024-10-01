@@ -1,33 +1,43 @@
 "use strict";
-const express = require("express");
-const receivingController = require("../../../../controllers/receiving-controller/receivingController");
-const roleMiddleware = require("../../middleware/roleMiddlewaree");
-const router = express.Router();
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const receivingController_1 = __importDefault(
+  require("../../../../controllers/receiving-controller/receivingController"),
+);
+const roleMiddlewaree_1 = __importDefault(
+  require("../../middleware/roleMiddlewaree"),
+);
+const router = express_1.default.Router();
 // Define routes with role-based access control
 router.get(
   "/",
-  roleMiddleware(["admin", "manager"]),
-  receivingController.getAllReceivings,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  receivingController_1.default.getAllReceivings,
 );
 router.get(
   "/:receivingId",
-  roleMiddleware(["admin", "manager", "user"]),
-  receivingController.getReceivingById,
+  (0, roleMiddlewaree_1.default)(["admin", "manager", "user"]),
+  receivingController_1.default.getReceivingById,
 );
 router.post(
   "/",
-  roleMiddleware(["admin", "manager"]),
-  receivingController.createReceiving,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  receivingController_1.default.createReceiving,
 );
 router.put(
   "/:receivingId",
-  roleMiddleware(["admin", "manager"]),
-  receivingController.updateReceivingById,
+  (0, roleMiddlewaree_1.default)(["admin", "manager"]),
+  receivingController_1.default.updateReceivingById,
 );
 router.delete(
   "/:receivingId",
-  roleMiddleware(["admin"]),
-  receivingController.deleteReceiving,
+  (0, roleMiddlewaree_1.default)(["admin"]),
+  receivingController_1.default.deleteReceiving,
 );
 module.exports = router;
 //# sourceMappingURL=receivingRoutes.js.map

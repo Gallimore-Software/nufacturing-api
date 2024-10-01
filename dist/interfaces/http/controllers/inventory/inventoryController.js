@@ -32,13 +32,19 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const InventoryItem = require("../models/inventoryModel");
-const mongoose = require("mongoose");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const inventoryModel_1 = __importDefault(require("../models/inventoryModel"));
 // Get all inventory items
 exports.getAllInventoryItems = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const inventoryItems = yield InventoryItem.find()
+      const inventoryItems = yield inventoryModel_1.default
+        .find()
         .populate("vendor")
         .populate("createdBy")
         .populate("associatedFormulas.refId")
@@ -61,7 +67,8 @@ exports.getAllInventoryItems = (req, res) =>
 exports.getInventoryItemById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const inventoryItem = yield InventoryItem.findById(req.params.inventoryId)
+      const inventoryItem = yield inventoryModel_1.default
+        .findById(req.params.inventoryId)
         .populate("vendor")
         .populate("createdBy")
         .populate("associatedFormulas.refId")
@@ -85,8 +92,6 @@ exports.getInventoryItemById = (req, res) =>
       });
     }
   });
-// Create a new inventory item
-const CreateInventoryItemUseCase = require("../use-cases/createInventoryItem");
 exports.createInventoryItem = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -107,11 +112,11 @@ exports.createInventoryItem = (req, res) =>
 exports.updateInventoryItem = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const updatedInventoryItem = yield InventoryItem.findByIdAndUpdate(
-        req.params.inventoryId,
-        req.body,
-        { new: true, runValidators: true },
-      )
+      const updatedInventoryItem = yield inventoryModel_1.default
+        .findByIdAndUpdate(req.params.inventoryId, req.body, {
+          new: true,
+          runValidators: true,
+        })
         .populate("vendor")
         .populate("createdBy")
         .populate("associatedFormulas.refId")
@@ -139,9 +144,10 @@ exports.updateInventoryItem = (req, res) =>
 exports.deleteInventoryItem = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const deletedInventoryItem = yield InventoryItem.findByIdAndDelete(
-        req.params.inventoryId,
-      );
+      const deletedInventoryItem =
+        yield inventoryModel_1.default.findByIdAndDelete(
+          req.params.inventoryId,
+        );
       if (!deletedInventoryItem) {
         return res
           .status(404)

@@ -1,14 +1,20 @@
 "use strict";
-const mongoose = require("mongoose");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
 // Define the schema for Receiving
-const receivingSchema = new mongoose.Schema({
+const receivingSchema = new mongoose_1.default.Schema({
   poNumber: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "PurchaseOrder",
     required: true,
   },
   vendor: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "Vendor",
     required: true,
   },
@@ -22,7 +28,7 @@ const receivingSchema = new mongoose.Schema({
     },
   ],
   receiver: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
@@ -38,6 +44,6 @@ const receivingSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-const Receiving = mongoose.model("Receiving", receivingSchema);
+const Receiving = mongoose_1.default.model("Receiving", receivingSchema);
 module.exports = Receiving;
 //# sourceMappingURL=receivingModel.js.map

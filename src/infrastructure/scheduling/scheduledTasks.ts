@@ -1,5 +1,5 @@
-const cron = require("node-cron");
-const User = require("../models/userModel");
+import cron from "node-cron";
+import User from "../models/userModel";
 
 // Schedule the task to run daily
 cron.schedule("0 0 * * *", async () => {

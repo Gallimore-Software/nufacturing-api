@@ -1,6 +1,6 @@
-const express = require("express");
-const batchRecordsController = require("../../controllers/quality-audits/batchRecordsController");
-const roleMiddleware = require("../../middleware/roleMiddlewaree");
+import express from "express";
+import batchRecordsController from "../../controllers/quality-audits/batchRecordsController";
+import roleMiddleware from "../../middleware/roleMiddlewaree";
 
 const router = express.Router();
 

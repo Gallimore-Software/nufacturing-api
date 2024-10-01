@@ -1,11 +1,17 @@
 "use strict";
-const mongoose = require("mongoose");
-const ingredientSchema = new mongoose.Schema({
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const ingredientSchema = new mongoose_1.default.Schema({
   name: { type: String, required: true },
   scientificName: { type: String, required: true },
   perUnit: { type: Number, required: true },
 });
-const formulaSchema = new mongoose.Schema({
+const formulaSchema = new mongoose_1.default.Schema({
   code: { type: String, unique: true },
   name: { type: String, required: true },
   productType: {
@@ -27,6 +33,6 @@ const formulaSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
-const Formula = mongoose.model("Formula", formulaSchema);
+const Formula = mongoose_1.default.model("Formula", formulaSchema);
 module.exports = Formula;
 //# sourceMappingURL=formulaModel.js.map

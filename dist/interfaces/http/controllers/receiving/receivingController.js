@@ -32,20 +32,30 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const Receiving = require("../../models/receiving-model/receivingModel");
-const PurchaseOrder = require("../../models/receiving-model/purchaseOrderModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const receivingModel_1 = __importDefault(
+  require("../../models/receiving-model/receivingModel"),
+);
+const purchaseOrderModel_1 = __importDefault(
+  require("../../models/receiving-model/purchaseOrderModel"),
+);
 // Create a new receiving entry
 exports.createReceiving = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
       const { poNumber, vendor, receivedItems, receiver, comments } = req.body;
       // Check if the Purchase Order exists
-      const poExists = yield PurchaseOrder.findById(poNumber);
+      const poExists = yield purchaseOrderModel_1.default.findById(poNumber);
       if (!poExists) {
         return res.status(404).json({ message: "Purchase Order not found" });
       }
       // Create the receiving entry
-      const receiving = new Receiving({
+      const receiving = new receivingModel_1.default({
         poNumber,
         vendor,
         receivedItems,
@@ -62,7 +72,8 @@ exports.createReceiving = (req, res) =>
 exports.getAllReceivings = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const receivings = yield Receiving.find()
+      const receivings = yield receivingModel_1.default
+        .find()
         .populate("poNumber")
         .populate("vendor")
         .populate("receiver");
@@ -75,7 +86,8 @@ exports.getAllReceivings = (req, res) =>
 exports.getReceivingById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const receiving = yield Receiving.findById(req.params.receivingId)
+      const receiving = yield receivingModel_1.default
+        .findById(req.params.receivingId)
         .populate("poNumber")
         .populate("vendor")
         .populate("receiver");
@@ -93,7 +105,7 @@ exports.updateReceivingById = (req, res) =>
     try {
       const { receivingId } = req.params;
       const updatedData = req.body;
-      const receiving = yield Receiving.findByIdAndUpdate(
+      const receiving = yield receivingModel_1.default.findByIdAndUpdate(
         receivingId,
         updatedData,
         { new: true },
@@ -110,7 +122,7 @@ exports.updateReceivingById = (req, res) =>
 exports.deleteReceiving = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const receiving = yield Receiving.findByIdAndDelete(
+      const receiving = yield receivingModel_1.default.findByIdAndDelete(
         req.params.receivingId,
       );
       if (!receiving) {

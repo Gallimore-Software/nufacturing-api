@@ -1,4 +1,4 @@
-const BatchRecords = require("../../models/quality-audits-model/batchRecordsModel");
+import BatchRecords from "../../models/quality-audits-model/batchRecordsModel";
 
 // Create a new batch record
 exports.createBatchRecord = async (req, res) => {

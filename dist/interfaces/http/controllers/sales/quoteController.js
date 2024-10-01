@@ -32,14 +32,22 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const Quote = require("../../models/sales-model/quoteModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const quoteModel_1 = __importDefault(
+  require("../../models/sales-model/quoteModel"),
+);
 // Get all quotes
 exports.getAllQuotes = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const quotes = yield Quote.find().populate(
-        "accountManager productType formula ingredients",
-      );
+      const quotes = yield quoteModel_1.default
+        .find()
+        .populate("accountManager productType formula ingredients");
       res.status(200).json(quotes);
     } catch (err) {
       res.status(500).json({ message: "Error fetching quotes", error: err });
@@ -49,9 +57,9 @@ exports.getAllQuotes = (req, res) =>
 exports.getQuoteById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const quote = yield Quote.findById(req.params.quoteId).populate(
-        "accountManager productType formula ingredients",
-      );
+      const quote = yield quoteModel_1.default
+        .findById(req.params.quoteId)
+        .populate("accountManager productType formula ingredients");
       if (!quote) {
         return res.status(404).json({ message: "Quote not found" });
       }
@@ -64,7 +72,7 @@ exports.getQuoteById = (req, res) =>
 exports.createQuote = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const newQuote = new Quote(req.body);
+      const newQuote = new quoteModel_1.default(req.body);
       yield newQuote.save();
       res.status(201).json(newQuote);
     } catch (err) {
@@ -75,7 +83,7 @@ exports.createQuote = (req, res) =>
 exports.updateQuote = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const updatedQuote = yield Quote.findByIdAndUpdate(
+      const updatedQuote = yield quoteModel_1.default.findByIdAndUpdate(
         req.params.quoteId,
         req.body,
         {
@@ -95,7 +103,9 @@ exports.updateQuote = (req, res) =>
 exports.deleteQuote = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const deletedQuote = yield Quote.findByIdAndDelete(req.params.quoteId);
+      const deletedQuote = yield quoteModel_1.default.findByIdAndDelete(
+        req.params.quoteId,
+      );
       if (!deletedQuote) {
         return res.status(404).json({ message: "Quote not found" });
       }

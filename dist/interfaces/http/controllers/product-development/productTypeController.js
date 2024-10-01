@@ -32,12 +32,20 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const ProductType = require("../../models/product-development-model/productTypeModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const productTypeModel_1 = __importDefault(
+  require("../../models/product-development-model/productTypeModel"),
+);
 // Get all product types
 exports.getAllProductTypes = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const productTypes = yield ProductType.find();
+      const productTypes = yield productTypeModel_1.default.find();
       res.status(200).json(productTypes);
     } catch (err) {
       res
@@ -49,7 +57,9 @@ exports.getAllProductTypes = (req, res) =>
 exports.getProductTypeById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const productType = yield ProductType.findById(req.params.typeId);
+      const productType = yield productTypeModel_1.default.findById(
+        req.params.typeId,
+      );
       if (!productType) {
         return res.status(404).json({ message: "Product type not found" });
       }
@@ -64,7 +74,7 @@ exports.getProductTypeById = (req, res) =>
 exports.createProductType = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const newProductType = new ProductType(req.body);
+      const newProductType = new productTypeModel_1.default(req.body);
       yield newProductType.save();
       res.status(201).json(newProductType);
     } catch (err) {
@@ -77,14 +87,15 @@ exports.createProductType = (req, res) =>
 exports.updateProductType = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const updatedProductType = yield ProductType.findByIdAndUpdate(
-        req.params.typeId,
-        req.body,
-        {
-          new: true,
-          runValidators: true,
-        },
-      );
+      const updatedProductType =
+        yield productTypeModel_1.default.findByIdAndUpdate(
+          req.params.typeId,
+          req.body,
+          {
+            new: true,
+            runValidators: true,
+          },
+        );
       if (!updatedProductType) {
         return res.status(404).json({ message: "Product type not found" });
       }
@@ -99,9 +110,8 @@ exports.updateProductType = (req, res) =>
 exports.deleteProductType = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const deletedProductType = yield ProductType.findByIdAndDelete(
-        req.params.typeId,
-      );
+      const deletedProductType =
+        yield productTypeModel_1.default.findByIdAndDelete(req.params.typeId);
       if (!deletedProductType) {
         return res.status(404).json({ message: "Product type not found" });
       }

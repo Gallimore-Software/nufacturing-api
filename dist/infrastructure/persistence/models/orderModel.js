@@ -1,8 +1,14 @@
 "use strict";
-const mongoose = require("mongoose");
-const orderSchema = new mongoose.Schema({
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const orderSchema = new mongoose_1.default.Schema({
   customer: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose_1.default.Schema.Types.ObjectId,
     ref: "Customer",
     required: true,
   },
@@ -33,7 +39,10 @@ const orderSchema = new mongoose.Schema({
   },
   products: [
     {
-      productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+      productId: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "Product",
+      },
       quantity: { type: Number, required: true },
     },
   ],
@@ -50,6 +59,6 @@ const orderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
-const Order = mongoose.model("Order", orderSchema);
+const Order = mongoose_1.default.model("Order", orderSchema);
 module.exports = Order;
 //# sourceMappingURL=orderModel.js.map

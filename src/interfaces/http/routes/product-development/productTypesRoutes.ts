@@ -1,6 +1,6 @@
-const express = require("express");
-const productTypeController = require("../../../../controllers/product-development-controller/productTypeController");
-const roleMiddleware = require("../../middleware/roleMiddlewaree");
+import express from "express";
+import productTypeController from "../../../../controllers/product-development-controller/productTypeController";
+import roleMiddleware from "../../middleware/roleMiddlewaree";
 
 const router = express.Router();
 

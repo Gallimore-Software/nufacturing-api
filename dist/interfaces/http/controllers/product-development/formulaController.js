@@ -32,12 +32,20 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const Formula = require("../../models/product-development-model/formulasModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const formulasModel_1 = __importDefault(
+  require("../../models/product-development-model/formulasModel"),
+);
 // Get all formulas
 exports.getAllFormulas = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const formulas = yield Formula.find();
+      const formulas = yield formulasModel_1.default.find();
       res.status(200).json(formulas);
     } catch (err) {
       res.status(500).json({ message: "Error fetching formulas", error: err });
@@ -47,7 +55,9 @@ exports.getAllFormulas = (req, res) =>
 exports.getFormulaById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const formula = yield Formula.findById(req.params.entity_id);
+      const formula = yield formulasModel_1.default.findById(
+        req.params.entity_id,
+      );
       if (!formula) {
         return res.status(404).json({ message: "Formula not found" });
       }
@@ -82,7 +92,7 @@ exports.createFormula = (req, res) =>
         default:
           unitOfMeasurement = "unknown";
       }
-      const formula = new Formula(
+      const formula = new formulasModel_1.default(
         Object.assign(Object.assign({}, req.body), { code, unitOfMeasurement }),
       );
       yield formula.save();
@@ -95,7 +105,7 @@ exports.createFormula = (req, res) =>
 exports.updateFormula = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const formula = yield Formula.findByIdAndUpdate(
+      const formula = yield formulasModel_1.default.findByIdAndUpdate(
         req.params.entity_id,
         req.body,
         {
@@ -115,7 +125,9 @@ exports.updateFormula = (req, res) =>
 exports.deleteFormula = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const formula = yield Formula.findByIdAndDelete(req.params.entity_id);
+      const formula = yield formulasModel_1.default.findByIdAndDelete(
+        req.params.entity_id,
+      );
       if (!formula) {
         return res.status(404).json({ message: "Formula not found" });
       }

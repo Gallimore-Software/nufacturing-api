@@ -1,4 +1,4 @@
-const ProductType = require("../../models/product-development-model/productTypeModel");
+import ProductType from "../../models/product-development-model/productTypeModel";
 
 // Get all product types
 exports.getAllProductTypes = async (req, res) => {

@@ -32,12 +32,22 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
-const LabTest = require("../../models/research-and-development-model/labTestingModel");
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+const labTestingModel_1 = __importDefault(
+  require("../../models/research-and-development-model/labTestingModel"),
+);
 // Get all lab tests
 exports.getAllLabTests = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const labTests = yield LabTest.find().populate("relatedInventoryItem");
+      const labTests = yield labTestingModel_1.default
+        .find()
+        .populate("relatedInventoryItem");
       res.status(200).json(labTests);
     } catch (error) {
       res.status(500).json({ message: "Error fetching lab tests", error });
@@ -47,9 +57,9 @@ exports.getAllLabTests = (req, res) =>
 exports.getLabTestById = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const labTest = yield LabTest.findById(req.params.id).populate(
-        "relatedInventoryItem",
-      );
+      const labTest = yield labTestingModel_1.default
+        .findById(req.params.id)
+        .populate("relatedInventoryItem");
       if (!labTest) {
         return res.status(404).json({ message: "Lab test not found" });
       }
@@ -71,7 +81,7 @@ exports.createLabTest = (req, res) =>
         relatedInventoryItem,
         attachments,
       } = req.body;
-      const newLabTest = new LabTest({
+      const newLabTest = new labTestingModel_1.default({
         testName,
         testDate,
         result,
@@ -99,19 +109,21 @@ exports.updateLabTest = (req, res) =>
         relatedInventoryItem,
         attachments,
       } = req.body;
-      const updatedLabTest = yield LabTest.findByIdAndUpdate(
-        req.params.id,
-        {
-          testName,
-          testDate,
-          result,
-          comments,
-          testedBy,
-          relatedInventoryItem,
-          attachments,
-        },
-        { new: true, runValidators: true },
-      ).populate("relatedInventoryItem");
+      const updatedLabTest = yield labTestingModel_1.default
+        .findByIdAndUpdate(
+          req.params.id,
+          {
+            testName,
+            testDate,
+            result,
+            comments,
+            testedBy,
+            relatedInventoryItem,
+            attachments,
+          },
+          { new: true, runValidators: true },
+        )
+        .populate("relatedInventoryItem");
       if (!updatedLabTest) {
         return res.status(404).json({ message: "Lab test not found" });
       }
@@ -124,7 +136,9 @@ exports.updateLabTest = (req, res) =>
 exports.deleteLabTest = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      const deletedLabTest = yield LabTest.findByIdAndDelete(req.params.id);
+      const deletedLabTest = yield labTestingModel_1.default.findByIdAndDelete(
+        req.params.id,
+      );
       if (!deletedLabTest) {
         return res.status(404).json({ message: "Lab test not found" });
       }
