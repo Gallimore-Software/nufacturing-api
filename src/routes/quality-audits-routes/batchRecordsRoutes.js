@@ -11,7 +11,7 @@ router.get(
   batchRecordsController.getAllBatchRecords,
 );
 router.get(
-  "/:labTestId",
+  "/:_id",
   roleMiddleware(["admin", "manager", "user"]),
   batchRecordsController.getBatchRecordById,
 );
@@ -21,12 +21,12 @@ router.post(
   batchRecordsController.createBatchRecord,
 );
 router.put(
-  "/:labTestId",
+  "/:_id",
   roleMiddleware(["admin", "manager"]),
   batchRecordsController.updateBatchRecordById,
 );
 router.delete(
-  "/:labTestId",
+  "/:_id",
   roleMiddleware(["admin"]),
   batchRecordsController.deleteBatchRecordById,
 );
