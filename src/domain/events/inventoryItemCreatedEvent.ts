@@ -1,7 +1,15 @@
+interface InventoryItem {
+  _id: string;
+  sku: string;
+  createdAt: Date;
+  createdBy: string;
+}
 class InventoryItemCreatedEvent {
-  constructor(inventoryItem) {
+  inventoryItem: InventoryItem;
+
+  constructor(inventoryItem: InventoryItem) {
     this.inventoryItem = inventoryItem;
   }
 }
 
-module.exports = InventoryItemCreatedEvent;
+export default InventoryItemCreatedEvent;

@@ -1,16 +1,26 @@
+interface Event {
+  constructor: { name: string };
+}
+
+interface EventHandler {
+  handle(event: Event): Promise<void> | void;
+}
+
 class EventDispatcher {
+  private eventHandlers: { [key: string]: EventHandler[] };
+
   constructor() {
     this.eventHandlers = {};
   }
 
-  register(eventType, handler) {
+  register(eventType: string, handler: EventHandler): void {
     if (!this.eventHandlers[eventType]) {
       this.eventHandlers[eventType] = [];
     }
     this.eventHandlers[eventType].push(handler);
   }
 
-  async dispatch(event) {
+  async dispatch(event: Event): Promise<void> {
     const handlers = this.eventHandlers[event.constructor.name];
     if (handlers) {
       for (const handler of handlers) {
@@ -20,4 +30,4 @@ class EventDispatcher {
   }
 }
 
-module.exports = new EventDispatcher();
+export default new EventDispatcher();

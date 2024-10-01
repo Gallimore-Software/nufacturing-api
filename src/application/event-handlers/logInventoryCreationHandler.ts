@@ -1,6 +1,10 @@
-import EventDispatcher from "../utils/eventDispatcher";
-import InventoryItemCreatedEvent from "../events/inventoryItemCreatedEvent";
+import EventDispatcher from "../../infrastructure/event-handlers/eventDispatcher";
+import InventoryItemCreatedEvent from "../../domain/events/inventoryItemCreatedEvent";
 import logger from "../../infrastructure/logging/logger";
+
+interface EventHandler {
+  handle(event: InventoryItemCreatedEvent): Promise<void> | void;
+}
 
 class LogInventoryCreationHandler {
   async handle(event) {
@@ -17,17 +21,24 @@ class LogInventoryCreationHandler {
         createdBy: event.inventoryItem.createdBy,
       });
     } catch (err) {
-      logger.error("Error handling InventoryItemCreatedEvent", {
-        error: err.message,
-        stack: err.stack,
-        event: event,
-      });
+      // Checks if "err" is instance of 'Error' before accessing :)
+      if (err instanceof Error) {
+        logger.error("Error handling InventoryItemCreatedEvent", {
+          error: err.message,
+          stack: err.stack,
+          event: event,
+        });
+      } else {
+        logger.error("An unknown error occurred", { event: event });
+      }
     }
   }
 }
-
 // Register the handler with a reusable function
-function registerEventHandler(eventName, handlerInstance) {
+function registerEventHandler(
+  eventName: string,
+  handlerInstance: EventHandler,
+): void {
   EventDispatcher.register(eventName, handlerInstance);
 }
 
