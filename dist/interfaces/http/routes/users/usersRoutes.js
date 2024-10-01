@@ -1,32 +1,45 @@
 "use strict";
-const express = require("express");
-const userController = require("../../controllers/users/userController");
-const { verifyEmail } = require("../../controllers/authController");
-const roleMiddleware = require("../middleware/roleMiddlewaree");
-const router = express.Router();
-// Define routes with role-based access control
-router.get(
-  "/all-users",
-  roleMiddleware(["admin", "manager"]),
-  userController.getAllUsers,
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = createRouter;
+const express_1 = __importDefault(require("express"));
+const userController_1 = __importDefault(
+  require("../../controllers/users/userController"),
 );
-router.get(
-  "/all-users/:_id",
-  roleMiddleware(["admin", "manager", "user"]),
-  userController.getUserById,
+const authController_1 = require("../../controllers/authController");
+const roleMiddleware_1 = __importDefault(
+  require("../middleware/roleMiddleware"),
 );
-router.post("/create-user", userController.createUser);
-router.put(
-  "/update-user/:_id",
-  roleMiddleware(["admin", "manager"]),
-  userController.updateUser,
-);
-router.delete(
-  "/delete-user/:_id",
-  roleMiddleware(["admin"]),
-  userController.deleteUser,
-);
-router.get("/verify/:token", verifyEmail);
-router.post("/login", userController.loginUser);
-module.exports = router;
+function createRouter() {
+  const router = express_1.default.Router();
+  // Define routes with role-based access control
+  router.get(
+    "/all-users",
+    (0, roleMiddleware_1.default)(["admin", "manager"]),
+    userController_1.default.getAllUsers,
+  );
+  router.get(
+    "/all-users/:_id",
+    (0, roleMiddleware_1.default)(["admin", "manager", "user"]),
+    userController_1.default.getUserById,
+  );
+  router.post("/create-user", userController_1.default.createUser);
+  router.put(
+    "/update-user/:_id",
+    (0, roleMiddleware_1.default)(["admin", "manager"]),
+    userController_1.default.updateUser,
+  );
+  router.delete(
+    "/delete-user/:_id",
+    (0, roleMiddleware_1.default)(["admin"]),
+    userController_1.default.deleteUser,
+  );
+  router.get("/verify/:token", authController_1.verifyEmail);
+  router.post("/login", userController_1.default.loginUser);
+  return router;
+}
 //# sourceMappingURL=usersRoutes.js.map

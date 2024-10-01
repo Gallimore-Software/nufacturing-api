@@ -46,7 +46,6 @@ describe("GET /api/inventory", () => {
   beforeAll(() =>
     __awaiter(void 0, void 0, void 0, function* () {
       yield mongoose_1.default.connect(process.env.DB_URI, {
-        useNewUrlParser: true,
         useUnifiedTopology: true,
       });
     }),

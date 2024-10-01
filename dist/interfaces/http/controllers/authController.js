@@ -38,9 +38,10 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.verifyEmail = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userModel_1 = __importDefault(require("../models/userModel"));
-exports.verifyEmail = (req, res) =>
+const verifyEmail = (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
       const token = req.params.token;
@@ -79,4 +80,5 @@ exports.verifyEmail = (req, res) =>
       res.status(500).json({ message: "Internal server error", error });
     }
   });
+exports.verifyEmail = verifyEmail;
 //# sourceMappingURL=authController.js.map
