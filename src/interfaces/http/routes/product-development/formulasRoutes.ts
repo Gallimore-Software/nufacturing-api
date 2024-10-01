@@ -1,6 +1,6 @@
 import express from "express";
-import formulaController from "../../../../controllers/product-development-controller/formulaController";
-import roleMiddleware from "../../middleware/roleMiddlewaree";
+import * as formulaController from "@controllers/product-development/formulaController";
+import roleMiddleware from "@middleware/roleMiddleware";
 
 const router = express.Router();
 

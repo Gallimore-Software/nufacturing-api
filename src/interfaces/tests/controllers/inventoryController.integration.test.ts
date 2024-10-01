@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "../../index";
-import db from "../../models";
+import db from "@models";
 
 describe("Inventory Integration Tests", () => {
   beforeAll(async () => {

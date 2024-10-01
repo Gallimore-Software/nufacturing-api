@@ -1,7 +1,7 @@
-import Quote from "../../models/sales-model/quoteModel";
+import Quote from "@models/quoteModel";
 
 // Get all quotes
-exports.getAllQuotes = async (req, res) => {
+export const getAllQuotes = async (req, res) => {
   try {
     const quotes = await Quote.find().populate(
       "accountManager productType formula ingredients",
@@ -13,7 +13,7 @@ exports.getAllQuotes = async (req, res) => {
 };
 
 // Get quote by ID
-exports.getQuoteById = async (req, res) => {
+export const getQuoteById = async (req, res) => {
   try {
     const quote = await Quote.findById(req.params.quoteId).populate(
       "accountManager productType formula ingredients",
@@ -28,7 +28,7 @@ exports.getQuoteById = async (req, res) => {
 };
 
 // Create a new quote
-exports.createQuote = async (req, res) => {
+export const createQuote = async (req, res) => {
   try {
     const newQuote = new Quote(req.body);
     await newQuote.save();
@@ -39,7 +39,7 @@ exports.createQuote = async (req, res) => {
 };
 
 // Update quote
-exports.updateQuote = async (req, res) => {
+export const updateQuote = async (req, res) => {
   try {
     const updatedQuote = await Quote.findByIdAndUpdate(
       req.params.quoteId,
@@ -59,7 +59,7 @@ exports.updateQuote = async (req, res) => {
 };
 
 // Delete quote
-exports.deleteQuote = async (req, res) => {
+export const deleteQuote = async (req, res) => {
   try {
     const deletedQuote = await Quote.findByIdAndDelete(req.params.quoteId);
     if (!deletedQuote) {

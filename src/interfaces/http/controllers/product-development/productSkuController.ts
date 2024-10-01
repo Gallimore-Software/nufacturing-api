@@ -1,7 +1,7 @@
-import ProductSKU from "../../models/product-development-model/productSkuModel";
+import ProductSKU from "@models/productSKUModel";
 
 // Get all product SKUs
-exports.getAllProductSKUs = async (req, res) => {
+export const getAllProductSKUs = async (req, res) => {
   try {
     const productSKUs = await ProductSKU.find().populate("formula");
     res.status(200).json(productSKUs);
@@ -13,7 +13,7 @@ exports.getAllProductSKUs = async (req, res) => {
 };
 
 // Get product SKU by ID
-exports.getProductSKUById = async (req, res) => {
+export const getProductSKUById = async (req, res) => {
   try {
     const productSKU = await ProductSKU.findById(req.params.skuId).populate(
       "formula",
@@ -28,7 +28,7 @@ exports.getProductSKUById = async (req, res) => {
 };
 
 // Create a new product SKU
-exports.createProductSKU = async (req, res) => {
+export const createProductSKU = async (req, res) => {
   try {
     const newProductSKU = new ProductSKU(req.body);
     await newProductSKU.save();
@@ -39,7 +39,7 @@ exports.createProductSKU = async (req, res) => {
 };
 
 // Update product SKU
-exports.updateProductSKU = async (req, res) => {
+export const updateProductSKU = async (req, res) => {
   try {
     const updatedProductSKU = await ProductSKU.findByIdAndUpdate(
       req.params.skuId,
@@ -59,7 +59,7 @@ exports.updateProductSKU = async (req, res) => {
 };
 
 // Delete product SKU
-exports.deleteProductSKU = async (req, res) => {
+export const deleteProductSKU = async (req, res) => {
   try {
     const deletedProductSKU = await ProductSKU.findByIdAndDelete(
       req.params.skuId,

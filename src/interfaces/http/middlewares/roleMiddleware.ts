@@ -18,8 +18,8 @@ const roleMiddleware = (roles) => {
 
       req.user = user;
       next();
-    } catch (error) {
-      res.status(401).json({ message: "Unauthorized", error: error.message });
+    } catch (err) {
+      res.status(401).json({ message: "Unauthorized", err: err });
     }
   };
 };

@@ -1,6 +1,6 @@
 import express from "express";
-import receivingController from "../../../../controllers/receiving-controller/receivingController";
-import roleMiddleware from "../../middleware/roleMiddlewaree";
+import * as receivingController from "@controllers/receiving/receivingController";
+import roleMiddleware from "@middleware/roleMiddleware";
 
 const router = express.Router();
 

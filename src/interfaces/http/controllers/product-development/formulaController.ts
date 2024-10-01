@@ -1,7 +1,7 @@
-import Formula from "../../models/product-development-model/formulasModel";
+import Formula from "@models/formulaModel";
 
 // Get all formulas
-exports.getAllFormulas = async (req, res) => {
+export const getAllFormulas = async (req, res) => {
   try {
     const formulas = await Formula.find();
     res.status(200).json(formulas);
@@ -11,7 +11,7 @@ exports.getAllFormulas = async (req, res) => {
 };
 
 // Get a formula by ID
-exports.getFormulaById = async (req, res) => {
+export const getFormulaById = async (req, res) => {
   try {
     const formula = await Formula.findById(req.params.entity_id);
     if (!formula) {
@@ -24,7 +24,7 @@ exports.getFormulaById = async (req, res) => {
 };
 
 // Create a new formula
-exports.createFormula = async (req, res) => {
+export const createFormula = async (req, res) => {
   try {
     const { productType } = req.body;
 
@@ -65,7 +65,7 @@ exports.createFormula = async (req, res) => {
 };
 
 // Update a formula by ID
-exports.updateFormula = async (req, res) => {
+export const updateFormula = async (req, res) => {
   try {
     const formula = await Formula.findByIdAndUpdate(
       req.params.entity_id,
@@ -85,7 +85,7 @@ exports.updateFormula = async (req, res) => {
 };
 
 // Delete a formula by ID
-exports.deleteFormula = async (req, res) => {
+export const deleteFormula = async (req, res) => {
   try {
     const formula = await Formula.findByIdAndDelete(req.params.entity_id);
     if (!formula) {

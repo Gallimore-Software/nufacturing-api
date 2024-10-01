@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import User from "../models/userModel";
+import User from "@models/userModel";
 
 // Schedule the task to run daily
 cron.schedule("0 0 * * *", async () => {

@@ -1,6 +1,6 @@
 import express from "express";
-import labTestingController from "../../controllers/research-and-development/labTestingController";
-import roleMiddleware from "../../middleware/roleMiddlewaree";
+import * as labTestingController from "@controllers/research-and-development/labTestingController";
+import roleMiddleware from "@middleware/roleMiddleware";
 
 const router = express.Router();
 

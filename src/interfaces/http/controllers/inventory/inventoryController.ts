@@ -19,7 +19,7 @@ export const getAllInventoryItems = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error fetching inventory items",
-      error: err.message,
+      error: err,
     });
   }
 };
@@ -47,7 +47,7 @@ export const getInventoryItemById = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error fetching inventory item",
-      error: err.message,
+      error: err,
     });
   }
 };
@@ -62,7 +62,7 @@ export const createInventoryItem = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error creating inventory item",
-      error: err.message,
+      error: err,
     });
   }
 };
@@ -95,7 +95,7 @@ export const updateInventoryItem = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error updating inventory item",
-      error: err.message,
+      error: err,
     });
   }
 };
@@ -119,7 +119,7 @@ export const deleteInventoryItem = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Error deleting inventory item",
-      error: err.message,
+      error: err,
     });
   }
 };

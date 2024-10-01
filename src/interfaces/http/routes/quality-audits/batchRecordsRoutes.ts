@@ -1,6 +1,6 @@
 import express from "express";
-import batchRecordsController from "../../controllers/quality-audits/batchRecordsController";
-import roleMiddleware from "../../middleware/roleMiddlewaree";
+import * as batchRecordsController from "@controllers/quality-audits/batchRecordsController";
+import roleMiddleware from "@middleware/roleMiddleware";
 
 const router = express.Router();
 

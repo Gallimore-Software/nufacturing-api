@@ -1,7 +1,7 @@
-import LabTest from "../../models/research-and-development-model/labTestingModel";
+import LabTest from "@models/labTestModel";
 
 // Get all lab tests
-exports.getAllLabTests = async (req, res) => {
+export const getAllLabTests = async (req, res) => {
   try {
     const labTests = await LabTest.find().populate("relatedInventoryItem");
     res.status(200).json(labTests);
@@ -11,7 +11,7 @@ exports.getAllLabTests = async (req, res) => {
 };
 
 // Get a lab test by ID
-exports.getLabTestById = async (req, res) => {
+export const getLabTestById = async (req, res) => {
   try {
     const labTest = await LabTest.findById(req.params.id).populate(
       "relatedInventoryItem",
@@ -26,7 +26,7 @@ exports.getLabTestById = async (req, res) => {
 };
 
 // Create a new lab test
-exports.createLabTest = async (req, res) => {
+export const createLabTest = async (req, res) => {
   try {
     const {
       testName,
@@ -56,7 +56,7 @@ exports.createLabTest = async (req, res) => {
 };
 
 // Update a lab test
-exports.updateLabTest = async (req, res) => {
+export const updateLabTest = async (req, res) => {
   try {
     const {
       testName,
@@ -93,7 +93,7 @@ exports.updateLabTest = async (req, res) => {
 };
 
 // Delete a lab test
-exports.deleteLabTest = async (req, res) => {
+export const deleteLabTest = async (req, res) => {
   try {
     const deletedLabTest = await LabTest.findByIdAndDelete(req.params.id);
     if (!deletedLabTest) {

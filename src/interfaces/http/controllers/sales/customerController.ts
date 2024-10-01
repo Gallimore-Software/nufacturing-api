@@ -1,7 +1,7 @@
-import Customer from "../../models/sales-model/customerModel";
+import Customer from "@models/sales-model/customerModel";
 
 // Get all customers
-exports.getAllCustomers = async (req, res) => {
+export const getAllCustomers = async (req, res) => {
   try {
     const customers = await Customer.find();
     res.status(200).json(customers);
@@ -11,7 +11,7 @@ exports.getAllCustomers = async (req, res) => {
 };
 
 // Get customer by ID
-exports.getCustomerById = async (req, res) => {
+export const getCustomerById = async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.customerId);
     if (!customer) {
@@ -24,7 +24,7 @@ exports.getCustomerById = async (req, res) => {
 };
 
 // Create a new customer
-exports.createCustomer = async (req, res) => {
+export const createCustomer = async (req, res) => {
   try {
     const newCustomer = new Customer(req.body);
     await newCustomer.save();
@@ -35,7 +35,7 @@ exports.createCustomer = async (req, res) => {
 };
 
 // Update customer
-exports.updateCustomer = async (req, res) => {
+export const updateCustomer = async (req, res) => {
   try {
     const updatedCustomer = await Customer.findByIdAndUpdate(
       req.params.customerId,
@@ -55,7 +55,7 @@ exports.updateCustomer = async (req, res) => {
 };
 
 // Delete customer
-exports.deleteCustomer = async (req, res) => {
+export const deleteCustomer = async (req, res) => {
   try {
     const deletedCustomer = await Customer.findByIdAndDelete(
       req.params.customerId,

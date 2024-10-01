@@ -1,7 +1,7 @@
-import Order from "../../models/sales-model/orderModel";
+import Order from "@models/orderModel";
 
 // Get all orders
-exports.getAllOrders = async (req, res) => {
+export const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find().populate("customer products.productId");
     res.status(200).json(orders);
@@ -11,7 +11,7 @@ exports.getAllOrders = async (req, res) => {
 };
 
 // Get order by ID
-exports.getOrderById = async (req, res) => {
+export const getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.orderId).populate(
       "customer products.productId",
@@ -26,7 +26,7 @@ exports.getOrderById = async (req, res) => {
 };
 
 // Create a new order
-exports.createOrder = async (req, res) => {
+export const createOrder = async (req, res) => {
   try {
     const newOrder = new Order(req.body);
     await newOrder.save();
@@ -37,7 +37,7 @@ exports.createOrder = async (req, res) => {
 };
 
 // Update order
-exports.updateOrder = async (req, res) => {
+export const updateOrder = async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.orderId,
@@ -57,7 +57,7 @@ exports.updateOrder = async (req, res) => {
 };
 
 // Delete order
-exports.deleteOrder = async (req, res) => {
+export const deleteOrder = async (req, res) => {
   try {
     const deletedOrder = await Order.findByIdAndDelete(req.params.orderId);
     if (!deletedOrder) {

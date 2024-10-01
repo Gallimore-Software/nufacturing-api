@@ -14,7 +14,9 @@
       "@/*": ["src/*"],
       "@models/*": ["src/infrastructure/persistence/models/*"],
       "@controllers/*": ["src/interfaces/http/controllers/*"],
-      "@middleware/*": ["src/interfaces/http/middlewares/*"]
+      "@middleware/*": ["src/interfaces/http/middlewares/*"],
+      "@logging/*": ["src/infrastructure/logging/*"],
+      "@notifications/*": ["src/infrastructure/notifications/*"]
     }
   },
   "include": ["src/**/*"],

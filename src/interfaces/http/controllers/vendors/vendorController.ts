@@ -1,4 +1,4 @@
-import Vendor from "../models/vendorModel";
+import Vendor from "@models/vendorModel";
 
 // Create a new vendor
 export const createVendor = async (req, res) => {
@@ -7,7 +7,7 @@ export const createVendor = async (req, res) => {
     await vendor.save();
     res.status(201).json(vendor);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: error });
   }
 };
 
@@ -17,7 +17,7 @@ export const getAllVendors = async (req, res) => {
     const vendors = await Vendor.find();
     res.status(200).json(vendors);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -28,7 +28,7 @@ export const getVendorById = async (req, res) => {
     if (!vendor) return res.status(404).json({ message: "Vendor not found" });
     res.status(200).json(vendor);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error });
   }
 };
 
@@ -41,7 +41,7 @@ export const updateVendorById = async (req, res) => {
     if (!vendor) return res.status(404).json({ message: "Vendor not found" });
     res.status(200).json(vendor);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: error });
   }
 };
 
@@ -52,6 +52,6 @@ export const deleteVendorById = async (req, res) => {
     if (!vendor) return res.status(404).json({ message: "Vendor not found" });
     res.status(200).json({ message: "Vendor deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error });
   }
 };

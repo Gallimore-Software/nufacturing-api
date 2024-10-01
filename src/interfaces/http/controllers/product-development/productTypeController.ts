@@ -1,7 +1,7 @@
-import ProductType from "../../models/product-development-model/productTypeModel";
+import ProductType from "@models/productTypeModel";
 
 // Get all product types
-exports.getAllProductTypes = async (req, res) => {
+export const getAllProductTypes = async (req, res) => {
   try {
     const productTypes = await ProductType.find();
     res.status(200).json(productTypes);
@@ -13,7 +13,7 @@ exports.getAllProductTypes = async (req, res) => {
 };
 
 // Get product type by ID
-exports.getProductTypeById = async (req, res) => {
+export const getProductTypeById = async (req, res) => {
   try {
     const productType = await ProductType.findById(req.params.typeId);
     if (!productType) {
@@ -28,7 +28,7 @@ exports.getProductTypeById = async (req, res) => {
 };
 
 // Create a new product type
-exports.createProductType = async (req, res) => {
+export const createProductType = async (req, res) => {
   try {
     const newProductType = new ProductType(req.body);
     await newProductType.save();
@@ -41,7 +41,7 @@ exports.createProductType = async (req, res) => {
 };
 
 // Update product type
-exports.updateProductType = async (req, res) => {
+export const updateProductType = async (req, res) => {
   try {
     const updatedProductType = await ProductType.findByIdAndUpdate(
       req.params.typeId,
@@ -63,7 +63,7 @@ exports.updateProductType = async (req, res) => {
 };
 
 // Delete product type
-exports.deleteProductType = async (req, res) => {
+export const deleteProductType = async (req, res) => {
   try {
     const deletedProductType = await ProductType.findByIdAndDelete(
       req.params.typeId,

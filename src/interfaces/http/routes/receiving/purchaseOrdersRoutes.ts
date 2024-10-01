@@ -1,6 +1,6 @@
 import express from "express";
-import purchaseOrderController from "../../../../controllers/receiving-controller/purchaseOrderController";
-import roleMiddleware from "../../middleware/roleMiddlewaree";
+import * as purchaseOrderController from "@controllers/receiving/purchaseOrderController";
+import roleMiddleware from "@middleware/roleMiddleware";
 
 const router = express.Router();
 
