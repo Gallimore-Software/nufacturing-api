@@ -6,7 +6,6 @@ describe("GET /api/inventory", () => {
   // Connect to the database before running any tests
   beforeAll(async () => {
     await mongoose.connect(process.env.DB_URI as string, {
-      useNewUrlParser: true,
       useUnifiedTopology: true,
     });
   });
