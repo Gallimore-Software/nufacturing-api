@@ -29,6 +29,6 @@
       "@domain-entities/*": ["src/domain/entities/*"]
     }
   },
-  "include": ["src/**/*", "app"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "__tests__"]
 }
