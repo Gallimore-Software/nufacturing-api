@@ -9,7 +9,7 @@ cron.schedule("0 0 * * *", async () => {
 
     // Delete unverified users older than a week
     const result = await User.deleteMany({
-      verified: false,
+      emailVerified: false,
       createdAt: { $lte: oneWeekAgo },
     });
 
