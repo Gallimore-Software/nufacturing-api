@@ -38,4 +38,4 @@ const batchRecordsSchema = new mongoose.Schema({
 
 const BatchRecords = mongoose.model("BatchRecord", batchRecordsSchema);
 
-module.exports = BatchRecords;
+export default BatchRecords;

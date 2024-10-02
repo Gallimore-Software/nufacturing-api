@@ -14,7 +14,7 @@ export const createPurchaseOrder = async (req, res) => {
 // Get all purchase orders with optional filtering
 export const getAllPurchaseOrders = async (req, res) => {
   try {
-    const filters = {};
+    const filters: { [key: string]: unknown } = {};
     const { dueInDays } = req.query;
 
     // Apply filters if dueInDays is provided
