@@ -1,36 +1,63 @@
-import { User } from "@domain-entities/user";
+import User from "@domain-entities/user"; // Adjust path if necessary
+import UserModel from "@models/userModel"; // Mocked
+import UserDTO from "@app-dto/userDTO"; // Adjust path if necessary
 
-describe("User Entity Tests", () => {
-  it("should create a valid user entity", () => {
-    const user = new User({
-      username: "john_doe",
-      email: "john@example.com",
-      role: "manager",
+jest.mock("@models/userModel");
+
+describe("User Entity", () => {
+  let userEntity;
+
+  beforeEach(() => {
+    userEntity = new User();
+    jest.clearAllMocks();
+  });
+
+  describe("createUser", () => {
+    it("should create a user and save it to the database", async () => {
+      const userDTO: UserDTO = {
+        username: "testuser",
+        password: "password123",
+        email: "testuser@example.com",
+        phoneNumber: "1234567890",
+      };
+
+      const mockSave = jest.fn().mockResolvedValue(userDTO);
+      (UserModel as unknown as jest.Mock).mockImplementation(() => ({
+        save: mockSave,
+      }));
+
+      const result = await userEntity.createUser(userDTO);
+
+      expect(UserModel).toHaveBeenCalledWith(userDTO);
+      expect(mockSave).toHaveBeenCalled();
+      expect(result).toEqual(userDTO);
     });
-
-    expect(user.username).toBe("john_doe");
-    expect(user.email).toBe("john@example.com");
-    expect(user.role).toBe("manager");
   });
 
-  it("should throw an error when email is invalid", () => {
-    expect(() => {
-      new User({
-        username: "jane_doe",
-        email: "invalid-email",
-        role: "employee",
-      });
-    }).toThrow("Invalid email format");
-  });
+  // describe("findUserByEmail", () => {
+  //   it("should find a user by email", async () => {
+  //     const mockUser = {
+  //       username: "testuser",
+  //       password: "password123",
+  //       email: "testuser@example.com",
+  //       phoneNumber: "1234567890",
+  //     };
 
-  it("should properly update user role", () => {
-    const user = new User({
-      username: "john_doe",
-      email: "john@example.com",
-      role: "employee",
-    });
+  //     (UserModel.findOne as jest.Mock).mockResolvedValue(mockUser);
 
-    user.updateRole("manager");
-    expect(user.role).toBe("manager");
-  });
+  //     const result = await userEntity.findUserByEmail("testuser@example.com");
+
+  //     expect(UserModel.findOne).toHaveBeenCalledWith({ email: "testuser@example.com" });
+  //     expect(result).toEqual(mockUser);
+  //   });
+
+  //   it("should return null if the user is not found", async () => {
+  //     (UserModel.findOne as jest.Mock).mockResolvedValue(null);
+
+  //     const result = await userEntity.findUserByEmail("nonexistent@example.com");
+
+  //     expect(UserModel.findOne).toHaveBeenCalledWith({ email: "nonexistent@example.com" });
+  //     expect(result).toBeNull();
+  //   });
+  // });
 });

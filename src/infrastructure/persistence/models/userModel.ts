@@ -1,6 +1,16 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const userSchema = new mongoose.Schema({
+interface IUser extends Document {
+  username: string;
+  password: string;
+  email: string;
+  role: "user" | "admin" | "manager";
+  phoneNumber: string;
+  createdAt: Date;
+  emailVerified: boolean;
+}
+
+const userSchema = new Schema<IUser>({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -10,6 +20,6 @@ const userSchema = new mongoose.Schema({
   emailVerified: { type: Boolean, default: false },
 });
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model<IUser>("User", userSchema);
 
-module.exports = User;
+export default User;
