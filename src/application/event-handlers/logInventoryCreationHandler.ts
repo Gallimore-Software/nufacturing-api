@@ -1,6 +1,6 @@
-import EventDispatcher from "../../infrastructure/event-handlers/eventDispatcher";
+import EventDispatcher from "@events/eventDispatcher";
 import InventoryItemCreatedEvent from "../../domain/events/inventoryItemCreatedEvent";
-import logger from "../../infrastructure/logging/logger";
+import logger from "@logging/logger";
 
 interface EventHandler {
   handle(event: InventoryItemCreatedEvent): Promise<void> | void;

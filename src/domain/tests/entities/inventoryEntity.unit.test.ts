@@ -1,12 +1,16 @@
-import { Inventory } from "../../entities/inventory";
+import { Inventory } from "@entity/inventory";
 
 describe("Inventory Entity Tests", () => {
   it("should create a valid inventory entity", () => {
     const inventory = new Inventory({
-      name: "Brown Rice",
+      _id: "1",
+      vendorName: "Rice Supplier",
       sku: "BR123",
-      quantity: 100,
-      price: 25,
+      ingredientName: "Brown Rice",
+      pricePerKg: 25,
+      stockQuantity: 100,
+      category: "Grains",
+      lotCode: "LC001",
     });
 
     expect(inventory.name).toBe("Brown Rice");
