@@ -35,11 +35,18 @@ export const verifyEmail = async (req, res) => {
 
     res.status(200).json({ message: "Email verified successfully" });
   } catch (error) {
-    if (error.name === "TokenExpiredError") {
+    // Check if the error is an instance of Error
+    if (error instanceof jwt.TokenExpiredError) {
       return res.status(400).json({ message: "Token has expired" });
-    } else if (error.name === "JsonWebTokenError") {
+    } else if (error instanceof jwt.JsonWebTokenError) {
       return res.status(400).json({ message: "Invalid token" });
+    } else if (error instanceof Error) {
+      return res
+        .status(500)
+        .json({ message: "Internal server error", error: error.message });
     }
-    res.status(500).json({ message: "Internal server error", error });
+
+    // Fallback for unknown error types
+    return res.status(500).json({ message: "An unexpected error occurred" });
   }
 };
