@@ -1,4 +1,4 @@
-import InventoryItem from "@models/inventoryModel.js";
+import { InventoryItem } from "@models/inventoryModel.js";
 import CreateInventoryItemUseCase from "@app-inventory/createInventoryItemUseCase.js";
 
 // Get all inventory items

@@ -42,6 +42,7 @@ const quantityPriceSchema = new Schema({
   minOrderQuantity: { type: Number, required: true },
   pricePerQuantity: { type: Number, required: true },
   dateUpdated: { type: Date, default: Date.now },
+  isStale: { type: Boolean, default: false },
 });
 
 // Batch Tracking Schema for tracking groups by date
@@ -111,12 +112,16 @@ const inventoryItemSchema = new Schema({
 
 // Adding hooks for updating timestamps and managing stale pricing
 inventoryItemSchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
+  this.updatedAt = new Date();
   next();
 });
 
 quantityPriceSchema.pre("save", function (next) {
-  if (Date.now() - this.dateUpdated > 30 * 24 * 60 * 60 * 1000) {
+  // Ensure dateUpdated is a Date object
+  const currentTime = Date.now();
+  const dateUpdatedTime = this.dateUpdated ? this.dateUpdated.getTime() : 0;
+
+  if (currentTime - dateUpdatedTime > 30 * 24 * 60 * 60 * 1000) {
     // Logic for marking price as stale (e.g., flag in UI)
     this.isStale = true;
   }
@@ -132,4 +137,4 @@ const WarehouseLocation = mongoose.model(
   warehouseLocationSchema,
 );
 
-module.exports = { InventoryItem, Category, Supplier, WarehouseLocation };
+export { InventoryItem, Category, Supplier, WarehouseLocation };
