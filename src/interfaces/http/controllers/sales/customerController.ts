@@ -1,4 +1,4 @@
-import Customer from "@models/sales-model/customerModel";
+import Customer from "@models/customerModel";
 
 // Get all customers
 export const getAllCustomers = async (req, res) => {

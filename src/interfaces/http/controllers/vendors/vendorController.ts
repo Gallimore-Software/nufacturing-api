@@ -1,5 +1,5 @@
 import { VendorEntity } from "@/application/dto/vendorDTO";
-import { VendorMapper } from "@/application/mapper/vendorMapper";
+import VendorMapper from "@/application/mapper/vendorMapper";
 
 // Create a new vendor
 export const createVendor = async (req, res) => {

@@ -1,7 +1,7 @@
 import { Pact } from "@pact-foundation/pact";
 import path from "path";
 import request from "supertest";
-import app from "../../index"; // Your Express app
+import app from "../../../../app"; // Your Express app
 
 const provider = new Pact({
   consumer: "FrontendConsumer",

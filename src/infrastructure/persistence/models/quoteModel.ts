@@ -43,4 +43,4 @@ const quoteSchema = new mongoose.Schema({
 
 const Quote = mongoose.model("Quote", quoteSchema);
 
-module.exports = Quote;
+export default Quote;
