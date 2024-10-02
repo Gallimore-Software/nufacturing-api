@@ -1,4 +1,4 @@
-import { VendorDTO } from "../dto/vendorDTO";
+import { VendorDocument, VendorDTO } from "../dto/vendorDTO";
 import { VendorEntity } from "@/application/dto/vendorDTO";
 
 class VendorMapper {
@@ -14,9 +14,9 @@ class VendorMapper {
   }
 
   // Convert from Entity to DTO
-  static toDTO(vendor: VendorEntity): VendorDTO {
+  static toDTO(vendor: VendorDocument): VendorDTO {
     return {
-      _id: vendor._id,
+      _id: vendor._id as string | undefined,
       displayName: vendor.displayName,
       companyName: vendor.companyName,
       companyWebsite: vendor.companyWebsite,

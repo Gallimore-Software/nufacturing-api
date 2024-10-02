@@ -1,6 +1,6 @@
 // VendorDTO.ts
 export interface VendorDTO {
-  _id?: string;
+  _id?: string | undefined;
   displayName: string;
   companyName: string;
   companyWebsite?: string;
@@ -22,7 +22,7 @@ export class VendorEntity {
   public createdBy: string;
 
   constructor(data: VendorDTO & { _id?: string }) {
-    this._id = data._id;
+    this._id = data._id ?? "";
     this.displayName = data.displayName;
     this.companyName = data.companyName;
     this.companyWebsite = data.companyWebsite;
@@ -48,7 +48,7 @@ export interface VendorDocument extends Document {
   createdBy: string;
 }
 
-const VendorSchema = new Schema({
+const VendorSchema = new Schema<VendorDocument>({
   displayName: { type: String, required: true },
   companyName: { type: String, required: true },
   companyWebsite: { type: String },
