@@ -1,4 +1,4 @@
-import { Inventory } from "@entity/inventory";
+import { Inventory } from "@domain-entities/inventory";
 
 describe("Inventory Entity Tests", () => {
   it("should create a valid inventory entity", () => {

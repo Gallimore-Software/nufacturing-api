@@ -12,13 +12,20 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      // Application
+      "@app-dto/*": ["src/application/dto/*"],
+      // Infrastructure
       "@models/*": ["src/infrastructure/persistence/models/*"],
-      "@controllers/*": ["src/interfaces/http/controllers/*"],
-      "@middleware/*": ["src/interfaces/http/middlewares/*"],
       "@logging/*": ["src/infrastructure/logging/*"],
+      "@infra-events/*": ["src/infrastructure/event-handlers/*"],
       "@notifications/*": ["src/infrastructure/notifications/*"],
-      "@events/*": ["src/infrastructure/event-handlers/*"],
-      "@entity/*": ["src/domain/entities/*"]
+      // Interfaces
+      "@middleware/*": ["src/interfaces/http/middlewares/*"],
+      "@controllers/*": ["src/interfaces/http/controllers/*"],
+      "@interf-dto/*": ["src/interfaces/dtos/*"],
+      // Domain
+      "@domain-events/*": ["src/domain/events/*"],
+      "@domain-entities/*": ["src/domain/entities/*"]
     }
   },
   "include": ["src/**/*"],

@@ -1,5 +1,5 @@
-import EventDispatcher from "@events/eventDispatcher";
-import InventoryItemCreatedEvent from "../../domain/events/inventoryItemCreatedEvent";
+import EventDispatcher from "@infra-events/eventDispatcher";
+import InventoryItemCreatedEvent from "@domain-events/inventoryItemCreatedEvent";
 import logger from "@logging/logger";
 
 interface EventHandler {
