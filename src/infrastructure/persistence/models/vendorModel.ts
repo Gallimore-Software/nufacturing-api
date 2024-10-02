@@ -28,6 +28,4 @@ const vendorSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Vendor = mongoose.model("Vendor", vendorSchema);
-
-module.exports = Vendor;
+export default mongoose.model("Vendor", vendorSchema);

@@ -1,5 +1,6 @@
-import { VendorEntity } from "@/application/dto/vendorDTO";
+// import { VendorEntity } from "@/application/dto/vendorDTO";
 import VendorMapper from "@/application/mapper/vendorMapper";
+import { VendorModel } from "@app-dto/vendorDTO"; // Update import path if necessary
 
 // Create a new vendor
 export const createVendor = async (req, res) => {
@@ -7,11 +8,11 @@ export const createVendor = async (req, res) => {
     // Convert request data to domain model using the mapper
     const vendorDomain = VendorMapper.fromDTO(req.body);
 
-    // Save the domain model instance
-    const savedVendor = await vendorDomain.save();
+    // Save the domain model instance using VendorModel (Mongoose)
+    const savedVendorDoc = await VendorModel.create(vendorDomain);
 
     // Convert saved domain model to DTO for response
-    const vendorDTO = VendorMapper.toDTO(savedVendor);
+    const vendorDTO = VendorMapper.toDTO(savedVendorDoc);
 
     res.status(201).json(vendorDTO);
   } catch (error) {
@@ -26,8 +27,8 @@ export const createVendor = async (req, res) => {
 // Get all vendors
 export const getAllVendors = async (req, res) => {
   try {
-    // Get all vendors as domain models
-    const vendors = await VendorEntity.find();
+    // Get all vendors as documents from Mongoose
+    const vendors = await VendorModel.find();
 
     // Convert domain models to DTOs
     const vendorDTOs = vendors.map((vendor) => VendorMapper.toDTO(vendor));
@@ -45,13 +46,13 @@ export const getAllVendors = async (req, res) => {
 // Get a single vendor by ID
 export const getVendorById = async (req, res) => {
   try {
-    // Find vendor by ID as domain model
-    const vendor = await Vendor.findById(req.params.id);
+    // Find vendor by ID using VendorModel
+    const vendor = await VendorModel.findById(req.params.id);
     if (!vendor) {
       return res.status(404).json({ message: "Vendor not found" });
     }
 
-    // Convert domain model to DTO
+    // Convert document to DTO
     const vendorDTO = VendorMapper.toDTO(vendor);
 
     res.status(200).json(vendorDTO);
@@ -70,8 +71,8 @@ export const updateVendorById = async (req, res) => {
     // Convert request data to domain model
     const vendorUpdate = VendorMapper.fromDTO(req.body);
 
-    // Find and update vendor
-    const updatedVendor = await Vendor.findByIdAndUpdate(
+    // Find and update vendor using VendorModel
+    const updatedVendor = await VendorModel.findByIdAndUpdate(
       req.params.id,
       vendorUpdate,
       {
@@ -82,7 +83,7 @@ export const updateVendorById = async (req, res) => {
       return res.status(404).json({ message: "Vendor not found" });
     }
 
-    // Convert updated domain model to DTO
+    // Convert updated document to DTO
     const vendorDTO = VendorMapper.toDTO(updatedVendor);
 
     res.status(200).json(vendorDTO);
@@ -98,8 +99,8 @@ export const updateVendorById = async (req, res) => {
 // Delete a vendor by ID
 export const deleteVendorById = async (req, res) => {
   try {
-    // Find and delete vendor by ID
-    const vendor = await Vendor.findByIdAndDelete(req.params.id);
+    // Find and delete vendor by ID using VendorModel
+    const vendor = await VendorModel.findByIdAndDelete(req.params.id);
     if (!vendor) {
       return res.status(404).json({ message: "Vendor not found" });
     }

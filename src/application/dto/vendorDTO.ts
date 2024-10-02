@@ -9,12 +9,20 @@ export interface VendorDTO {
 
 // VendorEntity.ts
 export class VendorEntity {
+  static find() {
+    throw new Error("Method not implemented.");
+  }
+  save() {
+    throw new Error("Method not implemented.");
+  }
+  public _id?: string | undefined;
   public displayName: string;
   public companyName: string;
   public companyWebsite?: string;
   public createdBy: string;
 
-  constructor(data: VendorDTO) {
+  constructor(data: VendorDTO & { _id?: string }) {
+    this._id = data._id;
     this.displayName = data.displayName;
     this.companyName = data.companyName;
     this.companyWebsite = data.companyWebsite;

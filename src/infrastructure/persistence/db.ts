@@ -9,15 +9,20 @@ dotenv.config();
 // Connect to MongoDB and add MongoDB transport
 const connectDB = async () => {
   try {
-    console.log(process.env.DB_URI);
+    const dbUri = process.env.DB_URI;
+
+    // Ensure DB_URI is defined
+    if (!dbUri) {
+      throw new Error("DB_URI is not defined in the environment variables");
+    }
 
     // Connect to MongoDB
-    await mongoose.connect(process.env.DB_URI);
+    await mongoose.connect(dbUri);
 
     // Add MongoDB transport for logging
     logger.add(
       new transports.MongoDB({
-        db: process.env.DB_URI,
+        db: dbUri,
         collection: "logs",
         level: "info",
         options: { useUnifiedTopology: true },
