@@ -54,24 +54,25 @@ class MongooseInventoryRepository {
     ]);
   }
 
+  // [NFG-86] Create Inventory Item - Temporarily Commented out due to errors
   // Handle unfinished or customer-supplied products
-  static async findUnfinishedOrCustomerSupplied() {
-    return await InventoryItem.find({
-      $or: [{ status: "unfinished" }, { customerSupplied: true }],
-    });
-  }
+  // static async findUnfinishedOrCustomerSupplied() {
+  //   return await InventoryItem.find({
+  //     $or: [{ status: "unfinished" }, { customerSupplied: true }],
+  //   });
+  // }
 
-  // Live updates (fetch inventory item with real-time locking, if necessary)
-  static async findAndLock(id) {
-    return await InventoryItem.findById(id).session(); // Requires transaction support for locking
-  }
+  // // Live updates (fetch inventory item with real-time locking, if necessary)
+  // static async findAndLock(id) {
+  //   return await InventoryItem.findById(id).session(); // Requires transaction support for locking
+  // }
 
-  // Generate stale price alerts (find inventory items with outdated prices)
-  static async findStalePrices(lastUpdatedThreshold) {
-    return await InventoryItem.find({
-      priceLastUpdated: { $lt: lastUpdatedThreshold },
-    });
-  }
+  // // Generate stale price alerts (find inventory items with outdated prices)
+  // static async findStalePrices(lastUpdatedThreshold) {
+  //   return await InventoryItem.find({
+  //     priceLastUpdated: { $lt: lastUpdatedThreshold },
+  //   });
+  // }
 
   // Update inventory stock quantity
   static async updateStockQuantity(id, quantityChange) {
