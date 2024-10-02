@@ -17,6 +17,7 @@
       "@app-inventory/*": ["src/application/inventory/*"],
       // Infrastructure
       "@models/*": ["src/infrastructure/persistence/models/*"],
+      "@persistence/*": ["src/infrastructure/persistence/*"],
       "@logging/*": ["src/infrastructure/logging/*"],
       "@infra-events/*": ["src/infrastructure/event-handlers/*"],
       "@notifications/*": ["src/infrastructure/notifications/*"],
