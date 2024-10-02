@@ -31,4 +31,4 @@ const formulaSchema = new mongoose.Schema({
 
 const Formula = mongoose.model("Formula", formulaSchema);
 
-module.exports = Formula;
+export default Formula;
