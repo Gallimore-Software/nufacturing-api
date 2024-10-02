@@ -10,7 +10,7 @@ export interface IVendor {
   isVerified: boolean;
 }
 
-export class Vendor {
+export default class Vendor {
   private id: string;
   private name: string;
   private address: string;

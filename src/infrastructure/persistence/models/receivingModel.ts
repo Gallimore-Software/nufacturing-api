@@ -41,4 +41,4 @@ const receivingSchema = new mongoose.Schema({
 
 const Receiving = mongoose.model("Receiving", receivingSchema);
 
-module.exports = Receiving;
+export default Receiving;
