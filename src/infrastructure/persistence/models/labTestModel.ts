@@ -44,4 +44,4 @@ const labTestSchema = new mongoose.Schema({
 
 const LabTest = mongoose.model("LabTest", labTestSchema);
 
-module.exports = LabTest;
+export default LabTest;

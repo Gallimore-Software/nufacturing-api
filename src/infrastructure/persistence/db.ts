@@ -12,10 +12,7 @@ const connectDB = async () => {
     console.log(process.env.DB_URI);
 
     // Connect to MongoDB
-    await mongoose.connect(process.env.DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.DB_URI);
 
     // Add MongoDB transport for logging
     logger.add(
