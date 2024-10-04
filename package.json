@@ -28,7 +28,7 @@
     "jest-fetch-mock": "^3.0.3",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.8.1",
+    "mongodb": "^6.9.0",
     "mongoose": "^8.6.1",
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.15",
