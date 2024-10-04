@@ -1,6 +1,6 @@
-const { body, validationResult } = require("express-validator");
+import { body, validationResult } from "express-validator";
 
-exports.validateInventoryItem = [
+const validateInventoryItem = [
   body("name").notEmpty().withMessage("Name is required").isString(),
   body("quantity")
     .notEmpty()
@@ -21,3 +21,5 @@ exports.validateInventoryItem = [
     next();
   },
 ];
+
+export default validateInventoryItem;

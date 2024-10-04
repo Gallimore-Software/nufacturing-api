@@ -1,4 +1,4 @@
-import { InventoryItem } from "@models/inventoryModel.js";
+import { InventoryItem } from "@models/inventoryModel";
 
 interface InventoryItemData {
   name: string;

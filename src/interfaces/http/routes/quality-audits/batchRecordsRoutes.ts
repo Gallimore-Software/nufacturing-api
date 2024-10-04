@@ -31,4 +31,4 @@ router.delete(
   batchRecordsController.deleteBatchRecordById,
 );
 
-module.exports = router;
+export default router;

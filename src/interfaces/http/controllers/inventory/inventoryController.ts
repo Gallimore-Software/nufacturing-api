@@ -1,5 +1,5 @@
-import { InventoryItem } from "@models/inventoryModel.js";
-import CreateInventoryItemUseCase from "@app-inventory/createInventoryItemUseCase.js";
+import { InventoryItem } from "@models/inventoryModel";
+import CreateInventoryItemUseCase from "@app-inventory/createInventoryItemUseCase";
 
 // Get all inventory items
 export const getAllInventoryItems = async (req, res) => {

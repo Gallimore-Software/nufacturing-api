@@ -2,12 +2,14 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
-    "rootDir": "src",
+    "rootDir": "./",
     "outDir": "dist",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
     "sourceMap": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
     "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
@@ -21,15 +23,17 @@
       "@logging/*": ["src/infrastructure/logging/*"],
       "@infra-events/*": ["src/infrastructure/event-handlers/*"],
       "@notifications/*": ["src/infrastructure/notifications/*"],
+      "@scheduling/*": ["src/infrastructure/scheduling/*"],
       // Interfaces
       "@middleware/*": ["src/interfaces/http/middlewares/*"],
       "@controllers/*": ["src/interfaces/http/controllers/*"],
+      "@routes/*": ["src/interfaces/http/routes/*"],
       "@interf-dto/*": ["src/interfaces/dtos/*"],
       // Domain
       "@domain-events/*": ["src/domain/events/*"],
       "@domain-entities/*": ["src/domain/entities/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "./*"],
   "exclude": ["node_modules", "__tests__"]
 }

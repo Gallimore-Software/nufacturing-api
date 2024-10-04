@@ -1,7 +1,7 @@
-const express = require("express");
-const inventoryController = require("../../controllers/inventory/inventoryController");
-const roleMiddleware = require("../middleware/roleMiddlewaree");
-const { validateInventoryItem } = require("../middleware/validationMiddleware");
+import express from "express";
+import * as inventoryController from "@controllers/inventory/inventoryController";
+import roleMiddleware from "@middleware/roleMiddleware";
+import validateInventoryItem from "@middleware/validationMiddleware";
 
 const router = express.Router();
 
@@ -33,4 +33,4 @@ router.delete(
   inventoryController.deleteInventoryItem,
 );
 
-module.exports = router;
+export default router;

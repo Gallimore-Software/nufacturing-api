@@ -31,4 +31,4 @@ router.delete(
   labTestingController.deleteLabTest,
 );
 
-module.exports = router;
+export default router;

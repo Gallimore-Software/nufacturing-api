@@ -31,4 +31,4 @@ router.delete(
   productSkuController.deleteProductSKU,
 );
 
-module.exports = router;
+export default router;

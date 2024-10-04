@@ -30,4 +30,4 @@ router.delete(
   vendorController.deleteVendorById,
 );
 
-module.exports = router;
+export default router;

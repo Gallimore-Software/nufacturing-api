@@ -31,4 +31,4 @@ router.delete(
   purchaseOrderController.deletePurchaseOrderById,
 );
 
-module.exports = router;
+export default router;

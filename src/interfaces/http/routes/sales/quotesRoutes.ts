@@ -31,4 +31,4 @@ router.delete(
   quoteController.deleteQuote,
 );
 
-module.exports = router;
+export default router;

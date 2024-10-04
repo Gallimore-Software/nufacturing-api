@@ -31,4 +31,4 @@ router.delete(
   receivingController.deleteReceiving,
 );
 
-module.exports = router;
+export default router;

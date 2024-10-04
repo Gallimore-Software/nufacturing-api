@@ -31,4 +31,4 @@ router.delete(
   customerController.deleteCustomer,
 );
 
-module.exports = router;
+export default router;

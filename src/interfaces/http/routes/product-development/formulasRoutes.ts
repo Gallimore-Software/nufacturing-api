@@ -30,4 +30,4 @@ router.delete(
   formulaController.deleteFormula,
 );
 
-module.exports = router;
+export default router;

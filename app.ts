@@ -1,24 +1,24 @@
 import express from "express";
 import cors from "cors";
-import connectDB from "./src/config/db.js";
-import userRoutes from "./src/routes/userRoutes.js";
-import formulaRoutes from "./src/routes/product-development-routes/formulaRoutes.js";
-import productSkuRoutes from "./src/routes/product-development-routes/productSkusRoutes.js";
-import productTypeRoutes from "./src/routes/product-development-routes/productTypeRoutes.js";
-import quoteRoutes from "./src/routes/sales-routes/quoteRoutes.js";
-import orderRoutes from "./src/routes/sales-routes/orderRoutes.js";
-import customerRoutes from "./src/routes/sales-routes/customerRoutes.js";
-import vendorRoutes from "./src/routes/vendorRoutes.js";
-import inventoryRoutes from "./src/routes/inventoryRoutes.js";
-import purchaseOrderRoutes from "./src/routes/receiving-routes/purchaseOrderRoutes.js";
-import labTestingRoutes from "./src/routes/research-and-development-routes/labTestingRoutes.js";
-import receivingRoutes from "./src/routes/receiving-routes/receivingRoutes.js";
-import batchRecordsRoutes from "./src/routes/quality-audits-routes/batchRecordsRoutes.js";
+import connectDB from "@persistence/db";
+import userRoutes from "@routes/users/usersRoutes";
+import formulaRoutes from "@routes/product-development/formulasRoutes";
+import productSkuRoutes from "@routes/product-development/productSkusRoutes";
+import productTypeRoutes from "@routes/product-development/productTypesRoutes";
+import quoteRoutes from "@routes/sales/quotesRoutes";
+import orderRoutes from "@routes/sales/ordersRoutes";
+import customerRoutes from "@routes/sales/customersRoutes";
+import vendorRoutes from "@routes/vendors/vendorsRoutes";
+import inventoryRoutes from "@routes/inventory/inventoryRoutes";
+import purchaseOrderRoutes from "@routes/receiving/purchaseOrdersRoutes";
+import labTestingRoutes from "@routes/research-and-development/labTestsRoutes";
+import receivingRoutes from "@routes/receiving/receivingRoutes";
+import batchRecordsRoutes from "@routes/quality-audits/batchRecordsRoutes";
 import swaggerUI from "swagger-ui-express";
-import swaggerDocument from "./swagger_output.json" assert { type: "json" };
+import swaggerDocument from "./swagger_output.json";
 
 // Schedule tasks
-import "./src/utils/scheduledTasks.js";
+import "@scheduling/scheduledTasks";
 
 const app = express();
 
