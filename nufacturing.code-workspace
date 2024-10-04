@@ -1,11 +1,8 @@
 {
   "folders": [
     {
-      "path": ".",
-    },
-    {
-      "path": "../gallimore-dev-tools",
-    },
+      "path": "."
+    }
   ],
   "settings": {},
 }

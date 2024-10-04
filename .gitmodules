@@ -3,4 +3,4 @@
 	url = git@github.com:Gallimore-Software/nufacturing.git
 [submodule "clients/nufacturing"]
 	path = clients/nufacturing
-	url = https://github.com/gallimore-software/nufacturing
+	url = git@github.com:Gallimore-Software/nufacturing.git
