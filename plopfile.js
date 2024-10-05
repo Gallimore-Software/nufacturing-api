@@ -1,24 +1,4 @@
 module.exports = function (plop) {
-  function generateActions(entityType, folderPath) {
-    const files = [
-      '.contract.ts.hbs',
-      '.e2e.ts.hbs',
-      '.integration.ts.hbs',
-      '.performance.ts.hbs',
-      '.security.ts.hbs',
-      '.unit.ts.hbs',
-      '.ts.hbs',
-    ];
-  
-    return files.map(file => ({
-      type: 'add',
-      path: `${folderPath}/{{camelCase name}}.${file.replace('.hbs', '')}`,
-      templateFile: `${folderPath}/${entityType}${file}`, // Fix template file path
-      abortOnFail: true, // Abort on failure to prevent cascading errors
-      skipIfExists: true, // Skip file generation if it already exists
-    }));
-  }  
-
   // Common prompt for different types of entities
   const commonPrompts = [
     {
@@ -28,14 +8,35 @@ module.exports = function (plop) {
     },
   ];
 
-  // Generators for each entity type
+  // Function to generate actions for each entity type
+  const generateActions = (entityType, folderPath) => {
+    const files = [
+      'contract.ts.hbs',
+      'e2e.ts.hbs',
+      'integration.ts.hbs',
+      'performance.ts.hbs',
+      'security.ts.hbs',
+      'unit.ts.hbs',
+      'ts.hbs',
+    ];
+
+    return files.map(file => ({
+      type: 'add',
+      path: `src/${folderPath}/{{camelCase name}}/{{camelCase name}}.${file.replace('.hbs', '')}`, // Generate in a folder named after the entity
+      templateFile: `plop-templates/${folderPath}/${entityType}.${file}`, // Adjust path for templates
+      abortOnFail: true, // Abort on failure
+      skipIfExists: true, // Skip if file already exists
+    }));
+  };
+
+  // Entity generators configuration
   const generators = [
     { name: 'eventHandler', description: 'Generate an event handler', folder: 'application/event-handlers' },
     { name: 'mapper', description: 'Generate a mapper', folder: 'application/mapper' },
     { name: 'service', description: 'Generate a service', folder: 'application/services' },
-    { name: 'use-case', description: 'Generate a use case', folder: 'application/use-cases' },
+    { name: 'useCase', description: 'Generate a use case', folder: 'application/use-cases' },
     { name: 'entity', description: 'Generate an entity', folder: 'domain/entities' },
-    { name: 'custom-error', description: 'Generate a custom error', folder: 'domain/errors' },
+    { name: 'customError', description: 'Generate a custom error', folder: 'domain/errors' },
     { name: 'event', description: 'Generate an event', folder: 'domain/events' },
     { name: 'repositoryInterface', description: 'Generate a repository interface', folder: 'domain/interfaces/repositories' },
     { name: 'config', description: 'Generate a persistence config', folder: 'infrastructure/config' },
@@ -44,15 +45,15 @@ module.exports = function (plop) {
     { name: 'notificationHandler', description: 'Generate a notification handler', folder: 'infrastructure/notifications' },
     { name: 'model', description: 'Generate a model', folder: 'infrastructure/persistence/models' },
     { name: 'repository', description: 'Generate a repository', folder: 'infrastructure/persistence/repositories' },
-    { name: 'scheduledTask', description: 'Generate a scheduled task', folder: 'infrastructure/scheduling' },
+    { name: 'scheduledTasks', description: 'Generate a scheduled task', folder: 'infrastructure/scheduling' },
     { name: 'dto', description: 'Generate a DTO', folder: 'interfaces/dtos' },
     { name: 'controller', description: 'Generate a controller', folder: 'interfaces/http/controllers' },
-    { name: 'route', description: 'Generate a route', folder: 'interfaces/http/routes' },
+    { name: 'routes', description: 'Generate a route', folder: 'interfaces/http/routes' },
     { name: 'swagger', description: 'Generate a swagger configuration', folder: 'interfaces/swagger' },
     { name: 'validationSchema', description: 'Generate a validation schema', folder: 'interfaces/validation-schemas' },
   ];
 
-  // Register individual generators for each entity type
+  // Register individual generators
   generators.forEach(generator => {
     plop.setGenerator(generator.name, {
       description: generator.description,
@@ -61,7 +62,7 @@ module.exports = function (plop) {
     });
   });
 
-  // Register middleware generator separately as it has additional prompts
+  // Register middleware generator separately
   plop.setGenerator('middleware', {
     description: 'Generate a middleware with all related tests',
     prompts: [
@@ -76,12 +77,12 @@ module.exports = function (plop) {
     actions: (data) => generateActions(data.middlewareType, 'interfaces/http/middlewares'),
   });
 
-  // Batch Generator to generate all components at once
+  // Batch generator to generate all components at once
   plop.setGenerator('all', {
     description: 'Generate all components with all related tests',
     prompts: [...commonPrompts],
     actions: () => {
-      // Create actions for each generator in the list
+      // Create actions for each generator
       let allActions = [];
       generators.forEach(generator => {
         allActions = allActions.concat(generateActions(generator.name, generator.folder));

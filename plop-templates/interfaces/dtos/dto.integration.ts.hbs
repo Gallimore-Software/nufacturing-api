@@ -1,1 +1,18 @@
-{{code_template}}
+import { {{properCase name}}DTO } from './{{camelCase name}}.ts';
+import { create{{properCase name}} } from '../services/{{camelCase name}}Service'; // Update to the correct service path
+
+describe('{{properCase name}} Integration Tests', () => {
+  it('should successfully create a {{camelCase name}}', async () => {
+    const newDto: {{properCase name}}DTO = {
+      id: '1',
+      name: 'Test Name',
+      // Add more properties as needed
+    };
+    
+    const result = await create{{properCase name}}(newDto);
+    expect(result).toHaveProperty('id');
+    expect(result.name).toBe(newDto.name);
+  });
+
+  // Additional tests can be added here
+});

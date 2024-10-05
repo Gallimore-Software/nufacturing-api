@@ -17,7 +17,7 @@ describe('Pact Contract Test: {{ eventHandlerName }}', () => {
 
   let eventHandler: {{ eventHandlerName }};
   let logger: Logger;
-  let service: {{ serviceName }>;
+  let service: {{ serviceName }};
 
   const mockEvent: {{ eventContract }} = {
     id: '1234',
@@ -28,21 +28,20 @@ describe('Pact Contract Test: {{ eventHandlerName }}', () => {
     timestamp: new Date(),
   };
 
-  beforeAll(() => {
+  beforeAll(async () => {
     logger = new Logger();
     service = new {{ serviceName }}();
     eventHandler = new {{ eventHandlerName }}(service, logger);
-
-    return provider.setup();
+    await provider.setup(); // Ensure setup is awaited
   });
 
-  afterAll(() => {
-    return provider.finalize();
+  afterAll(async () => {
+    await provider.finalize(); // Ensure finalize is awaited
   });
 
   describe('when an event is handled', () => {
-    beforeEach(() => {
-      return provider.addInteraction({
+    beforeEach(async () => {
+      await provider.addInteraction({
         state: 'the service is ready to handle the event',
         uponReceiving: 'a request to handle an event',
         withRequest: {
@@ -70,7 +69,7 @@ describe('Pact Contract Test: {{ eventHandlerName }}', () => {
       await eventHandler.handle(mockEvent);
 
       // Assert
-      return provider.verify();
+      await provider.verify(); // Ensure verification is awaited
     });
   });
 });

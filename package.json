@@ -7,7 +7,7 @@
     "build": "npm run clean && tsc -p tsconfig.json && tsc -p tsconfig.tests.json",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "start:env": "cross-env NODE_ENV=${NODE_ENV:-local} ts-node -r tsconfig-paths/register src/index.ts",
-    "dev": "nodemon --watch src/**/*.ts --exec \"./node_modules/.bin/ts-node.cmd -r tsconfig-paths/register\" index.ts",
+    "dev": "nodemon --watch src/**/*.ts --exec \"ts-node -r tsconfig-paths/register src/index.ts\"",
     "docs": "node swagger.js",
     "openapi:generate": "openapi-generator-cli generate",
     "openapi:install": "openapi-generator-cli version-manager set 5.3.1",
