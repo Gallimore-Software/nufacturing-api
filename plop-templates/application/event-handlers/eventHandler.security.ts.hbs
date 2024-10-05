@@ -1,0 +1,25 @@
+import { {{ eventHandlerName }} } from './eventHandler';
+import { {{ serviceName }} } from '@application/services/{{ serviceName }}';
+import { Logger } from '@infrastructure/logging/logger';
+import { {{ eventContract }} } from '@domain/contracts/{{ eventContractName }}';
+
+describe('Security Test: {{ eventHandlerName }}', () => {
+  let eventHandler: {{ eventHandlerName }};
+  let service: {{ serviceName }};
+  let logger: Logger;
+
+  beforeAll(() => {
+    logger = new Logger();
+    service = new {{ serviceName }}();
+    eventHandler = new {{ eventHandlerName }}(service, logger);
+  });
+
+  it('should handle unexpected or invalid event inputs gracefully', async () => {
+    const invalidEvent: any = {
+      // Providing invalid data
+      propertyThatDoesNotExist: 'Invalid',
+    };
+
+    await expect(eventHandler.handle(invalidEvent)).rejects.toThrowError('Invalid event data');
+  });
+});

@@ -1,8 +1,12 @@
-import { InventoryItem } from "@models/inventoryModel";
-import CreateInventoryItemUseCase from "@app-inventory/createInventoryItemUseCase";
+import { Request, Response } from "express";
+import CreateInventoryItemUseCase from "@app/inventory/createInventoryItemUseCase";
+import { InventoryItem } from "@infra/persistence/models/inventoryModel";
 
 // Get all inventory items
-export const getAllInventoryItems = async (req, res) => {
+export const getAllInventoryItems = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const inventoryItems = await InventoryItem.find()
       .populate("vendor")
@@ -13,21 +17,25 @@ export const getAllInventoryItems = async (req, res) => {
       .populate("associatedPOs.refId")
       .populate("associatedLabTests.refId")
       .populate("associatedReceivements.refId");
+
     res.status(200).json({ success: true, data: inventoryItems });
   } catch (err) {
-    console.error(err);
     res.status(500).json({
       success: false,
       message: "Error fetching inventory items",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
 
 // Get inventory item by ID
-export const getInventoryItemById = async (req, res) => {
+export const getInventoryItemById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const inventoryItem = await InventoryItem.findById(req.params.inventoryId)
+    const { inventoryId } = req.params;
+    const inventoryItem = await InventoryItem.findById(inventoryId)
       .populate("vendor")
       .populate("createdBy")
       .populate("associatedFormulas.refId")
@@ -36,44 +44,52 @@ export const getInventoryItemById = async (req, res) => {
       .populate("associatedPOs.refId")
       .populate("associatedLabTests.refId")
       .populate("associatedReceivements.refId");
+
     if (!inventoryItem) {
-      return res
+      res
         .status(404)
         .json({ success: false, message: "Inventory item not found" });
+      return; // Explicitly return to make sure the function ends here
     }
+
     res.status(200).json({ success: true, data: inventoryItem });
   } catch (err) {
-    console.error(err);
     res.status(500).json({
       success: false,
       message: "Error fetching inventory item",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
 
 // Create a new inventory item
-export const createInventoryItem = async (req, res) => {
+export const createInventoryItem = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const newInventoryItem = await CreateInventoryItemUseCase.execute(req.body);
     res.status(201).json({ success: true, data: newInventoryItem });
   } catch (err) {
-    console.error(err);
     res.status(500).json({
       success: false,
       message: "Error creating inventory item",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
 
 // Update inventory item
-export const updateInventoryItem = async (req, res) => {
+export const updateInventoryItem = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
+    const { inventoryId } = req.params;
     const updatedInventoryItem = await InventoryItem.findByIdAndUpdate(
-      req.params.inventoryId,
+      inventoryId,
       req.body,
-      { new: true, runValidators: true },
+      { new: true, runValidators: true }
     )
       .populate("vendor")
       .populate("createdBy")
@@ -85,41 +101,47 @@ export const updateInventoryItem = async (req, res) => {
       .populate("associatedReceivements.refId");
 
     if (!updatedInventoryItem) {
-      return res
+      res
         .status(404)
         .json({ success: false, message: "Inventory item not found" });
+      return; // Explicitly return to make sure the function ends here
     }
+
     res.status(200).json({ success: true, data: updatedInventoryItem });
   } catch (err) {
-    console.error(err);
     res.status(500).json({
       success: false,
       message: "Error updating inventory item",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
 
 // Delete inventory item
-export const deleteInventoryItem = async (req, res) => {
+export const deleteInventoryItem = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const deletedInventoryItem = await InventoryItem.findByIdAndDelete(
-      req.params.inventoryId,
-    );
+    const { inventoryId } = req.params;
+    const deletedInventoryItem =
+      await InventoryItem.findByIdAndDelete(inventoryId);
+
     if (!deletedInventoryItem) {
-      return res
+      res
         .status(404)
         .json({ success: false, message: "Inventory item not found" });
+      return; // Explicitly return to make sure the function ends here
     }
+
     res
       .status(200)
       .json({ success: true, message: "Inventory item deleted successfully" });
   } catch (err) {
-    console.error(err);
     res.status(500).json({
       success: false,
       message: "Error deleting inventory item",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };

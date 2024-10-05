@@ -1,43 +1,127 @@
-import Order from "@models/orderModel";
+import Order from "@infra/persistence/models/orderModel";
+import { Request, Response } from "express";
+
+// Define types for request parameters
+interface OrderRequestParams {
+  orderId: string;
+}
+
+// Utility function for standardized response handling
+const sendResponse = <T>({
+  res,
+  statusCode,
+  success,
+  message,
+  data,
+  error,
+}: {
+  res: Response;
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data?: T;
+  error?: string;
+}): void => {
+  res.status(statusCode).json({
+    success,
+    message,
+    ...(data !== undefined && { data }),
+    ...(error && { error }),
+  });
+};
 
 // Get all orders
-export const getAllOrders = async (req, res) => {
+export const getAllOrders = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const orders = await Order.find().populate("customer products.productId");
-    res.status(200).json(orders);
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: "Orders fetched successfully",
+      data: orders,
+    });
   } catch (err) {
-    res.status(500).json({ message: "Error fetching orders", error: err });
+    sendResponse({
+      res,
+      statusCode: 500,
+      success: false,
+      message: "Error fetching orders",
+      error: (err as Error).message,
+    });
   }
 };
 
 // Get order by ID
-export const getOrderById = async (req, res) => {
+export const getOrderById = async (
+  req: Request<OrderRequestParams>,
+  res: Response
+): Promise<void> => {
   try {
     const order = await Order.findById(req.params.orderId).populate(
-      "customer products.productId",
+      "customer products.productId"
     );
     if (!order) {
-      return res.status(404).json({ message: "Order not found" });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: "Order not found",
+      });
+      return;
     }
-    res.status(200).json(order);
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: "Order fetched successfully",
+      data: order,
+    });
   } catch (err) {
-    res.status(500).json({ message: "Error fetching order", error: err });
+    sendResponse({
+      res,
+      statusCode: 500,
+      success: false,
+      message: "Error fetching order",
+      error: (err as Error).message,
+    });
   }
 };
 
 // Create a new order
-export const createOrder = async (req, res) => {
+export const createOrder = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const newOrder = new Order(req.body);
     await newOrder.save();
-    res.status(201).json(newOrder);
+    sendResponse({
+      res,
+      statusCode: 201,
+      success: true,
+      message: "Order created successfully",
+      data: newOrder,
+    });
   } catch (err) {
-    res.status(400).json({ message: "Error creating order", error: err });
+    sendResponse({
+      res,
+      statusCode: 400,
+      success: false,
+      message: "Error creating order",
+      error: (err as Error).message,
+    });
   }
 };
 
 // Update order
-export const updateOrder = async (req, res) => {
+export const updateOrder = async (
+  req: Request<OrderRequestParams>,
+  res: Response
+): Promise<void> => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.orderId,
@@ -45,26 +129,64 @@ export const updateOrder = async (req, res) => {
       {
         new: true,
         runValidators: true,
-      },
+      }
     );
     if (!updatedOrder) {
-      return res.status(404).json({ message: "Order not found" });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: "Order not found",
+      });
+      return;
     }
-    res.status(200).json(updatedOrder);
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: "Order updated successfully",
+      data: updatedOrder,
+    });
   } catch (err) {
-    res.status(400).json({ message: "Error updating order", error: err });
+    sendResponse({
+      res,
+      statusCode: 400,
+      success: false,
+      message: "Error updating order",
+      error: (err as Error).message,
+    });
   }
 };
 
 // Delete order
-export const deleteOrder = async (req, res) => {
+export const deleteOrder = async (
+  req: Request<OrderRequestParams>,
+  res: Response
+): Promise<void> => {
   try {
     const deletedOrder = await Order.findByIdAndDelete(req.params.orderId);
     if (!deletedOrder) {
-      return res.status(404).json({ message: "Order not found" });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: "Order not found",
+      });
+      return;
     }
-    res.status(200).json({ message: "Order deleted successfully" });
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: "Order deleted successfully",
+    });
   } catch (err) {
-    res.status(500).json({ message: "Error deleting order", error: err });
+    sendResponse({
+      res,
+      statusCode: 500,
+      success: false,
+      message: "Error deleting order",
+      error: (err as Error).message,
+    });
   }
 };

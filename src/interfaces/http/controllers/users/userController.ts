@@ -1,8 +1,11 @@
-import Joi from "joi";
+import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "@models/userModel";
-import sendEmail from "@notifications/sendEmail";
+import { UserDTO } from "@dto/userDTO";
+import User, { IUser } from "@infra/persistence/models/userModel";
+import { UserMapper } from "@app/mappers/userMapper";
+import sendEmail from "@infra/notifications/sendEmail";
+import Joi from "joi";
 
 // Joi validation schema
 const userSchema = Joi.object({
@@ -12,171 +15,199 @@ const userSchema = Joi.object({
   role: Joi.string().valid("user", "admin", "manager").default("user"),
   phoneNumber: Joi.string()
     .pattern(/^[0-9]{10,15}$/)
-    .required(),
+    .optional(),
 });
 
-const loginSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
-});
+// Create a new user and issue JWT token
+export const createUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    // Validate the request body
+    const { error } = userSchema.validate(req.body);
+    if (error) {
+      res
+        .status(400)
+        .json({ message: "Validation error", error: error.details[0].message });
+      return;
+    }
+
+    const userDTO: UserDTO = req.body;
+
+    // Hash the password before saving
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(userDTO.password, saltRounds);
+
+    const newUser: IUser = new User({
+      ...userDTO,
+      password: hashedPassword,
+      verified: false,
+    });
+    await newUser.save();
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: newUser._id, role: newUser.role },
+      process.env.JWT_SECRET!,
+      { expiresIn: "5h" }
+    );
+
+    // Send verification email
+    const verificationToken = jwt.sign(
+      { id: newUser._id },
+      process.env.JWT_SECRET!,
+      { expiresIn: "7d" }
+    );
+    const verificationLink = `${process.env.LIVE_API_URL || "http://localhost:3000"}/api/users/verify/${verificationToken}`;
+    await sendEmail(
+      newUser.email,
+      "Email Verification",
+      `Please verify your email by clicking on the following link: ${verificationLink}`
+    );
+
+    res.status(201).json({ user: UserMapper.toDTO(newUser), token });
+  } catch (err) {
+    res.status(400).json({
+      message: "Error creating user",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
+  }
+};
 
 // Get all users
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const users = await User.find();
-    res.status(200).json(users);
+    res.status(200).json(users.map(UserMapper.toDTO));
   } catch (err) {
-    res.status(500).json({ message: "Error fetching users", error: err });
+    res.status(500).json({
+      message: "Error fetching users",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };
 
 // Get a single user by ID
-export const getUserById = async (req, res) => {
+export const getUserById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const user = await User.findById(req.params._id);
+    const user = await User.findById(req.params.id);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "User not found" });
+      return;
     }
-    res.status(200).json(user);
+    res.status(200).json(UserMapper.toDTO(user));
   } catch (err) {
-    res.status(500).json({ message: "Error fetching user", error: err });
-  }
-};
-
-// Create a new user and issue JWT token
-export const createUser = async (req, res) => {
-  try {
-    const { error } = userSchema.validate(req.body);
-    if (error) {
-      return res
-        .status(400)
-        .json({ message: "Validation error", error: error.details[0].message });
-    }
-
-    // Hash the password before saving
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
-
-    const user = new User({
-      ...req.body,
-      password: hashedPassword, // Use the hashed password
-      verified: false, // Set initial verification status
+    res.status(500).json({
+      message: "Error fetching user",
+      error: err instanceof Error ? err.message : "Unknown error",
     });
-    await user.save();
-
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "5h" }, // Token expires in 5 hour
-    );
-
-    // Generate verification token
-    const verificationToken = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }, // Token expires in 7 days
-    );
-
-    // Send verification email
-    const verificationLink = process.env.LIVE_API_URL
-      ? `${process.env.LIVE_API_URL}/api/users/verify/${verificationToken}`
-      : `http://localhost:3000/api/users/verify/${verificationToken}`;
-    await sendEmail(
-      user.email,
-      "Email Verification",
-      `Please verify your email by clicking on the following link: ${verificationLink}`,
-    );
-
-    res.status(201).json({ user, token }); // Send user and token in response
-  } catch (err) {
-    res.status(400).json({ message: "Error creating user", error: err });
   }
 };
 
 // Update a user by ID
-export const updateUser = async (req, res) => {
+export const updateUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
+    // Validate the request body
     const { error } = userSchema.validate(req.body);
     if (error) {
-      return res
+      res
         .status(400)
         .json({ message: "Validation error", error: error.details[0].message });
+      return;
     }
 
-    const user = await User.findByIdAndUpdate(req.params._id, req.body, {
+    const userDTO: UserDTO = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, userDTO, {
       new: true,
       runValidators: true,
     });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+
+    if (!updatedUser) {
+      res.status(404).json({ message: "User not found" });
+      return;
     }
-    res.status(200).json(user);
+    res.status(200).json(UserMapper.toDTO(updatedUser));
   } catch (err) {
-    res.status(400).json({ message: "Error updating user", error: err });
+    res.status(400).json({
+      message: "Error updating user",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };
 
 // Delete a user by ID
-export const deleteUser = async (req, res) => {
+export const deleteUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const user = await User.findByIdAndDelete(req.params._id);
+    const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "User not found" });
+      return;
     }
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
-    res.status(500).json({ message: "Error deleting user", error: err });
+    res.status(500).json({
+      message: "Error deleting user",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };
 
-export const loginUser = async (req, res) => {
+// Login user and issue JWT token
+export const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { error } = loginSchema.validate(req.body);
-    if (error) {
-      return res
-        .status(400)
-        .json({ message: "Validation error", error: error.details[0].message });
-    }
-
     const { email, password } = req.body;
 
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      res.status(401).json({ message: "Invalid email or password" });
+      return;
     }
 
     // Check if the email is verified
-    if (!user.emailVerified) {
-      return res.status(401).json({ message: "Email not verified" });
+    if (!user.verified) {
+      res.status(401).json({ message: "Email not verified" });
+      return;
     }
 
     // Compare passwords
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      res.status(401).json({ message: "Invalid email or password" });
+      return;
     }
 
     // Generate JWT token
     const token = jwt.sign(
       { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }, // Token expires in 1 hour
+      process.env.JWT_SECRET!,
+      { expiresIn: "1h" }
     );
 
     // Respond with token and user info
     res.status(200).json({
       message: "Login successful",
       token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-      },
+      user: UserMapper.toDTO(user),
     });
   } catch (err) {
-    res.status(500).json({ message: "Error logging in", error: err });
+    res.status(500).json({
+      message: "Error logging in",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };

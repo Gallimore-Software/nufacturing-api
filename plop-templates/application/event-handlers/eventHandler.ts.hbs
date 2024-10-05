@@ -1,0 +1,37 @@
+import { {{ eventContract }} } from '@domain/contracts/{{ eventContractName }}';
+import { {{ serviceName }} } from '@application/services/{{ serviceName }}';
+import { Logger } from '@infrastructure/logging/logger';
+
+export class {{ eventHandlerName }} {
+  private logger: Logger;
+  private service: {{ serviceName }};
+
+  constructor(service: {{ serviceName }}, logger: Logger) {
+    this.logger = logger;
+    this.service = service;
+  }
+
+  /**
+   * Handles the event received by processing the data and invoking necessary services.
+   * @param { {{ eventContract }} } event - The event to be processed.
+   */
+  public async handle(event: {{ eventContract }}): Promise<void> {
+    try {
+      this.logger.info(`Handling event: {{ eventContractName }}`);
+      
+      // TODO: Implement the specific business logic here.
+      await this.service.processEvent(event);
+
+      this.logger.info(`Successfully handled event: {{ eventContractName }}`);
+    } catch (error) {
+      this.logger.error(`Error while handling event: {{ eventContractName }} -`, error);
+      // Re-throw or handle error as per the system design
+    }
+  }
+}
+
+export const create{{ eventHandlerName }} = () => {
+  const logger = new Logger();
+  const service = new {{ serviceName }}();
+  return new {{ eventHandlerName }}(service, logger);
+};

@@ -1,0 +1,47 @@
+import { create{{ eventHandlerName }} } from './eventHandler';
+import { {{ eventContract }} } from '@domain/contracts/{{ eventContractName }}';
+import { Logger } from '@infrastructure/logging/logger';
+import { {{ serviceName }} } from '@application/services/{{ serviceName }}';
+
+describe('End-to-End Test: {{ eventHandlerName }}', () => {
+  let eventHandler: ReturnType<typeof create{{ eventHandlerName }}>;
+  let logger: Logger;
+  let service: {{ serviceName }>;
+
+  const mockEvent: {{ eventContract }} = {
+    // TODO: Define the properties of the eventContract for e2e testing
+  };
+
+  beforeAll(() => {
+    logger = new Logger();
+    service = new {{ serviceName }}();
+    eventHandler = create{{ eventHandlerName }}();
+  });
+
+  it('should handle the event end-to-end successfully', async () => {
+    const serviceSpy = jest.spyOn(service, 'processEvent').mockResolvedValueOnce(undefined);
+    const loggerSpy = jest.spyOn(logger, 'info');
+
+    await eventHandler.handle(mockEvent);
+
+    expect(serviceSpy).toHaveBeenCalledWith(mockEvent);
+    expect(loggerSpy).toHaveBeenCalledWith(expect.stringContaining('Successfully handled event'));
+
+    serviceSpy.mockRestore();
+    loggerSpy.mockRestore();
+  });
+
+  // Optionally test error scenarios for e2e tests
+  it('should log errors during handling in e2e', async () => {
+    const error = new Error('Simulated failure');
+    const serviceSpy = jest.spyOn(service, 'processEvent').mockRejectedValueOnce(error);
+    const loggerSpy = jest.spyOn(logger, 'error');
+
+    await eventHandler.handle(mockEvent).catch(() => {});
+
+    expect(loggerSpy).toHaveBeenCalledWith(expect.stringContaining('Error while handling event'), error);
+
+    serviceSpy.mockRestore();
+    loggerSpy.mockRestore();
+  });
+});

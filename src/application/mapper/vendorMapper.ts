@@ -1,5 +1,5 @@
-import { VendorDocument, VendorDTO } from "../dto/vendorDTO";
-import { VendorEntity } from "@/application/dto/vendorDTO";
+import { VendorDocument, VendorDTO } from "../../interfaces/dtos/vendorDTO";
+import { VendorEntity } from "@interfaces/dtos/vendorDTO";
 
 class VendorMapper {
   // Convert from DTO to Entity

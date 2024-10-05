@@ -10,13 +10,13 @@ export default function createRouter() {
   router.get(
     "/all-users",
     roleMiddleware(["admin", "manager"]),
-    userController.getAllUsers,
+    userController.getAllUsers
   );
 
   router.get(
     "/all-users/:_id",
     roleMiddleware(["admin", "manager", "user"]),
-    userController.getUserById,
+    userController.getUserById
   );
 
   router.post("/create-user", userController.createUser);
@@ -24,13 +24,13 @@ export default function createRouter() {
   router.put(
     "/update-user/:_id",
     roleMiddleware(["admin", "manager"]),
-    userController.updateUser,
+    userController.updateUser
   );
 
   router.delete(
     "/delete-user/:_id",
     roleMiddleware(["admin"]),
-    userController.deleteUser,
+    userController.deleteUser
   );
 
   router.get("/verify/:token", verifyEmail);

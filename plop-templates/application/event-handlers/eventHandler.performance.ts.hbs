@@ -1,0 +1,31 @@
+import { {{ eventHandlerName }} } from './eventHandler';
+import { {{ serviceName }} } from '@application/services/{{ serviceName }}';
+import { Logger } from '@infrastructure/logging/logger';
+import { {{ eventContract }} } from '@domain/contracts/{{ eventContractName }}';
+
+describe('Performance Test: {{ eventHandlerName }}', () => {
+  let eventHandler: {{ eventHandlerName }};
+  let service: {{ serviceName }};
+  let logger: Logger;
+
+  const mockEvent: {{ eventContract }} = {
+    // TODO: Define properties for the eventContract used in performance tests
+  };
+
+  beforeAll(() => {
+    logger = new Logger();
+    service = new {{ serviceName }}();
+    eventHandler = new {{ eventHandlerName }}(service, logger);
+  });
+
+  it('should handle the event within acceptable performance limits', async () => {
+    const start = performance.now();
+
+    await eventHandler.handle(mockEvent);
+
+    const end = performance.now();
+    const elapsedTime = end - start;
+
+    expect(elapsedTime).toBeLessThan(1000); // Assuming the performance limit is 1000 ms (1 second)
+  });
+});

@@ -1,0 +1,76 @@
+import { Pact } from '@pact-foundation/pact';
+import { {{ eventHandlerName }} } from './eventHandler';
+import { Logger } from '@infrastructure/logging/logger';
+import { {{ serviceName }} } from '@application/services/{{ serviceName }}';
+import { {{ eventContract }} } from '@domain/contracts/{{ eventContractName }}';
+import path from 'path';
+
+describe('Pact Contract Test: {{ eventHandlerName }}', () => {
+  const provider = new Pact({
+    consumer: '{{ consumerName }}',
+    provider: '{{ providerName }}',
+    port: 1234,
+    log: path.resolve(process.cwd(), 'logs', 'pact.log'),
+    dir: path.resolve(process.cwd(), 'pacts'),
+    spec: 2,
+  });
+
+  let eventHandler: {{ eventHandlerName }};
+  let logger: Logger;
+  let service: {{ serviceName }>;
+
+  const mockEvent: {{ eventContract }} = {
+    id: '1234',
+    type: '{{ eventType }}',
+    payload: {
+      key: 'value',
+    },
+    timestamp: new Date(),
+  };
+
+  beforeAll(() => {
+    logger = new Logger();
+    service = new {{ serviceName }}();
+    eventHandler = new {{ eventHandlerName }}(service, logger);
+
+    return provider.setup();
+  });
+
+  afterAll(() => {
+    return provider.finalize();
+  });
+
+  describe('when an event is handled', () => {
+    beforeEach(() => {
+      return provider.addInteraction({
+        state: 'the service is ready to handle the event',
+        uponReceiving: 'a request to handle an event',
+        withRequest: {
+          method: 'POST',
+          path: '/event',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: mockEvent,
+        },
+        willRespondWith: {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
+            success: true,
+          },
+        },
+      });
+    });
+
+    it('should successfully handle the event and interact with the provider', async () => {
+      // Act
+      await eventHandler.handle(mockEvent);
+
+      // Assert
+      return provider.verify();
+    });
+  });
+});

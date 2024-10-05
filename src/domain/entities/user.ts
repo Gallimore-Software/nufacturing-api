@@ -1,5 +1,5 @@
 import UserModel from "@models/userModel"; // Adjust the path as needed
-import UserDTO from "@app-dto/userDTO"; // Adjust the path as needed
+import UserDTO from "@dto/userDTO"; // Adjust the path as needed
 
 class User {
   private userModel: typeof UserModel;

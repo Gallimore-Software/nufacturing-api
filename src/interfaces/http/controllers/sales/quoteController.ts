@@ -1,45 +1,129 @@
-import Quote from "@models/quoteModel";
+import Quote from "@infra/persistence/models/quoteModel";
+import { Request, Response } from "express";
+
+// Define types for request parameters
+interface QuoteRequestParams {
+  quoteId: string;
+}
+
+// Utility function for standardized response handling
+const sendResponse = <T>({
+  res,
+  statusCode,
+  success,
+  message,
+  data,
+  error,
+}: {
+  res: Response;
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data?: T;
+  error?: string;
+}): void => {
+  res.status(statusCode).json({
+    success,
+    message,
+    ...(data !== undefined && { data }),
+    ...(error && { error }),
+  });
+};
 
 // Get all quotes
-export const getAllQuotes = async (req, res) => {
+export const getAllQuotes = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const quotes = await Quote.find().populate(
-      "accountManager productType formula ingredients",
+      "accountManager productType formula ingredients"
     );
-    res.status(200).json(quotes);
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: "Quotes fetched successfully",
+      data: quotes,
+    });
   } catch (err) {
-    res.status(500).json({ message: "Error fetching quotes", error: err });
+    sendResponse({
+      res,
+      statusCode: 500,
+      success: false,
+      message: "Error fetching quotes",
+      error: (err as Error).message,
+    });
   }
 };
 
 // Get quote by ID
-export const getQuoteById = async (req, res) => {
+export const getQuoteById = async (
+  req: Request<QuoteRequestParams>,
+  res: Response
+): Promise<void> => {
   try {
     const quote = await Quote.findById(req.params.quoteId).populate(
-      "accountManager productType formula ingredients",
+      "accountManager productType formula ingredients"
     );
     if (!quote) {
-      return res.status(404).json({ message: "Quote not found" });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: "Quote not found",
+      });
+      return;
     }
-    res.status(200).json(quote);
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: "Quote fetched successfully",
+      data: quote,
+    });
   } catch (err) {
-    res.status(500).json({ message: "Error fetching quote", error: err });
+    sendResponse({
+      res,
+      statusCode: 500,
+      success: false,
+      message: "Error fetching quote",
+      error: (err as Error).message,
+    });
   }
 };
 
 // Create a new quote
-export const createQuote = async (req, res) => {
+export const createQuote = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const newQuote = new Quote(req.body);
     await newQuote.save();
-    res.status(201).json(newQuote);
+    sendResponse({
+      res,
+      statusCode: 201,
+      success: true,
+      message: "Quote created successfully",
+      data: newQuote,
+    });
   } catch (err) {
-    res.status(400).json({ message: "Error creating quote", error: err });
+    sendResponse({
+      res,
+      statusCode: 400,
+      success: false,
+      message: "Error creating quote",
+      error: (err as Error).message,
+    });
   }
 };
 
 // Update quote
-export const updateQuote = async (req, res) => {
+export const updateQuote = async (
+  req: Request<QuoteRequestParams>,
+  res: Response
+): Promise<void> => {
   try {
     const updatedQuote = await Quote.findByIdAndUpdate(
       req.params.quoteId,
@@ -47,26 +131,64 @@ export const updateQuote = async (req, res) => {
       {
         new: true,
         runValidators: true,
-      },
+      }
     );
     if (!updatedQuote) {
-      return res.status(404).json({ message: "Quote not found" });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: "Quote not found",
+      });
+      return;
     }
-    res.status(200).json(updatedQuote);
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: "Quote updated successfully",
+      data: updatedQuote,
+    });
   } catch (err) {
-    res.status(400).json({ message: "Error updating quote", error: err });
+    sendResponse({
+      res,
+      statusCode: 400,
+      success: false,
+      message: "Error updating quote",
+      error: (err as Error).message,
+    });
   }
 };
 
 // Delete quote
-export const deleteQuote = async (req, res) => {
+export const deleteQuote = async (
+  req: Request<QuoteRequestParams>,
+  res: Response
+): Promise<void> => {
   try {
     const deletedQuote = await Quote.findByIdAndDelete(req.params.quoteId);
     if (!deletedQuote) {
-      return res.status(404).json({ message: "Quote not found" });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: "Quote not found",
+      });
+      return;
     }
-    res.status(200).json({ message: "Quote deleted successfully" });
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: "Quote deleted successfully",
+    });
   } catch (err) {
-    res.status(500).json({ message: "Error deleting quote", error: err });
+    sendResponse({
+      res,
+      statusCode: 500,
+      success: false,
+      message: "Error deleting quote",
+      error: (err as Error).message,
+    });
   }
 };

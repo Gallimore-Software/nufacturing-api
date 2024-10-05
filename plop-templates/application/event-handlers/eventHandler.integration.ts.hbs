@@ -1,0 +1,56 @@
+import { {{ eventHandlerName }} } from './eventHandler';
+import { {{ serviceName }} } from '@application/services/{{ serviceName }}';
+import { Logger } from '@infrastructure/logging/logger';
+import { {{ eventContract }} } from '@domain/contracts/{{ eventContractName }}';
+
+describe('Integration Test: {{ eventHandlerName }}', () => {
+  let eventHandler: {{ eventHandlerName }};
+  let logger: Logger;
+  let service: {{ serviceName }};
+
+  const mockEvent: {{ eventContract }} = {
+    // TODO: Define the properties of the eventContract for integration testing
+  };
+
+  beforeAll(() => {
+    logger = new Logger();
+    service = new {{ serviceName }}();
+    eventHandler = new {{ eventHandlerName }}(service, logger);
+  });
+
+  it('should handle the event and call service successfully', async () => {
+    // Spy on the logger to capture log messages
+    const loggerInfoSpy = jest.spyOn(logger, 'info');
+    const serviceSpy = jest.spyOn(service, 'processEvent').mockResolvedValueOnce(undefined);
+
+    // Act
+    await eventHandler.handle(mockEvent);
+
+    // Assert
+    expect(serviceSpy).toHaveBeenCalledWith(mockEvent);
+    expect(loggerInfoSpy).toHaveBeenCalledWith(expect.stringContaining('Handling event'));
+    expect(loggerInfoSpy).toHaveBeenCalledWith(expect.stringContaining('Successfully handled event'));
+
+    // Clean up spies
+    serviceSpy.mockRestore();
+    loggerInfoSpy.mockRestore();
+  });
+
+  it('should handle error scenario when service fails', async () => {
+    // Arrange
+    const error = new Error('Simulated service error');
+    const serviceSpy = jest.spyOn(service, 'processEvent').mockRejectedValueOnce(error);
+    const loggerErrorSpy = jest.spyOn(logger, 'error');
+
+    // Act
+    await eventHandler.handle(mockEvent).catch(() => {});
+
+    // Assert
+    expect(serviceSpy).toHaveBeenCalledWith(mockEvent);
+    expect(loggerErrorSpy).toHaveBeenCalledWith(expect.stringContaining('Error while handling event'), error);
+
+    // Clean up spies
+    serviceSpy.mockRestore();
+    loggerErrorSpy.mockRestore();
+  });
+});

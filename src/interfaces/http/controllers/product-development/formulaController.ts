@@ -1,30 +1,49 @@
-import Formula from "@models/formulaModel";
+import { Request, Response } from "express";
+import Formula from "@infra/persistence/models/formulaModel";
 
 // Get all formulas
-export const getAllFormulas = async (req, res) => {
+export const getAllFormulas = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const formulas = await Formula.find();
-    res.status(200).json(formulas);
+    res.status(200).json({ success: true, data: formulas });
   } catch (err) {
-    res.status(500).json({ message: "Error fetching formulas", error: err });
+    res.status(500).json({
+      success: false,
+      message: "Error fetching formulas",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };
 
 // Get a formula by ID
-export const getFormulaById = async (req, res) => {
+export const getFormulaById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const formula = await Formula.findById(req.params.entity_id);
     if (!formula) {
-      return res.status(404).json({ message: "Formula not found" });
+      res.status(404).json({ success: false, message: "Formula not found" });
+      return;
     }
-    res.status(200).json(formula);
+    res.status(200).json({ success: true, data: formula });
   } catch (err) {
-    res.status(500).json({ message: "Error fetching formula", error: err });
+    res.status(500).json({
+      success: false,
+      message: "Error fetching formula",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };
 
 // Create a new formula
-export const createFormula = async (req, res) => {
+export const createFormula = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { productType } = req.body;
 
@@ -58,14 +77,21 @@ export const createFormula = async (req, res) => {
     });
 
     await formula.save();
-    res.status(201).json(formula);
+    res.status(201).json({ success: true, data: formula });
   } catch (err) {
-    res.status(400).json({ message: "Error creating formula", error: err });
+    res.status(400).json({
+      success: false,
+      message: "Error creating formula",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };
 
 // Update a formula by ID
-export const updateFormula = async (req, res) => {
+export const updateFormula = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const formula = await Formula.findByIdAndUpdate(
       req.params.entity_id,
@@ -73,26 +99,41 @@ export const updateFormula = async (req, res) => {
       {
         new: true,
         runValidators: true,
-      },
+      }
     );
     if (!formula) {
-      return res.status(404).json({ message: "Formula not found" });
+      res.status(404).json({ success: false, message: "Formula not found" });
+      return;
     }
-    res.status(200).json(formula);
+    res.status(200).json({ success: true, data: formula });
   } catch (err) {
-    res.status(400).json({ message: "Error updating formula", error: err });
+    res.status(400).json({
+      success: false,
+      message: "Error updating formula",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };
 
 // Delete a formula by ID
-export const deleteFormula = async (req, res) => {
+export const deleteFormula = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const formula = await Formula.findByIdAndDelete(req.params.entity_id);
     if (!formula) {
-      return res.status(404).json({ message: "Formula not found" });
+      res.status(404).json({ success: false, message: "Formula not found" });
+      return;
     }
-    res.status(200).json({ message: "Formula deleted successfully" });
+    res
+      .status(200)
+      .json({ success: true, message: "Formula deleted successfully" });
   } catch (err) {
-    res.status(500).json({ message: "Error deleting formula", error: err });
+    res.status(500).json({
+      success: false,
+      message: "Error deleting formula",
+      error: err instanceof Error ? err.message : "Unknown error",
+    });
   }
 };

@@ -1,13 +1,21 @@
-import EventDispatcher from "@infra-events/eventDispatcher";
-import InventoryItemCreatedEvent from "@domain-events/inventoryItemCreatedEvent";
-import logger from "@logging/logger";
+import EventDispatcher from "@infra/event-handlers/eventDispatcher";
+import InventoryItemCreatedEvent from "@domain/events/inventoryItemCreatedEvent";
+import logger from "@infra/logging/logger";
 
-interface EventHandler {
-  handle(event: InventoryItemCreatedEvent): Promise<void> | void;
+// Define a base event type
+interface BaseEvent {
+  name: string;
 }
 
-class LogInventoryCreationHandler {
-  async handle(event) {
+// Define a generic EventHandler interface for events that extend BaseEvent
+interface EventHandler<T extends BaseEvent> {
+  handle(event: T): Promise<void> | void;
+}
+
+class LogInventoryCreationHandler
+  implements EventHandler<InventoryItemCreatedEvent>
+{
+  async handle(event: InventoryItemCreatedEvent): Promise<void> {
     try {
       if (!event || !event.inventoryItem) {
         throw new Error("Invalid event: inventoryItem is missing");
@@ -21,23 +29,23 @@ class LogInventoryCreationHandler {
         createdBy: event.inventoryItem.createdBy,
       });
     } catch (err) {
-      // Checks if "err" is instance of 'Error' before accessing :)
       if (err instanceof Error) {
         logger.error("Error handling InventoryItemCreatedEvent", {
           error: err.message,
           stack: err.stack,
-          event: event,
+          event,
         });
       } else {
-        logger.error("An unknown error occurred", { event: event });
+        logger.error("An unknown error occurred", { event });
       }
     }
   }
 }
-// Register the handler with a reusable function
-function registerEventHandler(
+
+// Update registerEventHandler to use EventHandler<BaseEvent>
+function registerEventHandler<T extends BaseEvent>(
   eventName: string,
-  handlerInstance: EventHandler,
+  handlerInstance: EventHandler<T>
 ): void {
   EventDispatcher.register(eventName, handlerInstance);
 }
@@ -46,5 +54,5 @@ function registerEventHandler(
 const logInventoryCreationHandler = new LogInventoryCreationHandler();
 registerEventHandler(
   InventoryItemCreatedEvent.name,
-  logInventoryCreationHandler,
+  logInventoryCreationHandler
 );
