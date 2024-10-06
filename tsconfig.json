@@ -2,41 +2,141 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
-    "rootDir": "src",
-    "outDir": "dist",
-    "esModuleInterop": true,
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
     "strict": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
-    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
-    "noEmit": false,
-    "noImplicitAny": true,
-    "baseUrl": ".",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./@types"
+    ],
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/application/*"],
-      "@infra/*": ["src/infrastructure/*"],
-      "@domain/*": ["src/domain/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@/*": ["src/*"],
-      // Application
-      "@app-inventory/*": ["src/application/inventory/*"],
-      // Infrastructure
-      "@models/*": ["src/infrastructure/persistence/models/*"],
-      "@persistence/*": ["src/infrastructure/persistence/*"],
-      "@logging/*": ["src/infrastructure/logging/*"],
-      "@infra-events/*": ["src/infrastructure/event-handlers/*"],
-      "@notifications/*": ["src/infrastructure/notifications/*"],
-      "@scheduling/*": ["src/infrastructure/scheduling/*"],
-      // Interfaces
-      "@middleware/*": ["src/interfaces/http/middlewares/*"],
-      "@controllers/*": ["src/interfaces/http/controllers/*"],
-      "@routes/*": ["src/interfaces/http/routes/*"],
-      "@dto/*": ["src/interfaces/dtos/*"],
-      // Domain
-      "@domain-events/*": ["src/domain/events/*"],
-      "@domain-entities/*": ["src/domain/entities/*"],
-    }
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@event-handlers/*": [
+        "src/app/event-handlers/*"
+      ],
+      "@mappers/*": [
+        "src/app/mappers/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@use-cases/*": [
+        "src/app/use-cases/*"
+      ],
+      "@domain/*": [
+        "src/domain/*"
+      ],
+      "@entities/*": [
+        "src/domain/entities/*"
+      ],
+      "@errors/*": [
+        "src/domain/errors/*"
+      ],
+      "@events/*": [
+        "src/domain/events/*"
+      ],
+      "@repository-interfaces/*": [
+        "src/domain/interfaces/repositories/*"
+      ],
+      "@infrastructure/*": [
+        "src/infrastructure/*"
+      ],
+      "@event-dispatchers/*": [
+        "src/infrastructure/event-dispatchers/*"
+      ],
+      "@logging/*": [
+        "src/infrastructure/logging/*"
+      ],
+      "@notifications/*": [
+        "src/infrastructure/notifications/*"
+      ],
+      "@models/*": [
+        "src/infrastructure/persistence/models/*"
+      ],
+      "@repositories/*": [
+        "src/infrastructure/persistence/repositories/*"
+      ],
+      "@scheduled-tasks/*": [
+        "src/infrastructure/scheduling/*"
+      ],
+      "@interfaces/*": [
+        "src/interfaces/*"
+      ],
+      "@dtos/*": [
+        "src/interfaces/dtos/*"
+      ],
+      "@controllers/*": [
+        "src/interfaces/http/controllers/*"
+      ],
+      "@routes/*": [
+        "src/interfaces/http/routes/*"
+      ],
+      "@swagger/*": [
+        "src/interfaces/swagger/*"
+      ],
+      "@validation-schemas/*": [
+        "src/interfaces/validation-schemas/*"
+      ],
+      "@middlewares/*": [
+        "src/interfaces/http/middlewares/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@scripts/*": [
+        "scripts/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@docs/*": [
+        "docs/*"
+      ],
+      "@tests/*": [
+        "__tests__/*"
+      ],
+      "@submodules/nufacturing/*": [
+        "submodules/nufacturing/src/*"
+      ],
+      "@submodules/veracore/*": [
+        "submodules/nufulfillment-veracore/src/*"
+      ],
+      "@submodules/devtools/*": [
+        "submodules/gallimore-dev-tools/src/*"
+      ]
+    },
+    "rootDir": "./",
+    "outDir": "dist"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "__tests__", "dist"]
+  "include": [
+    "src/**/*.ts",
+    "config/**/*.ts",
+    "scripts/**/*.ts",
+    "submodules/**/*.ts",
+    "__tests__/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.e2e.ts",
+    "**/__mocks__/**/*"
+  ]
 }

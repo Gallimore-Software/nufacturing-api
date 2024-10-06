@@ -1,7 +1,8 @@
 import express from "express";
-import * as userController from "@controllers/users/userController";
+import * as userController from "@interfaces/http/controllers/user/userController";
 import { verifyEmail } from "../../controllers/authController";
-import roleMiddleware from "@middleware/roleMiddleware";
+import roleMiddleware from "@interfaces/http/middlewares/roleMiddleware";
+
 
 export default function createRouter() {
   const router = express.Router();

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CreateInventoryItemUseCase from "@app/inventory/createInventoryItemUseCase";
+import CreateInventoryItemUseCase from "@app/use-cases/inventory/createInventoryItemUseCase";
 import { InventoryItem } from "@infra/persistence/models/inventoryModel";
 
 // Get all inventory items
