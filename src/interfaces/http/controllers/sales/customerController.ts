@@ -1,4 +1,4 @@
-import Customer from "@infra/persistence/models/customerModel";
+import Customer from "@infrastructure/persistence/models/customerModel";
 import { Request, Response } from "express";
 
 // Utility types for request parameters and response data
@@ -35,7 +35,7 @@ const sendResponse = <T>({
 // Get all customers
 export const getAllCustomers = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const customers = await Customer.find();
@@ -60,7 +60,7 @@ export const getAllCustomers = async (
 // Get customer by ID
 export const getCustomerById = async (
   req: Request<CustomerRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const customer = await Customer.findById(req.params.customerId);
@@ -94,7 +94,7 @@ export const getCustomerById = async (
 // Create a new customer
 export const createCustomer = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const newCustomer = new Customer(req.body);
@@ -120,7 +120,7 @@ export const createCustomer = async (
 // Update customer
 export const updateCustomer = async (
   req: Request<CustomerRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const updatedCustomer = await Customer.findByIdAndUpdate(
@@ -129,7 +129,7 @@ export const updateCustomer = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
     if (!updatedCustomer) {
       sendResponse({
@@ -161,11 +161,11 @@ export const updateCustomer = async (
 // Delete customer
 export const deleteCustomer = async (
   req: Request<CustomerRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const deletedCustomer = await Customer.findByIdAndDelete(
-      req.params.customerId
+      req.params.customerId,
     );
     if (!deletedCustomer) {
       sendResponse({

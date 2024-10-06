@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteLabTest = exports.updateLabTest = exports.createLabTest = exports.getLabTestById = exports.getAllLabTests = void 0;
-const labTestModel_1 = __importDefault(require("@infra/persistence/models/labTestModel"));
+const labTestModel_1 = __importDefault(require("@infrastructure/persistence/models/labTestModel"));
 // Get all lab tests
 const getAllLabTests = async (req, res) => {
     try {

@@ -1,4 +1,4 @@
-import PurchaseOrder from "@infra/persistence/models/purchaseOrderModel";
+import PurchaseOrder from "@infrastructure/persistence/models/purchaseOrderModel";
 import { Request, Response } from "express";
 
 // Define types for query parameters and request parameters
@@ -13,7 +13,7 @@ interface GetAllPurchaseOrdersQuery {
 // Create a new purchase order
 export const createPurchaseOrder = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const purchaseOrder = new PurchaseOrder(req.body);
@@ -31,7 +31,7 @@ export const createPurchaseOrder = async (
 // Get all purchase orders with optional filtering
 export const getAllPurchaseOrders = async (
   req: Request<object, object, object, GetAllPurchaseOrdersQuery>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const filters: { [key: string]: unknown } = {};
@@ -41,7 +41,7 @@ export const getAllPurchaseOrders = async (
     if (dueInDays) {
       const today = new Date();
       const dueDate = new Date(
-        today.setDate(today.getDate() + parseInt(dueInDays))
+        today.setDate(today.getDate() + parseInt(dueInDays)),
       );
       filters.dueDate = { $lte: dueDate };
     }
@@ -60,11 +60,11 @@ export const getAllPurchaseOrders = async (
 // Get a single purchase order by ID
 export const getPurchaseOrderById = async (
   req: Request<PurchaseOrderRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const purchaseOrder = await PurchaseOrder.findById(req.params.id).populate(
-      "vendor"
+      "vendor",
     );
     if (!purchaseOrder) {
       res
@@ -85,7 +85,7 @@ export const getPurchaseOrderById = async (
 // Update a purchase order by ID
 export const updatePurchaseOrderById = async (
   req: Request<PurchaseOrderRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const purchaseOrder = await PurchaseOrder.findByIdAndUpdate(
@@ -94,7 +94,7 @@ export const updatePurchaseOrderById = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
     if (!purchaseOrder) {
       res
@@ -115,7 +115,7 @@ export const updatePurchaseOrderById = async (
 // Delete a purchase order by ID
 export const deletePurchaseOrderById = async (
   req: Request<PurchaseOrderRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const purchaseOrder = await PurchaseOrder.findByIdAndDelete(req.params.id);

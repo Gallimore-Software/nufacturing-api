@@ -1,6 +1,6 @@
 import express from "express";
 import * as quoteController from "@controllers/sales/quoteController";
-import roleMiddleware from "@middleware/roleMiddleware";
+import roleMiddleware from "@interfaces/http/middleware/roleMiddleware";
 
 const router = express.Router();
 

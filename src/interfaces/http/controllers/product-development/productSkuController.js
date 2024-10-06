@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteFormula = exports.updateFormula = exports.createFormula = exports.getFormulaById = exports.getAllFormulas = void 0;
-const formulaModel_1 = __importDefault(require("@infra/persistence/models/formulaModel"));
+const formulaModel_1 = __importDefault(require("@infrastructure/persistence/models/formulaModel"));
 // Get all formulas
 const getAllFormulas = async (req, res) => {
     try {

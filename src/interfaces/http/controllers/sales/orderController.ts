@@ -1,4 +1,4 @@
-import Order from "@infra/persistence/models/orderModel";
+import Order from "@infrastructure/persistence/models/orderModel";
 import { Request, Response } from "express";
 
 // Define types for request parameters
@@ -33,7 +33,7 @@ const sendResponse = <T>({
 // Get all orders
 export const getAllOrders = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const orders = await Order.find().populate("customer products.productId");
@@ -58,11 +58,11 @@ export const getAllOrders = async (
 // Get order by ID
 export const getOrderById = async (
   req: Request<OrderRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const order = await Order.findById(req.params.orderId).populate(
-      "customer products.productId"
+      "customer products.productId",
     );
     if (!order) {
       sendResponse({
@@ -94,7 +94,7 @@ export const getOrderById = async (
 // Create a new order
 export const createOrder = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const newOrder = new Order(req.body);
@@ -120,7 +120,7 @@ export const createOrder = async (
 // Update order
 export const updateOrder = async (
   req: Request<OrderRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
@@ -129,7 +129,7 @@ export const updateOrder = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
     if (!updatedOrder) {
       sendResponse({
@@ -161,7 +161,7 @@ export const updateOrder = async (
 // Delete order
 export const deleteOrder = async (
   req: Request<OrderRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const deletedOrder = await Order.findByIdAndDelete(req.params.orderId);

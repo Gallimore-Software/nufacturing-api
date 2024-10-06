@@ -1,5 +1,5 @@
-import PurchaseOrder from "@infra/persistence/models/purchaseOrderModel";
-import Receiving from "@infra/persistence/models/receivingModel";
+import PurchaseOrder from "@infrastructure/persistence/models/purchaseOrderModel";
+import Receiving from "@infrastructure/persistence/models/receivingModel";
 import { Request, Response } from "express";
 
 // Define types for request parameters
@@ -19,7 +19,7 @@ interface ReceivingRequestBody {
 // Create a new receiving entry
 export const createReceiving = async (
   req: Request<object, object, ReceivingRequestBody>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { poNumber, vendor, receivedItems, receiver, comments } = req.body;
@@ -56,7 +56,7 @@ export const createReceiving = async (
 // Get all receiving entries
 export const getAllReceivings = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const receivings = await Receiving.find()
@@ -76,7 +76,7 @@ export const getAllReceivings = async (
 // Get a single receiving entry by ID
 export const getReceivingById = async (
   req: Request<ReceivingRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const receiving = await Receiving.findById(req.params.receivingId)
@@ -104,7 +104,7 @@ export const getReceivingById = async (
 // Update a receiving entry by ID
 export const updateReceivingById = async (
   req: Request<ReceivingRequestParams, object, ReceivingRequestBody>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { receivingId } = req.params;
@@ -116,7 +116,7 @@ export const updateReceivingById = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
 
     if (!receiving) {
@@ -139,7 +139,7 @@ export const updateReceivingById = async (
 // Delete a receiving entry by ID
 export const deleteReceiving = async (
   req: Request<ReceivingRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const receiving = await Receiving.findByIdAndDelete(req.params.receivingId);

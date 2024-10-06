@@ -1,4 +1,4 @@
-import BatchRecords from "@infra/persistence/models/batchRecordModel";
+import BatchRecords from "@infrastructure/persistence/models/batchRecordModel";
 import { Request, Response } from "express";
 
 // Define type for req.params
@@ -9,7 +9,7 @@ interface BatchRecordRequestParams {
 // Create a new batch record
 export const createBatchRecord = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const batchRecord = new BatchRecords(req.body);
@@ -27,7 +27,7 @@ export const createBatchRecord = async (
 // Get all batch records
 export const getAllBatchRecords = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const batchRecords = await BatchRecords.find();
@@ -44,7 +44,7 @@ export const getAllBatchRecords = async (
 // Get a single batch record by ID
 export const getBatchRecordById = async (
   req: Request<BatchRecordRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const batchRecord = await BatchRecords.findById(req.params._id);
@@ -67,7 +67,7 @@ export const getBatchRecordById = async (
 // Update a batch record by ID
 export const updateBatchRecordById = async (
   req: Request<BatchRecordRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const batchRecord = await BatchRecords.findByIdAndUpdate(
@@ -76,7 +76,7 @@ export const updateBatchRecordById = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
     if (!batchRecord) {
       res
@@ -97,7 +97,7 @@ export const updateBatchRecordById = async (
 // Delete a batch record by ID
 export const deleteBatchRecordById = async (
   req: Request<BatchRecordRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const batchRecord = await BatchRecords.findByIdAndDelete(req.params._id);

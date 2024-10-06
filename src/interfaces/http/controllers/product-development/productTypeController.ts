@@ -1,4 +1,4 @@
-import ProductType from "@infra/persistence/models/productTypeModel";
+import ProductType from "@infrastructure/persistence/models/productTypeModel";
 import { Request, Response } from "express";
 
 // Define type for req.params
@@ -9,7 +9,7 @@ interface ProductTypeRequestParams {
 // Get all product types
 export const getAllProductTypes = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const productTypes = await ProductType.find();
@@ -26,7 +26,7 @@ export const getAllProductTypes = async (
 // Get product type by ID
 export const getProductTypeById = async (
   req: Request<ProductTypeRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const productType = await ProductType.findById(req.params.typeId);
@@ -49,7 +49,7 @@ export const getProductTypeById = async (
 // Create a new product type
 export const createProductType = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const newProductType = new ProductType(req.body);
@@ -67,7 +67,7 @@ export const createProductType = async (
 // Update product type
 export const updateProductType = async (
   req: Request<ProductTypeRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const updatedProductType = await ProductType.findByIdAndUpdate(
@@ -76,7 +76,7 @@ export const updateProductType = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
     if (!updatedProductType) {
       res
@@ -97,11 +97,11 @@ export const updateProductType = async (
 // Delete product type
 export const deleteProductType = async (
   req: Request<ProductTypeRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const deletedProductType = await ProductType.findByIdAndDelete(
-      req.params.typeId
+      req.params.typeId,
     );
     if (!deletedProductType) {
       res

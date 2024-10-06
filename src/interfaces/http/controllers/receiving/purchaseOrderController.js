@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deletePurchaseOrderById = exports.updatePurchaseOrderById = exports.getPurchaseOrderById = exports.getAllPurchaseOrders = exports.createPurchaseOrder = void 0;
-const purchaseOrderModel_1 = __importDefault(require("@infra/persistence/models/purchaseOrderModel"));
+const purchaseOrderModel_1 = __importDefault(require("@infrastructure/persistence/models/purchaseOrderModel"));
 // Create a new purchase order
 const createPurchaseOrder = async (req, res) => {
     try {

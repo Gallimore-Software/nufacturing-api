@@ -3,7 +3,7 @@ import cors from "cors";
 import swaggerUI from "swagger-ui-express";
 
 // Schedule tasks
-import "@scheduling/scheduledTasks"
+import "@scheduling/scheduledTasks";
 
 // Importing database connection function
 import connectDB from "@infrastructure/persistence/db";

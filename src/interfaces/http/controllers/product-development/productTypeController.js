@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProductType = exports.updateProductType = exports.createProductType = exports.getProductTypeById = exports.getAllProductTypes = void 0;
-const productTypeModel_1 = __importDefault(require("@infra/persistence/models/productTypeModel"));
+const productTypeModel_1 = __importDefault(require("@infrastructure/persistence/models/productTypeModel"));
 // Get all product types
 const getAllProductTypes = async (req, res) => {
     try {

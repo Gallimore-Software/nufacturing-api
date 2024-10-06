@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteCustomer = exports.updateCustomer = exports.createCustomer = exports.getCustomerById = exports.getAllCustomers = void 0;
-const customerModel_1 = __importDefault(require("@infra/persistence/models/customerModel"));
+const customerModel_1 = __importDefault(require("@infrastructure/persistence/models/customerModel"));
 // Utility function for standardized response handling
 const sendResponse = ({ res, statusCode, success, message, data, error, }) => {
     res.status(statusCode).json({

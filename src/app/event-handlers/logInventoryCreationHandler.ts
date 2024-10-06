@@ -1,6 +1,6 @@
-import EventDispatcher from "@infra/event-handlers/eventDispatcher";
+import EventDispatcher from "@infrastructure/event-handlers/eventDispatcher";
 import InventoryItemCreatedEvent from "@domain/events/inventoryItemCreatedEvent";
-import logger from "@infra/logging/logger";
+import logger from "@infrastructure/logging/logger";
 
 // Define a base event type
 interface BaseEvent {
@@ -45,7 +45,7 @@ class LogInventoryCreationHandler
 // Update registerEventHandler to use EventHandler<BaseEvent>
 function registerEventHandler<T extends BaseEvent>(
   eventName: string,
-  handlerInstance: EventHandler<T>
+  handlerInstance: EventHandler<T>,
 ): void {
   EventDispatcher.register(eventName, handlerInstance);
 }
@@ -54,5 +54,5 @@ function registerEventHandler<T extends BaseEvent>(
 const logInventoryCreationHandler = new LogInventoryCreationHandler();
 registerEventHandler(
   InventoryItemCreatedEvent.name,
-  logInventoryCreationHandler
+  logInventoryCreationHandler,
 );

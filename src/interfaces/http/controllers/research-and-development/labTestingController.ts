@@ -1,4 +1,4 @@
-import LabTest from "@infra/persistence/models/labTestModel";
+import LabTest from "@infrastructure/persistence/models/labTestModel";
 import { Request, Response } from "express";
 
 // Define types for request parameters and request body
@@ -19,7 +19,7 @@ interface LabTestRequestBody {
 // Get all lab tests
 export const getAllLabTests = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const labTests = await LabTest.find().populate("relatedInventoryItem");
@@ -36,11 +36,11 @@ export const getAllLabTests = async (
 // Get a lab test by ID
 export const getLabTestById = async (
   req: Request<LabTestRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const labTest = await LabTest.findById(req.params.id).populate(
-      "relatedInventoryItem"
+      "relatedInventoryItem",
     );
     if (!labTest) {
       res.status(404).json({ success: false, message: "Lab test not found" });
@@ -59,7 +59,7 @@ export const getLabTestById = async (
 // Create a new lab test
 export const createLabTest = async (
   req: Request<object, object, LabTestRequestBody>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const {
@@ -96,7 +96,7 @@ export const createLabTest = async (
 // Update a lab test
 export const updateLabTest = async (
   req: Request<LabTestRequestParams, object, LabTestRequestBody>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const {
@@ -120,7 +120,7 @@ export const updateLabTest = async (
         relatedInventoryItem,
         attachments,
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     ).populate("relatedInventoryItem");
 
     if (!updatedLabTest) {
@@ -141,7 +141,7 @@ export const updateLabTest = async (
 // Delete a lab test
 export const deleteLabTest = async (
   req: Request<LabTestRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const deletedLabTest = await LabTest.findByIdAndDelete(req.params.id);

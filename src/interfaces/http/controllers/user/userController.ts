@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { UserDTO } from "@dto/userDTO";
-import User, { IUser } from "@infra/persistence/models/userModel";
+import User, { IUser } from "@infrastructure/persistence/models/userModel";
 import { UserMapper } from "@app/mappers/userMapper";
-import sendEmail from "@infra/notifications/sendEmail";
+import sendEmail from "@infrastructure/notifications/sendEmail";
 import Joi from "joi";
 
 // Joi validation schema
@@ -21,7 +21,7 @@ const userSchema = Joi.object({
 // Create a new user and issue JWT token
 export const createUser = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     // Validate the request body
@@ -50,20 +50,20 @@ export const createUser = async (
     const token = jwt.sign(
       { id: newUser._id, role: newUser.role },
       process.env.JWT_SECRET!,
-      { expiresIn: "5h" }
+      { expiresIn: "5h" },
     );
 
     // Send verification email
     const verificationToken = jwt.sign(
       { id: newUser._id },
       process.env.JWT_SECRET!,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" },
     );
     const verificationLink = `${process.env.LIVE_API_URL || "http://localhost:3000"}/api/users/verify/${verificationToken}`;
     await sendEmail(
       newUser.email,
       "Email Verification",
-      `Please verify your email by clicking on the following link: ${verificationLink}`
+      `Please verify your email by clicking on the following link: ${verificationLink}`,
     );
 
     res.status(201).json({ user: UserMapper.toDTO(newUser), token });
@@ -78,7 +78,7 @@ export const createUser = async (
 // Get all users
 export const getAllUsers = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const users = await User.find();
@@ -94,7 +94,7 @@ export const getAllUsers = async (
 // Get a single user by ID
 export const getUserById = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const user = await User.findById(req.params.id);
@@ -114,7 +114,7 @@ export const getUserById = async (
 // Update a user by ID
 export const updateUser = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     // Validate the request body
@@ -149,7 +149,7 @@ export const updateUser = async (
 // Delete a user by ID
 export const deleteUser = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
@@ -195,7 +195,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET!,
-      { expiresIn: "1h" }
+      { expiresIn: "1h" },
     );
 
     // Respond with token and user info

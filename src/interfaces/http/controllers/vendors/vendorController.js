@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteVendorById = exports.updateVendorById = exports.getVendorById = exports.getAllVendors = exports.createVendor = void 0;
 const vendorMapper_1 = __importDefault(require("@/application/mapper/vendorMapper"));
-const vendorModel_1 = __importDefault(require("@infra/persistence/models/vendorModel")); // Adjust path as needed
+const vendorModel_1 = __importDefault(require("@infrastructure/persistence/models/vendorModel")); // Adjust path as needed
 // Create a new vendor
 const createVendor = async (req, res) => {
     try {

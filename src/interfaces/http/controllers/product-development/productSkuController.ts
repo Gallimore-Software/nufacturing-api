@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Formula from "@infra/persistence/models/formulaModel";
+import Formula from "@infrastructure/persistence/models/formulaModel";
 
 // Define the type for entity_id in req.params
 interface EntityRequestParams {
@@ -9,7 +9,7 @@ interface EntityRequestParams {
 // Get all formulas
 export const getAllFormulas = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const formulas = await Formula.find();
@@ -26,7 +26,7 @@ export const getAllFormulas = async (
 // Get a formula by ID
 export const getFormulaById = async (
   req: Request<EntityRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const formula = await Formula.findById(req.params.entity_id);
@@ -47,7 +47,7 @@ export const getFormulaById = async (
 // Create a new formula
 export const createFormula = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { productType } = req.body;
@@ -95,7 +95,7 @@ export const createFormula = async (
 // Update a formula by ID
 export const updateFormula = async (
   req: Request<EntityRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const formula = await Formula.findByIdAndUpdate(
@@ -104,7 +104,7 @@ export const updateFormula = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
     if (!formula) {
       res.status(404).json({ success: false, message: "Formula not found" });
@@ -123,7 +123,7 @@ export const updateFormula = async (
 // Delete a formula by ID
 export const deleteFormula = async (
   req: Request<EntityRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const formula = await Formula.findByIdAndDelete(req.params.entity_id);

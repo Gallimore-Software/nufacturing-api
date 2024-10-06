@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteInventoryItem = exports.updateInventoryItem = exports.createInventoryItem = exports.getInventoryItemById = exports.getAllInventoryItems = void 0;
 const createInventoryItemUseCase_1 = __importDefault(require("@app/use-cases/inventory/createInventoryItemUseCase"));
-const inventoryModel_1 = require("@infra/persistence/models/inventoryModel");
+const inventoryModel_1 = require("@infrastructure/persistence/models/inventoryModel");
 // Get all inventory items
 const getAllInventoryItems = async (req, res) => {
     try {

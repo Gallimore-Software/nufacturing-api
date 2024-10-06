@@ -1,4 +1,4 @@
-import Quote from "@infra/persistence/models/quoteModel";
+import Quote from "@infrastructure/persistence/models/quoteModel";
 import { Request, Response } from "express";
 
 // Define types for request parameters
@@ -33,11 +33,11 @@ const sendResponse = <T>({
 // Get all quotes
 export const getAllQuotes = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const quotes = await Quote.find().populate(
-      "accountManager productType formula ingredients"
+      "accountManager productType formula ingredients",
     );
     sendResponse({
       res,
@@ -60,11 +60,11 @@ export const getAllQuotes = async (
 // Get quote by ID
 export const getQuoteById = async (
   req: Request<QuoteRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const quote = await Quote.findById(req.params.quoteId).populate(
-      "accountManager productType formula ingredients"
+      "accountManager productType formula ingredients",
     );
     if (!quote) {
       sendResponse({
@@ -96,7 +96,7 @@ export const getQuoteById = async (
 // Create a new quote
 export const createQuote = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const newQuote = new Quote(req.body);
@@ -122,7 +122,7 @@ export const createQuote = async (
 // Update quote
 export const updateQuote = async (
   req: Request<QuoteRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const updatedQuote = await Quote.findByIdAndUpdate(
@@ -131,7 +131,7 @@ export const updateQuote = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
     if (!updatedQuote) {
       sendResponse({
@@ -163,7 +163,7 @@ export const updateQuote = async (
 // Delete quote
 export const deleteQuote = async (
   req: Request<QuoteRequestParams>,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const deletedQuote = await Quote.findByIdAndDelete(req.params.quoteId);

@@ -79,7 +79,7 @@ class MongooseInventoryRepository {
     return await InventoryItem.findByIdAndUpdate(
       id,
       { $inc: { stockQuantity: quantityChange } },
-      { new: true }
+      { new: true },
     );
   }
 
@@ -88,7 +88,7 @@ class MongooseInventoryRepository {
     return await InventoryItem.findByIdAndUpdate(
       id,
       { price: newPrice, priceLastUpdated: new Date() },
-      { new: true }
+      { new: true },
     );
   }
 
@@ -97,7 +97,7 @@ class MongooseInventoryRepository {
     return await InventoryItem.findByIdAndUpdate(
       id,
       { status: "processed" },
-      { new: true }
+      { new: true },
     );
   }
 }

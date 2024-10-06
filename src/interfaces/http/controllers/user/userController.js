@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginUser = exports.deleteUser = exports.updateUser = exports.getUserById = exports.getAllUsers = exports.createUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const userModel_1 = __importDefault(require("@infra/persistence/models/userModel"));
+const userModel_1 = __importDefault(require("@infrastructure/persistence/models/userModel"));
 const userMapper_1 = require("@app/mappers/userMapper");
-const sendEmail_1 = __importDefault(require("@infra/notifications/sendEmail"));
+const sendEmail_1 = __importDefault(require("@infrastructure/notifications/sendEmail"));
 const joi_1 = __importDefault(require("joi"));
 // Joi validation schema
 const userSchema = joi_1.default.object({

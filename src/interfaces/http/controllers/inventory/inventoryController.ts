@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import CreateInventoryItemUseCase from "@app/use-cases/inventory/createInventoryItemUseCase";
-import { InventoryItem } from "@infra/persistence/models/inventoryModel";
+import { InventoryItem } from "@infrastructure/persistence/models/inventoryModel";
 
 // Get all inventory items
 export const getAllInventoryItems = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const inventoryItems = await InventoryItem.find()
@@ -31,7 +31,7 @@ export const getAllInventoryItems = async (
 // Get inventory item by ID
 export const getInventoryItemById = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { inventoryId } = req.params;
@@ -65,7 +65,7 @@ export const getInventoryItemById = async (
 // Create a new inventory item
 export const createInventoryItem = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const newInventoryItem = await CreateInventoryItemUseCase.execute(req.body);
@@ -82,14 +82,14 @@ export const createInventoryItem = async (
 // Update inventory item
 export const updateInventoryItem = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { inventoryId } = req.params;
     const updatedInventoryItem = await InventoryItem.findByIdAndUpdate(
       inventoryId,
       req.body,
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     )
       .populate("vendor")
       .populate("createdBy")
@@ -120,7 +120,7 @@ export const updateInventoryItem = async (
 // Delete inventory item
 export const deleteInventoryItem = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     const { inventoryId } = req.params;

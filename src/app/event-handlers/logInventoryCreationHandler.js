@@ -3,9 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const eventDispatcher_1 = __importDefault(require("@infra/event-handlers/eventDispatcher"));
+const eventDispatcher_1 = __importDefault(require("@infrastructure/event-handlers/eventDispatcher"));
 const inventoryItemCreatedEvent_1 = __importDefault(require("@domain/events/inventoryItemCreatedEvent"));
-const logger_1 = __importDefault(require("@infra/logging/logger"));
+const logger_1 = __importDefault(require("@infrastructure/logging/logger"));
 class LogInventoryCreationHandler {
     async handle(event) {
         try {

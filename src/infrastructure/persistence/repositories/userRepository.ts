@@ -1,4 +1,4 @@
-import User from "@infra/persistence/models/userModel";
+import User from "@infrastructure/persistence/models/userModel";
 import { IUserRepository } from "@domain/interfaces/repositories/userRepositoryInterface";
 import { CreateUserDTO } from "@interfaces/dtos/userDTO";
 

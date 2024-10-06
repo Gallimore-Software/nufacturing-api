@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserRepository = void 0;
-const userModel_1 = __importDefault(require("@infra/persistence/models/userModel"));
+const userModel_1 = __importDefault(require("@infrastructure/persistence/models/userModel"));
 class UserRepository {
     async createUser(userDetails) {
         const user = new userModel_1.default(userDetails);

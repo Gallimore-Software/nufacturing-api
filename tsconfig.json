@@ -94,8 +94,8 @@
       "@validation-schemas/*": [
         "src/interfaces/validation-schemas/*"
       ],
-      "@middlewares/*": [
-        "src/interfaces/http/middlewares/*"
+      "@middleware/*": [
+        "src/interfaces/http/middleware/*"
       ],
       "@config/*": [
         "config/*"

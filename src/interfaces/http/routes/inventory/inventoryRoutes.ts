@@ -1,7 +1,7 @@
 import express from "express";
 import * as inventoryController from "@controllers/inventory/inventoryController";
-import roleMiddleware from "@middleware/roleMiddleware";
-import validateInventoryItem from "@middleware/validationMiddleware";
+import roleMiddleware from "@interfaces/http/middleware/roleMiddleware";
+import validateInventoryItem from "@interfaces/http/middleware/validationMiddleware";
 
 const router = express.Router();
 

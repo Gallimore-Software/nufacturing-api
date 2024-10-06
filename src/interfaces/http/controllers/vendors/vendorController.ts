@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import VendorMapper from "@/application/mapper/vendorMapper";
-import VendorModel, { IVendor } from "@infra/persistence/models/vendorModel"; // Adjust path as needed
+import VendorModel, {
+  IVendor,
+} from "@infrastructure/persistence/models/vendorModel"; // Adjust path as needed
 
 // Create a new vendor
 export const createVendor = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     // Convert request data to domain model using the mapper
@@ -19,19 +21,17 @@ export const createVendor = async (
 
     res.status(201).json(vendorDTO);
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      });
+    res.status(400).json({
+      message:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    });
   }
 };
 
 // Get all vendors
 export const getAllVendors = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     // Get all vendors as documents from Mongoose
@@ -42,19 +42,17 @@ export const getAllVendors = async (
 
     res.status(200).json(vendorDTOs);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      });
+    res.status(500).json({
+      message:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    });
   }
 };
 
 // Get a single vendor by ID
 export const getVendorById = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     // Find vendor by ID using VendorModel
@@ -68,19 +66,17 @@ export const getVendorById = async (
 
     res.status(200).json(vendorDTO);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      });
+    res.status(500).json({
+      message:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    });
   }
 };
 
 // Update a vendor by ID
 export const updateVendorById = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     // Convert request data to domain model
@@ -93,7 +89,7 @@ export const updateVendorById = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
 
     if (!updatedVendor) {
@@ -105,19 +101,17 @@ export const updateVendorById = async (
 
     res.status(200).json(vendorDTO);
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      });
+    res.status(400).json({
+      message:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    });
   }
 };
 
 // Delete a vendor by ID
 export const deleteVendorById = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
     // Find and delete vendor by ID using VendorModel
@@ -128,11 +122,9 @@ export const deleteVendorById = async (
 
     res.status(200).json({ message: "Vendor deleted successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message:
-          error instanceof Error ? error.message : "An unknown error occurred",
-      });
+    res.status(500).json({
+      message:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    });
   }
 };

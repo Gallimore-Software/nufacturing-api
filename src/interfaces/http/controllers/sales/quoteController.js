@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteQuote = exports.updateQuote = exports.createQuote = exports.getQuoteById = exports.getAllQuotes = void 0;
-const quoteModel_1 = __importDefault(require("@infra/persistence/models/quoteModel"));
+const quoteModel_1 = __importDefault(require("@infrastructure/persistence/models/quoteModel"));
 // Utility function for standardized response handling
 const sendResponse = ({ res, statusCode, success, message, data, error, }) => {
     res.status(statusCode).json({

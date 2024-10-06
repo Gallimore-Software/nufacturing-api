@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteBatchRecordById = exports.updateBatchRecordById = exports.getBatchRecordById = exports.getAllBatchRecords = exports.createBatchRecord = void 0;
-const batchRecordModel_1 = __importDefault(require("@infra/persistence/models/batchRecordModel"));
+const batchRecordModel_1 = __importDefault(require("@infrastructure/persistence/models/batchRecordModel"));
 // Create a new batch record
 const createBatchRecord = async (req, res) => {
     try {

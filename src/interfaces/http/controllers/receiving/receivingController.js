@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReceiving = exports.updateReceivingById = exports.getReceivingById = exports.getAllReceivings = exports.createReceiving = void 0;
-const purchaseOrderModel_1 = __importDefault(require("@infra/persistence/models/purchaseOrderModel"));
-const receivingModel_1 = __importDefault(require("@infra/persistence/models/receivingModel"));
+const purchaseOrderModel_1 = __importDefault(require("@infrastructure/persistence/models/purchaseOrderModel"));
+const receivingModel_1 = __importDefault(require("@infrastructure/persistence/models/receivingModel"));
 // Create a new receiving entry
 const createReceiving = async (req, res) => {
     try {
