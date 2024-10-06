@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductDevelopmentComponent } from './product-development.component';
+
 import { FormulasComponent } from './components/formulas/formulas.component';
 import { ProductSkusComponent } from './components/product-skus/product-skus.component';
 import { ProductTypesComponent } from './components/product-types/product-types.component';
 import { ResearchAndDevelopmentComponent } from './components/research-and-development/research-and-development.component';
+import { ProductDevelopmentComponent } from './product-development.component';
 
 const routes: Routes = [
   {

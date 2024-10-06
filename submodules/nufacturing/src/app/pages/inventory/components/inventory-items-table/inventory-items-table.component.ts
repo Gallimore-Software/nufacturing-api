@@ -5,13 +5,14 @@ import {
   AfterViewInit,
   Input,
 } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { InventoryItem } from '../../inventory-item.model';
-import { InventoryService } from 'src/app/pages/inventory/inventory.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/components/auth/auth.service';
-import { MatDialog } from '@angular/material/dialog';
+import { InventoryService } from 'src/app/pages/inventory/inventory.service';
+
+import { InventoryItem } from '../../inventory-item.model';
 import { NewInventoryDialogComponent } from '../new-inventory-dialog/new-inventory-dialog.component';
 
 @Component({

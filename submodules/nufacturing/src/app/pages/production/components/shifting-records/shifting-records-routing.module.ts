@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { ShiftingRecordsComponent } from './shifting-records.component';
 
 const routes: Routes = [

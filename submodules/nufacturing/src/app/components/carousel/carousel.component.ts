@@ -1,4 +1,3 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   trigger,
   state,
@@ -6,6 +5,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',

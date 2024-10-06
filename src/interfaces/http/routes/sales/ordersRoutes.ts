@@ -1,6 +1,6 @@
-import express from "express";
 import * as orderController from "@controllers/sales/orderController";
 import roleMiddleware from "@interfaces/http/middleware/roleMiddleware";
+import express from "express";
 
 const router = express.Router();
 

@@ -11,8 +11,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+
 import { BomFormComponent } from './bom-form/bom-form.component';
 import { BomRoutingModule } from './bom-routing.module';
+import { BomComponent } from './bom.component';
 import { CalculateProfitComponent } from './calculate-profit/calculate-profit.component';
 import { CalculateQuotePricingComponent } from './calculate-quote-pricing/calculate-quote-pricing.component';
 import { IngredientBreakdownWithMoqComponent } from './ingredient-breakdown-with-moq/ingredient-breakdown-with-moq.component';
@@ -20,7 +22,6 @@ import { IngredientBreakdownWithoutMoqComponent } from './ingredient-breakdown-w
 import { IngredientCalculationComponent } from './ingredient-calculation/ingredient-calculation.component';
 import { PackageBreakdownComponent } from './package-breakdown/package-breakdown.component';
 import { SalesAnalysisComponent } from './sales-analysis/sales-analysis.component';
-import { BomComponent } from './bom.component';
 
 @NgModule({
   declarations: [

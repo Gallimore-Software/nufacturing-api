@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { CustomerService } from './customer.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/components/auth/auth.service';
-import { MatDialog } from '@angular/material/dialog';
+
 import { CustomerDetailsDialogComponent } from './components/customer-details-dialog/customer-details-dialog.component';
+import { CustomerService } from './customer.service';
 
 interface Customer {
   _id: string;

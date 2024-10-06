@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductSkusComponent } from './product-skus.component';
+
 import { CreateProductSkusComponent } from './create-product-skus/create-product-skus.component';
 import { ListProductSkusComponent } from './list-product-skus/list-product-skus.component';
+import { ProductSkusComponent } from './product-skus.component';
 
 const routes: Routes = [
   {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardMockService } from '../dashboard-mock.service';
 import { Chart, registerables } from 'chart.js';
+
+import { DashboardMockService } from '../dashboard-mock.service';
 
 @Component({
   selector: 'app-dashboard-page',

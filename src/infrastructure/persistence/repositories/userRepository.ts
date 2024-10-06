@@ -1,5 +1,5 @@
-import User from "@infrastructure/persistence/models/userModel";
 import { IUserRepository } from "@domain/interfaces/repositories/userRepositoryInterface";
+import User from "@infrastructure/persistence/models/userModel";
 import { CreateUserDTO } from "@interfaces/dtos/userDTO";
 
 export class UserRepository implements IUserRepository {

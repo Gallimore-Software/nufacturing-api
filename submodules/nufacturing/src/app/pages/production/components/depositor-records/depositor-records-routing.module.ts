@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { DepositorRecordsComponent } from './depositor-records.component';
 
 const routes: Routes = [

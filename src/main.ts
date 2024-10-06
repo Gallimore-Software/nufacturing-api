@@ -1,6 +1,6 @@
 import "module-alias/register";
-import logger from "./infrastructure/logging/logger";
 import app from "./app/app";
+import logger from "./infrastructure/logging/logger";
 
 // Load the environment variables based on the NODE_ENV
 logger.info("Starting API in :", process.env.NODE_ENV);

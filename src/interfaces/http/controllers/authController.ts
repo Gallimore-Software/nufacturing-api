@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import User from "@models/userModel";
+import jwt from "jsonwebtoken";
 
 export const verifyEmail = async (req, res) => {
   try {

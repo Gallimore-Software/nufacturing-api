@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/components/auth/auth.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ProductSkusService } from 'src/app/services/product-skus.service';
-import { CreateProductSkusComponent } from '../create-product-skus/create-product-skus.component';
+
 import { ConfirmDialogComponent } from '../../../../../components/confirm-dialog/confirm-dialog.component';
+import { CreateProductSkusComponent } from '../create-product-skus/create-product-skus.component';
 
 export interface ProductSku {
   _id: string;

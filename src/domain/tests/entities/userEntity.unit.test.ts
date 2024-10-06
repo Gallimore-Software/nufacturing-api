@@ -1,6 +1,6 @@
 import User from "@domain-entities/user"; // Adjust path if necessary
-import UserModel from "@models/userModel"; // Mocked
 import UserDTO from "@dto/userDTO"; // Adjust path if necessary
+import UserModel from "@models/userModel"; // Mocked
 
 jest.mock("@models/userModel");
 

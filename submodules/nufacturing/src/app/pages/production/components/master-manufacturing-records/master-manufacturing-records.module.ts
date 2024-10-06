@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MasterManufacturingRecordsComponent } from './master-manufacturing-records.component';
+import { NgModule } from '@angular/core';
+
 import { MasterManifacturingRecordsRoutingModule } from './master-manifacturing-records-routing.module';
+import { MasterManufacturingRecordsComponent } from './master-manufacturing-records.component';
 
 @NgModule({
   declarations: [MasterManufacturingRecordsComponent],

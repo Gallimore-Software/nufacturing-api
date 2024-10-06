@@ -1,5 +1,5 @@
-import express from "express";
 import cors from "cors";
+import express from "express";
 import swaggerUI from "swagger-ui-express";
 
 // Schedule tasks
@@ -12,7 +12,7 @@ import connectDB from "@infrastructure/persistence/db";
 import inventoryRoutes from "@interfaces/http/routes/inventory/inventoryRoutes";
 import batchRecordsRoutes from "@interfaces/http/routes/quality-audits/batchRecordsRoutes";
 import receivingRoutes from "@interfaces/http/routes/receiving/receivingRoutes";
-import userRoutes from "@interfaces/http/routes/users/usersRoutes"
+import userRoutes from "@interfaces/http/routes/users/usersRoutes";
 import formulaRoutes from "@interfaces/http/routes/product-development/formulasRoutes";
 import productSkuRoutes from "@interfaces/http/routes/product-development/productSkusRoutes";
 import productTypeRoutes from "@interfaces/http/routes/product-development/productTypesRoutes";

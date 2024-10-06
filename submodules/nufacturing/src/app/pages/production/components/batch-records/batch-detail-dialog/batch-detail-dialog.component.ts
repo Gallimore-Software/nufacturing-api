@@ -5,11 +5,12 @@ import {
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog'; // Import MatDialog for opening dialogs
+import { AuthService } from 'src/app/components/auth/auth.service';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component'; // Import the confirm dialog
-import { BatchRecord } from '../list-batch-records/list-batch-records.component';
 import { BatchRecordsService } from 'src/app/services/batch-records.service';
 import { UsersService } from 'src/app/services/users.service';
-import { AuthService } from 'src/app/components/auth/auth.service';
+
+import { BatchRecord } from '../list-batch-records/list-batch-records.component';
 
 @Component({
   selector: 'app-batch-detail-dialog',

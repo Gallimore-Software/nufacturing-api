@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
-import VendorMapper from "@/application/mapper/vendorMapper";
 import VendorModel, {
   IVendor,
 } from "@infrastructure/persistence/models/vendorModel"; // Adjust path as needed
+import { Request, Response } from "express";
+
+import VendorMapper from "@/application/mapper/vendorMapper";
 
 // Create a new vendor
 export const createVendor = async (

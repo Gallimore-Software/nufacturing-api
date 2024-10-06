@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FdaAuditsComponent } from './fda-audits.component';
+import { NgModule } from '@angular/core';
+
 import { FdaAuditsRoutingModule } from './fda-audits-routing.module';
+import { FdaAuditsComponent } from './fda-audits.component';
 
 @NgModule({
   declarations: [FdaAuditsComponent],

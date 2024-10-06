@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './pages/users/login/login.component';
 import { AuthGuard } from './components/auth/auth.guard';
-import { RegisterComponent } from './pages/users/signup/register.component';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { LoginComponent } from './pages/users/login/login.component';
+import { RegisterComponent } from './pages/users/signup/register.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },

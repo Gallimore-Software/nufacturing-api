@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
 import Formula from "@infrastructure/persistence/models/formulaModel";
+import { Request, Response } from "express";
 
 // Get all formulas
 export const getAllFormulas = async (

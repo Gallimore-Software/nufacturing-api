@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { MixingRecordsComponent } from './mixing-records.component';
 
 const routes: Routes = [

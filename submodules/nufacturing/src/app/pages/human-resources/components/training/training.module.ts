@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TrainingComponent } from './training.component';
+import { NgModule } from '@angular/core';
+
 import { TrainingRoutingModule } from './training-routing.module';
+import { TrainingComponent } from './training.component';
 
 @NgModule({
   declarations: [TrainingComponent],

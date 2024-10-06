@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QualityAuditsComponent } from './quality-audits.component';
+import { NgModule } from '@angular/core';
+
 import { QualityAuditsRoutingModule } from './quality-audits-routing.module';
+import { QualityAuditsComponent } from './quality-audits.component';
 
 @NgModule({
   declarations: [QualityAuditsComponent],

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryService } from 'src/app/pages/inventory/inventory.service';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/components/auth/auth.service';
-import { InventoryItem } from './inventory-item.model';
-import { MatDialog } from '@angular/material/dialog';
+import { InventoryService } from 'src/app/pages/inventory/inventory.service';
+
 import { NewInventoryDialogComponent } from './components/new-inventory-dialog/new-inventory-dialog.component';
+import { InventoryItem } from './inventory-item.model';
 
 @Component({
   selector: 'inventory',

@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReceivingComponent } from './receiving.component';
+import { NgModule } from '@angular/core';
+
 import { ReceivingRoutingModule } from './receiving-routing.module';
+import { ReceivingComponent } from './receiving.component';
 
 @NgModule({
   declarations: [ReceivingComponent],

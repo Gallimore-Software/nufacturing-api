@@ -1,5 +1,5 @@
-import EventDispatcher from "@infrastructure/event-handlers/eventDispatcher";
 import InventoryItemCreatedEvent from "@domain/events/inventoryItemCreatedEvent";
+import EventDispatcher from "@infrastructure/event-handlers/eventDispatcher";
 import logger from "@infrastructure/logging/logger";
 
 // Define a base event type

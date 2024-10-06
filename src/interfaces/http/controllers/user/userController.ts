@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { UserDTO } from "@dto/userDTO";
-import User, { IUser } from "@infrastructure/persistence/models/userModel";
 import { UserMapper } from "@app/mappers/userMapper";
+import { UserDTO } from "@dto/userDTO";
 import sendEmail from "@infrastructure/notifications/sendEmail";
+import User, { IUser } from "@infrastructure/persistence/models/userModel";
+import bcrypt from "bcrypt";
+import { Request, Response } from "express";
 import Joi from "joi";
+import jwt from "jsonwebtoken";
 
 // Joi validation schema
 const userSchema = Joi.object({

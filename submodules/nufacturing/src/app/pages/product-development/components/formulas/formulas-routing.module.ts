@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormulasComponent } from './formulas.component';
+
 import { CreateFormulasComponent } from './create-formulas/create-formulas.component';
+import { FormulasComponent } from './formulas.component';
 import { ListFormulaComponent } from './list-formulas/list-formulas.component';
 
 const routes: Routes = [

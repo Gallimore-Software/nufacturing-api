@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReportingComponent } from './reporting.component';
+import { NgModule } from '@angular/core';
+
 import { ReportingRoutingModule } from './reporting-routing.module';
+import { ReportingComponent } from './reporting.component';
 
 @NgModule({
   declarations: [ReportingComponent],

@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-import { transports, format } from "winston";
 import logger from "@logging/logger";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import { transports, format } from "winston";
 
 // Load environment variables
 dotenv.config();

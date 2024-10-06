@@ -6,6 +6,7 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+
 import { SalesService, KeyMetric, Activity } from '../../sales.service'; // Path might need adjustment based on actual structure
 
 @Component({

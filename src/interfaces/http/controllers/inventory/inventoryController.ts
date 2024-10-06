@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
 import CreateInventoryItemUseCase from "@app/use-cases/inventory/createInventoryItemUseCase";
 import { InventoryItem } from "@infrastructure/persistence/models/inventoryModel";
+import { Request, Response } from "express";
 
 // Get all inventory items
 export const getAllInventoryItems = async (

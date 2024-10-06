@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
+
 import { InventoryItem } from './inventory-item.model'; // Adjust the path as needed
 
 interface ApiResponse<T> {

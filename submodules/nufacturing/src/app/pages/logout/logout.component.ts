@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+
 import { LogoutDialogComponent } from './logout-dialog/logout-dialog.component';
 
 @Component({
