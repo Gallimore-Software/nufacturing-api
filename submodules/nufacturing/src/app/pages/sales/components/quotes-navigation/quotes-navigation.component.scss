@@ -1,0 +1,17 @@
+.quotes-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.metric-chip-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+mat-chip {
+  margin: 5px;
+}
