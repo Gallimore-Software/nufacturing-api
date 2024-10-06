@@ -32,41 +32,33 @@
       "**/node_modules/**": true,
       "**/.git/**": true
     },
+    
     // TypeScript and Linting Settings
     "typescript.tsdk": "node_modules/typescript/lib",
     "eslint.workingDirectories": [
-      {
-        "directory": ".",
-        "changeProcessCWD": true
-      },
-      {
-        "directory": "submodules/nufacturing",
-        "changeProcessCWD": true
-      },
-      {
-        "directory": "submodules/nufulfillment-veracore",
-        "changeProcessCWD": true
-      },
-      {
-        "directory": "submodules/gallimore-dev-tools",
-        "changeProcessCWD": true
-      }
+      { "directory": ".", "changeProcessCWD": true },
+      { "directory": "submodules/nufacturing", "changeProcessCWD": true },
+      { "directory": "submodules/nufulfillment-veracore", "changeProcessCWD": true },
+      { "directory": "submodules/gallimore-dev-tools", "changeProcessCWD": true }
     ],
     "eslint.validate": [
       "javascript",
       "typescript",
       "typescriptreact"
     ],
+
     // Code Navigation and Aliases
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "typescript.referencesCodeLens.enabled": true,
     "typescript.implementationsCodeLens.enabled": true,
     "typescript.suggest.autoImports": true,
+
     // Prettier Configuration
     "prettier.requireConfig": true,
     "prettier.useTabs": false,
     "prettier.singleQuote": true,
     "prettier.trailingComma": "all",
+
     // Integrated Testing & Debugging
     "jest.autoRun": {
       "watch": true,
@@ -86,6 +78,7 @@
     "terminal.integrated.env.osx": {
       "NODE_ENV": "development"
     },
+
     // Custom Clean-LLM Architecture Configurations
     "files.associations": {
       "*.dto.ts": "typescript",
@@ -150,9 +143,7 @@
         "type": "shell",
         "command": "npm run build && npm --prefix submodules/nufacturing run build && npm --prefix submodules/nufulfillment-veracore run build",
         "group": "build",
-        "problemMatcher": [
-          "$tsc"
-        ],
+        "problemMatcher": ["$tsc"],
         "detail": "Build all components in the CLEAN-LLM architecture."
       },
       {
@@ -160,9 +151,7 @@
         "type": "shell",
         "command": "npm run lint && npm --prefix submodules/nufacturing run lint && npm --prefix submodules/nufulfillment-veracore run lint",
         "group": "build",
-        "problemMatcher": [
-          "$eslint-stylish"
-        ],
+        "problemMatcher": ["$eslint-stylish"],
         "detail": "Lint all code in the workspace."
       },
       {
@@ -170,9 +159,7 @@
         "type": "shell",
         "command": "npm test && npm --prefix submodules/nufacturing run test && npm --prefix submodules/nufulfillment-veracore run test",
         "group": "test",
-        "problemMatcher": [
-          "$jest"
-        ],
+        "problemMatcher": ["$jest"],
         "detail": "Run all unit tests in the workspace."
       }
     ]
@@ -191,3 +178,4 @@
     ]
   }
 }
+
