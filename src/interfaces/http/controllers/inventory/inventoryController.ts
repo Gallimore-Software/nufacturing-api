@@ -4,7 +4,7 @@ import { InventoryItem } from "@infrastructure/persistence/models/inventoryModel
 
 // Get all inventory items
 export const getAllInventoryItems = async (
-  req: Request,
+  _req: Request,
   res: Response,
 ): Promise<void> => {
   try {

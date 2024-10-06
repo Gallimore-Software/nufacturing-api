@@ -12,19 +12,19 @@ import connectDB from "@infrastructure/persistence/db";
 import inventoryRoutes from "@interfaces/http/routes/inventory/inventoryRoutes";
 import batchRecordsRoutes from "@interfaces/http/routes/quality-audits/batchRecordsRoutes";
 import receivingRoutes from "@interfaces/http/routes/receiving/receivingRoutes";
-import userRoutes from "@interfaces/http/routes/users/user-routes";
-import formulaRoutes from "@interfaces/http/routes/product-development/formulaRoutes";
-import productSkuRoutes from "@interfaces/http/routes/product-development/productSkuRoutes";
-import productTypeRoutes from "@interfaces/http/routes/product-development/productTypeRoutes";
-import quoteRoutes from "@interfaces/http/routes/sales/quoteRoutes";
-import orderRoutes from "@interfaces/http/routes/sales/orderRoutes";
-import customerRoutes from "@interfaces/http/routes/sales/customerRoutes";
-import purchaseOrderRoutes from "@interfaces/http/routes/receiving/purchaseOrderRoutes";
-import labTestingRoutes from "@interfaces/http/routes/research-and-development/labTestingRoutes";
-import vendorRoutes from "@interfaces/http/routes/vendor/vendorRoutes";
+import userRoutes from "@interfaces/http/routes/users/usersRoutes"
+import formulaRoutes from "@interfaces/http/routes/product-development/formulasRoutes";
+import productSkuRoutes from "@interfaces/http/routes/product-development/productSkusRoutes";
+import productTypeRoutes from "@interfaces/http/routes/product-development/productTypesRoutes";
+import quoteRoutes from "@interfaces/http/routes/sales/quotesRoutes";
+import orderRoutes from "@interfaces/http/routes/sales/ordersRoutes";
+import customerRoutes from "@interfaces/http/routes/sales/customersRoutes";
+import purchaseOrderRoutes from "@interfaces/http/routes/receiving/purchaseOrdersRoutes";
+import labTestingRoutes from "@interfaces/http/routes/research-and-development/labTestsRoutes";
+import vendorRoutes from "@interfaces/http/routes/vendors/vendorsRoutes";
 
 // Import Swagger documentation
-import swaggerDocument from "@swagger/swaggerDocument";
+import swaggerDocument from "@docs/generated/swagger_output.json";
 
 // Initialize express app
 const app = express();

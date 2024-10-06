@@ -96,7 +96,10 @@
       "activityBar.background": "#002b36",
       "titleBar.activeBackground": "#073642",
       "titleBar.activeForeground": "#839496"
-    }
+    },
+    "cSpell.words": [
+      "Receivements"
+    ]
   },
   "launch": {
     "configurations": [
