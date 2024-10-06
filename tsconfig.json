@@ -24,6 +24,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./",
+    "outDir": "./dist",  // Output directory for compiled files
+    "rootDir": "./src",  // Root directory for source files
     "paths": {
       "@app/*": [
         "src/app/*"
@@ -122,15 +124,11 @@
         "submodules/gallimore-dev-tools/src/*"
       ]
     },
-    "rootDir": "./",
-    "outDir": "dist"
   },
   "include": [
     "src/**/*.ts",
     "config/**/*.ts",
-    "scripts/**/*.ts",
-    "submodules/**/*.ts",
-    "__tests__/**/*.ts"
+    "scripts/**/*.ts"
   ],
   "exclude": [
     "node_modules",

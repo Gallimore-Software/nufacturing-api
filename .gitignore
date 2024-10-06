@@ -1,6 +1,13 @@
 # Created by https://www.gitignore.io/api/node,vim,git,macos,linux,sublimetext
 logs/**
 
+# Ignore compiled JavaScript files
+*.js
+*.js.map
+
+# Ignore output directory
+dist/
+
 ### Git ###
 *.orig
 
