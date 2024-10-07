@@ -20,7 +20,7 @@ module.exports = function (plop) {
     ];
     return files.map((file) => ({
       type: 'add',
-      path: `src/${folderPath}/{{kebabCase name}}/{{kebabCase name}}-${entityType.replace(/([A-Z])/g, '-$1').toLowerCase()}-${file.replace('.hbs', '')}`,
+      path: `../src/${folderPath}/{{kebabCase name}}/{{kebabCase name}}-${entityType.replace(/([A-Z])/g, '-$1').toLowerCase()}-${file.replace('.hbs', '')}`,
       templateFile: `plop-templates/${folderPath}/${entityType}.${file}`,
       abortOnFail: true, // Abort on failure
       skipIfExists: true, // Skip if file already exists
@@ -28,10 +28,10 @@ module.exports = function (plop) {
   };
   // Entity generators configuration
   const generators = [
-    { name: 'eventHandler', description: 'Generate an event handler', folder: 'application/event-handlers' },
-    { name: 'mapper', description: 'Generate a mapper', folder: 'application/mappers' },
-    { name: 'service', description: 'Generate a service', folder: 'application/services' },
-    { name: 'useCase', description: 'Generate a use case', folder: 'application/use-cases' },
+    { name: 'eventHandler', description: 'Generate an event handler', folder: 'app/event-handlers' },
+    { name: 'mapper', description: 'Generate a mapper', folder: 'app/mappers' },
+    { name: 'service', description: 'Generate a service', folder: 'app/services' },
+    { name: 'useCase', description: 'Generate a use case', folder: 'app/use-cases' },
     { name: 'entity', description: 'Generate an entity', folder: 'domain/entities' },
     { name: 'customError', description: 'Generate a custom error', folder: 'domain/errors' },
     { name: 'event', description: 'Generate an event', folder: 'domain/events' },
