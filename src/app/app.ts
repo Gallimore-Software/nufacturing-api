@@ -9,19 +9,19 @@ import "@scheduling/scheduledTasks";
 import connectDB from "@infrastructure/persistence/db";
 
 // Import route handlers
-import inventoryRoutes from "@interfaces/http/routes/inventory/inventoryRoutes";
-import batchRecordsRoutes from "@interfaces/http/routes/quality-audits/batchRecordsRoutes";
-import receivingRoutes from "@interfaces/http/routes/receiving/receivingRoutes";
-import userRoutes from "@interfaces/http/routes/users/usersRoutes";
-import formulaRoutes from "@interfaces/http/routes/product-development/formulasRoutes";
-import productSkuRoutes from "@interfaces/http/routes/product-development/productSkusRoutes";
-import productTypeRoutes from "@interfaces/http/routes/product-development/productTypesRoutes";
-import quoteRoutes from "@interfaces/http/routes/sales/quotesRoutes";
-import orderRoutes from "@interfaces/http/routes/sales/ordersRoutes";
-import customerRoutes from "@interfaces/http/routes/sales/customersRoutes";
-import purchaseOrderRoutes from "@interfaces/http/routes/receiving/purchaseOrdersRoutes";
-import labTestingRoutes from "@interfaces/http/routes/research-and-development/labTestsRoutes";
-import vendorRoutes from "@interfaces/http/routes/vendors/vendorsRoutes";
+import inventoryRoutes from "@interfaces/http/routes/inventory/inventory-routes";
+import batchRecordsRoutes from "@interfaces/http/routes/quality-audits/batch-records-routes";
+import receivingRoutes from "@interfaces/http/routes/receiving/receiving-routes";
+import userRoutes from "@interfaces/http/routes/users/user-routes";
+import formulaRoutes from "@interfaces/http/routes/product-development/formula-routes";
+import productSkuRoutes from "@interfaces/http/routes/product-development/product-sku-routes";
+import productTypeRoutes from "@interfaces/http/routes/product-development/product-type-routes";
+import quoteRoutes from "@interfaces/http/routes/sales/quote-routes";
+import orderRoutes from "@interfaces/http/routes/sales/order-routes";
+import customerRoutes from "@interfaces/http/routes/sales/customer-routes";
+import purchaseOrderRoutes from "@interfaces/http/routes/receiving/purchase-orders-routes";
+import labTestingRoutes from "@interfaces/http/routes/research-and-development/lab-test-routes";
+import vendorRoutes from "@interfaces/http/routes/vendors/vendor-routes";
 
 // Import Swagger documentation
 import swaggerDocument from "@docs/generated/swagger_output.json";

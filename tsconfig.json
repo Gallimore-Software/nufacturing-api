@@ -75,7 +75,7 @@
       "@repositories/*": [
         "src/infrastructure/persistence/repositories/*"
       ],
-      "@scheduled-tasks/*": [
+      "@scheduleding*": [
         "src/infrastructure/scheduling/*"
       ],
       "@interfaces/*": [
@@ -99,8 +99,8 @@
       "@middleware/*": [
         "src/interfaces/http/middleware/*"
       ],
-      "@config/*": [
-        "config/*"
+      "@submodules/gallimore-dev-tools/config/*": [
+        "submodules/gallimore-dev-tools/config/*"
       ],
       "@scripts/*": [
         "scripts/*"
@@ -127,7 +127,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "config/**/*.ts",
+    "submodules/gallimore-dev-tools/config/**/*.ts",
     "scripts/**/*.ts"
   ],
   "exclude": [

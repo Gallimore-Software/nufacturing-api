@@ -42,7 +42,7 @@
 
     "test:build": "tsc --noEmit",
 
-    "test": "jest --config config/jest.config.js --coverage",
+    "test": "jest --config submodules/gallimore-dev-tools/config/jest.config.js --coverage",
 
     "test:watch": "jest --watch",
 
@@ -62,7 +62,7 @@
 
     "validate-imports": "node scripts/validate-import-paths.js",
 
-    "plop": "plop --plopfile config/plopfile.config.js"
+    "plop": "plop --plopfile submodules/gallimore-dev-tools/config/plopfile.config.js"
 
   },
 
