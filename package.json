@@ -42,7 +42,7 @@
 
     "test:build": "tsc --noEmit",
 
-    "test": "jest --config submodules/gallimore-dev-tools/config/jest.config.js --coverage",
+    "test": "jest --config submodules/gallimore-dev-tools/config/jest.config.js --coverage --passWithNoTests",
 
     "test:watch": "jest --watch",
 
