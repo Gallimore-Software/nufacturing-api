@@ -38,7 +38,7 @@
 
     "start:env": "cross-env NODE_ENV=${NODE_ENV:-local} ts-node -r tsconfig-paths/register src/main.ts",
 
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register src/main.ts'",
+    "dev": "nodemon --watch \"src/**/*.ts\" --exec \"npx ts-node -r tsconfig-paths/register src/main.ts\"",
 
     "test:build": "tsc --noEmit",
 
@@ -60,7 +60,9 @@
 
     "precommit": "npm run lint && npm run format",
 
-    "validate-imports": "node scripts/validate-import-paths.js"
+    "validate-imports": "node scripts/validate-import-paths.js",
+
+    "plop": "plop --plopfile config/plopfile.config.js"
 
   },
 
