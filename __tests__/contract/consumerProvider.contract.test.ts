@@ -5,7 +5,7 @@ import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 import request from "supertest";
 
-import app from "../src/app"; // Adjust this import to point to your Express app
+import app from "@src/app"; // Adjust this import to point to your Express app
 
 chai.use(chaiAsPromised);
 const { expect } = chai;

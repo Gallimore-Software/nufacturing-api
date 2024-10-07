@@ -1,5 +1,5 @@
 // import request from "supertest";
-// import app from "../../index";
+// import app from "@@index";
 // import * as inventoryController from "@controllers/inventory/inventoryController";
 
 // describe("Inventory Controller Unit Tests", () => {

@@ -1,6 +1,6 @@
 import request from "supertest";
 
-import app from "../../src/index";
+import app from "@@src/index";
 
 describe("Integration Test: Inventory API", () => {
   it("should create a new inventory item and retrieve it", async () => {

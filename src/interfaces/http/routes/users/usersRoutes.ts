@@ -2,7 +2,7 @@ import * as userController from "@interfaces/http/controllers/user/userControlle
 import roleMiddleware from "@interfaces/http/middleware/roleMiddleware";
 import express from "express";
 
-import { verifyEmail } from "../../controllers/authController";
+import { verifyEmail } from "@@controllers/authController";
 
 export default function createRouter() {
   const router = express.Router();

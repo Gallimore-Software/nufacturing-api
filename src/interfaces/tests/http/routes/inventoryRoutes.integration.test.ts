@@ -1,6 +1,6 @@
 // import request from "supertest";
 // import mongoose from "mongoose";
-// import app from "../app"; // Import your Express app
+// import app from "@app"; // Import your Express app
 
 // describe("GET /api/inventory", () => {
 //   // Connect to the database before running any tests

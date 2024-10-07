@@ -1,5 +1,5 @@
 // import request from "supertest";
-// import app from "../../index";
+// import app from "@@index";
 // import db from "@persistence/db";
 
 // describe("Inventory Integration Tests", () => {

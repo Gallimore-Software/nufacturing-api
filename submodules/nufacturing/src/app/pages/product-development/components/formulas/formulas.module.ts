@@ -17,7 +17,7 @@ import { CreateFormulasComponent } from './create-formulas/create-formulas.compo
 import { FormulasRoutingModule } from './formulas-routing.module';
 import { FormulasComponent } from './formulas.component';
 import { ListFormulaComponent } from './list-formulas/list-formulas.component';
-import { ConfirmDialogComponent } from '../../../../components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '@@@@components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [

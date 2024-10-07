@@ -1,5 +1,5 @@
-import { InventoryService } from "../../src/application/inventory/inventoryService";
-import { OrderService } from "../../src/application/orders/orderService";
+import { InventoryService } from "@@src/application/inventory/inventoryService";
+import { OrderService } from "@@src/application/orders/orderService";
 
 describe("Integration Test: Inventory and Order Services", () => {
   it("should reduce inventory quantity when an order is placed", async () => {

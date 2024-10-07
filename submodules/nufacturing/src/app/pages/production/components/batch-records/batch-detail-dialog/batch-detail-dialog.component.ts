@@ -10,7 +10,7 @@ import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confir
 import { BatchRecordsService } from 'src/app/services/batch-records.service';
 import { UsersService } from 'src/app/services/users.service';
 
-import { BatchRecord } from '../list-batch-records/list-batch-records.component';
+import { BatchRecord } from '@list-batch-records/list-batch-records.component';
 
 @Component({
   selector: 'app-batch-detail-dialog',

@@ -5,7 +5,7 @@ import {
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewInventoryComponent } from './view-inventory.component';
-import { InventoryService } from '../inventory.service';
+import { InventoryService } from '@inventory.service';
 
 describe('ViewInventoryComponent Integration Test', () => {
   let component: ViewInventoryComponent;
