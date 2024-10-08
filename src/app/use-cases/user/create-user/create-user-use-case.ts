@@ -1,7 +1,7 @@
 // src/application/use-cases/user/create-user.use-case.ts
 
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
-import { User } from "@domain/entities/user/user.entity";
+import { User } from "@domain/entities/user/user-entity";
 import { CreateUserDTO } from "@interfaces/dtos/user/user-dto";
 import { injectable, inject } from "inversify";
 import { EmailService } from "@application/services/email-service";

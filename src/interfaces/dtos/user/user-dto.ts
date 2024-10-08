@@ -7,9 +7,11 @@ export interface CreateUserDTO {
   role?: "user" | "admin" | "manager"; // Optional, defaults to "user"
 }
 
-export interface UpdateUserDTO {
-  email?: string;
-  phoneNumber?: string;
-  password?: string;
-  role?: "user" | "admin" | "manager";
+export interface UserDTO {
+  username: string;
+  email: string;
+  role: "user" | "admin" | "manager";
+  phoneNumber: string;
 }
+
+export type UpdateUserDTO = Partial<UserDTO>;
