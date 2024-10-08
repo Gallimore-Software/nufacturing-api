@@ -1,5 +1,3 @@
-// src/application/use-cases/user/update-user.use-case.ts
-
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
 import { User } from "@domain/entities/user/user-entity";
 import { UpdateUserDTO } from "@interfaces/dtos/user/user-dto";

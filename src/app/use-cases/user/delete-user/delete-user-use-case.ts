@@ -1,5 +1,3 @@
-// src/application/use-cases/user/delete-user.use-case.ts
-
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
 import { injectable, inject } from "inversify";
 import { NotFoundError } from "@domain/errors/not-found-error/not-found-custom-error";

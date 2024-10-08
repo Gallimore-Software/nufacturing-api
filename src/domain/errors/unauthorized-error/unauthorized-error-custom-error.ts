@@ -1,4 +1,3 @@
-// src/domain/errors/unauthorized-error.ts
 export class UnauthorizedError extends Error {
   public statusCode = 401;
 

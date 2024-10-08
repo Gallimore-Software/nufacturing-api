@@ -1,5 +1,3 @@
-// src/application/use-cases/user/verify-email.use-case.ts
-
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
 import { injectable, inject } from "inversify";
 import jwt from "jsonwebtoken";

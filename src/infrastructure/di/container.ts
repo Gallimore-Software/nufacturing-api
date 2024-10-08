@@ -1,4 +1,3 @@
-// src/infrastructure/di/container.ts
 import { Container } from 'inversify';
 
 import { TYPES } from './types';

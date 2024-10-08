@@ -1,4 +1,3 @@
-// src/application/use-cases/check-user-role-use-case.ts
 import { inject, injectable } from 'inversify';
 import { TYPES } from '@infrastructure/di/types';
 import { UnauthorizedError } from '@domain/errors/unauthorized-error/unauthorized-error-custom-error';

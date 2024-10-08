@@ -1,4 +1,3 @@
-// src/infrastructure/di/types.ts
 export const TYPES = {
   JWTService: Symbol.for('JWTService'),
   UserRepository: Symbol.for('UserRepository'),

@@ -1,5 +1,3 @@
-// src/application/use-cases/user/login-user.use-case.ts
-
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
 import { injectable, inject } from "inversify";
 import { UnauthorizedError } from "@domain/errors/unauthorized-error/unauthorized-error-custom-error";

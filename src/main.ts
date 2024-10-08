@@ -1,4 +1,3 @@
-// src/main.ts
 import 'reflect-metadata'; // Necessary for InversifyJS to work
 import express from 'express';
 import { container } from '@infrastructure/di/container';

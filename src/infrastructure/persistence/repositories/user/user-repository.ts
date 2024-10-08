@@ -1,5 +1,3 @@
-// src/infrastructure/persistence/repositories/user-repository.ts
-
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
 import { User } from "@domain/entities/user/user-entity";
 import UserModel from "@infrastructure/persistence/models/user/user-model"; // Mongoose model

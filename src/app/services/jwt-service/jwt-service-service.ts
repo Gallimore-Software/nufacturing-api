@@ -1,4 +1,3 @@
-// src/application/services/jwt-service.ts
 import { injectable } from 'inversify';
 import jwt from 'jsonwebtoken';
 

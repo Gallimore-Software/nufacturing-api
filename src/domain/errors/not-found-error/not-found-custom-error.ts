@@ -1,4 +1,3 @@
-// src/domain/errors/not-found-error.ts
 export class NotFoundError extends Error {
   public statusCode = 404;
 

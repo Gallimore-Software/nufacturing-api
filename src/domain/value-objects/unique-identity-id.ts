@@ -1,5 +1,3 @@
-// src/domain/value-objects/unique-entity-id.ts
-
 import { v4 as uuidv4 } from "uuid";
 
 export class UniqueEntityID {

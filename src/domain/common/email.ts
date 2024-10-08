@@ -1,5 +1,3 @@
-// src/domain/value-objects/email.ts
-
 import { Result } from "@domain/common/result";
 
 export class Email {

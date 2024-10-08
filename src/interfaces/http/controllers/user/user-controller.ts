@@ -1,5 +1,3 @@
-// src/interfaces/http/controllers/user-controller.ts
-
 import { Request, Response } from "express";
 import { container } from "@infrastructure/di/container";
 import { CreateUserUseCase } from "@app/commands/user/create-user/create-user-use-case";

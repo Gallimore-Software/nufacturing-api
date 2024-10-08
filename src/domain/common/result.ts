@@ -1,5 +1,3 @@
-// src/domain/common/result.ts
-
 export class Result<T> {
   public isSuccess: boolean;
   public isFailure: boolean;

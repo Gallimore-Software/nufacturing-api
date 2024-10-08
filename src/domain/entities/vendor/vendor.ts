@@ -1,5 +1,3 @@
-// src/domain/entities/Vendor.ts
-
 export interface IVendor {
   id: string;
   name: string;
