@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "@infrastructure/di/container";
-import { CreateUserUseCase } from "@app/commands/user/create-user/create-user-use-case";
+import { CreateUserUseCase } from "@app/commands/user/create-user/create-user.command";
 import { UpdateUserUseCase } from "@app/commands/user/update-user/update-user-use-case";
 import { DeleteUserUseCase } from "@app/use-cases/user/delete-user/delete-user-use-case";
 import { GetUserByIdUseCase } from "@app/use-cases/user/get-user-by-id/get-user-by-id-use-case";

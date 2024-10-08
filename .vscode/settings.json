@@ -3,6 +3,6 @@
         "openapi"
     ],
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "typescript.tsconfigPath": "submodules/gallimore-dev-tools/src/config/tsconfig.json",
+    "typescript.tsconfigPath": "submodules/gallimore-dev-tools/config/tsconfig.json",
     "typescript.preferences.importModuleSpecifier": "non-relative"
 }

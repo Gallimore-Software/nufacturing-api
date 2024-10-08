@@ -1,8 +1,9 @@
 import 'reflect-metadata'; // Necessary for InversifyJS to work
 import express from 'express';
-import { container } from '@infrastructure/di/container';
-import { TYPES } from '@infrastructure/di/types';
-import { RoleMiddleware } from '@interfaces/http/middleware/role-middleware';
+import { container } from './infrastructure/di/container';
+import { TYPES } from './infrastructure/di/types';
+import { RoleMiddleware } from './interfaces/http/middleware/role-middleware';
+
 
 const app = express();
 

@@ -2,8 +2,8 @@ import { createLogger } from "winston";
 
 import loggerConfig from "./logger-config";
 
-const logger = createLogger(loggerConfig);
+const Logger = createLogger(loggerConfig);
 
-logger.info("Logger initialized.");
+Logger.info("Logger initialized.");
 
-export default logger;
+export default Logger;

@@ -1,6 +1,6 @@
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
 import { User } from "@domain/entities/user/user-entity";
-import UserModel from "@infrastructure/persistence/models/user/user-model"; // Mongoose model
+import UserModel from "@infrastructure/persistence/models/user/user-model";
 import { injectable } from "inversify";
 
 @injectable()

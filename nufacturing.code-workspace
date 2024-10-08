@@ -37,7 +37,7 @@
     
     // TypeScript and Linting Settings
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "typescript.tsconfigPath": "submodules/gallimore-dev-tools/src/config/tsconfig.json",
+    "typescript.tsconfigPath": "submodules/gallimore-dev-tools/config/tsconfig.json",
     "eslint.workingDirectories": [
       { "directory": ".", "changeProcessCWD": true },
       { "directory": "submodules/nufacturing", "changeProcessCWD": true },
@@ -116,7 +116,7 @@
         "request": "launch",
         "name": "Launch Main API",
         "program": "${workspaceFolder}/src/main.ts",
-        "preLaunchTask": "tsc: build - submodules/src/config/tsconfig.json",
+        "preLaunchTask": "tsc: build - submodules/config/tsconfig.json",
         "outFiles": [
           "${workspaceFolder}/dist/**/*.js"
         ],

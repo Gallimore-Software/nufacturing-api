@@ -1,6 +1,6 @@
+import Logger from '@infrastructure/logging/logger';
 import { injectable } from 'inversify';
 import nodemailer from 'nodemailer';
-import { Logger } from '@infrastructure/logger/logger';
 
 @injectable()
 export class EmailService {
