@@ -9,7 +9,7 @@
     "@interfaces": "src/interfaces",
     "@scheduling": "src/infrastructure/scheduling",
     "@controllers": "src/interfaces/http/controllers",
-    "@middlewares": "src/interfaces/http/middlewares",
+    "@middleware": "src/interfaces/http/middleware",
     "@repositories": "src/infrastructure/persistence/repositories"
   },
   "scripts": {
