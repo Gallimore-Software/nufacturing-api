@@ -1,213 +1,102 @@
-import { UserMapper } from "@app/mappers/userMapper";
-import { UserDTO } from "@dto/userDTO";
-import sendEmail from "@infrastructure/notifications/send-email";
-import User, { IUser } from "@infrastructure/persistence/models/user/user-model";
-import bcrypt from "bcrypt";
+// src/interfaces/http/controllers/user-controller.ts
+
 import { Request, Response } from "express";
-import Joi from "joi";
-import jwt from "jsonwebtoken";
+import { container } from "@infrastructure/di/container";
+import { CreateUserUseCase } from "@app/use-cases/user/create-user-use-case";
+import { GetAllUsersUseCase } from "@use-cases/user/get-all-users-use-case";
+import { GetUserByIdUseCase } from "@use-cases/user/get-user-by-id-use-case";
+import { UpdateUserUseCase } from "@use-cases/user/update-user-use-case";
+import { DeleteUserUseCase } from "@use-cases/user/delete-user-use-case";
+import { LoginUserUseCase } from "@use-cases/user/login-user-use-case";
+import { VerifyEmailUseCase } from "@use-cases/user/verify-email-use-case";
 
-// Joi validation schema
-const userSchema = Joi.object({
-  username: Joi.string().min(3).max(30).required(),
-  password: Joi.string().min(6).required(),
-  email: Joi.string().email().required(),
-  role: Joi.string().valid("user", "admin", "manager").default("user"),
-  phoneNumber: Joi.string()
-    .pattern(/^[0-9]{10,15}$/)
-    .optional(),
-});
-
-// Create a new user and issue JWT token
-export const createUser = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  try {
-    // Validate the request body
-    const { error } = userSchema.validate(req.body);
-    if (error) {
-      res
-        .status(400)
-        .json({ message: "Validation error", error: error.details[0].message });
-      return;
+// Controller for creating a new user
+export class UserController {
+  static async createUser(req: Request, res: Response): Promise<Response> {
+    const createUserUseCase = container.get(CreateUserUseCase);
+    try {
+      const result = await createUserUseCase.execute(req.body);
+      return res.status(201).json(result);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
     }
-
-    const userDTO: UserDTO = req.body;
-
-    // Hash the password before saving
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(userDTO.password, saltRounds);
-
-    const newUser: IUser = new User({
-      ...userDTO,
-      password: hashedPassword,
-      verified: false,
-    });
-    await newUser.save();
-
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: newUser._id, role: newUser.role },
-      process.env.JWT_SECRET!,
-      { expiresIn: "5h" },
-    );
-
-    // Send verification email
-    const verificationToken = jwt.sign(
-      { id: newUser._id },
-      process.env.JWT_SECRET!,
-      { expiresIn: "7d" },
-    );
-    const verificationLink = `${process.env.LIVE_API_URL || "http://localhost:3000"}/api/users/verify/${verificationToken}`;
-    await sendEmail(
-      newUser.email,
-      "Email Verification",
-      `Please verify your email by clicking on the following link: ${verificationLink}`,
-    );
-
-    res.status(201).json({ user: UserMapper.toDTO(newUser), token });
-  } catch (err) {
-    res.status(400).json({
-      message: "Error creating user",
-      error: err instanceof Error ? err.message : "Unknown error",
-    });
   }
-};
 
-// Get all users
-export const getAllUsers = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  try {
-    const users = await User.find();
-    res.status(200).json(users.map(UserMapper.toDTO));
-  } catch (err) {
-    res.status(500).json({
-      message: "Error fetching users",
-      error: err instanceof Error ? err.message : "Unknown error",
-    });
+  // Controller for getting all users
+  static async getAllUsers(req: Request, res: Response): Promise<Response> {
+    const getAllUsersUseCase = container.get(GetAllUsersUseCase);
+    try {
+      const users = await getAllUsersUseCase.execute();
+      return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
   }
-};
 
-// Get a single user by ID
-export const getUserById = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
-      return;
+  // Controller for getting a user by ID
+  static async getUserById(req: Request, res: Response): Promise<Response> {
+    const getUserByIdUseCase = container.get(GetUserByIdUseCase);
+    try {
+      const user = await getUserByIdUseCase.execute(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
-    res.status(200).json(UserMapper.toDTO(user));
-  } catch (err) {
-    res.status(500).json({
-      message: "Error fetching user",
-      error: err instanceof Error ? err.message : "Unknown error",
-    });
   }
-};
 
-// Update a user by ID
-export const updateUser = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  try {
-    // Validate the request body
-    const { error } = userSchema.validate(req.body);
-    if (error) {
-      res
-        .status(400)
-        .json({ message: "Validation error", error: error.details[0].message });
-      return;
+  // Controller for updating a user
+  static async updateUser(req: Request, res: Response): Promise<Response> {
+    const updateUserUseCase = container.get(UpdateUserUseCase);
+    try {
+      const updatedUser = await updateUserUseCase.execute(
+        req.params.id,
+        req.body
+      );
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res.status(200).json(updatedUser);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
     }
-
-    const userDTO: UserDTO = req.body;
-
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, userDTO, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!updatedUser) {
-      res.status(404).json({ message: "User not found" });
-      return;
-    }
-    res.status(200).json(UserMapper.toDTO(updatedUser));
-  } catch (err) {
-    res.status(400).json({
-      message: "Error updating user",
-      error: err instanceof Error ? err.message : "Unknown error",
-    });
   }
-};
 
-// Delete a user by ID
-export const deleteUser = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
-      return;
+  // Controller for deleting a user
+  static async deleteUser(req: Request, res: Response): Promise<Response> {
+    const deleteUserUseCase = container.get(DeleteUserUseCase);
+    try {
+      const deleted = await deleteUserUseCase.execute(req.params.id);
+      if (!deleted) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
-    res.status(200).json({ message: "User deleted successfully" });
-  } catch (err) {
-    res.status(500).json({
-      message: "Error deleting user",
-      error: err instanceof Error ? err.message : "Unknown error",
-    });
   }
-};
 
-// Login user and issue JWT token
-export const loginUser = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { email, password } = req.body;
-
-    // Find user by email
-    const user = await User.findOne({ email });
-    if (!user) {
-      res.status(401).json({ message: "Invalid email or password" });
-      return;
+  // Controller for logging in a user
+  static async loginUser(req: Request, res: Response): Promise<Response> {
+    const loginUserUseCase = container.get(LoginUserUseCase);
+    try {
+      const result = await loginUserUseCase.execute(req.body);
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(401).json({ error: error.message });
     }
-
-    // Check if the email is verified
-    if (!user.verified) {
-      res.status(401).json({ message: "Email not verified" });
-      return;
-    }
-
-    // Compare passwords
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      res.status(401).json({ message: "Invalid email or password" });
-      return;
-    }
-
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET!,
-      { expiresIn: "1h" },
-    );
-
-    // Respond with token and user info
-    res.status(200).json({
-      message: "Login successful",
-      token,
-      user: UserMapper.toDTO(user),
-    });
-  } catch (err) {
-    res.status(500).json({
-      message: "Error logging in",
-      error: err instanceof Error ? err.message : "Unknown error",
-    });
   }
-};
+
+  // Controller for verifying email
+  static async verifyEmail(req: Request, res: Response): Promise<Response> {
+    const verifyEmailUseCase = container.get(VerifyEmailUseCase);
+    try {
+      const result = await verifyEmailUseCase.execute(req.params.token);
+      return res.status(200).json({ message: result });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  }
+}

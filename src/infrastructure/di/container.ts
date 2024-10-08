@@ -1,9 +1,10 @@
 // src/infrastructure/di/container.ts
 import { Container } from 'inversify';
-import { JWTService } from '@application/services/jwt-service';
-import { IUserRepository } from '@domain/interfaces/repositories/user-repository.interface';
-import { UserRepository } from '@infrastructure/persistence/repositories/user-repository';
+
 import { TYPES } from './types';
+import { JWTService } from '@app/services/jwt-service/jwt-service-service';
+import { UserRepository } from '@infrastructure/persistence/repositories/user/user-repository';
+import { IUserRepository } from '@interfaces/repositories/user/user-repository-interface';
 
 const container = new Container();
 

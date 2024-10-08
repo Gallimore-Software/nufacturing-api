@@ -1,15 +1,15 @@
-export class CreateUserDTO {
+export interface CreateUserDTO {
   username: string;
-  email: string;
   password: string;
-  role: string;
+  email: string;
   phoneNumber: string;
 
-  constructor({ username, email, password, role, phoneNumber }: any) {
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.role = role;
-    this.phoneNumber = phoneNumber;
-  }
+  role?: "user" | "admin" | "manager"; // Optional, defaults to "user"
+}
+
+export interface UpdateUserDTO {
+  email?: string;
+  phoneNumber?: string;
+  password?: string;
+  role?: "user" | "admin" | "manager";
 }
