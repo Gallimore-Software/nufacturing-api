@@ -1,7 +1,7 @@
 // src/infrastructure/persistence/repositories/user-repository.ts
 
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
-import { User } from "@domain/entities/user/user.entity";
+import { User } from "@domain/entities/user/user-entity";
 import UserModel from "@infrastructure/persistence/models/user/user-model"; // Mongoose model
 import { injectable } from "inversify";
 
@@ -13,7 +13,7 @@ export class UserRepository implements IUserRepository {
     const userModel = new UserModel({
       username: user.props.username,
       password: user.props.password,
-      email: user.props.email.value, // Assuming Email is a value object
+      email: user.props.email,
       role: user.props.role,
       emailVerified: user.props.emailVerified,
       createdAt: user.props.createdAt ?? new Date(),
@@ -55,7 +55,7 @@ export class UserRepository implements IUserRepository {
     return User.create({
       username: userModel.username,
       password: userModel.password,
-      email: { value: userModel.email }, // Email could be a value object
+      email: userModel.email,
       role: userModel.role,
       emailVerified: userModel.emailVerified,
       createdAt: userModel.createdAt,

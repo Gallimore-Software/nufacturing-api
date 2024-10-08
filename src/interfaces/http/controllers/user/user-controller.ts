@@ -6,6 +6,7 @@ import { CreateUserUseCase } from "@app/commands/user/create-user/create-user-us
 import { UpdateUserUseCase } from "@app/commands/user/update-user/update-user-use-case";
 import { DeleteUserUseCase } from "@app/use-cases/user/delete-user/delete-user-use-case";
 import { GetUserByIdUseCase } from "@app/use-cases/user/get-user-by-id/get-user-by-id-use-case";
+import { GetAllUsersUseCase } from "@app/use-cases/user/get-all-users/get-all-users-use-case";
 import { LoginUserUseCase } from "@app/use-cases/user/login-user/login-user-use-case";
 import { VerifyEmailUseCase } from "@app/use-cases/user/verify-email/verify-email-use-case";
 
@@ -17,8 +18,12 @@ export class UserController {
     try {
       const result = await createUserUseCase.execute(req.body);
       return res.status(201).json(result);
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      } else {
+        return res.status(400).json({ error: 'An unknown error occurred.' });
+      }
     }
   }
 
@@ -28,8 +33,12 @@ export class UserController {
     try {
       const users = await getAllUsersUseCase.execute();
       return res.status(200).json(users);
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      } else {
+        return res.status(400).json({ error: 'An unknown error occurred.' });
+      }
     }
   }
 
@@ -42,8 +51,12 @@ export class UserController {
         return res.status(404).json({ message: "User not found" });
       }
       return res.status(200).json(user);
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      } else {
+        return res.status(400).json({ error: 'An unknown error occurred.' });
+      }
     }
   }
 
@@ -59,8 +72,12 @@ export class UserController {
         return res.status(404).json({ message: "User not found" });
       }
       return res.status(200).json(updatedUser);
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      } else {
+        return res.status(400).json({ error: 'An unknown error occurred.' });
+      }
     }
   }
 
@@ -73,19 +90,28 @@ export class UserController {
         return res.status(404).json({ message: "User not found" });
       }
       return res.status(200).json({ message: "User deleted successfully" });
-    } catch (error) {
-      return res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      } else {
+        return res.status(400).json({ error: 'An unknown error occurred.' });
+      }
     }
   }
 
   // Controller for logging in a user
   static async loginUser(req: Request, res: Response): Promise<Response> {
     const loginUserUseCase = container.get(LoginUserUseCase);
+    const { email, password } = req.body;
     try {
-      const result = await loginUserUseCase.execute(req.body);
+      const result = await loginUserUseCase.execute(email, password);
       return res.status(200).json(result);
-    } catch (error) {
-      return res.status(401).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      } else {
+        return res.status(400).json({ error: 'An unknown error occurred.' });
+      }
     }
   }
 
@@ -95,8 +121,12 @@ export class UserController {
     try {
       const result = await verifyEmailUseCase.execute(req.params.token);
       return res.status(200).json({ message: result });
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(400).json({ error: error.message });
+      } else {
+        return res.status(400).json({ error: 'An unknown error occurred.' });
+      }
     }
   }
 }

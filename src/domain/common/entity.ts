@@ -1,6 +1,6 @@
 // src/domain/common/entity.ts
 
-import { UniqueEntityID } from "@domain/value-objects/unique-entity-id";
+import { UniqueEntityID } from "@domain/value-objects/unique-identity-id";
 
 export abstract class Entity<T> {
   protected readonly _id: UniqueEntityID;

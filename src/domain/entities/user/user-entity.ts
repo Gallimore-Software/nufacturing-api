@@ -1,7 +1,8 @@
 // user.ts
 import { Entity } from '@domain/common/entity';
-import { UniqueEntityID } from '@domain/value-objects/unique-entity-id';
+import { UniqueEntityID } from '@domain/value-objects/unique-identity-id';
 import { UserProps } from './user-props'; // Import the props
+import { Result } from '@domain/common/result'
 
 export class User extends Entity<UserProps> {
   private constructor(props: UserProps, id?: UniqueEntityID) {
