@@ -1,4 +1,4 @@
-import CreateInventoryItemUseCase from "@app/use-cases/inventory/create-inventory-item-use-case";
+import CreateInventoryItemUseCase from "@app/commands/inventory/create-inventory-item-use-case";
 import { InventoryItem } from "@infrastructure/persistence/models/inventory/inventory-model";
 import { Request, Response } from "express";
 

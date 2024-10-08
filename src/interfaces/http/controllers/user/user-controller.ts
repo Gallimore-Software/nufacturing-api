@@ -2,7 +2,12 @@
 
 import { Request, Response } from "express";
 import { container } from "@infrastructure/di/container";
-import { CreateUserUseCase } from "@app/use-cases/user/create-user/create-user-use-case";
+import { CreateUserUseCase } from "@app/commands/user/create-user/create-user-use-case";
+import { UpdateUserUseCase } from "@app/commands/user/update-user/update-user-use-case";
+import { DeleteUserUseCase } from "@app/use-cases/user/delete-user/delete-user-use-case";
+import { GetUserByIdUseCase } from "@app/use-cases/user/get-user-by-id/get-user-by-id-use-case";
+import { LoginUserUseCase } from "@app/use-cases/user/login-user/login-user-use-case";
+import { VerifyEmailUseCase } from "@app/use-cases/user/verify-email/verify-email-use-case";
 
 
 // Controller for creating a new user

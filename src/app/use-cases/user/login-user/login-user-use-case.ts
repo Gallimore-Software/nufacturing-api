@@ -2,9 +2,9 @@
 
 import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
 import { injectable, inject } from "inversify";
-import { UnauthorizedError } from "@domain/errors/unauthorized-error";
-import bcrypt from "bcrypt";
+import { UnauthorizedError } from "@domain/errors/unauthorized-error/unauthorized-error-custom-error";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 @injectable()
 export class LoginUserUseCase {
