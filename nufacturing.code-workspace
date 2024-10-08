@@ -177,7 +177,6 @@
       "esbenp.prettier-vscode",
       "ms-azuretools.vscode-docker",
       "eamodio.gitlens",
-      "ms-vscode.vscode-typescript-tslint-plugin",
       "orta.vscode-jest",
       "msjsdiag.debugger-for-chrome",
       "cypress.cypress",
@@ -185,4 +184,3 @@
     ]
   }
 }
-
