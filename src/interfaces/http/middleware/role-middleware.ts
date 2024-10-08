@@ -1,34 +1,29 @@
 // src/interfaces/http/middleware/role-middleware.ts
 import { Request, Response, NextFunction } from 'express';
+import { inject } from 'inversify';
 import { JWTService } from '@application/services/jwt-service';
 import { CheckUserRoleUseCase } from '@application/use-cases/check-user-role-use-case';
-import { IUserRepository } from '@domain/interfaces/repositories/user-repository.interface';
-import { UnauthorizedError } from '@domain/errors/unauthorized-error';
-import { Logger } from '@infrastructure/logger/logger';
+import { TYPES } from '@infrastructure/di/types';
 
 export const roleMiddleware = (
   roles: string[],
-  userRepository: IUserRepository,
-  jwtService: JWTService
+  @inject(TYPES.JWTService) jwtService: JWTService,
+  @inject(TYPES.CheckUserRoleUseCase) checkUserRoleUseCase: CheckUserRoleUseCase
 ) => {
-  const checkUserRoleUseCase = new CheckUserRoleUseCase(userRepository);
-
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = req.headers.authorization?.split(' ')[1];
       if (!token) {
-        throw new UnauthorizedError('Token not found');
+        return res.status(401).json({ message: 'Token not found' });
       }
 
       const decoded = jwtService.verifyToken(token, process.env.JWT_SECRET as string);
-
       const user = await checkUserRoleUseCase.execute(decoded.id, roles);
 
-      req.user = user; // Assuming request is extended to allow `user`
+      req.user = user;
       next();
     } catch (error) {
-      Logger.error('Role middleware failed', error);
-      res.status(error.statusCode || 500).json({ message: error.message });
+      res.status(401).json({ message: 'Unauthorized', error: error.message });
     }
   };
 };

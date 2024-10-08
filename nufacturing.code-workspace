@@ -32,9 +32,12 @@
       "**/node_modules/**": true,
       "**/.git/**": true
     },
+
+    
     
     // TypeScript and Linting Settings
-    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "typescript.tsconfigPath": "submodules/gallimore-dev-tools/src/config/tsconfig.json",
     "eslint.workingDirectories": [
       { "directory": ".", "changeProcessCWD": true },
       { "directory": "submodules/nufacturing", "changeProcessCWD": true },
@@ -99,6 +102,7 @@
     },
     "cSpell.words": [
       "gallimore",
+      "inversify",
       "nufacturing",
       "Receivements",
       "scheduleding",
@@ -111,8 +115,8 @@
         "type": "node",
         "request": "launch",
         "name": "Launch Main API",
-        "program": "${workspaceFolder}/src/index.ts",
-        "preLaunchTask": "tsc: build - tsconfig.json",
+        "program": "${workspaceFolder}/src/main.ts",
+        "preLaunchTask": "tsc: build - submodules/src/config/tsconfig.json",
         "outFiles": [
           "${workspaceFolder}/dist/**/*.js"
         ],

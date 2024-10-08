@@ -1,17 +1,15 @@
-import "module-alias/register";
-import app from "./app/app";
-import logger from "./infrastructure/logging/logger";
+// src/main.ts
+import 'reflect-metadata'; // Necessary for InversifyJS to work
+import express from 'express';
+import { container } from '@infrastructure/di/container';
+import { TYPES } from '@infrastructure/di/types';
+import { roleMiddleware } from '@interfaces/http/middleware/role-middleware';
 
-// Load the environment variables based on the NODE_ENV
-logger.info("Starting API in :", process.env.NODE_ENV);
+const app = express();
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV || "development"}`,
-});
+// Example usage of middleware with DI
+app.use('/protected-route', roleMiddleware(['admin'], container.get(TYPES.JWTService), container.get(TYPES.CheckUserRoleUseCase)));
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
 });

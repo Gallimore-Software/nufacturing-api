@@ -1,0 +1,18 @@
+{
+  "extends": "./submodules/gallimore-dev-tools/src/config/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./"
+  },
+  "include": [
+    "src/**/*.ts",
+    "submodules/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.e2e.ts",
+    "**/__mocks__/**/*"
+  ]
+}
