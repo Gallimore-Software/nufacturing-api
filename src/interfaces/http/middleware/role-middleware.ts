@@ -17,18 +17,28 @@ export class RoleMiddleware {
   ) {}
 
   public handle(roles: string[]) {
-    return async (req: CustomRequest, res: Response, next: NextFunction) => {
+    return async (req: CustomRequest, res: Response, next: NextFunction): Promise<void> => {
       try {
         const token = req.headers.authorization?.split(' ')[1];
         if (!token) {
-          return res.status(401).json({ message: 'Token not found' });
+          res.status(401).json({ message: 'Token not found' });
+          return;
         }
 
         const decoded = this.jwtService.verifyToken(token, process.env.JWT_SECRET as string);
+        if (!decoded) {
+          res.status(401).json({ message: 'Invalid token' });
+          return;
+        }
+
         const user = await this.checkUserRoleUseCase.execute(decoded.id, roles);
+        if (!user) {
+          res.status(403).json({ message: 'Access denied' });
+          return;
+        }
 
         req.user = user;
-        next();
+        next();  // No need to return after calling next()
       } catch (error: unknown) {
         if (error instanceof Error) {
           res.status(401).json({ message: 'Unauthorized', error: error.message });

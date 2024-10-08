@@ -2,7 +2,7 @@
 import { inject, injectable } from 'inversify';
 import { TYPES } from '@infrastructure/di/types';
 import { UnauthorizedError } from '@domain/errors/unauthorized-error/unauthorized-error-custom-error';
-import { IUserRepository } from '@interfaces/repositories/user/user-repository-interface';
+import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
 
 @injectable()
 export class CheckUserRoleUseCase {
