@@ -1,6 +1,6 @@
-import Logger from '@infrastructure/logging/logger';
-import { injectable } from 'inversify';
-import nodemailer from 'nodemailer';
+import Logger from "@infrastructure/logging/logger";
+import { injectable } from "inversify";
+import nodemailer from "nodemailer";
 
 @injectable()
 export class EmailService {
@@ -18,7 +18,12 @@ export class EmailService {
     });
   }
 
-  async sendEmail(to: string, subject: string, text: string, html?: string): Promise<void> {
+  async sendEmail(
+    to: string,
+    subject: string,
+    text: string,
+    html?: string,
+  ): Promise<void> {
     try {
       const mailOptions = {
         from: process.env.SMTP_USER, // sender address
@@ -31,8 +36,8 @@ export class EmailService {
       const info = await this.transporter.sendMail(mailOptions);
       Logger.info(`Email sent: ${info.messageId}`);
     } catch (error) {
-      Logger.error('Failed to send email', error);
-      throw new Error('Error sending email');
+      Logger.error("Failed to send email", error);
+      throw new Error("Error sending email");
     }
   }
 }

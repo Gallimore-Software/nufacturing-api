@@ -5,7 +5,6 @@ import { injectable } from "inversify";
 
 @injectable()
 export class UserRepository implements IUserRepository {
-
   // Create a new user in the database
   async createUser(user: User): Promise<User> {
     const userModel = new UserModel({
@@ -36,8 +35,15 @@ export class UserRepository implements IUserRepository {
   }
 
   // Update a user's details by ID
-  async updateUser(id: string, updatedUser: Partial<User>): Promise<User | null> {
-    const updatedUserModel = await UserModel.findByIdAndUpdate(id, updatedUser, { new: true });
+  async updateUser(
+    id: string,
+    updatedUser: Partial<User>,
+  ): Promise<User | null> {
+    const updatedUserModel = await UserModel.findByIdAndUpdate(
+      id,
+      updatedUser,
+      { new: true },
+    );
     if (!updatedUserModel) return null;
     return this.toDomain(updatedUserModel);
   }

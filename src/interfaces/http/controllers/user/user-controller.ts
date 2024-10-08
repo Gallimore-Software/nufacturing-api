@@ -8,7 +8,6 @@ import { GetAllUsersUseCase } from "@app/use-cases/user/get-all-users/get-all-us
 import { LoginUserUseCase } from "@app/use-cases/user/login-user/login-user-use-case";
 import { VerifyEmailUseCase } from "@app/use-cases/user/verify-email/verify-email-use-case";
 
-
 // Controller for creating a new user
 export class UserController {
   static async createUser(req: Request, res: Response): Promise<Response> {
@@ -20,7 +19,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: 'An unknown error occurred.' });
+        return res.status(400).json({ error: "An unknown error occurred." });
       }
     }
   }
@@ -35,7 +34,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: 'An unknown error occurred.' });
+        return res.status(400).json({ error: "An unknown error occurred." });
       }
     }
   }
@@ -53,7 +52,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: 'An unknown error occurred.' });
+        return res.status(400).json({ error: "An unknown error occurred." });
       }
     }
   }
@@ -64,7 +63,7 @@ export class UserController {
     try {
       const updatedUser = await updateUserUseCase.execute(
         req.params.id,
-        req.body
+        req.body,
       );
       if (!updatedUser) {
         return res.status(404).json({ message: "User not found" });
@@ -74,7 +73,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: 'An unknown error occurred.' });
+        return res.status(400).json({ error: "An unknown error occurred." });
       }
     }
   }
@@ -92,7 +91,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: 'An unknown error occurred.' });
+        return res.status(400).json({ error: "An unknown error occurred." });
       }
     }
   }
@@ -108,7 +107,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: 'An unknown error occurred.' });
+        return res.status(400).json({ error: "An unknown error occurred." });
       }
     }
   }
@@ -123,7 +122,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: 'An unknown error occurred.' });
+        return res.status(400).json({ error: "An unknown error occurred." });
       }
     }
   }

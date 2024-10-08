@@ -4,7 +4,9 @@ import { User } from "@domain/entities/user/user-entity";
 
 @injectable()
 export class GetAllUsersUseCase {
-  constructor(@inject("IUserRepository") private userRepository: IUserRepository) {}
+  constructor(
+    @inject("IUserRepository") private userRepository: IUserRepository,
+  ) {}
 
   async execute(): Promise<User[]> {
     const users = await this.userRepository.findAll();

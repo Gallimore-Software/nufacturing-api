@@ -8,7 +8,7 @@ import { EmailService } from "@application/services/email-service";
 export class CreateUserUseCase {
   constructor(
     @inject("IUserRepository") private userRepository: IUserRepository,
-    @inject("EmailService") private emailService: EmailService
+    @inject("EmailService") private emailService: EmailService,
   ) {}
 
   async execute(userDTO: CreateUserDTO): Promise<User> {

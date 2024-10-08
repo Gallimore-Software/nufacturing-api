@@ -1,12 +1,12 @@
 // user.ts
-import { Entity } from '@domain/common/entity';
-import { UniqueEntityID } from '@domain/value-objects/unique-identity-id';
-import { UserProps } from './user-props'; // Import the props
-import { Result } from '@domain/common/result'
+import { Entity } from "@domain/common/entity";
+import { UniqueEntityID } from "@domain/value-objects/unique-identity-id";
+import { UserProps } from "./user-props"; // Import the props
+import { Result } from "@domain/common/result";
 
 export class User extends Entity<UserProps> {
   private constructor(props: UserProps, id?: UniqueEntityID) {
-    super(props, id);  // Entity base class handles the id
+    super(props, id); // Entity base class handles the id
   }
 
   // Factory method to create a user
@@ -17,7 +17,7 @@ export class User extends Entity<UserProps> {
   }
 
   get id(): UniqueEntityID {
-    return this._id;  // _id is inherited from the base Entity class
+    return this._id; // _id is inherited from the base Entity class
   }
 
   // Example of a getter method for the user's role

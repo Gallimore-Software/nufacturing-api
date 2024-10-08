@@ -6,7 +6,9 @@ import { NotFoundError } from "@domain/errors/not-found-error/not-found-custom-e
 
 @injectable()
 export class UpdateUserUseCase {
-  constructor(@inject("IUserRepository") private userRepository: IUserRepository) {}
+  constructor(
+    @inject("IUserRepository") private userRepository: IUserRepository,
+  ) {}
 
   async execute(userId: string, userDTO: UpdateUserDTO): Promise<User> {
     const user = await this.userRepository.updateUser(userId, userDTO);

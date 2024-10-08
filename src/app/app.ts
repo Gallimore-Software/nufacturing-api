@@ -11,7 +11,6 @@ import connectDB from "@infrastructure/persistence/db";
 // Import route handlers
 import inventoryRoutes from "@interfaces/http/routes/inventory/inventory-routes";
 
-
 // Import Swagger documentation
 import swaggerDocument from "@docs/generated/swagger_output.json";
 import customerRoutes from "@interfaces/http/routes/customer/customer-routes";
