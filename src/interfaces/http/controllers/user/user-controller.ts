@@ -28,7 +28,7 @@ export class UserController {
   }
 
   // Controller for getting all users
-  static async getAllUsers(req: Request, res: Response): Promise<Response> {
+  static async getAllUsers(res: Response): Promise<Response> {
     const getAllUsersUseCase = container.get(GetAllUsersUseCase);
     try {
       const users = await getAllUsersUseCase.execute();
