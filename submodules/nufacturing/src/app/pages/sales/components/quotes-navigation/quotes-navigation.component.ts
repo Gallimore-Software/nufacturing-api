@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SalesService } from '@@sales.service';
+import { SalesService } from '../../sales.service';
 
 @Component({
   selector: 'app-quotes-navigation',

@@ -6,8 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/components/auth/auth.service';
 
 import { ListFormulasService } from './list-formulas.service'; // Adjust the path accordingly
-import { ConfirmDialogComponent } from '@@@@@components/confirm-dialog/confirm-dialog.component';
-import { CreateFormulasComponent } from '@create-formulas/create-formulas.component'; // Adjust path
+import { ConfirmDialogComponent } from '../../../../../components/confirm-dialog/confirm-dialog.component';
+import { CreateFormulasComponent } from '../create-formulas/create-formulas.component'; // Adjust path
 
 export interface Ingredient {
   name: string;

@@ -4,8 +4,8 @@ import { AuthService } from 'src/app/components/auth/auth.service';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { BatchRecordsService } from 'src/app/services/batch-records.service';
 
-import { BatchDetailDialogComponent } from '@batch-detail-dialog/batch-detail-dialog.component';
-import { CreateBatchRecordsComponent } from '@create-batch-records/create-batch-records.component';
+import { BatchDetailDialogComponent } from '../batch-detail-dialog/batch-detail-dialog.component';
+import { CreateBatchRecordsComponent } from '../create-batch-records/create-batch-records.component';
 
 export interface BatchRecord {
   _id: string;
