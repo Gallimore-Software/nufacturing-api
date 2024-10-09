@@ -11,7 +11,7 @@
             <mat-select formControlName="accountManager">
               <mat-option
                 *ngFor="let manager of accountManagers"
-                [value]="manager"
+                [value]=new UserRole("Manager"),
                 >{{ manager }}</mat-option
               >
               <mat-option value="other">Other</mat-option>

@@ -1,4 +1,4 @@
-import BatchRecords from "@infrastructure/persistence/models/batch-record-model";
+import BatchRecords from "@infrastructure/persistence/models//batch-record/batch-record-model";
 import { Request, Response } from "express";
 
 // Define type for req.params
@@ -26,7 +26,6 @@ export const createBatchRecord = async (
 
 // Get all batch records
 export const getAllBatchRecords = async (
-  req: Request,
   res: Response,
 ): Promise<void> => {
   try {

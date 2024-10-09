@@ -1,5 +1,5 @@
 import { UserRole } from "@domain/entities/user/user-role";
-import { UniqueEntityID } from "@domain/value-objects/unique-identity-id";
+import { UniqueEntityID } from "@domain/value-objects/unique-identity-id.value";
 
 export interface UserProps {
   isDeleted: boolean;

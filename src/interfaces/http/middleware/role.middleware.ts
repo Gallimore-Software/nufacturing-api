@@ -13,7 +13,7 @@ export class RoleMiddleware {
     private checkUserRoleUseCase: CheckUserRoleUseCase,
   ) {}
 
-  public handle(role: UserRole) {
+  public handle(roles: UserRole[] | UserRole) {
     return async (
       req: Request,
       res: Response,
@@ -28,7 +28,7 @@ export class RoleMiddleware {
         }
 
         const token = authHeader.split(" ")[1];
-        
+
         // Verify token and get decoded user information
         const decoded = this.jwtService.verifyToken(token, process.env.JWT_SECRET as string);
         if (!decoded) {
@@ -36,8 +36,8 @@ export class RoleMiddleware {
           return;
         }
 
-        // Check if the user has the required role
-        const user = await this.checkUserRoleUseCase.execute(decoded.id, role);
+        // Check if the user has one of the required roles
+        const user = await this.checkUserRoleUseCase.execute(decoded.id, roles);
         if (!user) {
           res.status(403).json({ message: "Access denied. You do not have the required role." });
           return;

@@ -4,7 +4,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import { User } from '@domain/entities/user/user-entity';
 import { UserRole } from '@domain/entities/user/user-role';
-import { UniqueEntityID } from '@domain/value-objects/unique-identity-id';
+import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
 
 describe('DeleteUserUseCase Integration Test', () => {
   let deleteUserUseCase: DeleteUserUseCase;

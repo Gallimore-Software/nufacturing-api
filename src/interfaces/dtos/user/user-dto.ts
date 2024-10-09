@@ -1,16 +1,17 @@
+import { UserRole } from "@domain/entities/user/user-role";
+
 export interface CreateUserDTO {
   username: string;
   password: string;
   email: string;
   phoneNumber: string;
-
-  role?: "user" | "admin" | "manager"; // Optional, defaults to "user"
+  role?: UserRole;
 }
 
 export interface UserDTO {
   username: string;
   email: string;
-  role: "user" | "admin" | "manager";
+  role: UserRole;
   phoneNumber: string;
 }
 

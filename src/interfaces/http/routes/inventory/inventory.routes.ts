@@ -8,28 +8,28 @@ const router = express.Router();
 // Define routes with role-based access control
 router.get(
   "/",
-  roleMiddleware(["admin", "manager", "user"]),
+  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager"), new UserRole("User")]),
   inventoryController.getAllInventoryItems,
 );
 router.get(
   "/:inventoryId",
-  roleMiddleware(["admin", "manager", "user"]),
+  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager"), new UserRole("User")]),
   inventoryController.getInventoryItemById,
 );
 router.post(
   "/",
-  roleMiddleware(["admin", "manager"]),
+  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
   validateInventoryItem,
   inventoryController.createInventoryItem,
 );
 router.put(
   "/:inventoryId",
-  roleMiddleware(["admin", "manager"]),
+  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
   inventoryController.updateInventoryItem,
 );
 router.delete(
   "/:inventoryId",
-  roleMiddleware(["admin"]),
+  roleMiddleware.handle([new UserRole("Admin")]),
   inventoryController.deleteInventoryItem,
 );
 

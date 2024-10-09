@@ -1,33 +1,38 @@
-import * as customerController from "@interfaces/http/controllers/sales/customer-controller";
-import roleMiddleware from "@interfaces/http/middleware/role.middleware";
+import * as customerController from "@interfaces/http/controllers/customer/customer/customer.controller";
+import RoleMiddleware from "@interfaces/http/middleware/role.middleware"; // Import the class, not default instance
 import express from "express";
+import { container } from "@infrastructure/di/container"; // Assuming you are using a DI container like Inversify
+import { UserRole } from "@domain/entities/user/user-role";
 
 const router = express.Router();
+
+// Instantiate the RoleMiddleware class via DI container
+const roleMiddleware = container.resolve(RoleMiddleware);
 
 // Define routes with role-based access control
 router.get(
   "/",
-  roleMiddleware(["admin", "manager"]),
+  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
   customerController.getAllCustomers,
 );
 router.get(
   "/:labTestId",
-  roleMiddleware(["admin", "manager", "user"]),
+  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager"), new UserRole("User")]),
   customerController.getCustomerById,
 );
 router.post(
   "/",
-  roleMiddleware(["admin", "manager"]),
+  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
   customerController.createCustomer,
 );
 router.put(
   "/:labTestId",
-  roleMiddleware(["admin", "manager"]),
+  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
   customerController.updateCustomer,
 );
 router.delete(
   "/:labTestId",
-  roleMiddleware(["admin"]),
+  roleMiddleware.handle([new UserRole("Admin")]),
   customerController.deleteCustomer,
 );
 

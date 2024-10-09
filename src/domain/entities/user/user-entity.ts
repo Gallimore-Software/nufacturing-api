@@ -1,5 +1,5 @@
 import { Entity } from "@domain/common/entity";
-import { UniqueEntityID } from "@domain/value-objects/unique-identity-id";
+import { UniqueEntityID } from "@domain/value-objects/unique-identity-id.value";
 import { UserProps } from "./user-props";
 import { Result } from "@domain/common/result";
 import { UserRole } from "@domain/entities/user/user-role";
