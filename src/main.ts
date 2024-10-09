@@ -3,6 +3,7 @@ import express from "express";
 import { container } from "./infrastructure/di/container";
 import { TYPES } from "./infrastructure/di/types";
 import { RoleMiddleware } from "./interfaces/http/middleware/role.middleware";
+import { UserRole } from "@domain/entities/user/user-role";
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(
   new RoleMiddleware(
     container.get(TYPES.JWTService),
     container.get(TYPES.CheckUserRoleUseCase),
-  ).handle(["admin"]), // Call the `handle` method
+  ).handle(new UserRole('Admin')), // Call the `handle` method
 );
 app.listen(3000, () => {
   console.log("Server is running on port 3000");

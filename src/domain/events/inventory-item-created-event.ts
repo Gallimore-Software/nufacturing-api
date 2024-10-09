@@ -1,5 +1,3 @@
-// domain/events/inventoryItemCreatedEvent.ts
-
 // Define a base event interface for consistency across all events
 interface BaseEvent {
   name: string; // Common property to identify the event type
