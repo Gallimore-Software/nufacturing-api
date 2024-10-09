@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/components/auth/auth.service';
 
 import { ListFormulaComponent } from './list-formulas.component';
 import { ListFormulasService } from './list-formulas.service';
-import { ConfirmDialogComponent } from '@@@@@components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../../../@components/confirm-dialog/confirm-dialog.component';
 import { CreateFormulasComponent } from '@create-formulas/create-formulas.component';
 
 describe('ListFormulaComponent - View All Formulas', () => {

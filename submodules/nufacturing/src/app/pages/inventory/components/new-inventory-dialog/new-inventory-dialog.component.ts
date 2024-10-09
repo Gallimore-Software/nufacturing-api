@@ -4,8 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { VendorsService, Vendor } from 'src/app/services/vendors.service'; // Adjust the path as needed
-
-import { InventoryService } from '@@inventory.service';
+import { InventoryService } from '../../inventory.service';
 
 @Component({
   selector: 'app-new-inventory-dialog',
@@ -14,6 +13,7 @@ import { InventoryService } from '@@inventory.service';
 })
 export class NewInventoryDialogComponent implements OnInit {
   inventoryForm: FormGroup;
+  isSubmitting: boolean = false;
   filteredVendors: Vendor[] = [];
 
   constructor(
@@ -25,9 +25,9 @@ export class NewInventoryDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.inventoryForm = this.fb.group({
-      sku: ['', Validators.required],
-      displayName: ['', Validators.required],
       vendor: ['', Validators.required],
+      displayName: ['', Validators.required],
+      sku: ['', Validators.required],
       description: ['', Validators.required],
       inventoryCategory: ['', Validators.required],
       type: ['', Validators.required],
@@ -48,10 +48,14 @@ export class NewInventoryDialogComponent implements OnInit {
   ngOnInit() {
     // If the data has an inventory item, populate the form for editing
     if (this.data.inventoryItem) {
+      console.log('inventory data: ' + this.data.inventoryItem);
       this.inventoryForm.patchValue(this.data.inventoryItem);
+    } else {
+      console.log('No Data');
     }
 
     // Subscribe to the vendor input value changes
+    console.log('Value Change');
     this.inventoryForm
       .get('vendor')
       ?.valueChanges.pipe(
@@ -60,15 +64,18 @@ export class NewInventoryDialogComponent implements OnInit {
           if (searchTerm) {
             return this.vendorService.getVendors().pipe(
               switchMap((response) => {
-                if (response.success) {
+                if (response) {
+                  console.log(response);
                   // Filter vendors based on the search term
                   return of(
-                    response.data.filter((vendor) =>
+                    response.filter((vendor) =>
                       vendor.displayName
                         .toLowerCase()
                         .includes(searchTerm.toLowerCase()),
                     ),
                   );
+                } else {
+                  console.log('No Vendor Data: ' + JSON.stringify(response));
                 }
                 return of([]);
               }),
@@ -83,8 +90,11 @@ export class NewInventoryDialogComponent implements OnInit {
       });
   }
 
-  onSubmit() {
+  onSubmit(event: Event): void {
+    event.preventDefault();
+
     if (this.inventoryForm.valid) {
+      this.isSubmitting = true;
       const newInventoryItem = this.inventoryForm.value;
       console.log('New Inventory Item:', newInventoryItem);
 
@@ -92,15 +102,21 @@ export class NewInventoryDialogComponent implements OnInit {
         (response) => {
           if (response.success) {
             console.log('Inventory item created:', response.data);
+            this.isSubmitting = false;
             this.dialogRef.close(response.data);
           } else {
             console.error('Failed to create inventory item.');
+            this.isSubmitting = false;
           }
         },
         (error) => {
           console.error('Error creating inventory item:', error);
         },
       );
+    } else {
+      console.log('Error while saving');
+      this.inventoryForm.markAllAsTouched(); // Highlight all invalid fields
+      return;
     }
   }
 

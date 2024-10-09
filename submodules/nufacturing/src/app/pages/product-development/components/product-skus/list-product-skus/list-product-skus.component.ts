@@ -6,8 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/components/auth/auth.service';
 import { ProductSkusService } from 'src/app/services/product-skus.service';
 
-import { ConfirmDialogComponent } from '@@@@@components/confirm-dialog/confirm-dialog.component';
-import { CreateProductSkusComponent } from '@create-product-skus/create-product-skus.component';
+import { ConfirmDialogComponent } from '../../../../../components/confirm-dialog/confirm-dialog.component';
+import { CreateProductSkusComponent } from '../create-product-skus/create-product-skus.component';
 
 export interface ProductSku {
   _id: string;
