@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>
-  {{ data.inventoryItem ? "Edit Inventory Item" : "Create New Inventory Item" }}
+  {{ data._id ? "Edit Inventory Item" : "Create New Inventory Item" }}
 </h2>
 <mat-dialog-content>
-  <form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="inventoryForm">
     <!-- Vendor Selection with Autocomplete -->
     <div
       *ngIf="
@@ -22,10 +22,11 @@
         matInput
         formControlName="vendor"
         placeholder="Search Vendor"
+        [value]="selectedVendorDisplayName"
         [matAutocomplete]="autoVendor"
       />
       <mat-autocomplete #autoVendor="matAutocomplete">
-        <mat-option *ngFor="let vendor of filteredVendors" [value]="vendor._id">
+        <mat-option *ngFor="let vendor of filteredVendors" (onSelectionChange)="onVendorSelected(vendor)" [value]="vendor._id">
           {{ vendor.displayName }}
         </mat-option>
       </mat-autocomplete>
@@ -251,7 +252,8 @@
   <button
     mat-button
     color="primary"
-    [disabled]="!inventoryForm.valid"
+    [disabled]="isSubmitting"
+    (click)="onSubmit($event)"
     type="submit"
   >
     Submit

@@ -17,6 +17,7 @@ export class AccountInfoComponent implements OnInit {
   ];
   displayedColumns: string[] = ['property', 'value'];
   dataSource: any[];
+new: any;
 
   constructor(private fb: FormBuilder) {
     this.accountInfoForm = this.fb.group({
