@@ -96,21 +96,24 @@ export class InventoryItemsTableComponent implements OnInit, AfterViewInit {
 
   editInventoryItem(item: InventoryItem) {
     this.inventoryService.getInventory().subscribe((data: any) => {
-      const parentItem = this.findParentItem(data, item);
+      // Accessing the correct data property that contains the array
+      const inventoryItems = data.data;
+
+      // Finding the parent item based on the item's _id
+      const parentItem = this.findParentItem(inventoryItems, item);
+      console.log(parentItem)
 
       if (parentItem) {
         const dialogRef = this.dialog.open(NewInventoryDialogComponent, {
           width: '450px',
-          data: item,
+          data: parentItem,
         });
 
-        dialogRef
-          .afterClosed()
-          .subscribe((result: InventoryItem | undefined) => {
-            if (result) {
-              this.updateInventoryItem(parentItem._id, result);
-            }
-          });
+        dialogRef.afterClosed().subscribe((result: InventoryItem | undefined) => {
+          if (result) {
+            this.updateDataSourceWithNewItem(result);
+          }
+        });
       } else {
         console.error('Parent item not found for item ID:', item._id);
       }
@@ -140,29 +143,30 @@ export class InventoryItemsTableComponent implements OnInit, AfterViewInit {
       if (parentItem) {
         // Call the delete method on the parent item's _id
         this.inventoryService.deleteInventoryItem(parentItem._id).subscribe(
-          () => this.refreshInventory(),
+          () => {
+            console.log('Item deleted successfully');
+            this.refreshInventory();  // Refresh inventory after deletion
+          },
           (error) => console.error('Error deleting inventory item:', error),
         );
       } else {
         console.error('Parent item not found for item ID:', item._id);
       }
     });
-  }
+}
 
-  refreshInventory() {
-    this.inventoryService.getInventory().subscribe((data: any) => {
-      const items = this.flattenInventoryItems(data);
-      this.dataSource.data = items;
-      this.setTableProperties();
-    });
-  }
+refreshInventory() {
+  this.inventoryService.getInventory().subscribe((data: any) => {
+    console.log('Fetched inventory data:', data.data);  // Add this line for debugging
+    if (data.success) {
+      console.log('Fetched inventory data 2:', data.data);
+        this.dataSource.data = data.data;
+        this.setTableProperties();
+    } else {
+        console.error('Data fetch unsuccessful:', data);
+    }
+  });
+}
 
-  private flattenInventoryItems(data: any) {
-    return data.flatMap((category: any) =>
-      category.items.map((item: any) => ({
-        ...item,
-        category: category.category,
-      })),
-    );
-  }
+
 }
