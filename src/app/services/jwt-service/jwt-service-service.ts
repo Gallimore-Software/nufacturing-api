@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import jwt from "jsonwebtoken";
+import * as jwt from "jsonwebtoken";
 
 @injectable()
 export class JWTService {

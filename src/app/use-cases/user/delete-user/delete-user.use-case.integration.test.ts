@@ -27,7 +27,7 @@ describe('DeleteUserUseCase Integration Test', () => {
     // Arrange: Create a user and save it to the database
     const user = User.create({
       id: new UniqueEntityID(),
-      username: 'testuser',
+      username: 'testUser',
       email: 'test@example.com',
       password: 'password123',
       phoneNumber: '555-555-5555',

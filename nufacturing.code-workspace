@@ -113,8 +113,10 @@
     "cSpell.ignoreWords": [
       "Nufacturing",
       "autogen",
+      "dtos",
       "gallimore",
       "inversify",
+      "nufulfillment",
       "openapitools",
       "plopfile",
       "precommit",

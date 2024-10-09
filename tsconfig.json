@@ -1,5 +1,5 @@
 {
-  "extends": "./submodules/gallimore-dev-tools/config/tsconfig.json",
+  "extends": "./submodules/gallimore-dev-tools/src/config/tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./"

@@ -15,7 +15,7 @@
   "scripts": {
     "prepare": "npx husky install",
     "clean": "npx rimraf dist dist-tests",
-    "build": "npm run clean && npx tsc -p submodules/gallimore-dev-tools/config/tsconfig.json",
+    "build": "npm run clean && npx tsc -p submodules/gallimore-dev-tools/src/config/tsconfig.json",
     "start": "npx cross-env NODE_ENV=production node -r tsconfig-paths/register dist/main.js",
     "start:env": "npx cross-env NODE_ENV=${NODE_ENV:-local} npx ts-node -r tsconfig-paths/register -P submodules/gallimore-dev-tools/config/tsconfig.json src/main.ts",
     "dev": "npx nodemon --watch \"src/**/*.ts\" --exec \"npx ts-node -r tsconfig-paths/register -P submodules/gallimore-dev-tools/config/tsconfig.json src/main.ts\"",

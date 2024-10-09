@@ -3,7 +3,7 @@
 import { Pact } from '@pact-foundation/pact';
 import { Matchers } from '@pact-foundation/pact';
 import request from 'supertest'; // To simulate API calls
-import path from 'path';
+import * as path from 'path';
 
 const { like } = Matchers;
 
