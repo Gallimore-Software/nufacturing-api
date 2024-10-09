@@ -110,6 +110,16 @@
       "userapi",
       "veracore"
     ],
+    "cSpell.ignoreWords": [
+      "Nufacturing",
+      "autogen",
+      "gallimore",
+      "inversify",
+      "openapitools",
+      "plopfile",
+      "precommit",
+      "skus"
+    ],
   },
   "launch": {
     "configurations": [
