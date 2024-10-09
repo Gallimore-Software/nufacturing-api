@@ -1,4 +1,4 @@
-import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
+import { IUserRepository } from "@domain/interfaces/repositories/user.repository.interface";
 import { User } from "@domain/entities/user/user-entity";
 import { CreateUserDTO } from "@interfaces/dtos/user/user-dto";
 import { injectable, inject } from "inversify";

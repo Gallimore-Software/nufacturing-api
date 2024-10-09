@@ -1,5 +1,5 @@
-import * as receivingController from "@interfaces/http/controllers/receiving/receiving-controller";
-import roleMiddleware from "@interfaces/http/middleware/role-middleware";
+import * as receivingController from "@interfaces/http/controllers/receiving/receiving.controller";
+import roleMiddleware from "@interfaces/http/middleware/role.middleware";
 import express from "express";
 
 const router = express.Router();
@@ -8,7 +8,7 @@ const router = express.Router();
 router.get(
   "/",
   roleMiddleware(["admin", "manager"]),
-  receivingController.getAllReceivings,
+  receivingController.getAllReceivements,
 );
 router.get(
   "/:receivingId",

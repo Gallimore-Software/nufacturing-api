@@ -1,5 +1,5 @@
 import * as purchaseOrderController from "@interfaces/http/controllers/receiving/purchase-order-controller";
-import roleMiddleware from "@interfaces/http/middleware/role-middleware";
+import roleMiddleware from "@interfaces/http/middleware/role.middleware";
 import express from "express";
 
 const router = express.Router();

@@ -6,8 +6,8 @@
   },
   "include": [
     "src/**/*.ts",
-    "submodules/**/*.ts"
-  ],
+    "submodules/**/*.ts",
+    "submodules/gallimore-dev-tools/src/app/template-generators/template-generator.js"  ],
   "exclude": [
     "node_modules",
     "dist",

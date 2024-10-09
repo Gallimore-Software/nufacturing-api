@@ -1,6 +1,6 @@
 import request from "supertest";
 import app from "@@index";
-import * as inventoryController from "@controllers/inventory/inventoryController";
+import * as inventoryController from "@interfaces/http/controllers/inventory/inventory.controller";
 
 describe("Inventory Controller Unit Tests", () => {
   it("should fetch inventory", async () => {

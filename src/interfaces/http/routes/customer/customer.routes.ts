@@ -1,5 +1,5 @@
-import * as orderController from "@interfaces/http/controllers/sales/order-controller";
-import roleMiddleware from "@interfaces/http/middleware/role-middleware";
+import * as customerController from "@interfaces/http/controllers/sales/customer-controller";
+import roleMiddleware from "@interfaces/http/middleware/role.middleware";
 import express from "express";
 
 const router = express.Router();
@@ -8,27 +8,27 @@ const router = express.Router();
 router.get(
   "/",
   roleMiddleware(["admin", "manager"]),
-  orderController.getAllOrders,
+  customerController.getAllCustomers,
 );
 router.get(
-  "/:orderId",
+  "/:labTestId",
   roleMiddleware(["admin", "manager", "user"]),
-  orderController.getOrderById,
+  customerController.getCustomerById,
 );
 router.post(
   "/",
   roleMiddleware(["admin", "manager"]),
-  orderController.createOrder,
+  customerController.createCustomer,
 );
 router.put(
-  "/:orderId",
+  "/:labTestId",
   roleMiddleware(["admin", "manager"]),
-  orderController.updateOrder,
+  customerController.updateCustomer,
 );
 router.delete(
-  "/:orderId",
+  "/:labTestId",
   roleMiddleware(["admin"]),
-  orderController.deleteOrder,
+  customerController.deleteCustomer,
 );
 
 export default router;

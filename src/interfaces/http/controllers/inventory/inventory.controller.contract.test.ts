@@ -1,14 +1,14 @@
 import { Pact } from "@pact-foundation/pact";
 import path from "path";
 import request from "supertest";
-import app from "@app"; // Your Express app
+import app from "@app/app"; // Your Express app
 
 const provider = new Pact({
   consumer: "FrontendConsumer",
   provider: "BackendProvider",
   port: 1234,
   log: path.resolve(process.cwd(), "logs", "pact.log"),
-  dir: path.resolve(process.cwd(), "pacts"),
+  dir: path.resolve(process.cwd(), "docs/generated/pacts"),
   logLevel: "info",
   spec: 2,
 });

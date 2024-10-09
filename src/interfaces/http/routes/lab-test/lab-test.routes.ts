@@ -1,5 +1,5 @@
-import * as customerController from "@interfaces/http/controllers/sales/customer-controller";
-import roleMiddleware from "@interfaces/http/middleware/role-middleware";
+import * as labTestingController from "@interfaces/http/controllers/research-and-development/lab-test-controller";
+import roleMiddleware from "@interfaces/http/middleware/role.middleware";
 import express from "express";
 
 const router = express.Router();
@@ -8,27 +8,27 @@ const router = express.Router();
 router.get(
   "/",
   roleMiddleware(["admin", "manager"]),
-  customerController.getAllCustomers,
+  labTestingController.getAllLabTests,
 );
 router.get(
   "/:labTestId",
   roleMiddleware(["admin", "manager", "user"]),
-  customerController.getCustomerById,
+  labTestingController.getLabTestById,
 );
 router.post(
   "/",
   roleMiddleware(["admin", "manager"]),
-  customerController.createCustomer,
+  labTestingController.createLabTest,
 );
 router.put(
   "/:labTestId",
   roleMiddleware(["admin", "manager"]),
-  customerController.updateCustomer,
+  labTestingController.updateLabTest,
 );
 router.delete(
   "/:labTestId",
   roleMiddleware(["admin"]),
-  customerController.deleteCustomer,
+  labTestingController.deleteLabTest,
 );
 
 export default router;

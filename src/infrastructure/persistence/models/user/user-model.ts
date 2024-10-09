@@ -1,10 +1,11 @@
+import { UserRole } from "@domain/entities/user/user-role";
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
   username: string;
   password: string;
   email: string;
-  role: "user" | "admin" | "manager";
+  role: UserRole;
   phoneNumber: string;
   createdAt: Date;
   emailVerified: boolean;
@@ -14,7 +15,7 @@ const userSchema = new Schema<IUser>({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  role: { type: String, enum: ["user", "admin", "manager"], default: "user" },
+  role: { type: String, enum: ['Admin', 'User', 'SuperAdmin'], required: true },
   phoneNumber: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
   emailVerified: { type: Boolean, default: false },

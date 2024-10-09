@@ -1,9 +1,14 @@
-// user-props.ts
+import { UserRole } from "@domain/entities/user/user-role";
+import { UniqueEntityID } from "@domain/value-objects/unique-identity-id";
+
 export interface UserProps {
+  isDeleted: boolean;
+  id: UniqueEntityID;
   username: string;
-  email: string;
-  role: "user" | "admin" | "manager";
   password: string;
-  createdAt?: Date;
-  emailVerified?: boolean;
+  email: string;
+  role: UserRole;
+  phoneNumber: string;
+  createdAt: Date;
+  emailVerified: boolean;
 }

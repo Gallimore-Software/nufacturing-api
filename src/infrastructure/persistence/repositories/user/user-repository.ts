@@ -1,10 +1,17 @@
-import { IUserRepository } from "@domain/interfaces/repositories/user-repository.interface";
+import { IUserRepository } from "@domain/interfaces/repositories/user.repository.interface";
 import { User } from "@domain/entities/user/user-entity";
 import UserModel from "@infrastructure/persistence/models/user/user-model";
 import { injectable } from "inversify";
 
 @injectable()
-export class UserRepository implements IUserRepository {
+export class UserRepository implements IUserRepository {  
+  
+  // Find all users in the database
+  async findAll(): Promise<User[]> {
+    const users = await UserModel.find(); // Fetch all users from the database
+    return users.map(this.toDomain); // Map each user model to domain entity
+  }
+
   // Create a new user in the database
   async createUser(user: User): Promise<User> {
     const userModel = new UserModel({

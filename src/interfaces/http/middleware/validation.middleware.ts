@@ -1,4 +1,5 @@
-import { body, validationResult } from "express-validator";
+import { body, ValidationError, validationResult } from "express-validator";
+import { Request } from "express-validator/lib/base";
 
 const validateInventoryItem = [
   body("name").notEmpty().withMessage("Name is required").isString(),
@@ -13,7 +14,7 @@ const validateInventoryItem = [
     .withMessage("Vendor ID must be a valid MongoDB ID"),
   // Add more fields based on your requirements
 
-  (req, res, next) => {
+  (req: Request, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { success: boolean; errors: ValidationError[]; }): any; new(): any; }; }; }, next: () => void) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ success: false, errors: errors.array() });

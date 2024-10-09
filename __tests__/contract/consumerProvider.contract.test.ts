@@ -16,7 +16,7 @@ describe("Pact", () => {
     provider: "ProviderService",
     port: 1234,
     log: path.resolve(process.cwd(), "logs", "pact.log"),
-    dir: path.resolve(process.cwd(), "pacts"),
+    dir: path.resolve(process.cwd(), "docs/generated/pacts"),
     logLevel: "INFO",
     spec: 2,
   });

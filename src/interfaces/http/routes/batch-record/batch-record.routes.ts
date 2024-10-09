@@ -1,5 +1,5 @@
-import * as batchRecordsController from "@interfaces/http/controllers/batch-record/batch-record-controller";
-import roleMiddleware from "@interfaces/http/middleware/role-middleware";
+import * as batchRecordsController from "@interfaces/http/controllers/batch-record/batch-record.controller";
+import roleMiddleware from "@interfaces/http/middleware/role.middleware";
 import express from "express";
 
 const router = express.Router();

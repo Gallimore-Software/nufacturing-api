@@ -54,16 +54,15 @@ export const createReceiving = async (
 };
 
 // Get all receiving entries
-export const getAllReceivings = async (
-  req: Request,
+export const getAllReceivements = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const receivings = await Receiving.find()
+    const receivements = await Receiving.find()
       .populate("poNumber")
       .populate("vendor")
       .populate("receiver");
-    res.status(200).json({ success: true, data: receivings });
+    res.status(200).json({ success: true, data: receivements });
   } catch (error) {
     res.status(500).json({
       success: false,
