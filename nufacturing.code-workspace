@@ -120,7 +120,8 @@
       "openapitools",
       "plopfile",
       "precommit",
-      "skus"
+      "skus",
+      "veracore"
     ],
   },
   "launch": {
