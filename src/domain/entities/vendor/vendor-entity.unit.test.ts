@@ -1,37 +1,49 @@
-import { Vendor } from '@entities/vendor';
+import Vendor  from '@entities/vendor/vendor';
 
 describe('Vendor Entity Tests', () => {
   it('should create a valid vendor entity', () => {
     const vendor = new Vendor({
+      id: '1',
       name: 'Rice Suppliers Ltd.',
-      contactEmail: 'contact@ricesuppliers.com',
-      productsSupplied: ['Brown Rice', 'White Rice'],
+      address: '123 Rice Lane',
+      phoneNumber: '555-1234',
+      email: 'contact@ricesuppliers.com',
+      contactPerson: 'John Doe',
+      isVerified: false,
     });
 
-    expect(vendor.name).toBe('Rice Suppliers Ltd.');
-    expect(vendor.productsSupplied.length).toBe(2);
+    expect(vendor.getName()).toBe('Rice Suppliers Ltd.');
+    expect(vendor.getId()).toBe('1');
   });
 
   it('should throw an error when adding an invalid product', () => {
     const vendor = new Vendor({
+      id: '2',
       name: 'Grain Masters',
-      contactEmail: 'info@grainmasters.com',
-      productsSupplied: ['Barley'],
+      address: '456 Grain Ave',
+      phoneNumber: '555-5678',
+      email: 'info@grainmasters.com',
+      contactPerson: 'Jane Doe',
+      isVerified: false,
     });
 
     expect(() => {
-      vendor.addProduct('');
+      vendor.updateContactPerson('');
     }).toThrow('Product name cannot be empty');
   });
 
   it('should properly add a new product to the vendor', () => {
     const vendor = new Vendor({
+      id: '3',
       name: 'Grain Masters',
-      contactEmail: 'info@grainmasters.com',
-      productsSupplied: ['Barley'],
+      address: '456 Grain Ave',
+      phoneNumber: '555-5678',
+      email: 'info@grainmasters.com',
+      contactPerson: 'Jane Doe',
+      isVerified: false,
     });
 
-    vendor.addProduct('Brown Rice');
-    expect(vendor.productsSupplied).toContain('Brown Rice');
+    vendor.updateAddress('789 New Address');
+    expect(vendor.getAddress()).toBe('789 New Address');
   });
 });
