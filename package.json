@@ -27,8 +27,8 @@
     "e2e:open": "npx cypress open",
     "lint": "eslint --ext .ts,.tsx --config submodules/gallimore-dev-tools/config/.eslintrc.js src",
     "lint:fix": "eslint --ext .ts,.tsx --config submodules/gallimore-dev-tools/config/.eslintrc.js src --fix",
-    "prettier:check": "npx prettier --check 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
-    "prettier:write": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
+    "format": "npx prettier --check 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
+    "format:fix": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
     "precommit": "npm run lint && npm run format",
     "plop": "npx plop --plopfile submodules/gallimore-dev-tools/config/plopfile.config.js",
     "link-configs": "node link-configs.js"

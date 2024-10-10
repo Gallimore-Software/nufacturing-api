@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const purchaseOrderSchema = new mongoose.Schema({
   poNumber: { type: String, required: true, unique: true },
   vendor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Vendor",
+    ref: 'Vendor',
     required: true,
   },
   items: [
@@ -21,18 +21,18 @@ const purchaseOrderSchema = new mongoose.Schema({
   receivedDate: { type: Date },
   status: {
     type: String,
-    enum: ["Unreceived", "Partially Received", "Received"],
-    default: "Unreceived",
+    enum: ['Unreceived', 'Partially Received', 'Received'],
+    default: 'Unreceived',
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
 
-const PurchaseOrder = mongoose.model("PurchaseOrder", purchaseOrderSchema);
+const PurchaseOrder = mongoose.model('PurchaseOrder', purchaseOrderSchema);
 
 export default PurchaseOrder;

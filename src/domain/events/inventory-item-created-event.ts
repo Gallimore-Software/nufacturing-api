@@ -19,7 +19,7 @@ class InventoryItemCreatedEvent implements BaseEvent {
   createdAt: Date;
 
   constructor(inventoryItem: InventoryItem) {
-    this.name = "InventoryItemCreatedEvent"; // Identifier for this event type
+    this.name = 'InventoryItemCreatedEvent'; // Identifier for this event type
     this.inventoryItem = inventoryItem;
     this.createdAt = new Date(); // Set the event creation timestamp
   }

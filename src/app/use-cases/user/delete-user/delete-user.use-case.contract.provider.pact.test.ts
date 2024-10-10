@@ -7,7 +7,12 @@ describe('Pact Verification - Delete User Use Case', () => {
   it('should validate the expectations from the consumer contract', async () => {
     const verifier = new Verifier({
       providerBaseUrl: 'http://localhost:3000', // The actual provider's URL
-      pactUrls: [path.resolve(process.cwd(), 'docs/generated/pacts/userclient-userapi.json')], // Path to the generated Pact file
+      pactUrls: [
+        path.resolve(
+          process.cwd(),
+          'docs/generated/pacts/userclient-userapi.json'
+        ),
+      ], // Path to the generated Pact file
       publishVerificationResult: true,
       providerVersion: '1.0.0', // Version of the provider API
     });

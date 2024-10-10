@@ -1,11 +1,11 @@
-import { IUserRepository } from "@domain/interfaces/repositories/user.repository.interface";
-import { injectable, inject } from "inversify";
-import { Error } from "mongoose";
+import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
+import { injectable, inject } from 'inversify';
+import { Error } from 'mongoose';
 
 @injectable()
 export class GetAllUsersUseCase {
   constructor(
-    @inject("IUserRepository") private userRepository: IUserRepository,
+    @inject('IUserRepository') private userRepository: IUserRepository
   ) {}
 
   async execute(): Promise<any> {

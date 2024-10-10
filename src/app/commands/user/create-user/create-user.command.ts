@@ -1,14 +1,14 @@
-import { IUserRepository } from "@domain/interfaces/repositories/user.repository.interface";
-import { User } from "@domain/entities/user/user-entity";
-import { CreateUserDTO } from "@interfaces/dtos/user/user-dto";
-import { injectable, inject } from "inversify";
-import { EmailService } from "@services/email-service/email-service";
+import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
+import { User } from '@domain/entities/user/user-entity';
+import { CreateUserDTO } from '@interfaces/dtos/user/user-dto';
+import { injectable, inject } from 'inversify';
+import { EmailService } from '@services/email-service/email-service';
 
 @injectable()
 export class CreateUserUseCase {
   constructor(
-    @inject("IUserRepository") private userRepository: IUserRepository,
-    @inject("EmailService") private emailService: EmailService,
+    @inject('IUserRepository') private userRepository: IUserRepository,
+    @inject('EmailService') private emailService: EmailService
   ) {}
 
   async execute(userDTO: CreateUserDTO): Promise<User> {

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const customerSchema = new mongoose.Schema({
   companyName: { type: String, required: true },
@@ -40,6 +40,6 @@ const customerSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Customer = mongoose.model("Customer", customerSchema);
+const Customer = mongoose.model('Customer', customerSchema);
 
 export default Customer;

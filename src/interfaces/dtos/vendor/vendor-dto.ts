@@ -10,10 +10,10 @@ export interface VendorDTO {
 // VendorEntity.ts
 export class VendorEntity {
   static find() {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   save() {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   public _id?: string | undefined;
   public displayName: string;
@@ -22,7 +22,7 @@ export class VendorEntity {
   public createdBy: string;
 
   constructor(data: VendorDTO & { _id?: string }) {
-    this._id = data._id ?? "";
+    this._id = data._id ?? '';
     this.displayName = data.displayName;
     this.companyName = data.companyName;
     this.companyWebsite = data.companyWebsite;
@@ -32,14 +32,14 @@ export class VendorEntity {
   // Example of some business logic method
   validate(): boolean {
     if (!this.displayName || !this.companyName) {
-      throw new Error("Missing required fields");
+      throw new Error('Missing required fields');
     }
     return true;
   }
 }
 
 // VendorModel.ts
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface VendorDocument extends Document {
   displayName: string;
@@ -56,6 +56,6 @@ const VendorSchema = new Schema<VendorDocument>({
 });
 
 export const VendorModel = mongoose.model<VendorDocument>(
-  "Vendor",
-  VendorSchema,
+  'Vendor',
+  VendorSchema
 );

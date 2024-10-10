@@ -3,7 +3,7 @@ export interface InventoryItemDTO {
   name: string;
   sku: string;
   category: string; // Reference to Category ID
-  type: "Raw Materials" | "Components" | "Work in Progress" | "Finished Goods";
+  type: 'Raw Materials' | 'Components' | 'Work in Progress' | 'Finished Goods';
   scientificName?: string;
   picture?: string; // URL for image storage
   description: string;
@@ -19,10 +19,10 @@ export interface InventoryItemDTO {
   batchTracking?: BatchTrackingDTO[];
   certificateOfAuthenticity?: string; // URL for certificate storage
   inventoryCategory:
-    | "Nufacturing"
-    | "Customer Supplied"
-    | "Research Lab"
-    | "Ancillary";
+    | 'Nufacturing'
+    | 'Customer Supplied'
+    | 'Research Lab'
+    | 'Ancillary';
   unitOfMeasurement: string; // E.g., kg, lbs
   pricePerUnit: number;
   quantities: QuantitiesDTO;
@@ -56,12 +56,12 @@ export interface WarehouseLocationDTO {
 export interface ReferenceDTO {
   refId: string; // Reference to related entity ID
   onModel:
-    | "Formula"
-    | "ProductSKU"
-    | "BatchRecords"
-    | "PurchaseOrder"
-    | "LabTest"
-    | "Receiving";
+    | 'Formula'
+    | 'ProductSKU'
+    | 'BatchRecords'
+    | 'PurchaseOrder'
+    | 'LabTest'
+    | 'Receiving';
 }
 
 // QuantityPriceDTO.ts

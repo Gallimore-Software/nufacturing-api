@@ -22,10 +22,22 @@ describe('GetAllUsersUseCase', () => {
 
   it('should return all users', async () => {
     const mockUsers: User[] = [
-      User.create({ username: 'JohnDoe', password: 'password', email: 'john@example.com', role: 'user', emailVerified: false }).getValue(),
-      User.create({ username: 'JaneDoe', password: 'password', email: 'jane@example.com', role: 'user', emailVerified: true }).getValue(),
+      User.create({
+        username: 'JohnDoe',
+        password: 'password',
+        email: 'john@example.com',
+        role: 'user',
+        emailVerified: false,
+      }).getValue(),
+      User.create({
+        username: 'JaneDoe',
+        password: 'password',
+        email: 'jane@example.com',
+        role: 'user',
+        emailVerified: true,
+      }).getValue(),
     ];
-    
+
     mockUserRepository.findAll.mockResolvedValue(mockUsers);
 
     const result = await getAllUsersUseCase.execute();
@@ -36,6 +48,8 @@ describe('GetAllUsersUseCase', () => {
   it('should throw an error if user retrieval fails', async () => {
     mockUserRepository.findAll.mockRejectedValue(new Error('Database error'));
 
-    await expect(getAllUsersUseCase.execute()).rejects.toThrow('Error retrieving users: Database error');
+    await expect(getAllUsersUseCase.execute()).rejects.toThrow(
+      'Error retrieving users: Database error'
+    );
   });
 });

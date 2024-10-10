@@ -1,8 +1,8 @@
-import * as productTypeController from "@interfaces/http/controllers/product-development/product-type-controller";
-import RoleMiddleware from "@interfaces/http/middleware/role.middleware"; // Import the class, not default instance
-import express from "express";
-import { container } from "@infrastructure/di/container"; // Assuming you are using a DI container like Inversify
-import { UserRole } from "@domain/entities/user/user-role";
+import * as productTypeController from '@interfaces/http/controllers/product-development/product-type-controller';
+import RoleMiddleware from '@interfaces/http/middleware/role.middleware'; // Import the class, not default instance
+import express from 'express';
+import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify
+import { UserRole } from '@domain/entities/user/user-role';
 
 const router = express.Router();
 
@@ -11,29 +11,33 @@ const roleMiddleware = container.resolve(RoleMiddleware);
 
 // Define routes with role-based access control
 router.get(
-  "/",
-  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
-  productTypeController.getAllProductTypes,
+  '/',
+  roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
+  productTypeController.getAllProductTypes
 );
 router.get(
-  "/:typeId",
-  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager"), new UserRole("User")]),
-  productTypeController.getProductTypeById,
+  '/:typeId',
+  roleMiddleware.handle([
+    new UserRole('Admin'),
+    new UserRole('Manager'),
+    new UserRole('User'),
+  ]),
+  productTypeController.getProductTypeById
 );
 router.post(
-  "/",
-  roleMiddleware.handle([new UserRole("Admin")]),
-  productTypeController.createProductType,
+  '/',
+  roleMiddleware.handle([new UserRole('Admin')]),
+  productTypeController.createProductType
 );
 router.put(
-  "/:typeId",
-  roleMiddleware.handle([new UserRole("Admin")]),
-  productTypeController.updateProductType,
+  '/:typeId',
+  roleMiddleware.handle([new UserRole('Admin')]),
+  productTypeController.updateProductType
 );
 router.delete(
-  "/:typeId",
-  roleMiddleware.handle([new UserRole("Admin")]),
-  productTypeController.deleteProductType,
+  '/:typeId',
+  roleMiddleware.handle([new UserRole('Admin')]),
+  productTypeController.deleteProductType
 );
 
 export default router;

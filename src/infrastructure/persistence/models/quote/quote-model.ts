@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const quoteSchema = new mongoose.Schema({
   accountManager: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
   customerName: { type: String, required: true },
@@ -11,17 +11,17 @@ const quoteSchema = new mongoose.Schema({
   customerCode: { type: String, required: true },
   productType: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ProductType",
+    ref: 'ProductType',
     required: true,
   },
   formula: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Formula",
+    ref: 'Formula',
     required: true,
   },
   customerProvidedLotCode: { type: String },
   customerProvidedSku: { type: String },
-  ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ingredient" }],
+  ingredients: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient' }],
   packaging: {
     capsuleInfo: String,
     bottlingInfo: String,
@@ -36,11 +36,11 @@ const quoteSchema = new mongoose.Schema({
     MOQ: String,
     bestGP: String,
   },
-  status: { type: String, enum: ["Active", "Expired"], default: "Active" },
+  status: { type: String, enum: ['Active', 'Expired'], default: 'Active' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Quote = mongoose.model("Quote", quoteSchema);
+const Quote = mongoose.model('Quote', quoteSchema);
 
 export default Quote;

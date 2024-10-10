@@ -1,5 +1,5 @@
-import { UserRole } from "@domain/entities/user/user-role";
-import mongoose, { Document, Schema } from "mongoose";
+import { UserRole } from '@domain/entities/user/user-role';
+import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IUser extends Document {
   username: string;
@@ -21,6 +21,6 @@ const userSchema = new Schema<IUser>({
   emailVerified: { type: Boolean, default: false },
 });
 
-const User = mongoose.model<IUser>("User", userSchema);
+const User = mongoose.model<IUser>('User', userSchema);
 
 export default User;

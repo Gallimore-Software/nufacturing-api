@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 // Define the schema for Receiving
 const receivingSchema = new mongoose.Schema({
   poNumber: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "PurchaseOrder",
+    ref: 'PurchaseOrder',
     required: true,
   },
   vendor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Vendor",
+    ref: 'Vendor',
     required: true,
   },
   receivedItems: [
@@ -23,7 +23,7 @@ const receivingSchema = new mongoose.Schema({
   ],
   receiver: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
   comments: {
@@ -39,6 +39,6 @@ const receivingSchema = new mongoose.Schema({
   },
 });
 
-const Receiving = mongoose.model("Receiving", receivingSchema);
+const Receiving = mongoose.model('Receiving', receivingSchema);
 
 export default Receiving;

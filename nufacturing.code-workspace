@@ -58,7 +58,7 @@
 
     // Prettier Configuration
     "prettier.requireConfig": true,
-    "prettier.configPath": "submodules/config/.prettierrc",
+    //"prettier.configPath": "./submodules/gallimore-dev-tools/config/.prettierrc",
     "prettier.useTabs": false,
     "prettier.singleQuote": true,
     "prettier.trailingComma": "all",

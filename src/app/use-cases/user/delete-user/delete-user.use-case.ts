@@ -1,9 +1,12 @@
-import { IUserRepository } from "@domain/interfaces/repositories/user.repository.interface";
+import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
 
 export class DeleteUserUseCase {
   constructor(private userRepository: IUserRepository) {}
 
-  async execute(userId: string, requestingUser: { id: string; role: string }): Promise<boolean> {
+  async execute(
+    userId: string,
+    requestingUser: { id: string; role: string }
+  ): Promise<boolean> {
     if (!userId) {
       throw new Error('User ID is required');
     }

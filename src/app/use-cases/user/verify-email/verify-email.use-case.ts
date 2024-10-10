@@ -4,7 +4,7 @@ import { inject, injectable } from 'inversify';
 @injectable()
 export class VerifyEmailUseCase {
   constructor(
-    @inject('IUserRepository') private userRepository: IUserRepository,
+    @inject('IUserRepository') private userRepository: IUserRepository
   ) {}
 
   // Execute the verify email use case

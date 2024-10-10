@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
-import { container } from "@infrastructure/di/container";
-import { CreateUserUseCase } from "@app/commands/user/create-user/create-user.command";
-import { UpdateUserUseCase } from "@app/commands/user/update-user/update-user-use-case";
-import { DeleteUserUseCase } from "@app/use-cases/user/delete-user/delete-user-use-case";
-import { GetUserByIdUseCase } from "@app/use-cases/user/get-user-by-id/get-user-by-id-use-case";
-import { GetAllUsersUseCase } from "@app/use-cases/user/get-all-users/get-all-users-use-case";
-import { LoginUserUseCase } from "@app/use-cases/user/login-user/login-user-use-case";
-import { VerifyEmailUseCase } from "@app/use-cases/user/verify-email/verify-email-use-case";
+import { Request, Response } from 'express';
+import { container } from '@infrastructure/di/container';
+import { CreateUserUseCase } from '@app/commands/user/create-user/create-user.command';
+import { UpdateUserUseCase } from '@app/commands/user/update-user/update-user-use-case';
+import { DeleteUserUseCase } from '@app/use-cases/user/delete-user/delete-user-use-case';
+import { GetUserByIdUseCase } from '@app/use-cases/user/get-user-by-id/get-user-by-id-use-case';
+import { GetAllUsersUseCase } from '@app/use-cases/user/get-all-users/get-all-users-use-case';
+import { LoginUserUseCase } from '@app/use-cases/user/login-user/login-user-use-case';
+import { VerifyEmailUseCase } from '@app/use-cases/user/verify-email/verify-email-use-case';
 
 // Controller for creating a new user
 export class UserController {
@@ -19,7 +19,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: "An unknown error occurred." });
+        return res.status(400).json({ error: 'An unknown error occurred.' });
       }
     }
   }
@@ -34,7 +34,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: "An unknown error occurred." });
+        return res.status(400).json({ error: 'An unknown error occurred.' });
       }
     }
   }
@@ -45,14 +45,14 @@ export class UserController {
     try {
       const user = await getUserByIdUseCase.execute(req.params.id);
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        return res.status(404).json({ message: 'User not found' });
       }
       return res.status(200).json(user);
     } catch (error: unknown) {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: "An unknown error occurred." });
+        return res.status(400).json({ error: 'An unknown error occurred.' });
       }
     }
   }
@@ -63,17 +63,17 @@ export class UserController {
     try {
       const updatedUser = await updateUserUseCase.execute(
         req.params.id,
-        req.body,
+        req.body
       );
       if (!updatedUser) {
-        return res.status(404).json({ message: "User not found" });
+        return res.status(404).json({ message: 'User not found' });
       }
       return res.status(200).json(updatedUser);
     } catch (error: unknown) {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: "An unknown error occurred." });
+        return res.status(400).json({ error: 'An unknown error occurred.' });
       }
     }
   }
@@ -84,14 +84,14 @@ export class UserController {
     try {
       const deleted = await deleteUserUseCase.execute(req.params.id);
       if (!deleted) {
-        return res.status(404).json({ message: "User not found" });
+        return res.status(404).json({ message: 'User not found' });
       }
-      return res.status(200).json({ message: "User deleted successfully" });
+      return res.status(200).json({ message: 'User deleted successfully' });
     } catch (error: unknown) {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: "An unknown error occurred." });
+        return res.status(400).json({ error: 'An unknown error occurred.' });
       }
     }
   }
@@ -107,7 +107,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: "An unknown error occurred." });
+        return res.status(400).json({ error: 'An unknown error occurred.' });
       }
     }
   }
@@ -122,7 +122,7 @@ export class UserController {
       if (error instanceof Error) {
         return res.status(400).json({ error: error.message });
       } else {
-        return res.status(400).json({ error: "An unknown error occurred." });
+        return res.status(400).json({ error: 'An unknown error occurred.' });
       }
     }
   }

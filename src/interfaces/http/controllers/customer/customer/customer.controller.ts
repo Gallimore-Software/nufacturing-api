@@ -1,5 +1,5 @@
-import Customer from "@infrastructure/persistence/models/customerModel";
-import { Request, Response } from "express";
+import Customer from '@infrastructure/persistence/models/customerModel';
+import { Request, Response } from 'express';
 
 // Utility types for request parameters and response data
 interface CustomerRequestParams {
@@ -35,7 +35,7 @@ const sendResponse = <T>({
 // Get all customers
 export const getAllCustomers = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const customers = await Customer.find();
@@ -43,7 +43,7 @@ export const getAllCustomers = async (
       res,
       statusCode: 200,
       success: true,
-      message: "Customers fetched successfully",
+      message: 'Customers fetched successfully',
       data: customers,
     });
   } catch (err) {
@@ -51,7 +51,7 @@ export const getAllCustomers = async (
       res,
       statusCode: 500,
       success: false,
-      message: "Error fetching customers",
+      message: 'Error fetching customers',
       error: (err as Error).message,
     });
   }
@@ -60,7 +60,7 @@ export const getAllCustomers = async (
 // Get customer by ID
 export const getCustomerById = async (
   req: Request<CustomerRequestParams>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const customer = await Customer.findById(req.params.customerId);
@@ -69,7 +69,7 @@ export const getCustomerById = async (
         res,
         statusCode: 404,
         success: false,
-        message: "Customer not found",
+        message: 'Customer not found',
       });
       return;
     }
@@ -77,7 +77,7 @@ export const getCustomerById = async (
       res,
       statusCode: 200,
       success: true,
-      message: "Customer fetched successfully",
+      message: 'Customer fetched successfully',
       data: customer,
     });
   } catch (err) {
@@ -85,7 +85,7 @@ export const getCustomerById = async (
       res,
       statusCode: 500,
       success: false,
-      message: "Error fetching customer",
+      message: 'Error fetching customer',
       error: (err as Error).message,
     });
   }
@@ -94,7 +94,7 @@ export const getCustomerById = async (
 // Create a new customer
 export const createCustomer = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const newCustomer = new Customer(req.body);
@@ -103,7 +103,7 @@ export const createCustomer = async (
       res,
       statusCode: 201,
       success: true,
-      message: "Customer created successfully",
+      message: 'Customer created successfully',
       data: newCustomer,
     });
   } catch (err) {
@@ -111,7 +111,7 @@ export const createCustomer = async (
       res,
       statusCode: 400,
       success: false,
-      message: "Error creating customer",
+      message: 'Error creating customer',
       error: (err as Error).message,
     });
   }
@@ -120,7 +120,7 @@ export const createCustomer = async (
 // Update customer
 export const updateCustomer = async (
   req: Request<CustomerRequestParams>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const updatedCustomer = await Customer.findByIdAndUpdate(
@@ -129,14 +129,14 @@ export const updateCustomer = async (
       {
         new: true,
         runValidators: true,
-      },
+      }
     );
     if (!updatedCustomer) {
       sendResponse({
         res,
         statusCode: 404,
         success: false,
-        message: "Customer not found",
+        message: 'Customer not found',
       });
       return;
     }
@@ -144,7 +144,7 @@ export const updateCustomer = async (
       res,
       statusCode: 200,
       success: true,
-      message: "Customer updated successfully",
+      message: 'Customer updated successfully',
       data: updatedCustomer,
     });
   } catch (err) {
@@ -152,7 +152,7 @@ export const updateCustomer = async (
       res,
       statusCode: 400,
       success: false,
-      message: "Error updating customer",
+      message: 'Error updating customer',
       error: (err as Error).message,
     });
   }
@@ -161,18 +161,18 @@ export const updateCustomer = async (
 // Delete customer
 export const deleteCustomer = async (
   req: Request<CustomerRequestParams>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const deletedCustomer = await Customer.findByIdAndDelete(
-      req.params.customerId,
+      req.params.customerId
     );
     if (!deletedCustomer) {
       sendResponse({
         res,
         statusCode: 404,
         success: false,
-        message: "Customer not found",
+        message: 'Customer not found',
       });
       return;
     }
@@ -180,14 +180,14 @@ export const deleteCustomer = async (
       res,
       statusCode: 200,
       success: true,
-      message: "Customer deleted successfully",
+      message: 'Customer deleted successfully',
     });
   } catch (err) {
     sendResponse({
       res,
       statusCode: 500,
       success: false,
-      message: "Error deleting customer",
+      message: 'Error deleting customer',
       error: (err as Error).message,
     });
   }

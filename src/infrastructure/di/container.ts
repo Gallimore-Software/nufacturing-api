@@ -1,9 +1,9 @@
-import { Container } from "inversify";
+import { Container } from 'inversify';
 
-import { TYPES } from "./types";
-import { JWTService } from "@app/services/jwt-service/jwt-service-service";
-import { UserRepository } from "@infrastructure/persistence/repositories/user/user-repository";
-import { IUserRepository } from "@domain/interfaces/repositories/user.repository.interface";
+import { TYPES } from './types';
+import { JWTService } from '@app/services/jwt-service/jwt-service-service';
+import { UserRepository } from '@infrastructure/persistence/repositories/user/user-repository';
+import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
 
 const container = new Container();
 

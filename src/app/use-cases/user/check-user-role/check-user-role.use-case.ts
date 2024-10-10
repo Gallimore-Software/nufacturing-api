@@ -5,7 +5,7 @@ import { inject, injectable } from 'inversify';
 @injectable()
 export class CheckUserRoleUseCase {
   constructor(
-    @inject('IUserRepository') private userRepository: IUserRepository,
+    @inject('IUserRepository') private userRepository: IUserRepository
   ) {}
 
   // Execute the check user role use case

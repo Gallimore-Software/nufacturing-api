@@ -1,9 +1,9 @@
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer';
 
 const sendEmail = async (to, subject, text) => {
   try {
     const transporter = nodemailer.createTransport({
-      host: "mail.brcodex.com.np",
+      host: 'mail.brcodex.com.np',
       port: 465,
       secure: true, // Use true for 465, false for other ports
       auth: {
@@ -20,9 +20,9 @@ const sendEmail = async (to, subject, text) => {
     };
 
     await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully");
+    console.log('Email sent successfully');
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error('Error sending email:', error);
   }
 };
 

@@ -11,11 +11,11 @@ const { like } = Matchers;
 describe('Pact - Delete User Use Case', () => {
   const provider = new Pact({
     consumer: 'UserClient', // Define consumer name
-    provider: 'UserAPI',     // Define provider name
-    port: 1234,              // Local pact server port
+    provider: 'UserAPI', // Define provider name
+    port: 1234, // Local pact server port
     log: path.resolve(process.cwd(), 'logs', 'pact.log'),
     dir: path.resolve(process.cwd(), 'docs/generated/pacts'),
-    spec: 2,                 // Pact specification version
+    spec: 2, // Pact specification version
   });
 
   // Set up pact interactions
@@ -38,12 +38,14 @@ describe('Pact - Delete User Use Case', () => {
           headers: { 'Content-Type': 'application/json' },
           body: like({ message: 'User deleted successfully' }), // The expected response
         },
-      }),
+      })
     );
 
     it('should successfully delete the user', async () => {
       // Act: Simulate API call to delete the user
-      const response = await request('http://localhost:1234').delete('/api/users/123');
+      const response = await request('http://localhost:1234').delete(
+        '/api/users/123'
+      );
 
       // Assert: Verify the response matches the contract
       expect(response.status).toBe(200);
@@ -65,12 +67,14 @@ describe('Pact - Delete User Use Case', () => {
           headers: { 'Content-Type': 'application/json' },
           body: like({ message: 'User not found' }),
         },
-      }),
+      })
     );
 
     it('should return 404 for a non-existent user', async () => {
       // Act: Simulate API call to delete a non-existent user
-      const response = await request('http://localhost:1234').delete('/api/users/999');
+      const response = await request('http://localhost:1234').delete(
+        '/api/users/999'
+      );
 
       // Assert: Verify the response matches the contract
       expect(response.status).toBe(404);

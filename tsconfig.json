@@ -1,13 +1,13 @@
 {
-  "extends": "./submodules/gallimore-dev-tools/src/config/tsconfig.json",
+  "extends": "./submodules/gallimore-dev-tools/config/tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./"
   },
   "include": [
     "src/**/*.ts",
-    "submodules/**/*.ts",
-    "submodules/gallimore-dev-tools/src/app/template-generators/template-generator.js"  ],
+    "submodules/**/*.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist",

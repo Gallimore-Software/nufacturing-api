@@ -1,4 +1,4 @@
-import { DomainWhitelist } from "@domain/value-objects/domain-whitelist.value";
+import { DomainWhitelist } from '@domain/value-objects/domain-whitelist.value';
 
 export class EmailAddress {
   private readonly value: string;
@@ -10,11 +10,14 @@ export class EmailAddress {
     this.value = value;
   }
 
-  private validateEmail(email: string, domainWhitelist: DomainWhitelist): boolean {
+  private validateEmail(
+    email: string,
+    domainWhitelist: DomainWhitelist
+  ): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) return false;
 
-    const emailDomain = email.split("@")[1];
+    const emailDomain = email.split('@')[1];
     return domainWhitelist.isAllowedDomain(emailDomain);
   }
 

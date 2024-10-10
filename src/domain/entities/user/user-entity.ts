@@ -1,9 +1,9 @@
-import { Entity } from "@domain/common/entity";
-import { UniqueEntityID } from "@domain/value-objects/unique-identity-id.value";
-import { UserProps } from "./user-props";
-import { Result } from "@domain/common/result";
-import { UserRole } from "@domain/entities/user/user-role";
-import { Guard } from "@domain/common/guards/against-null-or-undefined-bulk/against-null-or-undefined-bulk.guard";
+import { Entity } from '@domain/common/entity';
+import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
+import { UserProps } from './user-props';
+import { Result } from '@domain/common/result';
+import { UserRole } from '@domain/entities/user/user-role';
+import { Guard } from '@domain/common/guards/against-null-or-undefined-bulk/against-null-or-undefined-bulk.guard';
 
 export class User extends Entity<UserProps> {
   private constructor(props: UserProps, id?: UniqueEntityID) {

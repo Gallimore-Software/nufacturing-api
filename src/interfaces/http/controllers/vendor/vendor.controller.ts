@@ -1,14 +1,14 @@
 import VendorModel, {
   IVendor,
-} from "@infrastructure/persistence/models/vendorModel"; // Adjust path as needed
-import { Request, Response } from "express";
+} from '@infrastructure/persistence/models/vendorModel'; // Adjust path as needed
+import { Request, Response } from 'express';
 
-import VendorMapper from "@/application/mapper/vendorMapper";
+import VendorMapper from '@/application/mapper/vendorMapper';
 
 // Create a new vendor
 export const createVendor = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     // Convert request data to domain model using the mapper
@@ -24,7 +24,7 @@ export const createVendor = async (
   } catch (error) {
     res.status(400).json({
       message:
-        error instanceof Error ? error.message : "An unknown error occurred",
+        error instanceof Error ? error.message : 'An unknown error occurred',
     });
   }
 };
@@ -32,7 +32,7 @@ export const createVendor = async (
 // Get all vendors
 export const getAllVendors = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     // Get all vendors as documents from Mongoose
@@ -45,7 +45,7 @@ export const getAllVendors = async (
   } catch (error) {
     res.status(500).json({
       message:
-        error instanceof Error ? error.message : "An unknown error occurred",
+        error instanceof Error ? error.message : 'An unknown error occurred',
     });
   }
 };
@@ -53,13 +53,13 @@ export const getAllVendors = async (
 // Get a single vendor by ID
 export const getVendorById = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     // Find vendor by ID using VendorModel
     const vendor = await VendorModel.findById(req.params.id);
     if (!vendor) {
-      return res.status(404).json({ message: "Vendor not found" });
+      return res.status(404).json({ message: 'Vendor not found' });
     }
 
     // Convert document to DTO
@@ -69,7 +69,7 @@ export const getVendorById = async (
   } catch (error) {
     res.status(500).json({
       message:
-        error instanceof Error ? error.message : "An unknown error occurred",
+        error instanceof Error ? error.message : 'An unknown error occurred',
     });
   }
 };
@@ -77,7 +77,7 @@ export const getVendorById = async (
 // Update a vendor by ID
 export const updateVendorById = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     // Convert request data to domain model
@@ -90,11 +90,11 @@ export const updateVendorById = async (
       {
         new: true,
         runValidators: true,
-      },
+      }
     );
 
     if (!updatedVendor) {
-      return res.status(404).json({ message: "Vendor not found" });
+      return res.status(404).json({ message: 'Vendor not found' });
     }
 
     // Convert updated document to DTO
@@ -104,7 +104,7 @@ export const updateVendorById = async (
   } catch (error) {
     res.status(400).json({
       message:
-        error instanceof Error ? error.message : "An unknown error occurred",
+        error instanceof Error ? error.message : 'An unknown error occurred',
     });
   }
 };
@@ -112,20 +112,20 @@ export const updateVendorById = async (
 // Delete a vendor by ID
 export const deleteVendorById = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     // Find and delete vendor by ID using VendorModel
     const vendor = await VendorModel.findByIdAndDelete(req.params.id);
     if (!vendor) {
-      return res.status(404).json({ message: "Vendor not found" });
+      return res.status(404).json({ message: 'Vendor not found' });
     }
 
-    res.status(200).json({ message: "Vendor deleted successfully" });
+    res.status(200).json({ message: 'Vendor deleted successfully' });
   } catch (error) {
     res.status(500).json({
       message:
-        error instanceof Error ? error.message : "An unknown error occurred",
+        error instanceof Error ? error.message : 'An unknown error occurred',
     });
   }
 };

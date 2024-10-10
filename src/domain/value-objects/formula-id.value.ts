@@ -3,7 +3,7 @@ export class FormulaId {
 
   constructor(value: mongoose.Types.ObjectId) {
     if (!mongoose.isValidObjectId(value)) {
-      throw new Error("Invalid Formula ID");
+      throw new Error('Invalid Formula ID');
     }
     this.value = value;
   }

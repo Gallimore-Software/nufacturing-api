@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const contactSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
@@ -28,4 +28,4 @@ const vendorSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("Vendor", vendorSchema);
+export default mongoose.model('Vendor', vendorSchema);

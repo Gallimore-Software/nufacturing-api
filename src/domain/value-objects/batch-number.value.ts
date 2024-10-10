@@ -3,7 +3,7 @@ export class BatchNumber {
 
   constructor(value: string) {
     if (!value || value.trim().length === 0) {
-      throw new Error("Batch number cannot be empty");
+      throw new Error('Batch number cannot be empty');
     }
     this.value = value;
   }

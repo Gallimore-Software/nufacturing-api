@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const ingredientSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -12,13 +12,13 @@ const formulaSchema = new mongoose.Schema({
   productType: {
     type: String,
     enum: [
-      "Capsules",
-      "Powder",
-      "Gummies",
-      "Tinctures",
-      "Powder Stickpacks",
-      "Liquid Stickpacks",
-      "Pouches",
+      'Capsules',
+      'Powder',
+      'Gummies',
+      'Tinctures',
+      'Powder Stickpacks',
+      'Liquid Stickpacks',
+      'Pouches',
     ],
     required: true,
   },
@@ -29,6 +29,6 @@ const formulaSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Formula = mongoose.model("Formula", formulaSchema);
+const Formula = mongoose.model('Formula', formulaSchema);
 
 export default Formula;

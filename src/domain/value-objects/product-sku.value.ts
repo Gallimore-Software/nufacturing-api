@@ -3,7 +3,7 @@ export class ProductSKU {
 
   constructor(value: mongoose.Types.ObjectId) {
     if (!mongoose.isValidObjectId(value)) {
-      throw new Error("Invalid Product SKU ID");
+      throw new Error('Invalid Product SKU ID');
     }
     this.value = value;
   }

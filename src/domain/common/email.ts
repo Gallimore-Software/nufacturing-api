@@ -1,4 +1,4 @@
-import { Result } from "@domain/common/result";
+import { Result } from '@domain/common/result';
 
 export class Email {
   private readonly _value: string;
@@ -18,7 +18,7 @@ export class Email {
 
   public static create(email: string): Result<Email> {
     if (!this.validate(email)) {
-      return Result.fail<Email>("Invalid email format");
+      return Result.fail<Email>('Invalid email format');
     }
     return Result.ok<Email>(new Email(email));
   }

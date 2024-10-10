@@ -1,9 +1,9 @@
-import { createLogger } from "winston";
+import { createLogger } from 'winston';
 
-import loggerConfig from "./logger-config";
+import loggerConfig from './logger-config';
 
 const Logger = createLogger(loggerConfig);
 
-Logger.info("Logger initialized.");
+Logger.info('Logger initialized.');
 
 export default Logger;

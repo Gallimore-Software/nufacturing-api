@@ -59,14 +59,14 @@ export default class Vendor {
   // Setters with domain logic
   public updateContactPerson(newContactPerson: string): void {
     if (!newContactPerson) {
-      throw new Error("Contact person cannot be empty");
+      throw new Error('Contact person cannot be empty');
     }
     this.contactPerson = newContactPerson;
   }
 
   public updateAddress(newAddress: string): void {
     if (!newAddress) {
-      throw new Error("Address cannot be empty");
+      throw new Error('Address cannot be empty');
     }
     this.address = newAddress;
   }

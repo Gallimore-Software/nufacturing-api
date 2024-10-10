@@ -1,7 +1,7 @@
-import { InventoryItemDTO } from "./inventoryItem.ts";
+import { InventoryItemDTO } from './inventoryItem.ts';
 
-describe("InventoryItem Security Tests", () => {
-  it("should not allow creation of inventoryItem with invalid data", () => {
+describe('InventoryItem Security Tests', () => {
+  it('should not allow creation of inventoryItem with invalid data', () => {
     const invalidDto: any = {
       // Intentionally missing properties
     };

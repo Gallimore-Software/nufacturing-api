@@ -71,7 +71,9 @@ describe('DeleteUserUseCase', () => {
     const adminUser = { id: 'admin', role: 'Admin' };
 
     mockUserRepository.findById.mockResolvedValue(mockUser); // Simulate the user exists
-    mockUserRepository.deleteUser.mockRejectedValue(new Error('Error deleting user')); // Simulate deletion error
+    mockUserRepository.deleteUser.mockRejectedValue(
+      new Error('Error deleting user')
+    ); // Simulate deletion error
 
     // Act & Assert
     await expect(deleteUserUseCase.execute(userId, adminUser)).rejects.toThrow(
@@ -99,7 +101,9 @@ describe('DeleteUserUseCase', () => {
     mockUserRepository.findById.mockResolvedValue(mockUser);
 
     // Act & Assert
-    await expect(deleteUserUseCase.execute(userId, nonAdminUser)).rejects.toThrow('Unauthorized user');
+    await expect(
+      deleteUserUseCase.execute(userId, nonAdminUser)
+    ).rejects.toThrow('Unauthorized user');
     expect(mockUserRepository.deleteUser).not.toHaveBeenCalled(); // delete should not be called
   });
 
@@ -109,7 +113,9 @@ describe('DeleteUserUseCase', () => {
     const adminUser = { id: 'admin', role: 'Admin' };
 
     // Act & Assert
-    await expect(deleteUserUseCase.execute(userId, adminUser)).rejects.toThrow('User ID is required');
+    await expect(deleteUserUseCase.execute(userId, adminUser)).rejects.toThrow(
+      'User ID is required'
+    );
     expect(mockUserRepository.findById).not.toHaveBeenCalled();
     expect(mockUserRepository.deleteUser).not.toHaveBeenCalled();
   });

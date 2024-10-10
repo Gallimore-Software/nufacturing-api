@@ -1,16 +1,16 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 // Define the schema for Batch Records
 const batchRecordsSchema = new mongoose.Schema({
   batchNumber: { type: String, required: true, unique: true }, // Unique identifier for the batch
   productSKU: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ProductSKU",
+    ref: 'ProductSKU',
     required: true,
   }, // Reference to Product SKU
   formula: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Formula",
+    ref: 'Formula',
     required: true,
   }, // Reference to Formula
   productionDate: { type: Date, required: true }, // Date of Production
@@ -20,8 +20,8 @@ const batchRecordsSchema = new mongoose.Schema({
   quantityProduced: { type: Number, required: true }, // Quantity produced in this batch
   status: {
     type: String,
-    enum: ["In Progress", "Completed", "Quarantined", "Failed"],
-    default: "In Progress",
+    enum: ['In Progress', 'Completed', 'Quarantined', 'Failed'],
+    default: 'In Progress',
   },
   operator: { type: String, required: true },
   qualityChecks: [
@@ -36,6 +36,6 @@ const batchRecordsSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const BatchRecords = mongoose.model("BatchRecord", batchRecordsSchema);
+const BatchRecords = mongoose.model('BatchRecord', batchRecordsSchema);
 
 export default BatchRecords;

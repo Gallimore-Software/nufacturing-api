@@ -1,20 +1,20 @@
-import "reflect-metadata"; // Necessary for InversifyJS to work
-import express from "express";
-import { container } from "./infrastructure/di/container";
-import { TYPES } from "./infrastructure/di/types";
-import { RoleMiddleware } from "./interfaces/http/middleware/role.middleware";
-import { UserRole } from "@domain/entities/user/user-role";
+import 'reflect-metadata'; // Necessary for InversifyJS to work
+import express from 'express';
+import { container } from './infrastructure/di/container';
+import { TYPES } from './infrastructure/di/types';
+import { RoleMiddleware } from './interfaces/http/middleware/role.middleware';
+import { UserRole } from '@domain/entities/user/user-role';
 
 const app = express();
 
 // Example usage of middleware with DI
 app.use(
-  "/protected-route",
+  '/protected-route',
   new RoleMiddleware(
     container.get(TYPES.JWTService),
-    container.get(TYPES.CheckUserRoleUseCase),
-  ).handle([new UserRole('Admin')]), // Call the `handle` method
+    container.get(TYPES.CheckUserRoleUseCase)
+  ).handle([new UserRole('Admin')]) // Call the `handle` method
 );
 app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+  console.log('Server is running on port 3000');
 });

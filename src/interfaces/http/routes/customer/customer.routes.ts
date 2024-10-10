@@ -1,8 +1,8 @@
-import * as customerController from "@interfaces/http/controllers/customer/customer/customer.controller";
-import RoleMiddleware from "@interfaces/http/middleware/role.middleware"; // Import the class, not default instance
-import express from "express";
-import { container } from "@infrastructure/di/container"; // Assuming you are using a DI container like Inversify
-import { UserRole } from "@domain/entities/user/user-role";
+import * as customerController from '@interfaces/http/controllers/customer/customer/customer.controller';
+import RoleMiddleware from '@interfaces/http/middleware/role.middleware'; // Import the class, not default instance
+import express from 'express';
+import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify
+import { UserRole } from '@domain/entities/user/user-role';
 
 const router = express.Router();
 
@@ -11,29 +11,33 @@ const roleMiddleware = container.resolve(RoleMiddleware);
 
 // Define routes with role-based access control
 router.get(
-  "/",
-  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
-  customerController.getAllCustomers,
+  '/',
+  roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
+  customerController.getAllCustomers
 );
 router.get(
-  "/:labTestId",
-  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager"), new UserRole("User")]),
-  customerController.getCustomerById,
+  '/:labTestId',
+  roleMiddleware.handle([
+    new UserRole('Admin'),
+    new UserRole('Manager'),
+    new UserRole('User'),
+  ]),
+  customerController.getCustomerById
 );
 router.post(
-  "/",
-  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
-  customerController.createCustomer,
+  '/',
+  roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
+  customerController.createCustomer
 );
 router.put(
-  "/:labTestId",
-  roleMiddleware.handle([new UserRole("Admin"), new UserRole("Manager")]),
-  customerController.updateCustomer,
+  '/:labTestId',
+  roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
+  customerController.updateCustomer
 );
 router.delete(
-  "/:labTestId",
-  roleMiddleware.handle([new UserRole("Admin")]),
-  customerController.deleteCustomer,
+  '/:labTestId',
+  roleMiddleware.handle([new UserRole('Admin')]),
+  customerController.deleteCustomer
 );
 
 export default router;

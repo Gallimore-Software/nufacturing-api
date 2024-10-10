@@ -1,10 +1,10 @@
-import Formula from "@infrastructure/persistence/models/formula/formula-model";
-import { Request, Response } from "express";
+import Formula from '@infrastructure/persistence/models/formula/formula-model';
+import { Request, Response } from 'express';
 
 // Get all formulas
 export const getAllFormulas = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const formulas = await Formula.find();
@@ -12,8 +12,8 @@ export const getAllFormulas = async (
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "Error fetching formulas",
-      error: err instanceof Error ? err.message : "Unknown error",
+      message: 'Error fetching formulas',
+      error: err instanceof Error ? err.message : 'Unknown error',
     });
   }
 };
@@ -21,20 +21,20 @@ export const getAllFormulas = async (
 // Get a formula by ID
 export const getFormulaById = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const formula = await Formula.findById(req.params.entity_id);
     if (!formula) {
-      res.status(404).json({ success: false, message: "Formula not found" });
+      res.status(404).json({ success: false, message: 'Formula not found' });
       return;
     }
     res.status(200).json({ success: true, data: formula });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "Error fetching formula",
-      error: err instanceof Error ? err.message : "Unknown error",
+      message: 'Error fetching formula',
+      error: err instanceof Error ? err.message : 'Unknown error',
     });
   }
 };
@@ -42,7 +42,7 @@ export const getFormulaById = async (
 // Create a new formula
 export const createFormula = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const { productType } = req.body;
@@ -53,21 +53,21 @@ export const createFormula = async (
     // Determine unit of measurement based on product type
     let unitOfMeasurement;
     switch (productType) {
-      case "Capsules":
-      case "Powder":
-      case "Powder Stickpacks":
-        unitOfMeasurement = "mcg/mg/g/kg";
+      case 'Capsules':
+      case 'Powder':
+      case 'Powder Stickpacks':
+        unitOfMeasurement = 'mcg/mg/g/kg';
         break;
-      case "Gummies":
-      case "Tinctures":
-      case "Pouches":
-        unitOfMeasurement = "mcg/mg/g/kg/ml/liter/gallons/ounces";
+      case 'Gummies':
+      case 'Tinctures':
+      case 'Pouches':
+        unitOfMeasurement = 'mcg/mg/g/kg/ml/liter/gallons/ounces';
         break;
-      case "Liquid Stickpacks":
-        unitOfMeasurement = "ml/liter/gallons/ounces";
+      case 'Liquid Stickpacks':
+        unitOfMeasurement = 'ml/liter/gallons/ounces';
         break;
       default:
-        unitOfMeasurement = "unknown";
+        unitOfMeasurement = 'unknown';
     }
 
     const formula = new Formula({
@@ -81,8 +81,8 @@ export const createFormula = async (
   } catch (err) {
     res.status(400).json({
       success: false,
-      message: "Error creating formula",
-      error: err instanceof Error ? err.message : "Unknown error",
+      message: 'Error creating formula',
+      error: err instanceof Error ? err.message : 'Unknown error',
     });
   }
 };
@@ -90,7 +90,7 @@ export const createFormula = async (
 // Update a formula by ID
 export const updateFormula = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const formula = await Formula.findByIdAndUpdate(
@@ -99,18 +99,18 @@ export const updateFormula = async (
       {
         new: true,
         runValidators: true,
-      },
+      }
     );
     if (!formula) {
-      res.status(404).json({ success: false, message: "Formula not found" });
+      res.status(404).json({ success: false, message: 'Formula not found' });
       return;
     }
     res.status(200).json({ success: true, data: formula });
   } catch (err) {
     res.status(400).json({
       success: false,
-      message: "Error updating formula",
-      error: err instanceof Error ? err.message : "Unknown error",
+      message: 'Error updating formula',
+      error: err instanceof Error ? err.message : 'Unknown error',
     });
   }
 };
@@ -118,22 +118,22 @@ export const updateFormula = async (
 // Delete a formula by ID
 export const deleteFormula = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const formula = await Formula.findByIdAndDelete(req.params.entity_id);
     if (!formula) {
-      res.status(404).json({ success: false, message: "Formula not found" });
+      res.status(404).json({ success: false, message: 'Formula not found' });
       return;
     }
     res
       .status(200)
-      .json({ success: true, message: "Formula deleted successfully" });
+      .json({ success: true, message: 'Formula deleted successfully' });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "Error deleting formula",
-      error: err instanceof Error ? err.message : "Unknown error",
+      message: 'Error deleting formula',
+      error: err instanceof Error ? err.message : 'Unknown error',
     });
   }
 };

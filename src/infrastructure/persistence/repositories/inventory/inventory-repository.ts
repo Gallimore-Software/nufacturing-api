@@ -1,4 +1,4 @@
-import { InventoryItem } from "@infrastructure/persistence/models/inventory/inventory-model";
+import { InventoryItem } from '@infrastructure/persistence/models/inventory/inventory-model';
 
 class MongooseInventoryRepository {
   // Find inventory item by name or SKU (used for checking duplicates)
@@ -48,7 +48,7 @@ class MongooseInventoryRepository {
       {
         $group: {
           _id: `$${attribute}`,
-          items: { $push: "$$ROOT" },
+          items: { $push: '$$ROOT' },
         },
       },
     ]);
@@ -79,7 +79,7 @@ class MongooseInventoryRepository {
     return await InventoryItem.findByIdAndUpdate(
       id,
       { $inc: { stockQuantity: quantityChange } },
-      { new: true },
+      { new: true }
     );
   }
 
@@ -88,7 +88,7 @@ class MongooseInventoryRepository {
     return await InventoryItem.findByIdAndUpdate(
       id,
       { price: newPrice, priceLastUpdated: new Date() },
-      { new: true },
+      { new: true }
     );
   }
 
@@ -96,8 +96,8 @@ class MongooseInventoryRepository {
   static async markAsProcessed(id) {
     return await InventoryItem.findByIdAndUpdate(
       id,
-      { status: "processed" },
-      { new: true },
+      { status: 'processed' },
+      { new: true }
     );
   }
 }

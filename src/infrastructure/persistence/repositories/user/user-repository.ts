@@ -1,11 +1,10 @@
-import { IUserRepository } from "@domain/interfaces/repositories/user.repository.interface";
-import { User } from "@domain/entities/user/user-entity";
-import UserModel from "@infrastructure/persistence/models/user/user-model";
-import { injectable } from "inversify";
+import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
+import { User } from '@domain/entities/user/user-entity';
+import UserModel from '@infrastructure/persistence/models/user/user-model';
+import { injectable } from 'inversify';
 
 @injectable()
-export class UserRepository implements IUserRepository {  
-  
+export class UserRepository implements IUserRepository {
   // Find all users in the database
   async findAll(): Promise<User[]> {
     const users = await UserModel.find(); // Fetch all users from the database
@@ -44,12 +43,12 @@ export class UserRepository implements IUserRepository {
   // Update a user's details by ID
   async updateUser(
     id: string,
-    updatedUser: Partial<User>,
+    updatedUser: Partial<User>
   ): Promise<User | null> {
     const updatedUserModel = await UserModel.findByIdAndUpdate(
       id,
       updatedUser,
-      { new: true },
+      { new: true }
     );
     if (!updatedUserModel) return null;
     return this.toDomain(updatedUserModel);

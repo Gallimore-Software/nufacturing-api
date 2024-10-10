@@ -1,8 +1,8 @@
-import User from "@infrastructure/persistence/models/user/user-model";
-import cron from "node-cron";
+import User from '@infrastructure/persistence/models/user/user-model';
+import cron from 'node-cron';
 
 // Schedule the task to run daily
-cron.schedule("0 0 * * *", async () => {
+cron.schedule('0 0 * * *', async () => {
   try {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
@@ -15,6 +15,6 @@ cron.schedule("0 0 * * *", async () => {
 
     console.log(`Deleted ${result.deletedCount} unverified users`);
   } catch (err) {
-    console.error("Error deleting unverified users:", err);
+    console.error('Error deleting unverified users:', err);
   }
 });

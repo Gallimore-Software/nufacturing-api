@@ -1,7 +1,12 @@
 export class Status {
   private readonly value: string;
 
-  private static validStatuses = ["In Progress", "Completed", "Quarantined", "Failed"];
+  private static validStatuses = [
+    'In Progress',
+    'Completed',
+    'Quarantined',
+    'Failed',
+  ];
 
   constructor(value: string) {
     if (!Status.validStatuses.includes(value)) {

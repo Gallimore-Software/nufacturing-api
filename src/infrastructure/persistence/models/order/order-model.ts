@@ -1,39 +1,39 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
   customer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Customer",
+    ref: 'Customer',
     required: true,
   },
   orderNumber: { type: String, required: true },
   status: {
     type: String,
     enum: [
-      "PO Received",
-      "In Process",
-      "Awaiting Shipment",
-      "In Transit",
-      "Arrived",
+      'PO Received',
+      'In Process',
+      'Awaiting Shipment',
+      'In Transit',
+      'Arrived',
     ],
-    default: "PO Received",
+    default: 'PO Received',
   },
   orderType: {
     type: String,
     enum: [
-      "Capsule",
-      "Powders",
-      "Stick Packs (Powder)",
-      "Stick Packs (Liquid)",
-      "Tincture",
-      "Gummies",
-      "Co Packaging",
+      'Capsule',
+      'Powders',
+      'Stick Packs (Powder)',
+      'Stick Packs (Liquid)',
+      'Tincture',
+      'Gummies',
+      'Co Packaging',
     ],
     required: true,
   },
   products: [
     {
-      productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+      productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
       quantity: { type: Number, required: true },
     },
   ],
@@ -44,13 +44,13 @@ const orderSchema = new mongoose.Schema({
   },
   paymentStatus: {
     type: String,
-    enum: ["Pending", "Paid", "Overdue"],
-    default: "Pending",
+    enum: ['Pending', 'Paid', 'Overdue'],
+    default: 'Pending',
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Order = mongoose.model("Order", orderSchema);
+const Order = mongoose.model('Order', orderSchema);
 
 export default Order;

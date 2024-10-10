@@ -1,5 +1,5 @@
-import Quote from "@infrastructure/persistence/models/quoteModel";
-import { Request, Response } from "express";
+import Quote from '@infrastructure/persistence/models/quoteModel';
+import { Request, Response } from 'express';
 
 // Define types for request parameters
 interface QuoteRequestParams {
@@ -33,17 +33,17 @@ const sendResponse = <T>({
 // Get all quotes
 export const getAllQuotes = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const quotes = await Quote.find().populate(
-      "accountManager productType formula ingredients",
+      'accountManager productType formula ingredients'
     );
     sendResponse({
       res,
       statusCode: 200,
       success: true,
-      message: "Quotes fetched successfully",
+      message: 'Quotes fetched successfully',
       data: quotes,
     });
   } catch (err) {
@@ -51,7 +51,7 @@ export const getAllQuotes = async (
       res,
       statusCode: 500,
       success: false,
-      message: "Error fetching quotes",
+      message: 'Error fetching quotes',
       error: (err as Error).message,
     });
   }
@@ -60,18 +60,18 @@ export const getAllQuotes = async (
 // Get quote by ID
 export const getQuoteById = async (
   req: Request<QuoteRequestParams>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const quote = await Quote.findById(req.params.quoteId).populate(
-      "accountManager productType formula ingredients",
+      'accountManager productType formula ingredients'
     );
     if (!quote) {
       sendResponse({
         res,
         statusCode: 404,
         success: false,
-        message: "Quote not found",
+        message: 'Quote not found',
       });
       return;
     }
@@ -79,7 +79,7 @@ export const getQuoteById = async (
       res,
       statusCode: 200,
       success: true,
-      message: "Quote fetched successfully",
+      message: 'Quote fetched successfully',
       data: quote,
     });
   } catch (err) {
@@ -87,7 +87,7 @@ export const getQuoteById = async (
       res,
       statusCode: 500,
       success: false,
-      message: "Error fetching quote",
+      message: 'Error fetching quote',
       error: (err as Error).message,
     });
   }
@@ -96,7 +96,7 @@ export const getQuoteById = async (
 // Create a new quote
 export const createQuote = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const newQuote = new Quote(req.body);
@@ -105,7 +105,7 @@ export const createQuote = async (
       res,
       statusCode: 201,
       success: true,
-      message: "Quote created successfully",
+      message: 'Quote created successfully',
       data: newQuote,
     });
   } catch (err) {
@@ -113,7 +113,7 @@ export const createQuote = async (
       res,
       statusCode: 400,
       success: false,
-      message: "Error creating quote",
+      message: 'Error creating quote',
       error: (err as Error).message,
     });
   }
@@ -122,7 +122,7 @@ export const createQuote = async (
 // Update quote
 export const updateQuote = async (
   req: Request<QuoteRequestParams>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const updatedQuote = await Quote.findByIdAndUpdate(
@@ -131,14 +131,14 @@ export const updateQuote = async (
       {
         new: true,
         runValidators: true,
-      },
+      }
     );
     if (!updatedQuote) {
       sendResponse({
         res,
         statusCode: 404,
         success: false,
-        message: "Quote not found",
+        message: 'Quote not found',
       });
       return;
     }
@@ -146,7 +146,7 @@ export const updateQuote = async (
       res,
       statusCode: 200,
       success: true,
-      message: "Quote updated successfully",
+      message: 'Quote updated successfully',
       data: updatedQuote,
     });
   } catch (err) {
@@ -154,7 +154,7 @@ export const updateQuote = async (
       res,
       statusCode: 400,
       success: false,
-      message: "Error updating quote",
+      message: 'Error updating quote',
       error: (err as Error).message,
     });
   }
@@ -163,7 +163,7 @@ export const updateQuote = async (
 // Delete quote
 export const deleteQuote = async (
   req: Request<QuoteRequestParams>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const deletedQuote = await Quote.findByIdAndDelete(req.params.quoteId);
@@ -172,7 +172,7 @@ export const deleteQuote = async (
         res,
         statusCode: 404,
         success: false,
-        message: "Quote not found",
+        message: 'Quote not found',
       });
       return;
     }
@@ -180,14 +180,14 @@ export const deleteQuote = async (
       res,
       statusCode: 200,
       success: true,
-      message: "Quote deleted successfully",
+      message: 'Quote deleted successfully',
     });
   } catch (err) {
     sendResponse({
       res,
       statusCode: 500,
       success: false,
-      message: "Error deleting quote",
+      message: 'Error deleting quote',
       error: (err as Error).message,
     });
   }

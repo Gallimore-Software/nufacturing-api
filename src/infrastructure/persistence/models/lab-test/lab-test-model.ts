@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const labTestSchema = new mongoose.Schema({
   testName: {
@@ -11,8 +11,8 @@ const labTestSchema = new mongoose.Schema({
   },
   result: {
     type: String,
-    enum: ["Pass", "Fail", "Pending"],
-    default: "Pending",
+    enum: ['Pass', 'Fail', 'Pending'],
+    default: 'Pending',
   },
   comments: {
     type: String,
@@ -23,7 +23,7 @@ const labTestSchema = new mongoose.Schema({
   },
   relatedInventoryItem: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "InventoryItem",
+    ref: 'InventoryItem',
     required: true,
   },
   attachments: [
@@ -42,6 +42,6 @@ const labTestSchema = new mongoose.Schema({
   },
 });
 
-const LabTest = mongoose.model("LabTest", labTestSchema);
+const LabTest = mongoose.model('LabTest', labTestSchema);
 
 export default LabTest;

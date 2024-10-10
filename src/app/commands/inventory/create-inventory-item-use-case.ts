@@ -1,4 +1,4 @@
-import { InventoryItem } from "@infrastructure/persistence/models/inventory/inventory-model";
+import { InventoryItem } from '@infrastructure/persistence/models/inventory/inventory-model';
 
 interface InventoryItemData {
   name: string;
@@ -11,13 +11,13 @@ class CreateInventoryItemUseCase {
     try {
       // Perform validation checks on incoming data
       if (!data.name || !data.sku || !data.category) {
-        throw new Error("Missing required fields: name, sku, or category");
+        throw new Error('Missing required fields: name, sku, or category');
       }
 
       // Check if an inventory item with the same SKU already exists
       const existingItem = await InventoryItem.findOne({ sku: data.sku });
       if (existingItem) {
-        throw new Error("Inventory item with this SKU already exists");
+        throw new Error('Inventory item with this SKU already exists');
       }
 
       // Create a new inventory item
@@ -30,7 +30,7 @@ class CreateInventoryItemUseCase {
       return newInventoryItem;
     } catch (err) {
       throw new Error(
-        `Error creating inventory item: ${(err as Error).message}`,
+        `Error creating inventory item: ${(err as Error).message}`
       );
     }
   }

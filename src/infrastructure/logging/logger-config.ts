@@ -1,10 +1,10 @@
-import { format, transports, createLogger } from "winston";
-import "winston-mongodb";
-import dotenv from "dotenv";
+import { format, transports, createLogger } from 'winston';
+import 'winston-mongodb';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-const logLevel = process.env.LOG_LEVEL || "info";
+const logLevel = process.env.LOG_LEVEL || 'info';
 
 // Create the logger configuration
 const loggerConfig = createLogger({
@@ -22,11 +22,11 @@ const loggerConfig = createLogger({
 if (process.env.MONGODB_URI) {
   loggerConfig.add(
     new transports.MongoDB({
-      level: "error",
+      level: 'error',
       db: process.env.MONGODB_URI,
       options: { useUnifiedTopology: true },
-      collection: "app_logs",
-    }),
+      collection: 'app_logs',
+    })
   );
 }
 

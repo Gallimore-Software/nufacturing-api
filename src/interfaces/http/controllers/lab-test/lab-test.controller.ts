@@ -1,5 +1,5 @@
-import LabTest from "@infrastructure/persistence/models/labTestModel";
-import { Request, Response } from "express";
+import LabTest from '@infrastructure/persistence/models/labTestModel';
+import { Request, Response } from 'express';
 
 // Define types for request parameters and request body
 interface LabTestRequestParams {
@@ -19,16 +19,16 @@ interface LabTestRequestBody {
 // Get all lab tests
 export const getAllLabTests = async (
   req: Request,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
-    const labTests = await LabTest.find().populate("relatedInventoryItem");
+    const labTests = await LabTest.find().populate('relatedInventoryItem');
     res.status(200).json({ success: true, data: labTests });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error fetching lab tests",
-      error: error instanceof Error ? error.message : "Unknown error",
+      message: 'Error fetching lab tests',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
@@ -36,22 +36,22 @@ export const getAllLabTests = async (
 // Get a lab test by ID
 export const getLabTestById = async (
   req: Request<LabTestRequestParams>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const labTest = await LabTest.findById(req.params.id).populate(
-      "relatedInventoryItem",
+      'relatedInventoryItem'
     );
     if (!labTest) {
-      res.status(404).json({ success: false, message: "Lab test not found" });
+      res.status(404).json({ success: false, message: 'Lab test not found' });
       return;
     }
     res.status(200).json({ success: true, data: labTest });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error fetching lab test",
-      error: error instanceof Error ? error.message : "Unknown error",
+      message: 'Error fetching lab test',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
@@ -59,7 +59,7 @@ export const getLabTestById = async (
 // Create a new lab test
 export const createLabTest = async (
   req: Request<object, object, LabTestRequestBody>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const {
@@ -87,8 +87,8 @@ export const createLabTest = async (
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "Error creating lab test",
-      error: error instanceof Error ? error.message : "Unknown error",
+      message: 'Error creating lab test',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
@@ -96,7 +96,7 @@ export const createLabTest = async (
 // Update a lab test
 export const updateLabTest = async (
   req: Request<LabTestRequestParams, object, LabTestRequestBody>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const {
@@ -120,11 +120,11 @@ export const updateLabTest = async (
         relatedInventoryItem,
         attachments,
       },
-      { new: true, runValidators: true },
-    ).populate("relatedInventoryItem");
+      { new: true, runValidators: true }
+    ).populate('relatedInventoryItem');
 
     if (!updatedLabTest) {
-      res.status(404).json({ success: false, message: "Lab test not found" });
+      res.status(404).json({ success: false, message: 'Lab test not found' });
       return;
     }
 
@@ -132,8 +132,8 @@ export const updateLabTest = async (
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "Error updating lab test",
-      error: error instanceof Error ? error.message : "Unknown error",
+      message: 'Error updating lab test',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
@@ -141,22 +141,22 @@ export const updateLabTest = async (
 // Delete a lab test
 export const deleteLabTest = async (
   req: Request<LabTestRequestParams>,
-  res: Response,
+  res: Response
 ): Promise<void> => {
   try {
     const deletedLabTest = await LabTest.findByIdAndDelete(req.params.id);
     if (!deletedLabTest) {
-      res.status(404).json({ success: false, message: "Lab test not found" });
+      res.status(404).json({ success: false, message: 'Lab test not found' });
       return;
     }
     res
       .status(200)
-      .json({ success: true, message: "Lab test deleted successfully" });
+      .json({ success: true, message: 'Lab test deleted successfully' });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error deleting lab test",
-      error: error instanceof Error ? error.message : "Unknown error",
+      message: 'Error deleting lab test',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };

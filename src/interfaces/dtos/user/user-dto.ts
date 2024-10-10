@@ -1,4 +1,4 @@
-import { UserRole } from "@domain/entities/user/user-role";
+import { UserRole } from '@domain/entities/user/user-role';
 
 export interface CreateUserDTO {
   username: string;

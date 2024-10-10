@@ -1,7 +1,6 @@
 import { Guard } from './against-null-or-undefined-bulk.guard';
 
 describe('Guard.againstNullOrUndefinedBulk', () => {
-  
   it('should return success when all arguments are valid (not null or undefined)', () => {
     // Arrange
     const args = [
