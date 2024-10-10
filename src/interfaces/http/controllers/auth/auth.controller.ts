@@ -1,52 +1,80 @@
-import User from '@infrastructure/persistence/models/user/user-model';
-import jwt from 'jsonwebtoken';
+import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
+import { User } from '@domain/entities/user/user-entity';
+import UserModel, {
+  IUserModel,
+} from '@infrastructure/persistence/models/user/user-model';
+import { injectable } from 'inversify';
+import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
 
-export const verifyEmail = async (req, res) => {
-  try {
-    const token = req.params.token;
-
-    // Validate token format
-    if (!token || typeof token !== 'string') {
-      return res.status(400).json({ message: 'Invalid token format' });
-    }
-
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    // Ensure token is not expired (if expiration was set during token creation)
-    if (Date.now() >= decoded.exp * 1000) {
-      return res.status(400).json({ message: 'Token has expired' });
-    }
-
-    // Find user by ID from the decoded token
-    const user = await User.findById(decoded.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Check if email is already verified
-    if (user.emailVerified) {
-      return res.status(200).json({ message: 'Email already verified' });
-    }
-
-    // Verify email
-    user.emailVerified = true;
-    await user.save();
-
-    res.status(200).json({ message: 'Email verified successfully' });
-  } catch (error) {
-    // Check if the error is an instance of Error
-    if (error instanceof jwt.TokenExpiredError) {
-      return res.status(400).json({ message: 'Token has expired' });
-    } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(400).json({ message: 'Invalid token' });
-    } else if (error instanceof Error) {
-      return res
-        .status(500)
-        .json({ message: 'Internal server error', error: error.message });
-    }
-
-    // Fallback for unknown error types
-    return res.status(500).json({ message: 'An unexpected error occurred' });
+@injectable()
+export class UserRepository implements IUserRepository {
+  // Find all users in the database
+  async findAll(): Promise<User[]> {
+    const users = await UserModel.find(); // Fetch all users from the database
+    return users.map(this.toDomain); // Map each user model to domain entity
   }
-};
+
+  // Create a new user in the database
+  async createUser(user: User): Promise<User> {
+    const userModel = new UserModel({
+      username: user.props.username,
+      password: user.props.password,
+      email: user.props.email,
+      role: user.props.role,
+      emailVerified: user.props.emailVerified,
+      createdAt: user.props.createdAt ?? new Date(),
+    });
+
+    const savedUser = await userModel.save();
+    return this.toDomain(savedUser);
+  }
+
+  // Find a user by their ID
+  async findById(id: string): Promise<User | null> {
+    const userModel = await UserModel.findById(id);
+    if (!userModel) return null;
+    return this.toDomain(userModel);
+  }
+
+  // Find a user by their email
+  async findByEmail(email: string): Promise<User | null> {
+    const userModel = await UserModel.findOne({ email });
+    if (!userModel) return null;
+    return this.toDomain(userModel);
+  }
+
+  // Update a user's details by ID
+  async updateUser(
+    id: string,
+    updatedUser: Partial<User>
+  ): Promise<User | null> {
+    const updatedUserModel = await UserModel.findByIdAndUpdate(
+      id,
+      updatedUser,
+      { new: true }
+    );
+    if (!updatedUserModel) return null;
+    return this.toDomain(updatedUserModel);
+  }
+
+  // Delete a user by ID
+  async deleteUser(id: string): Promise<boolean> {
+    const deleted = await UserModel.findByIdAndDelete(id);
+    return !!deleted;
+  }
+
+  // Convert persistence model to domain entity
+  private toDomain(userModel: IUserModel): User {
+    return User.create({
+      username: userModel.username,
+      password: userModel.password,
+      email: userModel.email,
+      role: userModel.role,
+      emailVerified: userModel.emailVerified,
+      createdAt: userModel.createdAt,
+      isDeleted: false,
+      id: new UniqueEntityID(),
+      phoneNumber: '',
+    }).getValue();
+  }
+}

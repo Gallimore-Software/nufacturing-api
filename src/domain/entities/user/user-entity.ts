@@ -13,19 +13,15 @@ export class User extends Entity<UserProps> {
   // Factory method to create a user with validation checks
   public static create(props: UserProps, id?: UniqueEntityID): Result<User> {
     const guardResult = Guard.againstNullOrUndefinedBulk([
-      { argument: props.email, argumentName: 'email' },
-      { argument: props.username, argumentName: 'username' },
-      { argument: props.password, argumentName: 'password' },
-      { argument: props.role, argumentName: 'role' },
+      { argument: props.email ?? '', argumentName: 'email' }, // Ensure email is a string
+      { argument: props.username ?? '', argumentName: 'username' }, // Ensure username is a string
+      { argument: props.password ?? '', argumentName: 'password' }, // Ensure password is a string
+      { argument: props.role?.getValue() ?? '', argumentName: 'role' }, // Ensure role is a valid string value
     ]);
 
     if (!guardResult.succeeded) {
-      return Result.fail<User>(guardResult.message);
+      return Result.fail<User>(guardResult.message ?? 'Validation failed'); // Default message
     }
-
-    // Further domain validations could be added here, such as:
-    // - Email format validation
-    // - Password strength check
 
     const user = new User(props, id);
     return Result.ok<User>(user);
@@ -40,17 +36,16 @@ export class User extends Entity<UserProps> {
   }
 
   get email(): string {
-    return this.props.email;
+    return this.props.email ?? ''; // Return a default empty string if undefined
   }
 
   get username(): string {
-    return this.props.username;
+    return this.props.username ?? ''; // Return a default empty string if undefined
   }
 
   // Domain-specific business logic methods
 
   public changePassword(newPassword: string): Result<void> {
-    // Perform necessary validation or checks
     if (newPassword.length < 6) {
       return Result.fail<void>('Password must be at least 6 characters long.');
     }
@@ -60,6 +55,10 @@ export class User extends Entity<UserProps> {
 
   public markDeleted(): void {
     this.props.isDeleted = true;
+  }
+
+  public isDeleted(): boolean {
+    return this.props.isDeleted;
   }
 
   public verifyEmail(): void {

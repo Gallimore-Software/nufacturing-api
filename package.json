@@ -12,26 +12,25 @@
     "@middleware": "src/interfaces/http/middleware",
     "@repositories": "src/infrastructure/persistence/repositories"
   },
+  "type": "module",
   "scripts": {
     "prepare": "npx husky install",
     "clean": "npx rimraf dist dist-tests",
-    "build": "npm run clean && npx tsc -p submodules/gallimore-dev-tools/src/config/tsconfig.json",
+    "build": "npm run clean && npx tsc -p tsconfig.json",
     "start": "npx cross-env NODE_ENV=production node -r tsconfig-paths/register dist/main.js",
-    "start:env": "npx cross-env NODE_ENV=${NODE_ENV:-local} npx ts-node -r tsconfig-paths/register -P submodules/gallimore-dev-tools/config/tsconfig.json src/main.ts",
-    "dev": "npx nodemon --watch \"src/**/*.ts\" --exec \"npx ts-node -r tsconfig-paths/register -P submodules/gallimore-dev-tools/config/tsconfig.json src/main.ts\"",
-    "test:build": "npx tsc --noEmit -p submodules/gallimore-dev-tools/config/tsconfig.json",
-    "test": "npx jest --config submodules/gallimore-dev-tools/config/jest.config.js --coverage",
+    "start:env": "npx cross-env NODE_ENV=${NODE_ENV:-local} npx ts-node -r tsconfig-paths/register -P tsconfig.json src/main.ts",
+    "dev": "cross-env NODE_ENV=development nodemon --watch \"src/**/*.ts\" --exec \"node --loader ts-node/esm -r tsconfig-paths/register src/main.ts\"",
+    "test:build": "npx tsc --noEmit -p tsconfig.json",
+    "test": "npx jest --config jest.config.js --coverage",
     "test:watch": "npx jest --watch",
     "test:coverage": "npx nyc npm test",
     "e2e": "npx cypress run",
     "e2e:open": "npx cypress open",
-    "lint": "eslint --ext .ts,.tsx --config submodules/gallimore-dev-tools/config/.eslintrc.js src",
-    "lint:fix": "eslint --ext .ts,.tsx --config submodules/gallimore-dev-tools/config/.eslintrc.js src --fix",
+    "lint": "eslint --ext .ts,.tsx --config .eslintrc.js src",
+    "lint:fix": "eslint --ext .ts,.tsx --config .eslintrc.js src --fix",
     "format": "npx prettier --check 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
     "format:fix": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
-    "precommit": "npm run lint && npm run format",
-    "plop": "npx plop --plopfile submodules/gallimore-dev-tools/config/plopfile.config.js",
-    "link-configs": "node link-configs.js"
+    "precommit": "npm run lint && npm run format"
   },
   "husky": {
     "hooks": {

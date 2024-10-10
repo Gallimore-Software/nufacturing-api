@@ -1,7 +1,6 @@
 [submodule "submodules/nufulfillment-veracore"]
 	path = submodules/nufulfillment-veracore
 	url = git@github.com:Gallimore-Software/nufulfillment-veracore.git
-
 [submodule "submodules/nufacturing"]
 	path = submodules/nufacturing
 	url = git@github.com:Gallimore-Software/nufacturing.git

@@ -1,8 +1,8 @@
 import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
 import { User } from '@domain/entities/user/user-entity';
-import { UpdateUserDTO } from '@interfaces/dtos/user/user-dto';
+import { UpdateUserDTO } from '@interfaces/dtos/user/user.dto';
 import { injectable, inject } from 'inversify';
-import { NotFoundError } from '@domain/errors/not-found-error/not-found-custom-error';
+import { NotFoundError } from '@domain/shared/core/errors/not-found-error';
 
 @injectable()
 export class UpdateUserUseCase {

@@ -14,7 +14,7 @@
     },
     {
       "name": "Gallimore Dev Tools",
-      "path": "submodules/gallimore-dev-tools"
+      "path": "submodules/gallimore-devtools"
     }
   ],
   "settings": {
@@ -37,7 +37,7 @@
     
     // TypeScript and Linting Settings
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "typescript.tsconfigPath": "submodules/gallimore-dev-tools/config/tsconfig.json",
+    "typescript.tsconfigPath": "tsconfig.json",
     "eslint.workingDirectories": [
       { "directory": ".", "changeProcessCWD": true },
       { "directory": "submodules/nufacturing", "changeProcessCWD": true },
@@ -58,7 +58,7 @@
 
     // Prettier Configuration
     "prettier.requireConfig": true,
-    //"prettier.configPath": "./submodules/gallimore-dev-tools/config/.prettierrc",
+    //"prettier.configPath": "./submodules/gallimore-dev-tools/.prettierrc",
     "prettier.useTabs": false,
     "prettier.singleQuote": true,
     "prettier.trailingComma": "all",
@@ -130,7 +130,7 @@
         "request": "launch",
         "name": "Launch Main API",
         "program": "${workspaceFolder}/src/main.ts",
-        "preLaunchTask": "tsc: build - submodules/config/tsconfig.json",
+        "preLaunchTask": "tsc: build - tsconfig.json",
         "outFiles": [
           "${workspaceFolder}/dist/**/*.js"
         ],
@@ -144,19 +144,6 @@
         "name": "Debug Frontend",
         "url": "http://localhost:4200",
         "webRoot": "${workspaceFolder}/submodules/nufacturing"
-      },
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Test Fulfillment-Veracore Integration",
-        "program": "${workspaceFolder}/submodules/nufulfillment-veracore/src/index.ts",
-        "preLaunchTask": "tsc: build - tsconfig.tests.json",
-        "outFiles": [
-          "${workspaceFolder}/submodules/nufulfillment-veracore/dist/**/*.js"
-        ],
-        "env": {
-          "NODE_ENV": "test"
-        }
       }
     ]
   },

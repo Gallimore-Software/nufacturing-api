@@ -1,4 +1,4 @@
-import ProductType from '@infrastructure/persistence/models/productTypeModel';
+import ProductType from '@infrastructure/persistence/models/product-type/product-type-model';
 import { Request, Response } from 'express';
 
 // Define type for req.params
@@ -8,7 +8,7 @@ interface ProductTypeRequestParams {
 
 // Get all product types
 export const getAllProductTypes = async (
-  req: Request,
+  _req: Request,
   res: Response
 ): Promise<void> => {
   try {

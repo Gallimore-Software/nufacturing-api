@@ -1,4 +1,4 @@
-import Order from '@infrastructure/persistence/models/orderModel';
+import Order from '@infrastructure/persistence/models/order/order-model';
 import { Request, Response } from 'express';
 
 // Define types for request parameters
@@ -32,7 +32,7 @@ const sendResponse = <T>({
 
 // Get all orders
 export const getAllOrders = async (
-  req: Request,
+  _req: Request,
   res: Response
 ): Promise<void> => {
   try {

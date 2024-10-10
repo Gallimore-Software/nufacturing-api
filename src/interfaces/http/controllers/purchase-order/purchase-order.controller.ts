@@ -1,26 +1,43 @@
+import { Request, Response, RequestHandler } from 'express';
 import PurchaseOrder from '@infrastructure/persistence/models/purchase-order/purchase-order-model';
-import { Request, Response } from 'express';
 
-// Define types for query parameters and request parameters
+// Define types for request parameters and request body
 interface PurchaseOrderRequestParams {
-  id: string;
+  purchaseOrderId?: string;
 }
 
-interface GetAllPurchaseOrdersQuery {
-  dueInDays?: string;
+interface PurchaseOrderRequestBody {
+  orderNumber: string;
+  vendor: string;
+  orderItems: object[];
+  totalPrice: number;
+  status: string;
+  comments?: string;
 }
 
 // Create a new purchase order
-export const createPurchaseOrder = async (
-  req: Request,
+export const createPurchaseOrder: RequestHandler = async (
+  req: Request<object, object, PurchaseOrderRequestBody>,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
-    const purchaseOrder = new PurchaseOrder(req.body);
+    const { orderNumber, vendor, orderItems, totalPrice, status, comments } =
+      req.body;
+
+    // Create the purchase order entry
+    const purchaseOrder = new PurchaseOrder({
+      orderNumber,
+      vendor,
+      orderItems,
+      totalPrice,
+      status,
+      comments,
+    });
+
     await purchaseOrder.save();
-    res.status(201).json({ success: true, data: purchaseOrder });
+    return res.status(201).json({ success: true, data: purchaseOrder });
   } catch (error) {
-    res.status(400).json({
+    return res.status(500).json({
       success: false,
       message: 'Error creating purchase order',
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -28,28 +45,18 @@ export const createPurchaseOrder = async (
   }
 };
 
-// Get all purchase orders with optional filtering
-export const getAllPurchaseOrders = async (
-  req: Request<object, object, object, GetAllPurchaseOrdersQuery>,
+// Get all purchase orders
+export const getAllPurchaseOrders: RequestHandler = async (
+  _req: Request,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
-    const filters: { [key: string]: unknown } = {};
-    const { dueInDays } = req.query;
-
-    // Apply filters if dueInDays is provided
-    if (dueInDays) {
-      const today = new Date();
-      const dueDate = new Date(
-        today.setDate(today.getDate() + parseInt(dueInDays))
-      );
-      filters.dueDate = { $lte: dueDate };
-    }
-
-    const purchaseOrders = await PurchaseOrder.find(filters).populate('vendor');
-    res.status(200).json({ success: true, data: purchaseOrders });
+    const purchaseOrders = await PurchaseOrder.find()
+      .populate('vendor')
+      .populate('orderItems');
+    return res.status(200).json({ success: true, data: purchaseOrders });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Error fetching purchase orders',
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -58,23 +65,28 @@ export const getAllPurchaseOrders = async (
 };
 
 // Get a single purchase order by ID
-export const getPurchaseOrderById = async (
+export const getPurchaseOrderById: RequestHandler<
+  PurchaseOrderRequestParams
+> = async (
   req: Request<PurchaseOrderRequestParams>,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
-    const purchaseOrder = await PurchaseOrder.findById(req.params.id).populate(
-      'vendor'
-    );
+    const purchaseOrder = await PurchaseOrder.findById(
+      req.params.purchaseOrderId
+    )
+      .populate('vendor')
+      .populate('orderItems');
+
     if (!purchaseOrder) {
-      res
+      return res
         .status(404)
-        .json({ success: false, message: 'Purchase Order not found' });
-      return;
+        .json({ success: false, message: 'Purchase order not found' });
     }
-    res.status(200).json({ success: true, data: purchaseOrder });
+
+    return res.status(200).json({ success: true, data: purchaseOrder });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Error fetching purchase order',
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -83,28 +95,36 @@ export const getPurchaseOrderById = async (
 };
 
 // Update a purchase order by ID
-export const updatePurchaseOrderById = async (
-  req: Request<PurchaseOrderRequestParams>,
+export const updatePurchaseOrderById: RequestHandler<
+  PurchaseOrderRequestParams,
+  object,
+  PurchaseOrderRequestBody
+> = async (
+  req: Request<PurchaseOrderRequestParams, object, PurchaseOrderRequestBody>,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
+    const { purchaseOrderId } = req.params;
+    const updatedData = req.body;
+
     const purchaseOrder = await PurchaseOrder.findByIdAndUpdate(
-      req.params.id,
-      req.body,
+      purchaseOrderId,
+      updatedData,
       {
         new: true,
         runValidators: true,
       }
     );
+
     if (!purchaseOrder) {
-      res
+      return res
         .status(404)
-        .json({ success: false, message: 'Purchase Order not found' });
-      return;
+        .json({ success: false, message: 'Purchase order not found' });
     }
-    res.status(200).json({ success: true, data: purchaseOrder });
+
+    return res.status(200).json({ success: true, data: purchaseOrder });
   } catch (error) {
-    res.status(400).json({
+    return res.status(500).json({
       success: false,
       message: 'Error updating purchase order',
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -113,23 +133,27 @@ export const updatePurchaseOrderById = async (
 };
 
 // Delete a purchase order by ID
-export const deletePurchaseOrderById = async (
+export const deletePurchaseOrderById: RequestHandler<
+  PurchaseOrderRequestParams
+> = async (
   req: Request<PurchaseOrderRequestParams>,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
-    const purchaseOrder = await PurchaseOrder.findByIdAndDelete(req.params.id);
+    const purchaseOrder = await PurchaseOrder.findByIdAndDelete(
+      req.params.purchaseOrderId
+    );
     if (!purchaseOrder) {
-      res
+      return res
         .status(404)
-        .json({ success: false, message: 'Purchase Order not found' });
-      return;
+        .json({ success: false, message: 'Purchase order not found' });
     }
-    res
+
+    return res
       .status(200)
-      .json({ success: true, message: 'Purchase Order deleted successfully' });
+      .json({ success: true, message: 'Purchase order deleted successfully' });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Error deleting purchase order',
       error: error instanceof Error ? error.message : 'Unknown error',

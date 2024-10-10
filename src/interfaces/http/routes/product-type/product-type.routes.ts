@@ -1,4 +1,4 @@
-import * as productTypeController from '@interfaces/http/controllers/product-development/product-type-controller';
+import * as productTypeController from '@interfaces/http/controllers/product-development/product-type.controller';
 import RoleMiddleware from '@interfaces/http/middleware/role.middleware'; // Import the class, not default instance
 import express from 'express';
 import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify

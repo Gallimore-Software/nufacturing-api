@@ -1,8 +1,8 @@
 export class Guard {
-  public static againstNullOrUndefinedBulk(
-    args: { argument: any; argumentName: string }[]
+  public static againstNullOrUndefinedBulk<T>(
+    args: { argument: T | null | undefined; argumentName: string }[]
   ): { succeeded: boolean; message?: string } {
-    for (let arg of args) {
+    for (const arg of args) {
       if (arg.argument === null || arg.argument === undefined) {
         return {
           succeeded: false,

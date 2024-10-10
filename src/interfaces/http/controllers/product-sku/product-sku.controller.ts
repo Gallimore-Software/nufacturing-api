@@ -8,7 +8,7 @@ interface EntityRequestParams {
 
 // Get all formulas
 export const getAllFormulas = async (
-  req: Request,
+  _req: Request,
   res: Response
 ): Promise<void> => {
   try {

@@ -1,18 +1,20 @@
+import { UserRole } from '@domain/entities/user/user-role';
 import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
+import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
 
 export class DeleteUserUseCase {
   constructor(private userRepository: IUserRepository) {}
 
   async execute(
-    userId: string,
-    requestingUser: { id: string; role: string }
+    userId: UniqueEntityID,
+    requestingUser: { id: UniqueEntityID; role: UserRole }
   ): Promise<boolean> {
     if (!userId) {
       throw new Error('User ID is required');
     }
 
     // Check if the requesting user is an admin
-    if (requestingUser.role !== 'Admin') {
+    if (!requestingUser.role.isAdmin()) {
       throw new Error('Unauthorized user');
     }
 
@@ -23,7 +25,7 @@ export class DeleteUserUseCase {
     }
 
     // Check if the user is already deleted
-    if (user.isDeleted) {
+    if (user.isDeleted()) {
       return false; // User already deleted
     }
 

@@ -15,6 +15,7 @@ app.use(
     container.get(TYPES.CheckUserRoleUseCase)
   ).handle([new UserRole('Admin')]) // Call the `handle` method
 );
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });

@@ -1,4 +1,4 @@
-import * as purchaseOrderController from '@interfaces/http/controllers/receiving/purchase-order-controller';
+import * as purchaseOrderController from '@interfaces/http/controllers/purchase-order/purchase-order.controller';
 import RoleMiddleware from '@interfaces/http/middleware/role.middleware'; // Import the class, not default instance
 import express from 'express';
 import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify

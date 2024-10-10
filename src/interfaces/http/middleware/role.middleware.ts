@@ -1,3 +1,6 @@
+// src/interfaces/http/middleware/role.middleware.ts
+
+import { JWTPayload } from '@domain/interfaces/jwt/jwt-payload.interface';
 import { JWTService } from '@app/services/jwt-service/jwt-service-service';
 import { CheckUserRoleUseCase } from '@use-cases/user/check-user-role/check-user-role.use-case';
 import { TYPES } from '@infrastructure/di/types';
@@ -20,7 +23,6 @@ export class RoleMiddleware {
       next: NextFunction
     ): Promise<void> => {
       try {
-        // Check for Authorization header and extract token
         const authHeader = req.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
           res
@@ -32,7 +34,7 @@ export class RoleMiddleware {
         const token = authHeader.split(' ')[1];
 
         // Verify token and get decoded user information
-        const decoded = this.jwtService.verifyToken(
+        const decoded: JWTPayload | null = this.jwtService.verifyToken(
           token,
           process.env.JWT_SECRET as string
         );
@@ -41,22 +43,28 @@ export class RoleMiddleware {
           return;
         }
 
-        // Check if the user has one of the required roles
-        const user = await this.checkUserRoleUseCase.execute(decoded.id, roles);
-        if (!user) {
-          res
-            .status(403)
-            .json({
+        // Now that 'decoded' is typed, we can safely access 'role'
+        const userRole = new UserRole(decoded.role);
+        if (Array.isArray(roles)) {
+          const hasValidRole = roles.some((role) => userRole.equals(role));
+          if (!hasValidRole) {
+            res.status(403).json({
               message: 'Access denied. You do not have the required role.',
             });
-          return;
+            return;
+          }
+        } else {
+          if (!userRole.equals(roles)) {
+            res.status(403).json({
+              message: 'Access denied. You do not have the required role.',
+            });
+            return;
+          }
         }
 
-        // Pass user to the request body for later use in the pipeline
-        req.body.user = user;
+        req.body.userRole = userRole;
         next();
       } catch (error) {
-        // Error handling
         res.status(500).json({
           message: 'An error occurred while verifying authorization',
           error: error instanceof Error ? error.message : 'Unknown error',

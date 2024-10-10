@@ -1,6 +1,10 @@
 import nodemailer from 'nodemailer';
 
-const sendEmail = async (to, subject, text) => {
+const sendEmail = async (
+  to: string,
+  subject: string,
+  text: string
+): Promise<void> => {
   try {
     const transporter = nodemailer.createTransport({
       host: 'mail.brcodex.com.np',

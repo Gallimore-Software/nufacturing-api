@@ -1,4 +1,4 @@
-import * as customerController from '@interfaces/http/controllers/customer/customer/customer.controller';
+import * as customerController from '@interfaces/http/controllers/customer/customer.controller';
 import RoleMiddleware from '@interfaces/http/middleware/role.middleware'; // Import the class, not default instance
 import express from 'express';
 import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify
@@ -16,7 +16,7 @@ router.get(
   customerController.getAllCustomers
 );
 router.get(
-  '/:labTestId',
+  '/:customerId',
   roleMiddleware.handle([
     new UserRole('Admin'),
     new UserRole('Manager'),
@@ -30,12 +30,12 @@ router.post(
   customerController.createCustomer
 );
 router.put(
-  '/:labTestId',
+  '/:customerId',
   roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
   customerController.updateCustomer
 );
 router.delete(
-  '/:labTestId',
+  '/:customerId',
   roleMiddleware.handle([new UserRole('Admin')]),
   customerController.deleteCustomer
 );

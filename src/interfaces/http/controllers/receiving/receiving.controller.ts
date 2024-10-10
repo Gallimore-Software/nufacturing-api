@@ -1,13 +1,12 @@
-import PurchaseOrder from '@infrastructure/persistence/models/purchase-order/purchase-order-model';
+import { Request, Response, RequestHandler } from 'express';
 import Receiving from '@infrastructure/persistence/models/receiving/receiving-model';
-import { Request, Response } from 'express';
+import PurchaseOrder from '@infrastructure/persistence/models/purchase-order/purchase-order-model';
 
-// Define types for request parameters
+// Define types for request parameters and request body
 interface ReceivingRequestParams {
-  receivingId: string;
+  receivingId?: string;
 }
 
-// Define type for request body when creating/updating receiving entry
 interface ReceivingRequestBody {
   poNumber: string;
   vendor: string;
@@ -17,23 +16,20 @@ interface ReceivingRequestBody {
 }
 
 // Create a new receiving entry
-export const createReceiving = async (
+export const createReceiving: RequestHandler = async (
   req: Request<object, object, ReceivingRequestBody>,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
     const { poNumber, vendor, receivedItems, receiver, comments } = req.body;
 
-    // Check if the Purchase Order exists
     const poExists = await PurchaseOrder.findById(poNumber);
     if (!poExists) {
-      res
+      return res
         .status(404)
         .json({ success: false, message: 'Purchase Order not found' });
-      return;
     }
 
-    // Create the receiving entry
     const receiving = new Receiving({
       poNumber,
       vendor,
@@ -41,11 +37,11 @@ export const createReceiving = async (
       receiver,
       comments,
     });
-
     await receiving.save();
-    res.status(201).json({ success: true, data: receiving });
+
+    return res.status(201).json({ success: true, data: receiving });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Error creating receiving entry',
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -54,15 +50,19 @@ export const createReceiving = async (
 };
 
 // Get all receiving entries
-export const getAllReceivements = async (res: Response): Promise<void> => {
+export const getAllReceivements: RequestHandler = async (
+  _req: Request,
+  res: Response
+): Promise<Response> => {
   try {
     const receivements = await Receiving.find()
       .populate('poNumber')
       .populate('vendor')
       .populate('receiver');
-    res.status(200).json({ success: true, data: receivements });
+
+    return res.status(200).json({ success: true, data: receivements });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Error fetching receiving entries',
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -71,10 +71,10 @@ export const getAllReceivements = async (res: Response): Promise<void> => {
 };
 
 // Get a single receiving entry by ID
-export const getReceivingById = async (
+export const getReceivingById: RequestHandler<ReceivingRequestParams> = async (
   req: Request<ReceivingRequestParams>,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
     const receiving = await Receiving.findById(req.params.receivingId)
       .populate('poNumber')
@@ -82,15 +82,14 @@ export const getReceivingById = async (
       .populate('receiver');
 
     if (!receiving) {
-      res
+      return res
         .status(404)
         .json({ success: false, message: 'Receiving entry not found' });
-      return;
     }
 
-    res.status(200).json({ success: true, data: receiving });
+    return res.status(200).json({ success: true, data: receiving });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Error fetching receiving entry',
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -99,10 +98,14 @@ export const getReceivingById = async (
 };
 
 // Update a receiving entry by ID
-export const updateReceivingById = async (
+export const updateReceivingById: RequestHandler<
+  ReceivingRequestParams,
+  object,
+  ReceivingRequestBody
+> = async (
   req: Request<ReceivingRequestParams, object, ReceivingRequestBody>,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
     const { receivingId } = req.params;
     const updatedData = req.body;
@@ -117,15 +120,14 @@ export const updateReceivingById = async (
     );
 
     if (!receiving) {
-      res
+      return res
         .status(404)
         .json({ success: false, message: 'Receiving record not found' });
-      return;
     }
 
-    res.status(200).json({ success: true, data: receiving });
+    return res.status(200).json({ success: true, data: receiving });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Error updating receiving entry',
       error: error instanceof Error ? error.message : 'Unknown error',
@@ -134,23 +136,23 @@ export const updateReceivingById = async (
 };
 
 // Delete a receiving entry by ID
-export const deleteReceiving = async (
+export const deleteReceiving: RequestHandler<ReceivingRequestParams> = async (
   req: Request<ReceivingRequestParams>,
   res: Response
-): Promise<void> => {
+): Promise<Response> => {
   try {
     const receiving = await Receiving.findByIdAndDelete(req.params.receivingId);
     if (!receiving) {
-      res
+      return res
         .status(404)
         .json({ success: false, message: 'Receiving entry not found' });
-      return;
     }
-    res
+
+    return res
       .status(200)
       .json({ success: true, message: 'Receiving entry deleted successfully' });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: 'Error deleting receiving entry',
       error: error instanceof Error ? error.message : 'Unknown error',

@@ -4,6 +4,7 @@ import { TYPES } from './types';
 import { JWTService } from '@app/services/jwt-service/jwt-service-service';
 import { UserRepository } from '@infrastructure/persistence/repositories/user/user-repository';
 import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
+import { CheckUserRoleUseCase } from '@app/use-cases/user/check-user-role/check-user-role.use-case';
 
 const container = new Container();
 

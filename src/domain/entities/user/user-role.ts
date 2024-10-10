@@ -1,27 +1,51 @@
 export class UserRole {
-  isAdmin(): boolean {
-    throw new Error('Method not implemented.');
-  }
   private readonly value: string;
 
-  private static readonly validRoles = ['Admin', 'User', 'SuperAdmin'];
+  // Static definitions for known roles
+  public static readonly ADMIN = 'Admin';
+  public static readonly MANAGER = 'Manager';
+  public static readonly USER = 'User';
+  public static readonly SUPER_ADMIN = 'SuperAdmin';
 
-  constructor(value: string) {
-    if (!UserRole.validRoles.includes(value)) {
-      throw new Error(`Invalid user role: ${value}`);
+  // You can add more static role definitions here as needed
+
+  // List of valid roles
+  private static readonly validRoles = [
+    UserRole.ADMIN,
+    UserRole.MANAGER,
+    UserRole.USER,
+    UserRole.SUPER_ADMIN,
+  ];
+
+  constructor(role: string) {
+    if (!UserRole.validRoles.includes(role)) {
+      throw new Error(`Invalid user role: ${role}`);
     }
-    this.value = value;
+    this.value = role;
   }
 
-  static create(role: string): UserRole {
-    return new UserRole(role);
-  }
-
+  // Get the string value of the role
   getValue(): string {
     return this.value;
   }
 
+  // Check if this role equals another role
   equals(role: UserRole): boolean {
     return this.value === role.getValue();
+  }
+
+  // Check if the role is an Admin
+  isAdmin(): boolean {
+    return this.value === UserRole.ADMIN;
+  }
+
+  // Check if the role is a Manager
+  isManager(): boolean {
+    return this.value === UserRole.MANAGER;
+  }
+
+  // Check if the role is a User
+  isUser(): boolean {
+    return this.value === UserRole.USER;
   }
 }
