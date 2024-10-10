@@ -1,24 +1,56 @@
-import ProductType from '@infrastructure/persistence/models/product-type/product-type-model';
 import { Request, Response } from 'express';
+import ProductType from '@infrastructure/persistence/models/product-type/product-type-model';
 
-// Define type for req.params
+// Define the custom request parameter type for ProductType
 interface ProductTypeRequestParams {
   typeId: string;
 }
 
+// Utility function for standardized response handling
+const sendResponse = <T>({
+  res,
+  statusCode,
+  success,
+  message,
+  data,
+  error,
+}: {
+  res: Response;
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data?: T;
+  error?: string;
+}): void => {
+  res.status(statusCode).json({
+    success,
+    message,
+    ...(data !== undefined && { data }),
+    ...(error && { error }),
+  });
+};
+
 // Get all product types
 export const getAllProductTypes = async (
-  _req: Request,
+  req: Request,
   res: Response
 ): Promise<void> => {
   try {
     const productTypes = await ProductType.find();
-    res.status(200).json({ success: true, data: productTypes });
-  } catch (err) {
-    res.status(500).json({
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: 'Product types fetched successfully',
+      data: productTypes,
+    });
+  } catch (error) {
+    sendResponse({
+      res,
+      statusCode: 500,
       success: false,
       message: 'Error fetching product types',
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
@@ -31,17 +63,28 @@ export const getProductTypeById = async (
   try {
     const productType = await ProductType.findById(req.params.typeId);
     if (!productType) {
-      res
-        .status(404)
-        .json({ success: false, message: 'Product type not found' });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: 'Product type not found',
+      });
       return;
     }
-    res.status(200).json({ success: true, data: productType });
-  } catch (err) {
-    res.status(500).json({
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: 'Product type fetched successfully',
+      data: productType,
+    });
+  } catch (error) {
+    sendResponse({
+      res,
+      statusCode: 500,
       success: false,
       message: 'Error fetching product type',
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
@@ -54,17 +97,25 @@ export const createProductType = async (
   try {
     const newProductType = new ProductType(req.body);
     await newProductType.save();
-    res.status(201).json({ success: true, data: newProductType });
-  } catch (err) {
-    res.status(400).json({
+    sendResponse({
+      res,
+      statusCode: 201,
+      success: true,
+      message: 'Product type created successfully',
+      data: newProductType,
+    });
+  } catch (error) {
+    sendResponse({
+      res,
+      statusCode: 400,
       success: false,
       message: 'Error creating product type',
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
 
-// Update product type
+// Update product type by ID
 export const updateProductType = async (
   req: Request<ProductTypeRequestParams>,
   res: Response
@@ -79,22 +130,33 @@ export const updateProductType = async (
       }
     );
     if (!updatedProductType) {
-      res
-        .status(404)
-        .json({ success: false, message: 'Product type not found' });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: 'Product type not found',
+      });
       return;
     }
-    res.status(200).json({ success: true, data: updatedProductType });
-  } catch (err) {
-    res.status(400).json({
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: 'Product type updated successfully',
+      data: updatedProductType,
+    });
+  } catch (error) {
+    sendResponse({
+      res,
+      statusCode: 400,
       success: false,
       message: 'Error updating product type',
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
 
-// Delete product type
+// Delete product type by ID
 export const deleteProductType = async (
   req: Request<ProductTypeRequestParams>,
   res: Response
@@ -104,19 +166,27 @@ export const deleteProductType = async (
       req.params.typeId
     );
     if (!deletedProductType) {
-      res
-        .status(404)
-        .json({ success: false, message: 'Product type not found' });
+      sendResponse({
+        res,
+        statusCode: 404,
+        success: false,
+        message: 'Product type not found',
+      });
       return;
     }
-    res
-      .status(200)
-      .json({ success: true, message: 'Product type deleted successfully' });
-  } catch (err) {
-    res.status(500).json({
+    sendResponse({
+      res,
+      statusCode: 200,
+      success: true,
+      message: 'Product type deleted successfully',
+    });
+  } catch (error) {
+    sendResponse({
+      res,
+      statusCode: 500,
       success: false,
       message: 'Error deleting product type',
-      error: err instanceof Error ? err.message : 'Unknown error',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };

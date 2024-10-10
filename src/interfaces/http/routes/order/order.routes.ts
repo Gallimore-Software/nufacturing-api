@@ -1,7 +1,7 @@
-import * as orderController from '@interfaces/http/controllers/sales/order.controller';
-import RoleMiddleware from '@interfaces/http/middleware/role.middleware'; // Import the class, not default instance
+import * as orderController from '@interfaces/http/controllers/order/order.controller';
+import RoleMiddleware from '@interfaces/http/middleware/role.middleware';
 import express from 'express';
-import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify
+import { container } from '@infrastructure/di/container';
 import { UserRole } from '@domain/entities/user/user-role';
 
 const router = express.Router();

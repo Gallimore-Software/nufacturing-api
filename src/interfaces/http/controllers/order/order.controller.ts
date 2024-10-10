@@ -1,11 +1,6 @@
 import Order from '@infrastructure/persistence/models/order/order-model';
 import { Request, Response } from 'express';
 
-// Define types for request parameters
-interface OrderRequestParams {
-  orderId: string;
-}
-
 // Utility function for standardized response handling
 const sendResponse = <T>({
   res,
@@ -57,13 +52,15 @@ export const getAllOrders = async (
 
 // Get order by ID
 export const getOrderById = async (
-  req: Request<OrderRequestParams>,
+  req: Request<{ orderId: string }>,
   res: Response
 ): Promise<void> => {
   try {
-    const order = await Order.findById(req.params.orderId).populate(
+    const { orderId } = req.params;
+    const order = await Order.findById(orderId).populate(
       'customer products.productId'
     );
+
     if (!order) {
       sendResponse({
         res,
@@ -73,6 +70,7 @@ export const getOrderById = async (
       });
       return;
     }
+
     sendResponse({
       res,
       statusCode: 200,
@@ -99,6 +97,7 @@ export const createOrder = async (
   try {
     const newOrder = new Order(req.body);
     await newOrder.save();
+
     sendResponse({
       res,
       statusCode: 201,
@@ -119,18 +118,16 @@ export const createOrder = async (
 
 // Update order
 export const updateOrder = async (
-  req: Request<OrderRequestParams>,
+  req: Request<{ orderId: string }>,
   res: Response
 ): Promise<void> => {
   try {
-    const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.orderId,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
+    const { orderId } = req.params;
+    const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
     if (!updatedOrder) {
       sendResponse({
         res,
@@ -140,6 +137,7 @@ export const updateOrder = async (
       });
       return;
     }
+
     sendResponse({
       res,
       statusCode: 200,
@@ -160,11 +158,13 @@ export const updateOrder = async (
 
 // Delete order
 export const deleteOrder = async (
-  req: Request<OrderRequestParams>,
+  req: Request<{ orderId: string }>,
   res: Response
 ): Promise<void> => {
   try {
-    const deletedOrder = await Order.findByIdAndDelete(req.params.orderId);
+    const { orderId } = req.params;
+    const deletedOrder = await Order.findByIdAndDelete(orderId);
+
     if (!deletedOrder) {
       sendResponse({
         res,
@@ -174,6 +174,7 @@ export const deleteOrder = async (
       });
       return;
     }
+
     sendResponse({
       res,
       statusCode: 200,

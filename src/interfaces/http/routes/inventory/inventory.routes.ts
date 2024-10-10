@@ -1,6 +1,6 @@
-import inventoryController from '@interfaces/http/controllers/inventory/inventory.controller';
-import { roleMiddleware } from '@interfaces/http/middleware/role.middleware';
-import validateInventoryItem from '@interfaces/http/middleware/validation.middleware';
+import { UserRole } from '@domain/entities/user/user-role';
+import roleMiddleware from '@interfaces/http/middleware/role.middleware';
+import validateInventoryItem from '@interfaces/http/middleware/validate-inventory-item';
 import express from 'express';
 
 const router = express.Router();

@@ -1,9 +1,10 @@
-import LabTest from '@infrastructure/persistence/models/labTestModel';
-import { Request, Response } from 'express';
+import LabTest from '@infrastructure/persistence/models/lab-test/lab-test-model';
+import { RequestHandler } from 'express';
+import { ParamsDictionary } from 'express-serve-static-core'; // Import this for default parameter handling
 
 // Define types for request parameters and request body
-interface LabTestRequestParams {
-  id: string;
+interface LabTestRequestParams extends ParamsDictionary {
+  labTestId: string; // Add the labTestId parameter to the default ParamsDictionary
 }
 
 interface LabTestRequestBody {
@@ -17,9 +18,9 @@ interface LabTestRequestBody {
 }
 
 // Get all lab tests
-export const getAllLabTests = async (
-  req: Request,
-  res: Response
+export const getAllLabTests: RequestHandler = async (
+  _req,
+  res
 ): Promise<void> => {
   try {
     const labTests = await LabTest.find().populate('relatedInventoryItem');
@@ -34,12 +35,12 @@ export const getAllLabTests = async (
 };
 
 // Get a lab test by ID
-export const getLabTestById = async (
-  req: Request<LabTestRequestParams>,
-  res: Response
+export const getLabTestById: RequestHandler<LabTestRequestParams> = async (
+  req,
+  res
 ): Promise<void> => {
   try {
-    const labTest = await LabTest.findById(req.params.id).populate(
+    const labTest = await LabTest.findById(req.params.labTestId).populate(
       'relatedInventoryItem'
     );
     if (!labTest) {
@@ -57,10 +58,11 @@ export const getLabTestById = async (
 };
 
 // Create a new lab test
-export const createLabTest = async (
-  req: Request<object, object, LabTestRequestBody>,
-  res: Response
-): Promise<void> => {
+export const createLabTest: RequestHandler<
+  object,
+  object,
+  LabTestRequestBody
+> = async (req, res): Promise<void> => {
   try {
     const {
       testName,
@@ -94,10 +96,11 @@ export const createLabTest = async (
 };
 
 // Update a lab test
-export const updateLabTest = async (
-  req: Request<LabTestRequestParams, object, LabTestRequestBody>,
-  res: Response
-): Promise<void> => {
+export const updateLabTest: RequestHandler<
+  LabTestRequestParams,
+  object,
+  LabTestRequestBody
+> = async (req, res): Promise<void> => {
   try {
     const {
       testName,
@@ -110,7 +113,7 @@ export const updateLabTest = async (
     } = req.body;
 
     const updatedLabTest = await LabTest.findByIdAndUpdate(
-      req.params.id,
+      req.params.labTestId, // Make sure the parameter is correctly typed
       {
         testName,
         testDate,
@@ -139,12 +142,14 @@ export const updateLabTest = async (
 };
 
 // Delete a lab test
-export const deleteLabTest = async (
-  req: Request<LabTestRequestParams>,
-  res: Response
+export const deleteLabTest: RequestHandler<LabTestRequestParams> = async (
+  req,
+  res
 ): Promise<void> => {
   try {
-    const deletedLabTest = await LabTest.findByIdAndDelete(req.params.id);
+    const deletedLabTest = await LabTest.findByIdAndDelete(
+      req.params.labTestId
+    );
     if (!deletedLabTest) {
       res.status(404).json({ success: false, message: 'Lab test not found' });
       return;

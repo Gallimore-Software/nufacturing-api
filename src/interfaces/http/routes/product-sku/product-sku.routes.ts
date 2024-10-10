@@ -1,4 +1,4 @@
-import * as productSkuController from '@interfaces/http/controllers/product-development/product-sku.controller';
+import * as productSkuController from '@interfaces/http/controllers/product-sku/product-sku.controller';
 import RoleMiddleware from '@interfaces/http/middleware/role.middleware'; // Import the class, not default instance
 import express from 'express';
 import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify
@@ -13,7 +13,7 @@ const roleMiddleware = container.resolve(RoleMiddleware);
 router.get(
   '/',
   roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
-  productSkuController.getAllProductSKUs
+  productSkuController.getAllProductSKUs as unknown as express.RequestHandler
 );
 router.get(
   '/:skuId',
@@ -22,22 +22,22 @@ router.get(
     new UserRole('Manager'),
     new UserRole('User'),
   ]),
-  productSkuController.getProductSKUById
+  productSkuController.getProductSKUById as unknown as express.RequestHandler
 );
 router.post(
   '/',
   roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
-  productSkuController.createProductSKU
+  productSkuController.createProductSKU as unknown as express.RequestHandler
 );
 router.put(
   '/:skuId',
   roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
-  productSkuController.updateProductSKU
+  productSkuController.updateProductSKU as unknown as express.RequestHandler
 );
 router.delete(
   '/:skuId',
   roleMiddleware.handle([new UserRole('Admin')]),
-  productSkuController.deleteProductSKU
+  productSkuController.deleteProductSKU as unknown as express.RequestHandler
 );
 
 export default router;
