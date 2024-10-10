@@ -2,18 +2,18 @@ import { InventoryItem } from '@infrastructure/persistence/models/inventory/inve
 
 class MongooseInventoryRepository {
   // Find inventory item by name or SKU (used for checking duplicates)
-  static async findByNameOrSKU(name, sku) {
+  static async findByNameOrSKU(name: string, sku: string) {
     return await InventoryItem.findOne({ $or: [{ name }, { sku }] });
   }
 
   // Create a new inventory item
-  static async create(data) {
+  static async create(data: any) {
     const newInventoryItem = new InventoryItem(data);
     return await newInventoryItem.save();
   }
 
   // Find inventory item by ID
-  static async findById(id) {
+  static async findById(id: string) {
     return await InventoryItem.findById(id);
   }
 
@@ -23,17 +23,17 @@ class MongooseInventoryRepository {
   }
 
   // Update inventory item by ID
-  static async updateById(id, updateData) {
+  static async updateById(id: string, updateData: Date) {
     return await InventoryItem.findByIdAndUpdate(id, updateData, { new: true });
   }
 
   // Delete inventory item by ID
-  static async deleteById(id) {
+  static async deleteById(id: string) {
     return await InventoryItem.findByIdAndDelete(id);
   }
 
   // Find inventory items by date range (for tracking inventory over time)
-  static async findByDateRange(startDate, endDate) {
+  static async findByDateRange(startDate: Date, endDate: Date) {
     return await InventoryItem.find({
       createdAt: {
         $gte: startDate,
@@ -43,7 +43,7 @@ class MongooseInventoryRepository {
   }
 
   // Combine inventory items by a given attribute (e.g., date for batch processing)
-  static async combineByAttribute(attribute) {
+  static async combineByAttribute(attribute: any) {
     return await InventoryItem.aggregate([
       {
         $group: {
@@ -75,7 +75,7 @@ class MongooseInventoryRepository {
   // }
 
   // Update inventory stock quantity
-  static async updateStockQuantity(id, quantityChange) {
+  static async updateStockQuantity(id: string, quantityChange: number) {
     return await InventoryItem.findByIdAndUpdate(
       id,
       { $inc: { stockQuantity: quantityChange } },
@@ -84,7 +84,7 @@ class MongooseInventoryRepository {
   }
 
   // Update price information
-  static async updatePrice(id, newPrice) {
+  static async updatePrice(id: string, newPrice: number) {
     return await InventoryItem.findByIdAndUpdate(
       id,
       { price: newPrice, priceLastUpdated: new Date() },
@@ -93,7 +93,7 @@ class MongooseInventoryRepository {
   }
 
   // Mark inventory as processed (e.g., for batch completion)
-  static async markAsProcessed(id) {
+  static async markAsProcessed(id: string) {
     return await InventoryItem.findByIdAndUpdate(
       id,
       { status: 'processed' },
