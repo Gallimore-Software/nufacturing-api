@@ -3,7 +3,6 @@ import { Request, Response } from 'express';
 
 // Get all formulas
 export const getAllFormulas = async (
-  req: Request,
   res: Response
 ): Promise<void> => {
   try {

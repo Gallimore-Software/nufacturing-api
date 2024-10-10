@@ -111,7 +111,9 @@
       "veracore"
     ],
     "cSpell.ignoreWords": [
+      "Gummies",
       "Nufacturing",
+      "Stickpacks",
       "autogen",
       "dtos",
       "gallimore",
@@ -121,6 +123,7 @@
       "plopfile",
       "precommit",
       "skus",
+      "unverify",
       "veracore"
     ],
   },
