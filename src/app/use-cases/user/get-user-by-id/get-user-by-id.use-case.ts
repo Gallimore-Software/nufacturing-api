@@ -28,8 +28,13 @@ export class GetUserByIdUseCase {
       // Return the user as a success result
       return Result.ok<User>(user);
     } catch (error) {
-      // Handle unexpected errors
-      return Result.fail<User>(error.message);
+      // Added type guards
+      if (error instanceof Error) {
+        return Result.fail<User>(error.message);
+      } else {
+        // Handle unexpected errors
+        return Result.fail<User>('An unexpected error occurred');
+      }
     }
   }
 }
