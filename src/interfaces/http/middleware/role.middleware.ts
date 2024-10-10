@@ -2,7 +2,6 @@
 
 import { JWTPayload } from '@domain/interfaces/jwt/jwt-payload.interface';
 import { JWTService } from '@app/services/jwt-service/jwt-service-service';
-import { CheckUserRoleUseCase } from '@use-cases/user/check-user-role/check-user-role.use-case';
 import { TYPES } from '@infrastructure/di/types';
 import { inject, injectable } from 'inversify';
 import { Request, Response, NextFunction } from 'express';
@@ -12,8 +11,6 @@ import { UserRole } from '@domain/entities/user/user-role';
 export class RoleMiddleware {
   constructor(
     @inject(TYPES.JWTService) private jwtService: JWTService,
-    @inject(TYPES.CheckUserRoleUseCase)
-    private checkUserRoleUseCase: CheckUserRoleUseCase
   ) {}
 
   public handle(roles: UserRole[] | UserRole) {

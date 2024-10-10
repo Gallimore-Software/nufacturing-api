@@ -24,7 +24,7 @@ export class UserController {
   }
 
   // Controller for getting all users
-  static async getAllUsers(req: Request, res: Response): Promise<Response> {
+  static async getAllUsers(res: Response): Promise<Response> {
     // Added req to match middleware
     const getAllUsersUseCase = container.get(GetAllUsersUseCase);
     try {
