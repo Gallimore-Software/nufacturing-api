@@ -1,6 +1,8 @@
 import { GetAllUsersUseCase } from './get-all-users.use-case';
 import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
 import { User } from '@domain/entities/user/user-entity';
+import { UserRole } from '@domain/entities/user/user-role';
+import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
 
 describe('GetAllUsersUseCase', () => {
   let getAllUsersUseCase: GetAllUsersUseCase;
@@ -26,15 +28,23 @@ describe('GetAllUsersUseCase', () => {
         username: 'JohnDoe',
         password: 'password',
         email: 'john@example.com',
-        role: 'user',
+        role: new UserRole(UserRole.USER),
         emailVerified: false,
+        isDeleted: false,
+        id: new UniqueEntityID(),
+        phoneNumber: '123-456-7890',
+        createdAt: new Date(),
       }).getValue(),
       User.create({
         username: 'JaneDoe',
         password: 'password',
         email: 'jane@example.com',
-        role: 'user',
+        role: new UserRole(UserRole.USER),
         emailVerified: true,
+        isDeleted: false,
+        id: new UniqueEntityID(),
+        phoneNumber: '321-654-0987',
+        createdAt: new Date(),        
       }).getValue(),
     ];
 
