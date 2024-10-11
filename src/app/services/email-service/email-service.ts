@@ -1,3 +1,4 @@
+import { User } from '@domain/entities/user/user-entity';
 import Logger from '@infrastructure/logging/logger';
 import { injectable } from 'inversify';
 import nodemailer from 'nodemailer';
@@ -39,5 +40,9 @@ export class EmailService {
       Logger.error('Failed to send email', error);
       throw new Error('Error sending email');
     }
+  }
+
+  async sendWelcomeEmail(savedUser: User) {
+    throw new Error('Method not implemented.');
   }
 }

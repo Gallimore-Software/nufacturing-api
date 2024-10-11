@@ -3,7 +3,10 @@ import { Guard } from './against-null-or-undefined-bulk.guard';
 describe('Guard.againstNullOrUndefinedBulk', () => {
   it('should return success when all arguments are valid (not null or undefined)', () => {
     // Arrange
-    const args = [
+    const args: {
+      argument: string | number | boolean | null | undefined;
+      argumentName: string;
+    }[] = [
       { argument: 'valid string', argumentName: 'firstArg' },
       { argument: 123, argumentName: 'secondArg' },
       { argument: true, argumentName: 'thirdArg' },
@@ -19,7 +22,10 @@ describe('Guard.againstNullOrUndefinedBulk', () => {
 
   it('should return failure when one of the arguments is null', () => {
     // Arrange
-    const args = [
+    const args: {
+      argument: string | number | boolean | null | undefined;
+      argumentName: string;
+    }[] = [
       { argument: 'valid string', argumentName: 'firstArg' },
       { argument: null, argumentName: 'secondArg' }, // null value
       { argument: true, argumentName: 'thirdArg' },
@@ -35,7 +41,10 @@ describe('Guard.againstNullOrUndefinedBulk', () => {
 
   it('should return failure when one of the arguments is undefined', () => {
     // Arrange
-    const args = [
+    const args: {
+      argument: string | number | boolean | null | undefined;
+      argumentName: string;
+    }[] = [
       { argument: 'valid string', argumentName: 'firstArg' },
       { argument: undefined, argumentName: 'secondArg' }, // undefined value
       { argument: true, argumentName: 'thirdArg' },
@@ -51,7 +60,10 @@ describe('Guard.againstNullOrUndefinedBulk', () => {
 
   it('should return failure when multiple arguments are null or undefined', () => {
     // Arrange
-    const args = [
+    const args: {
+      argument: string | number | boolean | null | undefined;
+      argumentName: string;
+    }[] = [
       { argument: undefined, argumentName: 'firstArg' }, // undefined value
       { argument: null, argumentName: 'secondArg' }, // null value
       { argument: true, argumentName: 'thirdArg' },

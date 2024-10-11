@@ -1,6 +1,6 @@
 // src/domain/permissions/order-permissions.ts
 
-export enum OrderPermissionsEnum {
+export enum OrderPermissions {
   CREATE_ORDER = 'createOrder',
   READ_ORDER = 'readOrder',
   UPDATE_ORDER = 'updateOrder',

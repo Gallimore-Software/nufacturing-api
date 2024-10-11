@@ -1,5 +1,5 @@
-import BatchRecords from '@infrastructure/persistence/models//batch-record/batch-record-model';
-import { Request, Response } from 'express';
+import { RequestHandler, Request, Response } from 'express';
+import BatchRecords from '@infrastructure/persistence/models/batch-record/batch-record-model';
 
 // Define type for req.params
 interface BatchRecordRequestParams {
@@ -7,9 +7,9 @@ interface BatchRecordRequestParams {
 }
 
 // Create a new batch record
-export const createBatchRecord = async (
-  req: Request,
-  res: Response
+export const createBatchRecord: RequestHandler = async (
+  req,
+  res
 ): Promise<void> => {
   try {
     const batchRecord = new BatchRecords(req.body);
@@ -25,7 +25,10 @@ export const createBatchRecord = async (
 };
 
 // Get all batch records
-export const getAllBatchRecords = async (res: Response): Promise<void> => {
+export const getAllBatchRecords: RequestHandler = async (
+  req,
+  res
+): Promise<void> => {
   try {
     const batchRecords = await BatchRecords.find();
     res.status(200).json({ success: true, data: batchRecords });
@@ -39,9 +42,9 @@ export const getAllBatchRecords = async (res: Response): Promise<void> => {
 };
 
 // Get a single batch record by ID
-export const getBatchRecordById = async (
-  req: Request<BatchRecordRequestParams>,
-  res: Response
+export const getBatchRecordById: RequestHandler<{ _id: string }> = async (
+  req,
+  res
 ): Promise<void> => {
   try {
     const batchRecord = await BatchRecords.findById(req.params._id);
@@ -62,9 +65,9 @@ export const getBatchRecordById = async (
 };
 
 // Update a batch record by ID
-export const updateBatchRecordById = async (
-  req: Request<BatchRecordRequestParams>,
-  res: Response
+export const updateBatchRecordById: RequestHandler<{ _id: string }> = async (
+  req,
+  res
 ): Promise<void> => {
   try {
     const batchRecord = await BatchRecords.findByIdAndUpdate(
@@ -92,9 +95,9 @@ export const updateBatchRecordById = async (
 };
 
 // Delete a batch record by ID
-export const deleteBatchRecordById = async (
-  req: Request<BatchRecordRequestParams>,
-  res: Response
+export const deleteBatchRecordById: RequestHandler<{ _id: string }> = async (
+  req,
+  res
 ): Promise<void> => {
   try {
     const batchRecord = await BatchRecords.findByIdAndDelete(req.params._id);

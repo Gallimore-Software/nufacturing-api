@@ -15,6 +15,7 @@ router.get(
   roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
   batchRecordsController.getAllBatchRecords
 );
+
 router.get(
   '/:_id',
   roleMiddleware.handle([
@@ -24,16 +25,19 @@ router.get(
   ]),
   batchRecordsController.getBatchRecordById
 );
+
 router.post(
   '/',
   roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
   batchRecordsController.createBatchRecord
 );
+
 router.put(
   '/:_id',
   roleMiddleware.handle([new UserRole('Admin'), new UserRole('Manager')]),
   batchRecordsController.updateBatchRecordById
 );
+
 router.delete(
   '/:_id',
   roleMiddleware.handle([new UserRole('Admin')]),

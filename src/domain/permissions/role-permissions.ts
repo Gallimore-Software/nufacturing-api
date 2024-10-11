@@ -1,8 +1,8 @@
 // src/domain/permissions/role-permissions.ts
 
 import { UserRole } from '@domain/entities/user/user-role';
-import { UserPermissions } from './user-permissions';
-import { OrderPermissions } from './order-permissions';
+import { OrderPermissions } from '@domain/permissions/order-permission';
+import { UserPermissions } from '@domain/permissions/user-permission';
 
 export class RolePermissions {
   private static permissions: Record<

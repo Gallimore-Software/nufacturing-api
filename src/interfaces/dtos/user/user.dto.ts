@@ -1,3 +1,4 @@
+import { UserProps } from '@domain/entities/user/user-props';
 import { UserRole } from '@domain/entities/user/user-role';
 
 export interface CreateUserDTO {
@@ -15,4 +16,4 @@ export interface UserDTO {
   phoneNumber: string;
 }
 
-export type UpdateUserDTO = Partial<UserDTO>;
+export type UpdateUserDTO = Partial<UserProps>;

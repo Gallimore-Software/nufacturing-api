@@ -34,23 +34,44 @@ describe('DeleteUserUseCase Integration Test', () => {
       role: new UserRole('User'),
       emailVerified: false,
       createdAt: new Date(),
+      isDeleted: false,
     }).getValue();
 
     const savedUser = await userRepository.createUser(user);
 
+    // Prepare the requesting user (assuming an Admin is performing the deletion)
+    const requestingUser = {
+      id: new UniqueEntityID(), // This can be the same or different depending on your scenario
+      role: new UserRole('Admin'), // Adjust the role based on your logic
+    };
+
     // Act: Delete the user
-    const result = await deleteUserUseCase.execute(savedUser.id.toString());
+    const result = await deleteUserUseCase.execute(
+      savedUser.id,
+      requestingUser
+    );
 
     // Assert: Verify that the user was deleted
     expect(result).toBe(true);
 
-    const foundUser = await userRepository.findById(savedUser.id.toString());
+    const foundUser = await userRepository.findById(
+      new UniqueEntityID(savedUser.id.toString())
+    );
     expect(foundUser).toBeNull();
   });
 
   it('should return false if the user does not exist', async () => {
+    // Prepare the requesting user (e.g., Admin)
+    const requestingUser = {
+      id: new UniqueEntityID(),
+      role: new UserRole('Admin'),
+    };
+
     // Act: Try to delete a non-existent user
-    const result = await deleteUserUseCase.execute('nonexistent-id');
+    const result = await deleteUserUseCase.execute(
+      new UniqueEntityID('nonexistent-id'),
+      requestingUser
+    );
 
     // Assert: Should return false
     expect(result).toBe(false);

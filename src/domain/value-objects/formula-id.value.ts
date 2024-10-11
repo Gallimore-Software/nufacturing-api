@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export class FormulaId {
   private readonly value: mongoose.Types.ObjectId;
 
