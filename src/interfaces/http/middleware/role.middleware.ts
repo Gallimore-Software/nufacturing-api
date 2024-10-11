@@ -1,5 +1,3 @@
-// src/interfaces/http/middleware/role.middleware.ts
-
 import { JWTPayload } from '@domain/interfaces/jwt/jwt-payload.interface';
 import { JWTService } from '@app/services/jwt-service/jwt-service-service';
 import { TYPES } from '@infrastructure/di/types';
@@ -9,9 +7,7 @@ import { UserRole } from '@domain/entities/user/user-role';
 
 @injectable()
 export class RoleMiddleware {
-  constructor(
-    @inject(TYPES.JWTService) private jwtService: JWTService,
-  ) {}
+  constructor(@inject(TYPES.JWTService) private jwtService: JWTService) {}
 
   public handle(roles: UserRole[] | UserRole) {
     return async (

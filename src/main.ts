@@ -10,10 +10,9 @@ const app = express();
 // Example usage of middleware with DI
 app.use(
   '/protected-route',
-  new RoleMiddleware(
-    container.get(TYPES.JWTService),
-    container.get(TYPES.CheckUserRoleUseCase)
-  ).handle([new UserRole('Admin')]) // Call the `handle` method
+  new RoleMiddleware(container.get(TYPES.JWTService)).handle([
+    new UserRole('Admin'),
+  ])
 );
 
 app.listen(3000, () => {

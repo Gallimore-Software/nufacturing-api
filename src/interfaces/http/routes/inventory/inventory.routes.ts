@@ -1,9 +1,14 @@
 import { UserRole } from '@domain/entities/user/user-role';
-import roleMiddleware from '@interfaces/http/middleware/role.middleware';
+import RoleMiddleware from '@interfaces/http/middleware/role.middleware';
 import validateInventoryItem from '@interfaces/http/middleware/validate-inventory-item';
 import express from 'express';
+import * as inventoryController from '@interfaces/http/controllers/inventory/inventory.controller';
+import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify
 
 const router = express.Router();
+
+// Instantiate the RoleMiddleware class via DI container
+const roleMiddleware = container.resolve(RoleMiddleware);
 
 // Define routes with role-based access control
 router.get(
