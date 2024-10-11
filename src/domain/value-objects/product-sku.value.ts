@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export class ProductSKU {
   private readonly value: mongoose.Types.ObjectId;
 

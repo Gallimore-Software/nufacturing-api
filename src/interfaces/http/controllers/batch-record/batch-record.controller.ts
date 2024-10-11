@@ -1,10 +1,5 @@
-import { RequestHandler, Request, Response } from 'express';
+import { RequestHandler } from 'express';
 import BatchRecords from '@infrastructure/persistence/models/batch-record/batch-record-model';
-
-// Define type for req.params
-interface BatchRecordRequestParams {
-  _id: string;
-}
 
 // Create a new batch record
 export const createBatchRecord: RequestHandler = async (
@@ -26,7 +21,7 @@ export const createBatchRecord: RequestHandler = async (
 
 // Get all batch records
 export const getAllBatchRecords: RequestHandler = async (
-  req,
+  _req,
   res
 ): Promise<void> => {
   try {

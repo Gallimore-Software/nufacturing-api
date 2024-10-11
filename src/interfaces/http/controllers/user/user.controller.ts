@@ -109,7 +109,9 @@ export class UserController {
   static async verifyEmail(req: Request, res: Response): Promise<Response> {
     const verifyEmailUseCase = container.get(VerifyEmailUseCase);
     try {
-      const result = await verifyEmailUseCase.execute(req.params.token);
+      const result = await verifyEmailUseCase.execute(
+        new UniqueEntityID(req.params.token)
+      );
       return res.status(200).json({ message: result });
     } catch (error: unknown) {
       return handleError(res, error);

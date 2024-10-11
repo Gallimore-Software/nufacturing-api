@@ -1,4 +1,4 @@
-import { body, ValidationError, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 
 // Validation rules for inventory item
@@ -26,6 +26,7 @@ const validateInventoryItem = [
       return res.status(400).json({ success: false, errors: errors.array() });
     }
     next();
+    return;
   },
 ];
 

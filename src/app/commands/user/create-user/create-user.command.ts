@@ -1,8 +1,10 @@
-import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
+import { EmailService } from '@app/services/email-service/email-service';
 import { User } from '@domain/entities/user/user-entity';
+import { UserProps } from '@domain/entities/user/user-props';
+import { UserRole } from '@domain/entities/user/user-role';
+import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
 import { CreateUserDTO } from '@interfaces/dtos/user/user.dto';
 import { injectable, inject } from 'inversify';
-import { EmailService } from '@services/email-service/email-service';
 
 @injectable()
 export class CreateUserUseCase {
@@ -12,12 +14,19 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(userDTO: CreateUserDTO): Promise<User> {
-    const user = User.create(userDTO).getValue();
+    // Set a default role if none is provided
+    const role = userDTO.role ?? new UserRole('User'); // Default to 'User' role if undefined
 
+    const userProps: UserProps = {
+      ...userDTO,
+      role, // Now role is guaranteed to be present
+    };
+
+    const user = User.create(userProps).getValue();
     const savedUser = await this.userRepository.createUser(user);
 
     // Optionally, send an email notification
-    await this.emailService.sendWelcomeEmail(savedUser);
+    await this.emailService.sendWelcomeEmail();
 
     return savedUser;
   }

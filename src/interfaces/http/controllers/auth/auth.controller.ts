@@ -30,7 +30,7 @@ export class UserRepository implements IUserRepository {
   }
 
   // Find a user by their ID
-  async findById(id: string): Promise<User | null> {
+  async findById(id: UniqueEntityID): Promise<User | null> {
     const userModel = await UserModel.findById(id);
     if (!userModel) return null;
     return this.toDomain(userModel);
@@ -45,7 +45,7 @@ export class UserRepository implements IUserRepository {
 
   // Update a user's details by ID
   async updateUser(
-    id: string,
+    id: UniqueEntityID,
     updatedUser: Partial<User>
   ): Promise<User | null> {
     const updatedUserModel = await UserModel.findByIdAndUpdate(
@@ -58,7 +58,7 @@ export class UserRepository implements IUserRepository {
   }
 
   // Delete a user by ID
-  async deleteUser(id: string): Promise<boolean> {
+  async deleteUser(id: UniqueEntityID): Promise<boolean> {
     const deleted = await UserModel.findByIdAndDelete(id);
     return !!deleted;
   }
