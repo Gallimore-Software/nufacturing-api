@@ -1,80 +1,41 @@
-import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
-import { User } from '@domain/entities/user/user-entity';
-import UserModel, {
-  IUserModel,
-} from '@infrastructure/persistence/models/user/user-model';
-import { injectable } from 'inversify';
-import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
+import { Request, Response } from 'express';
+import { container } from '@infrastructure/di/container';
+import { AuthService } from '@app/auth/auth.service';
 
-@injectable()
-export class UserRepository implements IUserRepository {
-  // Find all users in the database
-  async findAll(): Promise<User[]> {
-    const users = await UserModel.find(); // Fetch all users from the database
-    return users.map(this.toDomain); // Map each user model to domain entity
+export class AuthController {
+  // Login endpoint to issue a token
+  static async login(req: Request, res: Response): Promise<Response> {
+    const authService = container.get(AuthService);
+    const { email, password } = req.body;
+
+    console.log('Login request received:', { email, password }); // ADD THIS LOGGING LINE
+
+    try {
+      const token = await authService.authenticate(email, password);
+      if (!token) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+      }
+
+      return res.status(200).json({ token });
+    } catch (error) {
+      return res.status(500).json({ message: 'Internal server error' });
+    }
   }
 
-  // Create a new user in the database
-  async createUser(user: User): Promise<User> {
-    const userModel = new UserModel({
-      username: user.props.username,
-      password: user.props.password,
-      email: user.props.email,
-      role: user.props.role,
-      emailVerified: user.props.emailVerified,
-      createdAt: user.props.createdAt ?? new Date(),
-    });
+  // Refresh token endpoint to issue a new access token
+  static async refreshToken(req: Request, res: Response): Promise<Response> {
+    const authService = container.get(AuthService);
+    const { refreshToken } = req.body;
 
-    const savedUser = await userModel.save();
-    return this.toDomain(savedUser);
-  }
+    try {
+      const newToken = await authService.refreshToken(refreshToken);
+      if (!newToken) {
+        return res.status(401).json({ message: 'Invalid refresh token' });
+      }
 
-  // Find a user by their ID
-  async findById(id: UniqueEntityID): Promise<User | null> {
-    const userModel = await UserModel.findById(id);
-    if (!userModel) return null;
-    return this.toDomain(userModel);
-  }
-
-  // Find a user by their email
-  async findByEmail(email: string): Promise<User | null> {
-    const userModel = await UserModel.findOne({ email });
-    if (!userModel) return null;
-    return this.toDomain(userModel);
-  }
-
-  // Update a user's details by ID
-  async updateUser(
-    id: UniqueEntityID,
-    updatedUser: Partial<User>
-  ): Promise<User | null> {
-    const updatedUserModel = await UserModel.findByIdAndUpdate(
-      id,
-      updatedUser,
-      { new: true }
-    );
-    if (!updatedUserModel) return null;
-    return this.toDomain(updatedUserModel);
-  }
-
-  // Delete a user by ID
-  async deleteUser(id: UniqueEntityID): Promise<boolean> {
-    const deleted = await UserModel.findByIdAndDelete(id);
-    return !!deleted;
-  }
-
-  // Convert persistence model to domain entity
-  private toDomain(userModel: IUserModel): User {
-    return User.create({
-      username: userModel.username,
-      password: userModel.password,
-      email: userModel.email,
-      role: userModel.role,
-      emailVerified: userModel.emailVerified,
-      createdAt: userModel.createdAt,
-      isDeleted: false,
-      id: new UniqueEntityID(),
-      phoneNumber: '',
-    }).getValue();
+      return res.status(200).json({ token: newToken });
+    } catch (error) {
+      return res.status(500).json({ message: 'Internal server error' });
+    }
   }
 }

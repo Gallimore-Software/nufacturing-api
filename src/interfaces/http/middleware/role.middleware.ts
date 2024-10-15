@@ -1,4 +1,4 @@
-import { JWTPayload } from '@domain/interfaces/jwt/jwt-payload.interface';
+import { JWTPayload } from '@domain/interfaces/infrastructure/services/jwt/jwt-payload.interface';
 import { JWTService } from '@app/services/jwt-service/jwt-service-service';
 import { TYPES } from '@infrastructure/di/types';
 import { inject, injectable } from 'inversify';

@@ -1,4 +1,4 @@
-import { JWTPayload } from '@domain/interfaces/jwt/jwt-payload.interface';
+import { JWTPayload } from '@domain/interfaces/infrastructure/services/jwt/jwt-payload.interface';
 import Logger from '@infrastructure/logging/logger';
 import { injectable } from 'inversify';
 import jwt from 'jsonwebtoken';

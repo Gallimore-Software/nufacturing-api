@@ -1,6 +1,6 @@
 import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
-import { IHashService } from '@infrastructure/services/hash-service.interface';
-import { IJWTService } from '@domain/interfaces/jwt-service.interface';
+import { IHashService } from '@domain/interfaces/infrastructure/services/hash/hash-service.interface';
+import { IJWTService } from '@domain/interfaces/infrastructure/services/jwt/jwt-service.interface';
 import { LoginUserDTO } from '@interfaces/dtos/user/login-user.dto';
 import { Either, left, right } from '@domain/shared/core/either';
 import { Result } from '@domain/shared/core/result';
@@ -9,7 +9,7 @@ import {
   UnexpectedError,
 } from '@domain/shared/core/errors/app-error';
 import { UseCase } from '@domain/shared/core/use-case';
-import { JWTPayload } from '@domain/interfaces/jwt/jwt-payload.interface';
+import { JWTPayload } from '@domain/interfaces/infrastructure/services/jwt/jwt-payload.interface';
 
 // Define the response type for the use case
 type Response = Either<UnexpectedError | AuthenticationError, Result<string>>;

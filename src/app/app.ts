@@ -7,7 +7,8 @@ import swaggerDocument from '../../docs/generated/swagger/swagger_output.json';
 const allowedDomains = process.env.ALLOWED_DOMAINS
   ? process.env.ALLOWED_DOMAINS.split(',')
   : [];
-const domainWhitelist = new DomainWhitelist(allowedDomains);
+const allowAllOrigins = process.env.ALLOW_ALL_ORIGINS === 'true';
+const enforceHttps = process.env.FORCE_HTTPS === 'true';
 
 // Schedule tasks
 import '@scheduling/scheduled-tasks';
@@ -35,16 +36,20 @@ import { DomainWhitelist } from '@domain/value-objects/domain-whitelist.value';
 const app = express();
 
 // Set up CORS middleware with domain whitelist
+const domainWhitelist = new DomainWhitelist(allowedDomains);
 const corsOptions = {
   origin: (
     origin: string | undefined,
     callback: (err: Error | null, allow?: boolean) => void
   ) => {
-    if (!origin || domainWhitelist.isAllowedDomain(new URL(origin).hostname)) {
-      // If the origin is allowed or if there is no origin (like from Postman or a server-to-server request)
+    // Allow all origins if the flag is set, or use the domain whitelist
+    if (
+      allowAllOrigins ||
+      !origin ||
+      domainWhitelist.isAllowedDomain(new URL(origin).hostname)
+    ) {
       callback(null, true);
     } else {
-      // If the origin is not in the whitelist
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -58,6 +63,16 @@ app.use(express.json());
 
 // Connect to the database
 connectDB();
+
+// Middleware to force HTTPS if the flag is set
+if (enforceHttps) {
+  app.use((req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(`https://${req.headers.host}${req.url}`);
+    }
+    next();
+  });
+}
 
 // Routes
 app.use('/api/users', userRoutes);
