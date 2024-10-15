@@ -19,7 +19,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "typeRoots": ["node_modules/@types", "@types"],
-    "baseUrl": ".",
+    "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "./",
     "paths": {
@@ -44,7 +44,7 @@
       "@dtos/*": ["src/interfaces/dtos/*"],
       "@controllers/*": ["src/interfaces/http/controllers/*"],
       "@routes/*": ["src/interfaces/http/routes/*"],
-      "@swagger/*": ["src/interfaces/swagger/*"],
+      "@swagger/*": ["src/infrastructure/swagger/*"],
       "@validation-schemas/*": ["src/interfaces/validation-schemas/*"],
       "@middleware/*": ["src/interfaces/http/middleware/*"],
       "@scripts/*": ["scripts/*"],

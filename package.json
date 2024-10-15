@@ -18,7 +18,7 @@
     "prepare": "npx husky install",
     "clean": "npx rimraf dist dist-tests",
     "build": "npm run clean && npx tsc -p tsconfig.json",
-    "start": "nodemon --watch src --ext ts --exec tsx src/main.ts",
+    "start": "nodemon --watch src --ext ts --exec npx tsx src/main.ts",
     "start:env": "npx cross-env NODE_ENV=${NODE_ENV:-local} npx ts-node -r tsconfig-paths/register -P tsconfig.json src/main.ts",
     "dev": "cross-env NODE_ENV=development nodemon --watch \"src/**/*.ts\" --exec \"node --loader ts-node/esm -r tsconfig-paths/register ./src/main.ts\"",
     "test:build": "npx tsc --noEmit -p tsconfig.json",
@@ -31,7 +31,9 @@
     "lint:fix": "eslint --ext .ts,.tsx --config .eslintrc.js src --fix",
     "format": "npx prettier --check 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
     "format:fix": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
-    "precommit": "npm run lint && npm run format"
+    "precommit": "npm run lint && npm run format",
+    "cert": "openssl req -new -x509 -key key.pem -out cert.pem -days 365 -config \"C:/Program Files/Git/usr/ssl/openssl.cnf\"",
+    "docs": "node --loader ts-node/esm --experimental-specifier-resolution=node -r tsconfig-paths/register scripts/generate-docs.ts"
   },
   "husky": {
     "hooks": {
@@ -58,7 +60,6 @@
     "nodemailer": "^6.9.15",
     "nufacturing-api": "file:",
     "reflect-metadata": "^0.2.2",
-    "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^4.1.2",
     "ts-morph": "^23.0.0",
     "winston": "^3.15.0",
@@ -79,6 +80,7 @@
     "@types/node-cron": "^3.0.11",
     "@types/nodemailer": "^6.4.16",
     "@types/supertest": "^6.0.2",
+    "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
@@ -98,10 +100,12 @@
     "prettier": "^3.3.3",
     "rimraf": "^4.1.2",
     "supertest": "^7.0.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-jsdoc": "^6.2.8",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "resolutions": {
     "cookie": "0.7.0"

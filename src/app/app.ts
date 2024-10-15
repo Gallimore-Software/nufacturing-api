@@ -1,11 +1,7 @@
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express from 'express';
 import swaggerUI from 'swagger-ui-express';
-import swaggerDocument from '@docs/generated/swagger/swagger_output.json';
-
-// Load environment variables
-dotenv.config();
+import swaggerDocument from '../../docs/generated/swagger/swagger_output.json';
 
 // Initialize allowed domains from environment variables
 const allowedDomains = process.env.ALLOWED_DOMAINS
