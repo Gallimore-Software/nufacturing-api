@@ -18,6 +18,7 @@ export class RoleMiddleware {
       try {
         const authHeader = req.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
+          console.log('Authorization header missing or malformed');
           res
             .status(401)
             .json({ message: 'Authorization token missing or malformed' });
@@ -31,6 +32,8 @@ export class RoleMiddleware {
           token,
           process.env.JWT_SECRET as string
         );
+        console.log('Decoded payload:', decoded);
+
         if (!decoded) {
           res.status(401).json({ message: 'Invalid or expired token' });
           return;
@@ -38,6 +41,8 @@ export class RoleMiddleware {
 
         // Now that 'decoded' is typed, we can safely access 'role'
         const userRole = new UserRole(decoded.role);
+        console.log('User role:', userRole);
+
         if (Array.isArray(roles)) {
           const hasValidRole = roles.some((role) => userRole.equals(role));
           if (!hasValidRole) {
@@ -58,6 +63,7 @@ export class RoleMiddleware {
         req.body.userRole = userRole;
         next();
       } catch (error) {
+        console.log('Error during token verification:', error);
         res.status(500).json({
           message: 'An error occurred while verifying authorization',
           error: error instanceof Error ? error.message : 'Unknown error',

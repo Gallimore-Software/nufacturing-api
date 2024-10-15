@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2020",
     "module": "ESNext",
     "lib": ["ES2020", "DOM"],
     "moduleResolution": "node", 
@@ -9,6 +9,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -17,7 +19,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "typeRoots": ["node_modules/@types", "@types"],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "outDir": "./dist",
     "rootDir": "./",
     "paths": {
@@ -53,6 +55,10 @@
       "@nufulfillment/*": ["submodules/nufulfillment-veracore/src/*"],
       "@gallimore-devtools/*": ["submodules/gallimore-dev-tools/src/*"]
     }
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
   },
   "include": ["src/**/*.ts", "src/main.ts"],
   "exclude": [
