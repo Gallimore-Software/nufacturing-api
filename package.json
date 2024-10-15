@@ -18,9 +18,9 @@
     "prepare": "npx husky install",
     "clean": "npx rimraf dist dist-tests",
     "build": "npm run clean && npx tsc -p tsconfig.json",
-    "start": "npx cross-env NODE_ENV=production tsx src/main.ts",
+    "start": "nodemon --watch src --ext ts --exec tsx src/main.ts",
     "start:env": "npx cross-env NODE_ENV=${NODE_ENV:-local} npx ts-node -r tsconfig-paths/register -P tsconfig.json src/main.ts",
-    "dev": "npx cross-env NODE_ENV=production tsx src/main.ts",
+    "dev": "cross-env NODE_ENV=development nodemon --watch \"src/**/*.ts\" --exec \"node --loader ts-node/esm -r tsconfig-paths/register ./src/main.ts\"",
     "test:build": "npx tsc --noEmit -p tsconfig.json",
     "test": "npx jest --config jest.config.js --coverage",
     "test:watch": "npx jest --watch",
@@ -101,7 +101,6 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "tsx": "^4.19.1",
     "typescript": "^5.6.2"
   },
   "resolutions": {
