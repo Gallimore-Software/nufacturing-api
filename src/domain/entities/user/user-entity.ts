@@ -16,7 +16,7 @@ export class User extends Entity<UserProps> {
       { argument: props.email ?? '', argumentName: 'email' }, // Ensure email is a string
       { argument: props.username ?? '', argumentName: 'username' }, // Ensure username is a string
       { argument: props.password ?? '', argumentName: 'password' }, // Ensure password is a string
-      { argument: props.role?.getValue() ?? '', argumentName: 'role' }, // Ensure role is a valid string value
+      // { argument: props.role?.getValue() ?? '', argumentName: 'role' }, // Ensure role is a valid string value
     ]);
 
     if (!guardResult.succeeded) {

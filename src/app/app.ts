@@ -30,15 +30,50 @@ import userRoutes from '@interfaces/http/routes/user/user.routes';
 import vendorRoutes from '@interfaces/http/routes/vendor/vendor.routes';
 import batchRecordRoutes from '@interfaces/http/routes/batch-record/batch-record.routes';
 import labTestRoutes from '@interfaces/http/routes/lab-test/lab-test.routes';
+import authRoutes from '@interfaces/http/routes/auth/auth.routes';
+import { DomainWhitelist } from '@domain/value-objects/domain-whitelist.value';
 
 // Initialize express app
 const app = express();
+
+// Set up CORS middleware with domain whitelist
+const domainWhitelist = new DomainWhitelist(allowedDomains);
+const corsOptions = {
+  origin: (
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) => {
+    // Allow all origins if the flag is set, or use the domain whitelist
+    if (
+      allowAllOrigins ||
+      !origin ||
+      domainWhitelist.isAllowedDomain(new URL(origin).hostname)
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+// Apply the CORS middleware to all routes
+app.use(cors(corsOptions));
 
 // Middleware for parsing JSON requests
 app.use(express.json());
 
 // Connect to the database
 connectDB();
+
+// Middleware to force HTTPS if the flag is set
+if (enforceHttps) {
+  app.use((req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(`https://${req.headers.host}${req.url}`);
+    }
+    next();
+  });
+}
 
 // Routes
 app.use('/api/users', userRoutes);
@@ -54,6 +89,7 @@ app.use('/api/research-and-development/lab-testing', labTestRoutes);
 app.use('/api/receiving/receiving', receivingRoutes);
 app.use('/api/vendor', vendorRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/auth', authRoutes);
 
 // Serve Swagger documentation
 app.use('/api', swaggerUI.serve, swaggerUI.setup(swaggerDocument));

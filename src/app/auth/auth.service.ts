@@ -1,5 +1,5 @@
-// auth-service.ts
 import { inject, injectable } from 'inversify';
+import { TYPES } from '@infrastructure/di/types'; // Assuming the path to your TYPES file
 import { JWTService } from '@infrastructure/auth/jwt/jwt-service';
 import { IHashService } from '@domain/interfaces/infrastructure/services/hash/hash-service.interface';
 import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
@@ -7,9 +7,9 @@ import { IUserRepository } from '@domain/interfaces/repositories/user.repository
 @injectable()
 export class AuthService {
   constructor(
-    @inject('JWTService') private jwtService: JWTService,
-    @inject('HashService') private hashService: IHashService,
-    @inject('UserRepository') private userRepository: IUserRepository
+    @inject(TYPES.JWTService) private jwtService: JWTService,
+    @inject(TYPES.HashService) private hashService: IHashService,
+    @inject(TYPES.UserRepository) private userRepository: IUserRepository
   ) {}
 
   async authenticate(
@@ -19,6 +19,8 @@ export class AuthService {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) return null;
+    console.log(password);
+    console.log(user.props.password);
 
     const passwordValid = await this.hashService.compare(
       password,

@@ -39,6 +39,7 @@ export class UserRepository implements IUserRepository {
   // Find a user by their email
   async findByEmail(email: string): Promise<User | null> {
     const userModel = await UserModel.findOne({ email });
+    console.log('User model for debugging' + userModel);
     if (!userModel) return null;
     return this.toDomain(userModel); // Convert MongoDB model to domain entity
   }
