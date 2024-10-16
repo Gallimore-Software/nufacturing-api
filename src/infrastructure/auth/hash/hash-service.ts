@@ -5,7 +5,9 @@ import { IHashService } from '../../../domain/interfaces/infrastructure/services
 @injectable() // Add this decorator to make the class injectable
 export class HashService implements IHashService {
   async compare(plainText: string, hashed: string): Promise<boolean> {
-    return bcrypt.compare(plainText, hashed);
+    const hashResult = await bcrypt.compare(plainText, hashed);
+    console.log(hashResult);
+    return hashResult;
   }
 
   async hash(plainText: string): Promise<string> {

@@ -38,6 +38,35 @@ const referenceSchema = new Schema({
   },
 });
 
+const workInProgressSchema = new Schema({
+  wipId: { type: String, required: true }, // Unique WIP ID
+  productName: { type: String, required: true }, // Name of the product in production
+  batchId: { type: String, required: true }, // Link to the Batch ID
+  lotId: { type: String, required: true }, // Link to Lot ID (optional but helpful)
+  stageOfProduction: {
+    type: String,
+    required: true,
+    enum: ['Bottling', 'Labeling', 'Packaging', 'Quality Control'],
+  }, // Stage in production
+  quantityInProgress: { type: Number, required: true }, // Number of units being produced
+  costToDate: { type: Number, required: true }, // Accumulated cost for production (materials, labor, etc.)
+  estimatedCompletionDate: { type: Date, required: true }, // Projected completion date
+  workOrderId: { type: String, required: true }, // Work Order ID related to this WIP batch
+  leadTimeRemaining: { type: String }, // Time remaining to complete production
+  operator: { type: Schema.Types.ObjectId, ref: 'User' }, // Operator or team responsible for this WIP batch
+  status: {
+    type: String,
+    required: true,
+    enum: ['In Progress', 'Delayed', 'Completed'],
+  }, // Status of the WIP
+});
+
+// Export the schema to ensure it's available
+export const WorkInProgress = mongoose.model(
+  'WorkInProgress',
+  workInProgressSchema
+);
+
 const quantityPriceSchema = new Schema({
   minOrderQuantity: { type: Number, required: true },
   pricePerQuantity: { type: Number, required: true },
@@ -84,6 +113,7 @@ const inventoryItemSchema = new Schema({
   associatedReceivements: [referenceSchema],
   warehouseLocation: { type: Schema.Types.ObjectId, ref: 'WarehouseLocation' },
   batchTracking: [batchTrackingSchema], // Tracking individual batches of the same item
+  wipTracking: [workInProgressSchema], // Tracking work in progress batches
   certificateOfAuthenticity: { type: String }, // Certificate storage URL
   inventoryCategory: {
     type: String,
@@ -92,14 +122,29 @@ const inventoryItemSchema = new Schema({
   },
   unitOfMeasurement: { type: String, required: true }, // E.g., kg, lbs
   pricePerUnit: { type: Number, required: true },
+  // New Field: Selling Price
+  sellingPrice: { type: Number }, // Selling price for finished goods
+  // New Field: Expiration Date
+  expirationDate: { type: Date }, // Expiration date for materials and finished goods
   quantities: {
     minRestockQuantity: { type: Number, required: true },
     inStock: { type: Number, required: true },
-    minOrderQuantities: [quantityPriceSchema],
     availableQuantity: { type: Number },
     onHoldQuantity: { type: Number },
     allocatedQuantity: { type: Number },
     quarantinedQuantity: { type: Number },
+    // New Field: Reorder Level
+    reorderLevel: { type: Number }, // Reorder threshold for replenishment
+    // New Field: Reserved for Order ID
+    reservedForOrderId: { type: String }, // Linked to the sales or production order
+    // New Field: Order Allocation Details
+    orderAllocationDetails: { type: Map, of: Number }, // Detailed order allocation
+  },
+  // New Field: Status
+  status: {
+    type: String,
+    enum: ['In Stock', 'Low Stock', 'Out of Stock'],
+    default: 'In Stock',
   },
   createdBy: {
     type: Schema.Types.ObjectId,

@@ -1,5 +1,5 @@
 import { JWTPayload } from '@domain/interfaces/infrastructure/services/jwt/jwt-payload.interface';
-import { JWTService } from '@app/services/jwt-service/jwt-service-service';
+import { JWTService } from '@infrastructure/auth/jwt/jwt-service';
 import { TYPES } from '@infrastructure/di/types';
 import { inject, injectable } from 'inversify';
 import { Request, Response, NextFunction } from 'express';
@@ -28,10 +28,7 @@ export class RoleMiddleware {
         const token = authHeader.split(' ')[1];
 
         // Verify token and get decoded user information
-        const decoded: JWTPayload | null = this.jwtService.verifyToken(
-          token,
-          process.env.JWT_SECRET as string
-        );
+        const decoded: JWTPayload | null = await this.jwtService.verify(token);
         console.log('Decoded payload:', decoded);
 
         if (!decoded) {

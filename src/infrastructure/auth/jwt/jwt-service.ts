@@ -1,7 +1,9 @@
 // jwt-service.ts
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { IJWTService } from '@domain/interfaces/infrastructure/services/jwt/jwt-service.interface';
+import { injectable } from 'inversify';
 
+@injectable()
 export class JWTService implements IJWTService {
   sign(payload: object, expiresIn: string = '1h'): string {
     return jwt.sign(payload, process.env.JWT_SECRET as string, {
@@ -9,8 +11,11 @@ export class JWTService implements IJWTService {
     });
   }
 
-  verify(token: string): JwtPayload {
-    return jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
+  async verify(token: string): Promise<jwt.JwtPayload> {
+    return (await jwt.verify(
+      token,
+      process.env.JWT_SECRET as string
+    )) as JwtPayload;
   }
 
   signRefreshToken(payload: object): string {

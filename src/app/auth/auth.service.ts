@@ -19,14 +19,13 @@ export class AuthService {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) return null;
-    console.log(password);
-    console.log(user.props.password);
 
     const passwordValid = await this.hashService.compare(
       password,
       user.props.password
     );
     if (!passwordValid) return null;
+    console.log('Is password valid: ' + passwordValid);
 
     // Generate tokens
     const token = this.jwtService.sign({ id: user.id, role: user.role });
