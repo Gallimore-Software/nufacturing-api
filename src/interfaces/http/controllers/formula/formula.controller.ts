@@ -2,9 +2,7 @@ import Formula from '@infrastructure/persistence/models/formula/formula-model';
 import { Request, Response } from 'express';
 
 // Get all formulas
-export const getAllFormulas = async (
-  res: Response
-): Promise<void> => {
+export const getAllFormulas = async (res: Response): Promise<void> => {
   try {
     const formulas = await Formula.find();
     res.status(200).json({ success: true, data: formulas });

@@ -7,7 +7,7 @@ class MongooseInventoryRepository {
   }
 
   // Create a new inventory item
-  static async create(data: any) {
+  static async create(data: unknown) {
     const newInventoryItem = new InventoryItem(data);
     return await newInventoryItem.save();
   }
@@ -43,7 +43,7 @@ class MongooseInventoryRepository {
   }
 
   // Combine inventory items by a given attribute (e.g., date for batch processing)
-  static async combineByAttribute(attribute: any) {
+  static async combineByAttribute(attribute: unknown) {
     return await InventoryItem.aggregate([
       {
         $group: {

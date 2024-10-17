@@ -79,7 +79,7 @@ describe('Guard.againstNullOrUndefinedBulk', () => {
 
   it('should return success for an empty array of arguments', () => {
     // Arrange
-    const args: { argument: any; argumentName: string }[] = [];
+    const args: { argument: unknown; argumentName: string }[] = [];
 
     // Act
     const result = Guard.againstNullOrUndefinedBulk(args);

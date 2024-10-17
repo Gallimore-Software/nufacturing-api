@@ -64,11 +64,12 @@ describe('InventoryItem Model Test', () => {
       itemId: 'FG-1001', // Omit necessary fields like `name`, `sku`, `description`
     });
 
-    let err: any;
+    let err: unknown;
     try {
       await inventoryItem.save();
     } catch (error) {
       err = error;
+      return err;
     }
     expect(err).toBeInstanceOf(mongoose.Error.ValidationError);
     expect(err.errors.name).toBeDefined();
@@ -151,7 +152,7 @@ describe('InventoryItem Model Test', () => {
       updatedAt: new Date(),
     });
 
-    const savedInventoryItem: any = await inventoryItem.save();
+    const savedInventoryItem: unknown = await inventoryItem.save();
 
     // Check batchTracking array
     expect(savedInventoryItem.batchTracking[0].lotCode).toBe('LOT-002');
