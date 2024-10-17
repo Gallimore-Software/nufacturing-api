@@ -38,6 +38,35 @@ const referenceSchema = new Schema({
   },
 });
 
+const workInProgressSchema = new Schema({
+  wipId: { type: String, required: true }, // Unique WIP ID
+  productName: { type: String, required: true }, // Name of the product in production
+  batchId: { type: String, required: true }, // Link to the Batch ID
+  lotId: { type: String, required: true }, // Link to Lot ID
+  stageOfProduction: {
+    type: String,
+    required: true,
+    enum: ['Bottling', 'Labeling', 'Packaging', 'Quality Control'],
+  }, // Stage in production
+  quantityInProgress: { type: Number, required: true }, // Number of units being produced
+  costToDate: { type: Number, required: true }, // Accumulated cost for production (materials, labor, etc.)
+  estimatedCompletionDate: { type: Date, required: true }, // Projected completion date
+  workOrderId: { type: String, required: true }, // Work Order ID related to this WIP batch
+  leadTimeRemaining: { type: String }, // Time remaining to complete production
+  operator: { type: Schema.Types.ObjectId, ref: 'User' }, // Operator responsible for this WIP batch
+  status: {
+    type: String,
+    required: true,
+    enum: ['In Progress', 'Delayed', 'Completed'],
+  }, // Status of the WIP
+});
+
+// Export the schema to ensure it's available
+export const WorkInProgress = mongoose.model(
+  'WorkInProgress',
+  workInProgressSchema
+);
+
 const quantityPriceSchema = new Schema({
   minOrderQuantity: { type: Number, required: true },
   pricePerQuantity: { type: Number, required: true },
@@ -47,7 +76,8 @@ const quantityPriceSchema = new Schema({
 
 // Batch Tracking Schema for tracking groups by date
 const batchTrackingSchema = new Schema({
-  lotCode: { type: String, required: true },
+  lotCode: { type: String, required: true }, // Unique lot code
+  batchId: { type: String, required: true }, // Unique batch identifier
   dateReceived: { type: Date, required: true },
   quantity: { type: Number, required: true },
   supplier: { type: Schema.Types.ObjectId, ref: 'Supplier', required: true },
@@ -62,7 +92,7 @@ const batchTrackingSchema = new Schema({
 
 // Define the main Inventory Item schema
 const inventoryItemSchema = new Schema({
-  itemId: { type: String, required: true, unique: true }, // Unique identifier (e.g., UUID)
+  itemId: { type: String, required: true, unique: true }, // Unique identifier
   name: { type: String, required: true },
   sku: { type: String, required: true, unique: true },
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
@@ -74,32 +104,41 @@ const inventoryItemSchema = new Schema({
   scientificName: { type: String },
   picture: { type: String }, // URL for image storage
   description: { type: String, required: true },
-  vendor: { type: Schema.Types.ObjectId, ref: 'Vendor', required: true },
-  supplier: { type: Schema.Types.ObjectId, ref: 'Supplier' }, // Supplier information
+  vendor: { type: Schema.Types.ObjectId, ref: 'Supplier', required: true }, // Updated to 'Supplier'
+  supplier: { type: Schema.Types.ObjectId, ref: 'Supplier', required: true }, // Added required constraint
   associatedFormulas: [referenceSchema],
   associatedProductSKUs: [referenceSchema],
   associatedBatchNumbers: [referenceSchema],
   associatedPOs: [referenceSchema],
   associatedLabTests: [referenceSchema],
   associatedReceivements: [referenceSchema],
-  warehouseLocation: { type: Schema.Types.ObjectId, ref: 'WarehouseLocation' },
-  batchTracking: [batchTrackingSchema], // Tracking individual batches of the same item
-  certificateOfAuthenticity: { type: String }, // Certificate storage URL
-  inventoryCategory: {
-    type: String,
+  warehouseLocation: {
+    type: Schema.Types.ObjectId,
+    ref: 'WarehouseLocation',
     required: true,
-    enum: ['Nufacturing', 'Customer Supplied', 'Research Lab', 'Ancillary'],
-  },
+  }, // Required warehouse location
+  batchTracking: [batchTrackingSchema], // Tracking individual batches of the same item
+  wipTracking: [workInProgressSchema], // Tracking work in progress batches
+  certificateOfAuthenticity: { type: String }, // Certificate storage URL
   unitOfMeasurement: { type: String, required: true }, // E.g., kg, lbs
   pricePerUnit: { type: Number, required: true },
+  sellingPrice: { type: Number }, // Selling price for finished goods
+  expirationDate: { type: Date }, // Expiration date for materials and finished goods
   quantities: {
     minRestockQuantity: { type: Number, required: true },
     inStock: { type: Number, required: true },
-    minOrderQuantities: [quantityPriceSchema],
     availableQuantity: { type: Number },
     onHoldQuantity: { type: Number },
     allocatedQuantity: { type: Number },
     quarantinedQuantity: { type: Number },
+    reorderLevel: { type: Number }, // Reorder threshold for replenishment
+    reservedForOrderId: { type: String }, // Linked to the sales or production order
+    orderAllocationDetails: { type: Map, of: Number }, // Detailed order allocation
+  },
+  status: {
+    type: String,
+    enum: ['In Stock', 'Low Stock', 'Out of Stock'],
+    default: 'In Stock',
   },
   createdBy: {
     type: Schema.Types.ObjectId,
@@ -117,7 +156,6 @@ inventoryItemSchema.pre('save', function (next) {
 });
 
 quantityPriceSchema.pre('save', function (next) {
-  // Ensure dateUpdated is a Date object
   const currentTime = Date.now();
   const dateUpdatedTime = this.dateUpdated ? this.dateUpdated.getTime() : 0;
 

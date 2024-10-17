@@ -23,7 +23,10 @@ const connectDB = async () => {
     logger.info('Connected to MongoDB for logging.');
     console.log('Connected to MongoDB');
   } catch (err) {
-    logger.error('Could not connect to MongoDB for logging', err);
+    logger.error(
+      'Could not connect to MongoDB for logging with error message -',
+      err
+    );
     process.exit(1); // Exit the process if there is a connection error
   }
 };

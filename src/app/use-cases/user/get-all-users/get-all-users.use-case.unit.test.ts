@@ -44,7 +44,7 @@ describe('GetAllUsersUseCase', () => {
         isDeleted: false,
         id: new UniqueEntityID(),
         phoneNumber: '321-654-0987',
-        createdAt: new Date(),        
+        createdAt: new Date(),
       }).getValue(),
     ];
 

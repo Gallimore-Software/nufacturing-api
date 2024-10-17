@@ -18,7 +18,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "typeRoots": ["node_modules/@types", "@types"],
+    "typeRoots": ["node_modules/@types", "@types", "./node_modules/@types"],
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDir": "./",

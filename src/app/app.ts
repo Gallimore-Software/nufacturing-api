@@ -30,6 +30,7 @@ import userRoutes from '@interfaces/http/routes/user/user.routes';
 import vendorRoutes from '@interfaces/http/routes/vendor/vendor.routes';
 import batchRecordRoutes from '@interfaces/http/routes/batch-record/batch-record.routes';
 import labTestRoutes from '@interfaces/http/routes/lab-test/lab-test.routes';
+import authRoutes from '@interfaces/http/routes/auth/auth.routes';
 import { DomainWhitelist } from '@domain/value-objects/domain-whitelist.value';
 
 // Initialize express app
@@ -88,6 +89,7 @@ app.use('/api/research-and-development/lab-testing', labTestRoutes);
 app.use('/api/receiving/receiving', receivingRoutes);
 app.use('/api/vendor', vendorRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/auth', authRoutes);
 
 // Serve Swagger documentation
 app.use('/api', swaggerUI.serve, swaggerUI.setup(swaggerDocument));

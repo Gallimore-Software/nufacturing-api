@@ -5,12 +5,12 @@
       "path": "src"
     },
     {
-      "name": "Nufacturing API",
-      "path": "."
-    },
-    {
       "name": "Nufacturing Frontend (Angular App)",
       "path": "submodules/nufacturing"
+    },
+    {
+      "name": "Nufacturing API",
+      "path": "."
     },
     {
       "name": "Nufulfillment-Veracore Integration",

@@ -16,7 +16,7 @@ logger.info('Starting API in:', process.env.NODE_ENV);
 // SSL certificates
 const httpsOptions = {
   key: fs.readFileSync('./key.pem'),
-  cert: fs.readFileSync('./csr.pem'),
+  cert: fs.readFileSync('./cert.pem'),
 };
 
 // Determine if HTTPS or HTTP should be used
