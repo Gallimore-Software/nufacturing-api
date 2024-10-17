@@ -115,10 +115,12 @@
       "veracore"
     ],
     "cSpell.ignoreWords": [
+      "Backordered",
       "Gummies",
       "Nufacturing",
       "Stickpacks",
       "autogen",
+      "backorderedQty",
       "dtos",
       "gallimore",
       "inversify",
@@ -128,7 +130,8 @@
       "precommit",
       "skus",
       "unverify",
-      "veracore"
+      "veracore",
+      "wips"
     ],
   },
   "launch": {
