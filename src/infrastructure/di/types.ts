@@ -3,5 +3,5 @@ export const TYPES = {
   JWTService: Symbol.for('JWTService'),
   UserRepository: Symbol.for('UserRepository'),
   CheckUserRoleUseCase: Symbol.for('CheckUserRoleUseCase'),
-  HashService: Symbol.for('HashService'), // Add this line
+  HashService: Symbol.for('HashService'),
 };

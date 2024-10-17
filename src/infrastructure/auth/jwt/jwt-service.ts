@@ -1,4 +1,3 @@
-// jwt-service.ts
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { IJWTService } from '@domain/interfaces/infrastructure/services/jwt/jwt-service.interface';
 import { injectable } from 'inversify';

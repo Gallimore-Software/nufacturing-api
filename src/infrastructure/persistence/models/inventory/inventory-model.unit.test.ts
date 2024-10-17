@@ -69,6 +69,7 @@ describe('InventoryItem Model Test', () => {
       await inventoryItem.save();
     } catch (error) {
       err = error;
+      npm;
     }
     expect(err).toBeInstanceOf(mongoose.Error.ValidationError);
     expect(err.errors.name).toBeDefined();
