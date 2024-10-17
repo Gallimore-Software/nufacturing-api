@@ -1,4 +1,4 @@
-import Vendor  from '@entities/vendor/vendor';
+import Vendor from '@entities/vendor/vendor';
 
 describe('Vendor Entity Tests', () => {
   it('should create a valid vendor entity', () => {

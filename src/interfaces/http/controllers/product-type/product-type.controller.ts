@@ -31,9 +31,7 @@ const sendResponse = <T>({
 };
 
 // Get all product types
-export const getAllProductTypes = async (
-  res: Response
-): Promise<void> => {
+export const getAllProductTypes = async (res: Response): Promise<void> => {
   try {
     const productTypes = await ProductType.find();
     sendResponse({
