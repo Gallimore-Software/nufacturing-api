@@ -1,0 +1,154 @@
+[
+  {
+    "_id": "670fb7753f9938c31031cd5d",
+    "itemId": "FG-1001",
+    "name": "Vitamin C 500mg Tablets",
+    "sku": "SKU-1234",
+    "category": "650f13e1f1e4f2c5d4f67c1",
+    "type": "Finished Goods",
+    "scientificName": "Ascorbic Acid",
+    "picture": "https://example.com/images/vitamin-c.jpg",
+    "description": "500mg Vitamin C tablets",
+    "vendor": "650f13e1f1e4f2c5d4f67a1",
+    "supplier": "650f13e1f1e4f2c5d4f67a1",
+    "warehouseLocation": "650f13e1f1e4f2c5d4f67b1",
+    "batchTracking": [
+      {
+        "lotCode": "650f13e1f1e4f2c5d4f67a1",
+        "batchId": "650f13e1f1e4f2c5d4f67b1",
+        "dateReceived": "2022-01-01T00:00:00.000Z",
+        "quantity": 1000,
+        "supplier": "650f13e1f1e4f2c5d4f67a1",
+        "warehouseLocation": "650f13e1f1e4f2c5d4f67b1",
+        "availableQuantity": 950
+      }
+    ],
+    "unitOfMeasurement": "Bottles",
+    "pricePerUnit": 1.5,
+    "sellingPrice": 9.99,
+    "expirationDate": "2025-12-31T00:00:00.000Z",
+    "quantities": {
+      "minRestockQuantity": 100,
+      "inStock": 500,
+      "reorderLevel": 200
+    },
+    "status": "In Stock",
+    "createdBy": "650f13e1f1e4f2c5d4f67d1",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "_id": "670fb7753f9938c31031cd5e",
+    "itemId": "RM-1001",
+    "name": "Vitamin C Powder",
+    "sku": "SKU-5678",
+    "category": "650f13e1f1e4f2c5d4f67c2",
+    "type": "Raw Materials",
+    "scientificName": "Ascorbic Acid",
+    "picture": "https://example.com/images/vitamin-c-powder.jpg",
+    "description": "Vitamin C in raw powder form",
+    "vendor": "650f13e1f1e4f2c5d4f67a2",
+    "supplier": "650f13e1f1e4f2c5d4f67a2",
+    "warehouseLocation": "650f13e1f1e4f2c5d4f67b2",
+    "batchTracking": [
+      {
+        "lotCode": "650f13e1f1e4f2c5d4f67a2",
+        "batchId": "650f13e1f1e4f2c5d4f67b2",
+        "dateReceived": "2022-06-15T00:00:00.000Z",
+        "quantity": 500,
+        "supplier": "650f13e1f1e4f2c5d4f67a2",
+        "warehouseLocation": "650f13e1f1e4f2c5d4f67b2",
+        "availableQuantity": 450
+      }
+    ],
+    "unitOfMeasurement": "kg",
+    "pricePerUnit": 10.0,
+    "expirationDate": "2026-06-15T00:00:00.000Z",
+    "quantities": {
+      "minRestockQuantity": 50,
+      "inStock": 20,
+      "reorderLevel": 30
+    },
+    "status": "Low Stock",
+    "createdBy": "650f13e1f1e4f2c5d4f67d1",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "_id": "670fb7753f9938c31031cd5f",
+    "itemId": "CP-1001",
+    "name": "Tablet Coating",
+    "sku": "SKU-4321",
+    "category": "650f13e1f1e4f2c5d4f67c3",
+    "type": "Components",
+    "scientificName": "Polyvinyl Alcohol",
+    "picture": "https://example.com/images/tablet-coating.jpg",
+    "description": "Coating for vitamin tablets",
+    "vendor": "650f13e1f1e4f2c5d4f67a3",
+    "supplier": "650f13e1f1e4f2c5d4f67a3",
+    "warehouseLocation": "650f13e1f1e4f2c5d4f67b3",
+    "batchTracking": [
+      {
+        "lotCode": "650f13e1f1e4f2c5d4f67a3",
+        "batchId": "650f13e1f1e4f2c5d4f67b3",
+        "dateReceived": "2023-05-10T00:00:00.000Z",
+        "quantity": 100,
+        "supplier": "650f13e1f1e4f2c5d4f67a3",
+        "warehouseLocation": "650f13e1f1e4f2c5d4f67b3",
+        "availableQuantity": 80
+      }
+    ],
+    "unitOfMeasurement": "L",
+    "pricePerUnit": 5.0,
+    "quantities": {
+      "minRestockQuantity": 10,
+      "inStock": 50,
+      "reorderLevel": 15
+    },
+    "status": "In Stock",
+    "createdBy": "650f13e1f1e4f2c5d4f67d1",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "_id": "670fb7753f9938c31031cd60",
+    "itemId": "WIP-1001",
+    "name": "Vitamin C 1000mg Tablets",
+    "sku": "SKU-9876",
+    "category": "650f13e1f1e4f2c5d4f67c4",
+    "type": "Work in Progress",
+    "scientificName": "Ascorbic Acid",
+    "picture": "https://example.com/images/vitamin-c-1000mg.jpg",
+    "description": "Production of 1000mg Vitamin C tablets",
+    "vendor": "650f13e1f1e4f2c5d4f67a4",
+    "supplier": "650f13e1f1e4f2c5d4f67a4",
+    "warehouseLocation": "650f13e1f1e4f2c5d4f67b4",
+    "wipTracking": [
+      {
+        "wipId": "WIP-2024-001",
+        "productName": "Vitamin C 1000mg Tablets",
+        "batchId": "650f13e1f1e4f2c5d4f67a4",
+        "lotId": "650f13e1f1e4f2c5d4f67a4",
+        "stageOfProduction": "Bottling",
+        "quantityInProgress": 200,
+        "costToDate": 300.0,
+        "estimatedCompletionDate": "2024-06-01T00:00:00.000Z",
+        "workOrderId": "WO-2024-12345",
+        "leadTimeRemaining": "2 weeks",
+        "operator": "650f13e1f1e4f2c5d4f67d1",
+        "status": "In Progress"
+      }
+    ],
+    "unitOfMeasurement": "Tablets",
+    "pricePerUnit": 2.0,
+    "quantities": {
+      "minRestockQuantity": 1000,
+      "inStock": 2000,
+      "reorderLevel": 1500
+    },
+    "status": "In Progress",
+    "createdBy": "650f13e1f1e4f2c5d4f67d1",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  }
+]
