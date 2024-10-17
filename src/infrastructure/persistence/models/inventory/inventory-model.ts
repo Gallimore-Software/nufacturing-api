@@ -120,11 +120,6 @@ const inventoryItemSchema = new Schema({
   batchTracking: [batchTrackingSchema], // Tracking individual batches of the same item
   wipTracking: [workInProgressSchema], // Tracking work in progress batches
   certificateOfAuthenticity: { type: String }, // Certificate storage URL
-  inventoryCategory: {
-    type: String,
-    required: true,
-    enum: ['Nufacturing', 'Customer Supplied', 'Research Lab', 'Ancillary'],
-  },
   unitOfMeasurement: { type: String, required: true }, // E.g., kg, lbs
   pricePerUnit: { type: Number, required: true },
   sellingPrice: { type: Number }, // Selling price for finished goods
