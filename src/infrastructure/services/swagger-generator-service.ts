@@ -7,7 +7,7 @@ import Logger from '../../infrastructure/logging/logger'; // Importing the custo
 interface SwaggerGeneratorOptions {
   outputFile: string;
   endpointsFiles: string[];
-  additionalConfig?: any; // Optional, additional Swagger configurations
+  additionalConfig?: unknown; // Optional, additional Swagger configurations
   useHttps?: boolean; // Optional flag to switch between http and https
   host?: string; // Optional custom host (e.g., localhost or production URL)
   port?: string | number; // Optional custom port

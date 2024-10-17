@@ -34,7 +34,7 @@ export class AuthService {
     return { token, refreshToken };
   }
 
-  async refreshToken(token: string): Promise<string | null> {
+  async refreshToken(token: string): Promise<string | boolean | null> {
     try {
       const payload = this.jwtService.verifyRefreshToken(token);
 
@@ -46,7 +46,8 @@ export class AuthService {
 
       return newToken;
     } catch (error) {
-      return null; // Invalid or expired refresh token
+      console.log(error);
+      return false; // Invalid or expired refresh token
     }
   }
 }
