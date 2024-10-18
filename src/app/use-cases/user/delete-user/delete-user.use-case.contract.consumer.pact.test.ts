@@ -9,7 +9,7 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
   const provider = new Pact({
     consumer: 'UserClient', // Define consumer name
     provider: 'UserAPI', // Define provider name
-    port: 1234, // This is a local Pact mock server, not a real server
+    port: 1234, // Local pact server port
     log: path.resolve(process.cwd(), 'logs', 'pact.log'),
     dir: path.resolve(process.cwd(), 'pacts'), // Pact contract output directory
     logLevel: 'info', // Log level
@@ -17,14 +17,21 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
   });
 
   // Set up pact interactions
-  beforeAll(() => provider.setup()); // Start Pact mock server
+  beforeAll(async () => {
+    await provider.setup(); // Ensure provider setup is fully awaited
+  });
 
-  afterEach(() => provider.verify()); // Verify Pact interactions after each test
-  afterAll(() => provider.finalize()); // Finalize Pact file after all tests
+  afterEach(async () => {
+    await provider.verify(); // Ensure interactions are verified after each test
+  });
+
+  afterAll(async () => {
+    await provider.finalize(); // Finalize Pact file after all tests
+  });
 
   describe('when a DELETE request is made to delete a user', () => {
-    beforeAll(() =>
-      provider.addInteraction({
+    beforeAll(async () => {
+      await provider.addInteraction({
         state: 'a user with ID 123 exists', // Pre-condition
         uponReceiving: 'a request to delete a user',
         withRequest: {
@@ -39,8 +46,8 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
           headers: { 'Content-Type': 'application/json' },
           body: like({ message: 'User deleted successfully' }), // The expected response
         },
-      })
-    );
+      });
+    });
 
     it('should successfully delete the user', async () => {
       // Act: Simulate API call to delete the user
@@ -55,8 +62,8 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
   });
 
   describe('when a DELETE request is made for a non-existent user', () => {
-    beforeAll(() =>
-      provider.addInteraction({
+    beforeAll(async () => {
+      await provider.addInteraction({
         state: 'no user exists with ID 999', // Pre-condition
         uponReceiving: 'a request to delete a non-existent user',
         withRequest: {
@@ -71,8 +78,8 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
           headers: { 'Content-Type': 'application/json' },
           body: like({ message: 'User not found' }), // Expected response
         },
-      })
-    );
+      });
+    });
 
     it('should return 404 for a non-existent user', async () => {
       // Act: Simulate API call to delete a non-existent user
