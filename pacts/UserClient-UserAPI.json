@@ -7,6 +7,9 @@
       "description": "a request to delete a non-existent user",
       "providerState": "no user exists with ID 999",
       "request": {
+        "headers": {
+          "Accept": "application/json"
+        },
         "method": "DELETE",
         "path": "/api/users/999"
       },
@@ -29,6 +32,9 @@
       "description": "a request to delete a user",
       "providerState": "a user with ID 123 exists",
       "request": {
+        "headers": {
+          "Accept": "application/json"
+        },
         "method": "DELETE",
         "path": "/api/users/123"
       },
