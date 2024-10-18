@@ -50,7 +50,7 @@ class SwaggerGeneratorService {
         },
         host: `${host}:${port}`,
         schemes: [scheme],
-        ...this.options.additionalConfig,
+        ...(this.options.additionalConfig as object),
       };
 
       // Ensure the directory for the output file exists
