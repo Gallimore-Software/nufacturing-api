@@ -16,7 +16,8 @@
   "scripts": {
     "tsc": "nodemon --inspect",
     "prepare": "npx husky install",
-    "pact": "jest --testPathPattern='src/app/use-cases/user/delete-user/delete-user.use-case.contract.consumer.pact.test.ts'",
+    "test:consumer": "jest --testPathPattern='src/app/use-cases/user/delete-user/delete-user.use-case.contract.consumer.pact.test.ts'",
+    "test:provider": "jest --testPathPattern='src/app/use-cases/user/delete-user/delete-user.use-case.contract.provider.pact.test.ts'",
     "clean": "npx rimraf dist dist-tests",
     "build": "npm run clean && npx tsc -p tsconfig.json",
     "start": "npx --exec npx tsx dist/main.js",
@@ -66,6 +67,11 @@
     "ts-morph": "^23.0.0",
     "winston": "^3.15.0",
     "winston-mongodb": "^5.1.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 30000,
+    "verbose": true
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.13.12",
