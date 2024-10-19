@@ -2,12 +2,13 @@ module.exports = {
   preset: 'ts-jest',
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'node'],
   testEnvironment: 'node',
+  testTimeout: 30000, // Increased timeout for async Pact tests
   verbose: true,
   collectCoverage: true,
   coverageDirectory: './docs/coverage', // Adjust path
   collectCoverageFrom: ['src/**/*.ts'], // Specify files for coverage
   transform: {
-    '^.+\\.ts?$': 'ts-jest', // Let Jest use ts-jest to transform TypeScript files
+    '^.+\\.ts?$': 'ts-jest', // Use transform for ts-jest instead of globals
   },
   rootDir: './', // Adjust based on your project structure
   testMatch: ['**/*.test.ts'], // Matches all .test.ts files

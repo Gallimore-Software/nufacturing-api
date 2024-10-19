@@ -16,7 +16,7 @@
   "scripts": {
     "tsc": "nodemon --inspect",
     "prepare": "npx husky install",
-    "pact": "jest --config jest.config.cjs --testPathPattern=\"**/*.pact.test.ts\"",
+    "pact": "jest --config jest.config.cjs --testPathPattern='**/*.pact.test.ts'",
     "clean": "npx rimraf dist dist-tests",
     "build": "npm run clean && npx tsc -p tsconfig.json",
     "start": "npx --exec npx tsx dist/main.js",

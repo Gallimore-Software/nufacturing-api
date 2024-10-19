@@ -1,18 +1,18 @@
 import { Pact, Matchers } from '@pact-foundation/pact';
-import request from 'supertest'; // To simulate API calls
+import request from 'supertest';
 import * as path from 'path';
 
 const { like } = Matchers;
 
 describe('Pact - Delete User Use Case with Mocked External Service', () => {
   const provider = new Pact({
-    consumer: 'UserClient', // Define consumer name
-    provider: 'UserAPI', // Define provider name
-    port: 1234, // Local pact server port
+    consumer: 'UserClient',
+    provider: 'UserAPI',
+    port: 1234,
     log: path.resolve(process.cwd(), 'logs', 'pact.log'),
-    dir: path.resolve(process.cwd(), 'docs/generated/pacts'), // Pact contract output directory
-    logLevel: 'info', // Log level for debugging
-    spec: 2, // Pact specification version
+    dir: path.resolve(process.cwd(), 'docs/generated/pacts'),
+    logLevel: 'info',
+    spec: 2,
   });
 
   beforeAll(async () => {
@@ -29,7 +29,7 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
 
   afterAll(async () => {
     console.log('Finalizing Pact...');
-    await provider.finalize(); // Finalize Pact file after all tests
+    await provider.finalize();
   });
 
   describe('when a DELETE request is made to delete a user', () => {
@@ -70,9 +70,9 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
           headers: { Accept: 'application/json' },
         },
         willRespondWith: {
-          status: 404,
+          status: 404, // Expected status code for non-existent user
           headers: { 'Content-Type': 'application/json' },
-          body: like({ message: 'User not found' }),
+          body: like({ message: 'User not found' }), // Expecting a message in the response
         },
       });
     });
