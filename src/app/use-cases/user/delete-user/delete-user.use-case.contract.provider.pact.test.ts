@@ -1,6 +1,6 @@
 import { Verifier } from '@pact-foundation/pact';
 import path from 'path';
-import nock from 'nock'; // Add this to mock the provider
+import nock from 'nock'; // Add this to mock the provider test
 
 describe('Pact Verification - Delete User Use Case', () => {
   beforeAll(() => {
