@@ -80,8 +80,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Start Mock Server (Background)
+        run: |
+          nohup npm run start-mock-server &        
+
       - name: Run Pact tests
         run: npm run pact
+
+      - name: Stop Mock Server
+        run: |
+          pid=$(lsof -t -i:1234) && if [ -n "$pid" ]; then kill $pid; else echo "No process found on port 1234"; fi
 
 
   deploy:
