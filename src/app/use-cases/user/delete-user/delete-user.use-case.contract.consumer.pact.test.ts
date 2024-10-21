@@ -8,25 +8,28 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
   const provider = new Pact({
     consumer: 'UserClient',
     provider: 'UserAPI',
-    port: 1234,
+    port: 1234, // Make sure the port is correct
     log: path.resolve(process.cwd(), 'logs', 'pact.log'),
     dir: path.resolve(process.cwd(), 'docs/generated/pacts'),
     logLevel: 'info',
     spec: 2,
   });
 
+  // Make sure the provider mock server is set up before the test
   beforeAll(async () => {
     console.log('Setting up Pact mock server...');
     await provider.setup();
     console.log('Pact mock server is ready.');
   });
 
+  // Verify the interactions after each test
   afterEach(async () => {
     console.log('Verifying Pact interactions...');
     await provider.verify();
     console.log('Pact interactions verified.');
   });
 
+  // Finalize Pact after all tests
   afterAll(async () => {
     console.log('Finalizing Pact...');
     await provider.finalize();
@@ -51,7 +54,8 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
     });
 
     it('should successfully delete the user', async () => {
-      const response = await request('http://localhost:1234')
+      // Use explicit IPv4 address to avoid "::1" (IPv6) issues
+      const response = await request('http://127.0.0.1:1234') // Change to 127.0.0.1
         .delete('/api/users/123')
         .set('Accept', 'application/json');
       expect(response.status).toBe(200);
@@ -70,15 +74,16 @@ describe('Pact - Delete User Use Case with Mocked External Service', () => {
           headers: { Accept: 'application/json' },
         },
         willRespondWith: {
-          status: 404, // Expected status code for non-existent user
+          status: 404,
           headers: { 'Content-Type': 'application/json' },
-          body: like({ message: 'User not found' }), // Expecting a message in the response
+          body: like({ message: 'User not found' }),
         },
       });
     });
 
     it('should return 404 for a non-existent user', async () => {
-      const response = await request('http://localhost:1234')
+      // Use explicit IPv4 address to avoid "::1" (IPv6) issues
+      const response = await request('http://127.0.0.1:1234') // Change to 127.0.0.1
         .delete('/api/users/999')
         .set('Accept', 'application/json');
       expect(response.status).toBe(404);
