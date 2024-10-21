@@ -31,9 +31,9 @@
     "e2e:open": "npx cypress open",
     "lint": "eslint --ext .ts,.tsx --config .eslintrc.cjs src",
     "lint:fix": "eslint --ext .ts,.tsx --config .eslintrc.cjs src --fix",
-    "format": "npx prettier --check 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
-    "format:fix": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
-    "precommit": "npm run lint && npm run format",
+    "prettier": "npx prettier --check 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
+    "prettier:fix": "npx prettier --write 'src/**/*.{ts,tsx,js,json,css,scss,md}'",
+    "precommit": "npm run lint && npm run prettier",
     "cert": "openssl req -new -x509 -key key.pem -out cert.pem -days 365 -config \"C:/Program Files/Git/usr/ssl/openssl.cnf\"",
     "docs": "node --loader ts-node/esm --experimental-specifier-resolution=node -r tsconfig-paths/register scripts/generate-docs.ts"
   },
