@@ -84,7 +84,9 @@ jobs:
         run: npm run pact
 
       - name: Stop Mock Server
-        run: kill $(lsof -t -i:1234)
+        run: |
+          kill $(lsof -t -i:1234) || true
+
 
   deploy:
     runs-on: ubuntu-latest
