@@ -2,24 +2,27 @@
   "folders": [
     {
       "name": "src",
-      "path": "src"
+      "path": "src",
     },
     {
       "name": "Nufacturing Frontend (Angular App)",
-      "path": "submodules/nufacturing"
+      "path": "submodules/nufacturing",
     },
     {
       "name": "Nufacturing API",
-      "path": "."
+      "path": ".",
     },
     {
       "name": "Nufulfillment-Veracore Integration",
-      "path": "submodules/nufulfillment-veracore"
+      "path": "submodules/nufulfillment-veracore",
     },
     {
       "name": "Gallimore Dev Tools",
-      "path": "submodules/gallimore-devtools"
-    }
+      "path": "submodules/gallimore-devtools",
+    },
+    {
+      "path": "../gallimore-ag-grid-demos",
+    },
   ],
   "settings": {
     // General Workspace Settings
@@ -30,29 +33,29 @@
       "**/dist": true,
       "**/build": true,
       "**/.git": true,
-      "**/.DS_Store": true
+      "**/.DS_Store": true,
     },
     "files.watcherExclude": {
       "**/node_modules/**": true,
-      "**/.git/**": true
+      "**/.git/**": true,
     },
 
-    
-    
     // TypeScript and Linting Settings
     "typescript.tsdk": "./node_modules/typescript/lib",
     "typescript.tsconfigPath": "tsconfig.json",
     "eslint.workingDirectories": [
       { "directory": ".", "changeProcessCWD": true },
       { "directory": "submodules/nufacturing", "changeProcessCWD": true },
-      { "directory": "submodules/nufulfillment-veracore", "changeProcessCWD": true },
-      { "directory": "submodules/gallimore-dev-tools", "changeProcessCWD": true }
+      {
+        "directory": "submodules/nufulfillment-veracore",
+        "changeProcessCWD": true,
+      },
+      {
+        "directory": "submodules/gallimore-dev-tools",
+        "changeProcessCWD": true,
+      },
     ],
-    "eslint.validate": [
-      "javascript",
-      "typescript",
-      "typescriptreact"
-    ],
+    "eslint.validate": ["javascript", "typescript", "typescriptreact"],
 
     // Code Navigation and Aliases
     "typescript.preferences.importModuleSpecifier": "non-relative",
@@ -70,21 +73,21 @@
     // Integrated Testing & Debugging
     "jest.autoRun": {
       "watch": true,
-      "onSave": "test-file"
+      "onSave": "test-file",
     },
     "cypress.resolvers": [
       {
-        "cypress": "cypress.json"
-      }
+        "cypress": "cypress.json",
+      },
     ],
     "terminal.integrated.env.windows": {
-      "NODE_ENV": "development"
+      "NODE_ENV": "development",
     },
     "terminal.integrated.env.linux": {
-      "NODE_ENV": "development"
+      "NODE_ENV": "development",
     },
     "terminal.integrated.env.osx": {
-      "NODE_ENV": "development"
+      "NODE_ENV": "development",
     },
 
     // Custom Clean-LLM Architecture Configurations
@@ -94,16 +97,16 @@
       "*.repository.ts": "typescript",
       "*.use-case.ts": "typescript",
       "*.controller.ts": "typescript",
-      "*.integration.ts": "typescript"
+      "*.integration.ts": "typescript",
     },
     "workbench.editorAssociations": {
-      "*.md": "default"
+      "*.md": "default",
     },
     "explorer.sortOrder": "type",
     "workbench.colorCustomizations": {
       "activityBar.background": "#002b36",
       "titleBar.activeBackground": "#073642",
-      "titleBar.activeForeground": "#839496"
+      "titleBar.activeForeground": "#839496",
     },
     "cSpell.words": [
       "gallimore",
@@ -112,7 +115,7 @@
       "Receivements",
       "scheduleding",
       "userapi",
-      "veracore"
+      "veracore",
     ],
     "cSpell.ignoreWords": [
       "Backordered",
@@ -131,7 +134,7 @@
       "skus",
       "unverify",
       "veracore",
-      "wips"
+      "wips",
     ],
   },
   "launch": {
@@ -142,21 +145,19 @@
         "name": "Launch Main API",
         "program": "${workspaceFolder}/src/main.ts",
         "preLaunchTask": "tsc: build - tsconfig.json",
-        "outFiles": [
-          "${workspaceFolder}/dist/**/*.js"
-        ],
+        "outFiles": ["${workspaceFolder}/dist/**/*.js"],
         "env": {
-          "NODE_ENV": "development"
-        }
+          "NODE_ENV": "development",
+        },
       },
       {
         "type": "chrome",
         "request": "launch",
         "name": "Debug Frontend",
         "url": "http://localhost:4200",
-        "webRoot": "${workspaceFolder}/submodules/nufacturing"
-      }
-    ]
+        "webRoot": "${workspaceFolder}/submodules/nufacturing",
+      },
+    ],
   },
   "tasks": {
     "version": "2.0.0",
@@ -167,7 +168,7 @@
         "command": "npm run build && npm --prefix submodules/nufacturing run build && npm --prefix submodules/nufulfillment-veracore run build",
         "group": "build",
         "problemMatcher": ["$tsc"],
-        "detail": "Build all components in the CLEAN-LLM architecture."
+        "detail": "Build all components in the CLEAN-LLM architecture.",
       },
       {
         "label": "lint-all",
@@ -175,7 +176,7 @@
         "command": "npm run lint && npm --prefix submodules/nufacturing run lint && npm --prefix submodules/nufulfillment-veracore run lint",
         "group": "build",
         "problemMatcher": ["$eslint-stylish"],
-        "detail": "Lint all code in the workspace."
+        "detail": "Lint all code in the workspace.",
       },
       {
         "label": "test-all",
@@ -183,9 +184,9 @@
         "command": "npm test && npm --prefix submodules/nufacturing run test && npm --prefix submodules/nufulfillment-veracore run test",
         "group": "test",
         "problemMatcher": ["$jest"],
-        "detail": "Run all unit tests in the workspace."
-      }
-    ]
+        "detail": "Run all unit tests in the workspace.",
+      },
+    ],
   },
   "extensions": {
     "recommendations": [
@@ -196,8 +197,7 @@
       "orta.vscode-jest",
       "msjsdiag.debugger-for-chrome",
       "cypress.cypress",
-      "streetsidesoftware.code-spell-checker"
-    ]
-  }
+      "streetsidesoftware.code-spell-checker",
+    ],
+  },
 }
-
