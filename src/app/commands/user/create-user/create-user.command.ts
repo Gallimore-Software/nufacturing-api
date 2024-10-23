@@ -1,6 +1,6 @@
 import { EmailService } from '@app/services/email-service/email-service';
 import { User } from '@domain/entities/user/user-entity';
-import { UserProps } from '@domain/entities/user/user-props';
+import { IUserProps } from '@domain/entities/user/user-props';
 import { UserRole } from '@domain/entities/user/user-role';
 import { IUserRepository } from '@domain/interfaces/repositories/user.repository.interface';
 import { CreateUserDTO } from '@interfaces/dtos/user/user.dto';
@@ -17,7 +17,7 @@ export class CreateUserUseCase {
     // Set a default role if none is provided
     const role = userDTO.role ?? new UserRole('User'); // Default to 'User' role if undefined
 
-    const userProps: UserProps = {
+    const userProps: IUserProps = {
       ...userDTO,
       role, // Now role is guaranteed to be present
     };

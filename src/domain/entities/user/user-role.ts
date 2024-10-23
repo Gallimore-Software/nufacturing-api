@@ -1,3 +1,4 @@
+// user-role.ts
 export class UserRole {
   private readonly value: string;
 
@@ -49,3 +50,6 @@ export class UserRole {
     return this.value === UserRole.USER;
   }
 }
+
+// Ensure it's exported
+export default UserRole;

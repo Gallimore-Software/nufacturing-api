@@ -5,6 +5,7 @@ import UserModel, {
 } from '@infrastructure/persistence/models/user/user-model'; // Import the Mongoose model and its types
 import { injectable } from 'inversify';
 import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
+import UserRole from '@domain/entities/user/user-role';
 
 @injectable()
 export class UserRepository implements IUserRepository {
@@ -20,9 +21,12 @@ export class UserRepository implements IUserRepository {
       username: user.props.username,
       password: user.props.password,
       email: user.props.email,
-      role: user.props.role,
+      role: user.props.role.getValue(), // Ensure role is stored as a string
       emailVerified: user.props.emailVerified,
-      createdAt: user.props.createdAt ?? new Date(),
+      createdAt: user.props.createdAt
+        ? new Date(user.props.createdAt)
+        : new Date(), // Convert to Date object
+      phoneNumber: user.props.phoneNumber,
     });
 
     const savedUser = await userModel.save();
@@ -69,17 +73,19 @@ export class UserRepository implements IUserRepository {
 
   // Convert persistence model to domain entity
   private toDomain(userModel: IUserModel): User {
-    return User.create({
-      username: userModel.username,
-      password: userModel.password,
-      email: userModel.email,
-      role: userModel.role,
-      emailVerified: userModel.emailVerified,
-      createdAt: userModel.createdAt,
-      id: new UniqueEntityID(userModel.id.toString()), // Properly convert MongoDB's ObjectId to a string
-      isDeleted: false, // Handle this if it's part of your model
-      phoneNumber: userModel.phoneNumber || '', // Default empty value for optional fields
-    }).getValue(); // Assuming you're using Result<T> or similar pattern
+    return User.create(
+      {
+        username: userModel.username,
+        password: userModel.password,
+        email: userModel.email,
+        role: new UserRole(userModel.role), // Create UserRole from string
+        emailVerified: userModel.emailVerified,
+        createdAt: new Date(userModel.createdAt), // Ensure this is a Date object
+        isDeleted: userModel.isDeleted ?? false,
+        phoneNumber: userModel.phoneNumber,
+      },
+      new UniqueEntityID(userModel._id)
+    ).getValue(); // Convert MongoDB _id to UniqueEntityID
   }
 
   // Convert domain entity to persistence format (for updates)

@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
 import { body, validationResult } from 'express-validator';
+import { Request, Response, NextFunction } from 'express';
 
 // Error handler middleware
 export const handleValidationErrors = (
@@ -9,9 +9,9 @@ export const handleValidationErrors = (
 ): void | Response => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() }); // Returning response in case of validation failure
+    return res.status(400).json({ errors: errors.array() });
   }
-  return next(); // Ensuring that next() is returned in the valid case
+  next();
 };
 
 // Validation rules for login
@@ -20,5 +20,47 @@ export const validateLogin = [
   body('password')
     .isLength({ min: 6 })
     .withMessage('Password must be at least 6 characters long'),
-  handleValidationErrors, // Attach the error handler middleware
+  handleValidationErrors, // Attach error handler middleware
+];
+
+// Validation rules for registration
+export const validateRegister = [
+  body('email').isEmail().withMessage('Email must be valid'),
+  body('password')
+    .isLength({ min: 6 })
+    .withMessage('Password must be at least 6 characters long'),
+  body('username').notEmpty().withMessage('Username is required'),
+  body('phoneNumber')
+    .matches(/^\d{10}$/)
+    .withMessage('Phone number must be 10 digits long'),
+  handleValidationErrors, // Attach error handler middleware
+];
+
+// Validation rules for inventory item
+export const validateInventoryItem = [
+  // Ensure the name is provided and is a string
+  body('name').notEmpty().withMessage('Name is required').isString(),
+
+  // Ensure the quantity is provided and is an integer greater than 0
+  body('quantity')
+    .notEmpty()
+    .withMessage('Quantity is required')
+    .isInt({ min: 1 })
+    .withMessage('Quantity must be an integer greater than 0'),
+
+  // Optional vendor ID, but if provided, it must be a valid MongoDB ObjectId
+  body('vendor')
+    .optional()
+    .isMongoId()
+    .withMessage('Vendor ID must be a valid MongoDB ID'),
+
+  // Custom validation result handler
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+    next();
+    return;
+  },
 ];

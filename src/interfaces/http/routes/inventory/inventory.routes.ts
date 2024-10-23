@@ -1,6 +1,6 @@
 import { UserRole } from '@domain/entities/user/user-role';
 import RoleMiddleware from '@interfaces/http/middleware/role.middleware';
-import validateInventoryItem from '@interfaces/http/middleware/validate-inventory-item.middleware';
+import { validateInventoryItem } from '@interfaces/http/middleware/validation.middleware';
 import express from 'express';
 import * as inventoryController from '@interfaces/http/controllers/inventory/inventory.controller';
 import { container } from '@infrastructure/di/container'; // Assuming you are using a DI container like Inversify

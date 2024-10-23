@@ -1,29 +1,32 @@
+// user.entity.ts
 import { Entity } from '@domain/common/entity';
 import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
-import { UserProps } from './user-props';
+import { IUserProps } from './user-props';
 import { Result } from '@domain/common/result';
 import { UserRole } from '@domain/entities/user/user-role';
 import { Guard } from '@domain/common/guards/against-null-or-undefined-bulk/against-null-or-undefined-bulk.guard';
 
-export class User extends Entity<UserProps> {
-  private constructor(props: UserProps, id?: UniqueEntityID) {
+export class User extends Entity<IUserProps> {
+  private constructor(props: IUserProps, id?: UniqueEntityID) {
     super(props, id); // Entity base class handles the id
   }
 
   // Factory method to create a user with validation checks
-  public static create(props: UserProps, id?: UniqueEntityID): Result<User> {
+  public static create(props: IUserProps, id?: UniqueEntityID): Result<User> {
     const guardResult = Guard.againstNullOrUndefinedBulk([
       { argument: props.email ?? '', argumentName: 'email' }, // Ensure email is a string
       { argument: props.username ?? '', argumentName: 'username' }, // Ensure username is a string
       { argument: props.password ?? '', argumentName: 'password' }, // Ensure password is a string
-      // { argument: props.role?.getValue() ?? '', argumentName: 'role' }, // Ensure role is a valid string value
     ]);
 
     if (!guardResult.succeeded) {
       return Result.fail<User>(guardResult.message ?? 'Validation failed'); // Default message
     }
 
-    const user = new User(props, id);
+    // If no ID is provided, generate a new UniqueEntityID
+    const userId = id ?? new UniqueEntityID();
+
+    const user = new User({ ...props, id: userId }, userId);
     return Result.ok<User>(user);
   }
 

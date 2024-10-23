@@ -17,8 +17,10 @@ export class UserController {
     const createUserUseCase = container.get(CreateUserUseCase);
     try {
       const result = await createUserUseCase.execute(req.body);
+      console.log('Create user result', result);
       return res.status(201).json(result);
     } catch (error: unknown) {
+      console.log('Create user error', error);
       return handleError(res, error);
     }
   }

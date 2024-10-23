@@ -83,6 +83,7 @@ const inventoryItemSchema = new Schema({
   associatedPOs: [referenceSchema],
   associatedLabTests: [referenceSchema],
   associatedReceivements: [referenceSchema],
+  associatedLots: [referenceSchema],
   warehouseLocation: {
     type: Schema.Types.ObjectId,
     ref: 'WarehouseLocation',

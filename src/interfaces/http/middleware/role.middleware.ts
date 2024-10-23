@@ -9,59 +9,58 @@ import { UserRole } from '@domain/entities/user/user-role';
 export class RoleMiddleware {
   constructor(@inject(TYPES.JWTService) private jwtService: JWTService) {}
 
-  public handle(roles: UserRole[] | UserRole) {
+  public handle(requiredRoles: UserRole[] | UserRole) {
     return async (
       req: Request,
       res: Response,
       next: NextFunction
-    ): Promise<void> => {
+    ): Promise<Response | void> => {
       try {
+        // Extract authorization header
         const authHeader = req.headers.authorization;
+
+        // Validate authorization header presence and format
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
-          console.log('Authorization header missing or malformed');
-          res
+          return res
             .status(401)
             .json({ message: 'Authorization token missing or malformed' });
-          return;
         }
 
+        // Extract token from 'Bearer <token>' format
         const token = authHeader.split(' ')[1];
 
-        // Verify token and get decoded user information
+        // Verify token using JWT service
         const decoded: JWTPayload | null = await this.jwtService.verify(token);
-        console.log('Decoded payload:', decoded);
 
+        // If token verification fails, respond with unauthorized
         if (!decoded) {
-          res.status(401).json({ message: 'Invalid or expired token' });
-          return;
+          return res.status(401).json({ message: 'Invalid or expired token' });
         }
 
-        // Now that 'decoded' is typed, we can safely access 'role'
+        // Create UserRole instance from decoded token role
         const userRole = new UserRole(decoded.role);
-        console.log('User role:', userRole);
 
-        if (Array.isArray(roles)) {
-          const hasValidRole = roles.some((role) => userRole.equals(role));
-          if (!hasValidRole) {
-            res.status(403).json({
-              message: 'Access denied. You do not have the required role.',
-            });
-            return;
-          }
-        } else {
-          if (!userRole.equals(roles)) {
-            res.status(403).json({
-              message: 'Access denied. You do not have the required role.',
-            });
-            return;
-          }
+        // Check if the user has at least one of the required roles
+        const hasRequiredRole = Array.isArray(requiredRoles)
+          ? requiredRoles.some((role) => userRole.equals(role))
+          : userRole.equals(requiredRoles);
+
+        // If the user doesn't have the necessary role, return forbidden
+        if (!hasRequiredRole) {
+          return res.status(403).json({
+            message: 'Access denied. Insufficient permissions.',
+          });
         }
 
+        // Attach the user role to the request body for downstream use
         req.body.userRole = userRole;
+
+        // Proceed to the next middleware or controller
         next();
       } catch (error) {
-        console.log('Error during token verification:', error);
-        res.status(500).json({
+        // Handle any unexpected errors that might occur during token verification
+        console.error('Error during token verification:', error);
+        return res.status(500).json({
           message: 'An error occurred while verifying authorization',
           error: error instanceof Error ? error.message : 'Unknown error',
         });
