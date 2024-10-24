@@ -6,10 +6,21 @@ import { JWTPayload } from '@domain/interfaces/infrastructure/services/jwt/jwt-p
 @injectable()
 export class JWTService implements IJWTService {
   // Sign an access token with a default expiration of 1 hour
-  sign(payload: JWTPayload, expiresIn: string = '1h'): string {
-    return jwt.sign(payload, process.env.JWT_SECRET as string, {
+  sign(
+    payload: JWTPayload,
+    expiresIn: string = '1h'
+  ): { token: string; expiresAt: Date } {
+    const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
       expiresIn,
     });
+
+    // Decode the token to get the expiration timestamp
+    const decoded = jwt.decode(token) as JwtPayload;
+
+    // Convert the expiration to a Date object
+    const expiresAt = new Date((decoded.exp || 0) * 1000);
+
+    return { token, expiresAt }; // Return both token and expiration date
   }
 
   // Verify an access token and return its payload

@@ -11,6 +11,10 @@ export class UniqueEntityID {
     return this._value;
   }
 
+  public toString(): string {
+    return this._value;
+  }
+
   equals(id?: UniqueEntityID): boolean {
     if (id === null || id === undefined) {
       return false;
