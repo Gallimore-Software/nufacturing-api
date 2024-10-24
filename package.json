@@ -43,7 +43,9 @@
     "ci:pact": "npm run pact",
     "ci:build": "npm run build",
     "ci:deploy": "npm run deploy",
-    "ci": "npm run ci:install && npm run ci:lint && npm run ci:prettier && npm run ci:test && npm run ci:pact && npm run ci:build"
+    "ci": "npm run ci:install && npm run ci:lint && npm run ci:prettier && npm run ci:test && npm run ci:pact && npm run ci:build",
+    "data": "node --loader ts-node/esm --experimental-specifier-resolution=node -r tsconfig-paths/register scripts/generate-inventory-item-data.ts",
+    "genfiles": "node --loader ts-node/esm --experimental-specifier-resolution=node -r tsconfig-paths/register scripts/generate-files.ts"
   },
   "husky": {
     "hooks": {

@@ -3,7 +3,7 @@
     "target": "ES2020",
     "module": "ESNext",
     "lib": ["ES2020", "DOM"],
-    "moduleResolution": "node", 
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -60,7 +60,11 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
-  "include": ["src/**/*.ts", "src/main.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/main.ts",
+    "scripts/generate-inventory-item-data.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist",

@@ -1,5 +1,3 @@
-// src/app/services/jwt-service/jwt-payload.interface.ts
-
 export interface JWTPayload {
   id: string;
   role: string; // This is the role we expect from the token

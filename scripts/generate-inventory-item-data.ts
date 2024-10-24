@@ -4,11 +4,11 @@ import {
   Category,
   Supplier,
   WarehouseLocation,
-} from './inventory-model'; // No need for .js, TypeScript will resolve .ts automatically
-import FinishedGoodsModel from './finished-goods-model'; // Remove .js
-import RawMaterialsModel from './raw-materials-model'; // Remove .js
-import ComponentsModel from './components-model'; // Remove .js
-import WIPModel from './wip-model'; // Remove .js
+} from '../src/infrastructure/persistence/models/inventory/inventory-model'; // No need for .js, TypeScript will resolve .ts automatically
+import FinishedGoodsModel from '../src/infrastructure/persistence/models/inventory/finished-goods-model'; // Remove .js
+import RawMaterialsModel from '../src/infrastructure/persistence/models/inventory/raw-materials-model'; // Remove .js
+import ComponentsModel from '../src/infrastructure/persistence/models/inventory/components-model'; // Remove .js
+import WIPModel from '../src/infrastructure/persistence/models/inventory/wip-model'; // Remove .js
 
 // Connect to MongoDB
 mongoose
