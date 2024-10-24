@@ -1,5 +1,3 @@
 // opportunity.model.ts - Model definition
 
-export class Opportunity {
-
-}
+export class Opportunity {}

@@ -1,5 +1,3 @@
 // consolidated-financials.model.ts - Model definition
 
-export class ConsolidatedFinancials {
-
-}
+export class ConsolidatedFinancials {}

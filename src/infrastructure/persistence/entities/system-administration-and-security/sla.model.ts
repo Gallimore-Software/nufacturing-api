@@ -1,5 +1,3 @@
 // sla.model.ts - Model definition
 
-export class Sla {
-
-}
+export class Sla {}

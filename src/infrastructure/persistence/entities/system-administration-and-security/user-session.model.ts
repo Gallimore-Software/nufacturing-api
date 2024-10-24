@@ -1,5 +1,3 @@
 // user-session.model.ts - Model definition
 
-export class UserSession {
-
-}
+export class UserSession {}

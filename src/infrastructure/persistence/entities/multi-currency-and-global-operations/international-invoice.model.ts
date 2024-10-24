@@ -1,5 +1,3 @@
 // international-invoice.model.ts - Model definition
 
-export class InternationalInvoice {
-
-}
+export class InternationalInvoice {}

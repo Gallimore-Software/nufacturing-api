@@ -1,5 +1,3 @@
 // machine-operation-log.model.ts - Model definition
 
-export class MachineOperationLog {
-
-}
+export class MachineOperationLog {}

@@ -1,5 +1,3 @@
 // bottlingRecord.model.ts - Model definition
 
-export class BottlingRecord {
-
-}
+export class BottlingRecord {}

@@ -1,5 +1,3 @@
 // fda-compliance.model.ts - Model definition
 
-export class FdaCompliance {
-
-}
+export class FdaCompliance {}

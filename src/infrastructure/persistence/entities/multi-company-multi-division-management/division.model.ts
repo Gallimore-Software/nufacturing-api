@@ -1,5 +1,3 @@
 // division.model.ts - Model definition
 
-export class Division {
-
-}
+export class Division {}

@@ -1,5 +1,3 @@
 // legal-case.model.ts - Model definition
 
-export class LegalCase {
-
-}
+export class LegalCase {}

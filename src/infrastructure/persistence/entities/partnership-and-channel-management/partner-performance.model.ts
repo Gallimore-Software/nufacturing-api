@@ -1,5 +1,3 @@
 // partner-performance.model.ts - Model definition
 
-export class PartnerPerformance {
-
-}
+export class PartnerPerformance {}

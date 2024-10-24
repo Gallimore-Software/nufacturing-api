@@ -1,5 +1,3 @@
 // integration.model.ts - Model definition
 
-export class Integration {
-
-}
+export class Integration {}

@@ -1,5 +1,3 @@
 // subscription-invoice.model.ts - Model definition
 
-export class SubscriptionInvoice {
-
-}
+export class SubscriptionInvoice {}

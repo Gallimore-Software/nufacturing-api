@@ -1,5 +1,3 @@
 // customer-ticket.model.ts - Model definition
 
-export class CustomerTicket {
-
-}
+export class CustomerTicket {}

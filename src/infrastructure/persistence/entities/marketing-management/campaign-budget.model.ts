@@ -1,5 +1,3 @@
 // campaign-budget.model.ts - Model definition
 
-export class CampaignBudget {
-
-}
+export class CampaignBudget {}

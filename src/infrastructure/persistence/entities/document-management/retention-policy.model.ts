@@ -1,5 +1,3 @@
 // retention-policy.model.ts - Model definition
 
-export class RetentionPolicy {
-
-}
+export class RetentionPolicy {}

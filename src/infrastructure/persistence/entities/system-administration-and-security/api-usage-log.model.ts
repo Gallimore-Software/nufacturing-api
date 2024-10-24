@@ -1,5 +1,3 @@
 // api-usage-log.model.ts - Model definition
 
-export class ApiUsageLog {
-
-}
+export class ApiUsageLog {}

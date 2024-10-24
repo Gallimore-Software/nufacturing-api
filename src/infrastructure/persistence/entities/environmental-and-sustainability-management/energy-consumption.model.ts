@@ -1,5 +1,3 @@
 // energy-consumption.model.ts - Model definition
 
-export class EnergyConsumption {
-
-}
+export class EnergyConsumption {}

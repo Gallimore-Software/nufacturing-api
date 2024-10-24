@@ -1,5 +1,3 @@
 // data-visualization.model.ts - Model definition
 
-export class DataVisualization {
-
-}
+export class DataVisualization {}

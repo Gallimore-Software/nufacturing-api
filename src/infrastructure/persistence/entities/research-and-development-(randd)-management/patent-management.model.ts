@@ -1,5 +1,3 @@
 // patent-management.model.ts - Model definition
 
-export class PatentManagement {
-
-}
+export class PatentManagement {}

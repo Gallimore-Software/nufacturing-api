@@ -55,6 +55,7 @@
   "dependencies": {
     "@azure/msal-angular": "^3.0.25",
     "@azure/msal-browser": "^3.26.1",
+    "@typegoose/typegoose": "^12.8.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

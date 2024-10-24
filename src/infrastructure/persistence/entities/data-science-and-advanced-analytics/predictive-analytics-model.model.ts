@@ -1,5 +1,3 @@
 // predictive-analytics-model.model.ts - Model definition
 
-export class PredictiveAnalyticsModel {
-
-}
+export class PredictiveAnalyticsModel {}

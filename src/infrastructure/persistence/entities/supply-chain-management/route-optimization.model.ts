@@ -1,5 +1,3 @@
 // route-optimization.model.ts - Model definition
 
-export class RouteOptimization {
-
-}
+export class RouteOptimization {}

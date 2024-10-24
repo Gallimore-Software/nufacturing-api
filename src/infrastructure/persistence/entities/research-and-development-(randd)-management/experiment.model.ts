@@ -1,5 +1,3 @@
 // experiment.model.ts - Model definition
 
-export class Experiment {
-
-}
+export class Experiment {}

@@ -1,5 +1,3 @@
 // demand-planning.model.ts - Model definition
 
-export class DemandPlanning {
-
-}
+export class DemandPlanning {}

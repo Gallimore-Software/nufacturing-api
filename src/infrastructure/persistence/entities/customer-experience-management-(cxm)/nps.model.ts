@@ -1,5 +1,3 @@
 // nps.model.ts - Model definition
 
-export class Nps {
-
-}
+export class Nps {}

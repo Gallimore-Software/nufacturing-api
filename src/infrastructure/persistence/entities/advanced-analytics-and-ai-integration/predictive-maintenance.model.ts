@@ -1,5 +1,3 @@
 // predictive-maintenance.model.ts - Model definition
 
-export class PredictiveMaintenance {
-
-}
+export class PredictiveMaintenance {}

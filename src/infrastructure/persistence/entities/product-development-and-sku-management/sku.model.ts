@@ -1,5 +1,3 @@
 // sku.model.ts - Model definition
 
-export class Sku {
-
-}
+export class Sku {}

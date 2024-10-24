@@ -1,5 +1,3 @@
 // connector.model.ts - Model definition
 
-export class Connector {
-
-}
+export class Connector {}

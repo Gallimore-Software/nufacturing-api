@@ -1,5 +1,3 @@
 // task.model.ts - Model definition
 
-export class Task {
-
-}
+export class Task {}

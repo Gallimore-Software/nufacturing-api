@@ -1,5 +1,3 @@
 // product-price.model.ts - Model definition
 
-export class ProductPrice {
-
-}
+export class ProductPrice {}

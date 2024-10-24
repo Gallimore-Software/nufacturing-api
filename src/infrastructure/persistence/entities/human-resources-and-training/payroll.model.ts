@@ -1,5 +1,3 @@
 // payroll.model.ts - Model definition
 
-export class Payroll {
-
-}
+export class Payroll {}

@@ -1,5 +1,3 @@
 // shipment.model.ts - Model definition
 
-export class Shipment {
-
-}
+export class Shipment {}

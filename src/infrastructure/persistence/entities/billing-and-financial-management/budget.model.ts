@@ -1,5 +1,3 @@
 // budget.model.ts - Model definition
 
-export class Budget {
-
-}
+export class Budget {}

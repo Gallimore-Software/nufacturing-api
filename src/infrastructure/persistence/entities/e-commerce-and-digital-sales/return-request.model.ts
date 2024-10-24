@@ -1,5 +1,3 @@
 // return-request.model.ts - Model definition
 
-export class ReturnRequest {
-
-}
+export class ReturnRequest {}

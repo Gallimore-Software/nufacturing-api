@@ -1,5 +1,3 @@
 // customer-profile.model.ts - Model definition
 
-export class CustomerProfile {
-
-}
+export class CustomerProfile {}

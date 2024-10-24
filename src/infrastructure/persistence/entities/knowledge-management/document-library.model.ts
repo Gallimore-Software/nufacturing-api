@@ -1,5 +1,3 @@
 // document-library.model.ts - Model definition
 
-export class DocumentLibrary {
-
-}
+export class DocumentLibrary {}

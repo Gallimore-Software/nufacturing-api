@@ -1,5 +1,3 @@
 // influencer-campaign.model.ts - Model definition
 
-export class InfluencerCampaign {
-
-}
+export class InfluencerCampaign {}

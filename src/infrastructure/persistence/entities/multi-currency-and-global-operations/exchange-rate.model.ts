@@ -1,5 +1,3 @@
 // exchange-rate.model.ts - Model definition
 
-export class ExchangeRate {
-
-}
+export class ExchangeRate {}

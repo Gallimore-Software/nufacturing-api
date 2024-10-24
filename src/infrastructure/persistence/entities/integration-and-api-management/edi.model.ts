@@ -1,5 +1,3 @@
 // edi.model.ts - Model definition
 
-export class Edi {
-
-}
+export class Edi {}

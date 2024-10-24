@@ -1,5 +1,3 @@
 // timesheet.model.ts - Model definition
 
-export class Timesheet {
-
-}
+export class Timesheet {}

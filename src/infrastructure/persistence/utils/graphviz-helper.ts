@@ -15,7 +15,7 @@ export const generateInventoryERDiagram = () => {
       category: ObjectId | 
       type: Enum | 
       pricePerUnit: Number | 
-      vendor: ObjectId }"`, 
+      vendor: ObjectId }"`,
     shape: 'record',
   });
 

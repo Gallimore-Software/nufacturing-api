@@ -1,5 +1,3 @@
 // cost-center.model.ts - Model definition
 
-export class CostCenter {
-
-}
+export class CostCenter {}

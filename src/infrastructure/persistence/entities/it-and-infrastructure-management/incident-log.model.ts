@@ -1,5 +1,3 @@
 // incident-log.model.ts - Model definition
 
-export class IncidentLog {
-
-}
+export class IncidentLog {}

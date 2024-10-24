@@ -1,5 +1,3 @@
 // document-tag.model.ts - Model definition
 
-export class DocumentTag {
-
-}
+export class DocumentTag {}

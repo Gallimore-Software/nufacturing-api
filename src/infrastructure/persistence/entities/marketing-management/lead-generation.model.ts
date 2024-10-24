@@ -1,5 +1,3 @@
 // lead-generation.model.ts - Model definition
 
-export class LeadGeneration {
-
-}
+export class LeadGeneration {}

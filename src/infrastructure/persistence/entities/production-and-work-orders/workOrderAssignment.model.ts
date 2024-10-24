@@ -1,5 +1,3 @@
 // workOrderAssignment.model.ts - Model definition
 
-export class WorkOrderAssignment {
-
-}
+export class WorkOrderAssignment {}

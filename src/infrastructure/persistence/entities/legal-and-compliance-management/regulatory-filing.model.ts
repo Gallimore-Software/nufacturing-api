@@ -1,5 +1,3 @@
 // regulatory-filing.model.ts - Model definition
 
-export class RegulatoryFiling {
-
-}
+export class RegulatoryFiling {}

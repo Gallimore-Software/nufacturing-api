@@ -1,5 +1,3 @@
 // payment-terms.model.ts - Model definition
 
-export class PaymentTerms {
-
-}
+export class PaymentTerms {}

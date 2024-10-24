@@ -1,5 +1,3 @@
 // supply-chain-risk-assessment.model.ts - Model definition
 
-export class SupplyChainRiskAssessment {
-
-}
+export class SupplyChainRiskAssessment {}

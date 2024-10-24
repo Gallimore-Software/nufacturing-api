@@ -1,5 +1,3 @@
 // content-management.model.ts - Model definition
 
-export class ContentManagement {
-
-}
+export class ContentManagement {}

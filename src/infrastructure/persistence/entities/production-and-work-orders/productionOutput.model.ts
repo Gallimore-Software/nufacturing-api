@@ -1,5 +1,3 @@
 // productionOutput.model.ts - Model definition
 
-export class ProductionOutput {
-
-}
+export class ProductionOutput {}

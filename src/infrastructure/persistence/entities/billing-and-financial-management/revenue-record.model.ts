@@ -1,5 +1,3 @@
 // revenue-record.model.ts - Model definition
 
-export class RevenueRecord {
-
-}
+export class RevenueRecord {}

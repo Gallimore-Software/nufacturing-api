@@ -1,5 +1,3 @@
 // company.model.ts - Model definition
 
-export class Company {
-
-}
+export class Company {}

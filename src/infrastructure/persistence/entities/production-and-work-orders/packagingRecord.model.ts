@@ -1,5 +1,3 @@
 // packagingRecord.model.ts - Model definition
 
-export class PackagingRecord {
-
-}
+export class PackagingRecord {}

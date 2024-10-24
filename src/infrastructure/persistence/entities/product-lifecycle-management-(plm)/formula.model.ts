@@ -1,5 +1,3 @@
 // formula.model.ts - Model definition
 
-export class Formula {
-
-}
+export class Formula {}

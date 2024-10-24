@@ -1,5 +1,3 @@
 // wasteRecord.model.ts - Model definition
 
-export class WasteRecord {
-
-}
+export class WasteRecord {}

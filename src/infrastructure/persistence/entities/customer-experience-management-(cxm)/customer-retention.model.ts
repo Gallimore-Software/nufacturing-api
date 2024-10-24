@@ -1,5 +1,3 @@
 // customer-retention.model.ts - Model definition
 
-export class CustomerRetention {
-
-}
+export class CustomerRetention {}

@@ -1,5 +1,3 @@
 // formula-innovation.model.ts - Model definition
 
-export class FormulaInnovation {
-
-}
+export class FormulaInnovation {}

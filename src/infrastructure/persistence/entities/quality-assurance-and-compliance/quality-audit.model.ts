@@ -1,5 +1,3 @@
 // quality-audit.model.ts - Model definition
 
-export class QualityAudit {
-
-}
+export class QualityAudit {}

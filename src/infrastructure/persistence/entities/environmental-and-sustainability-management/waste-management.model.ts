@@ -1,5 +1,3 @@
 // waste-management.model.ts - Model definition
 
-export class WasteManagement {
-
-}
+export class WasteManagement {}

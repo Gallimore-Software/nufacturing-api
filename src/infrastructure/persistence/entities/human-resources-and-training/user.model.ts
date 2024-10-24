@@ -1,5 +1,3 @@
 // user.model.ts - Model definition
 
-export class User {
-
-}
+export class User {}

@@ -1,5 +1,3 @@
 // prototype.model.ts - Model definition
 
-export class Prototype {
-
-}
+export class Prototype {}

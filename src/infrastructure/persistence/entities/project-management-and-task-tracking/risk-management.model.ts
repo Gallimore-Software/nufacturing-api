@@ -1,5 +1,3 @@
 // risk-management.model.ts - Model definition
 
-export class RiskManagement {
-
-}
+export class RiskManagement {}

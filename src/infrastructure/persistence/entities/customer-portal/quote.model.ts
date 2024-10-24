@@ -1,5 +1,3 @@
 // quote.model.ts - Model definition
 
-export class Quote {
-
-}
+export class Quote {}

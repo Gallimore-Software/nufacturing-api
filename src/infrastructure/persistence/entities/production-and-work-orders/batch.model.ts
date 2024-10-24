@@ -1,5 +1,3 @@
 // batch.model.ts - Model definition
 
-export class Batch {
-
-}
+export class Batch {}

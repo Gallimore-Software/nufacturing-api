@@ -1,5 +1,3 @@
 // productionSchedule.model.ts - Model definition
 
-export class ProductionSchedule {
-
-}
+export class ProductionSchedule {}

@@ -1,5 +1,3 @@
 // productionStage.model.ts - Model definition
 
-export class ProductionStage {
-
-}
+export class ProductionStage {}

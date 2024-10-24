@@ -1,5 +1,3 @@
 // customer-loyalty.model.ts - Model definition
 
-export class CustomerLoyalty {
-
-}
+export class CustomerLoyalty {}

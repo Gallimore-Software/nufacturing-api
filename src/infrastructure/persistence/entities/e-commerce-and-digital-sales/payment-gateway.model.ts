@@ -1,5 +1,3 @@
 // payment-gateway.model.ts - Model definition
 
-export class PaymentGateway {
-
-}
+export class PaymentGateway {}

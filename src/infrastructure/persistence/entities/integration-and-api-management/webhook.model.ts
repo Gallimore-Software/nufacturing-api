@@ -1,5 +1,3 @@
 // webhook.model.ts - Model definition
 
-export class Webhook {
-
-}
+export class Webhook {}

@@ -1,5 +1,3 @@
 // encapsulationRecord.model.ts - Model definition
 
-export class EncapsulationRecord {
-
-}
+export class EncapsulationRecord {}

@@ -1,5 +1,3 @@
 // siftingRecord.model.ts - Model definition
 
-export class SiftingRecord {
-
-}
+export class SiftingRecord {}

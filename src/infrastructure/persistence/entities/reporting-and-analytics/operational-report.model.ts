@@ -1,5 +1,3 @@
 // operational-report.model.ts - Model definition
 
-export class OperationalReport {
-
-}
+export class OperationalReport {}

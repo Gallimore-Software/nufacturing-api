@@ -1,5 +1,3 @@
 // campaign-management.model.ts - Model definition
 
-export class CampaignManagement {
-
-}
+export class CampaignManagement {}

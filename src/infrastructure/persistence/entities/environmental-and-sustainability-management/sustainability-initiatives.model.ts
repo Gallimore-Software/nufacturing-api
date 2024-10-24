@@ -1,5 +1,3 @@
 // sustainability-initiatives.model.ts - Model definition
 
-export class SustainabilityInitiatives {
-
-}
+export class SustainabilityInitiatives {}

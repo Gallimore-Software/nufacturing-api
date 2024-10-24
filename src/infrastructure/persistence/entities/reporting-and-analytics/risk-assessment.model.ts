@@ -1,5 +1,3 @@
 // risk-assessment.model.ts - Model definition
 
-export class RiskAssessment {
-
-}
+export class RiskAssessment {}

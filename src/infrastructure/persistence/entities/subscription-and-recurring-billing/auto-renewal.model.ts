@@ -1,5 +1,3 @@
 // auto-renewal.model.ts - Model definition
 
-export class AutoRenewal {
-
-}
+export class AutoRenewal {}
