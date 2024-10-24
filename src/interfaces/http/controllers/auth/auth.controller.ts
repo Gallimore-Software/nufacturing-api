@@ -1,3 +1,4 @@
+// auth.controller.ts
 import { Request, Response } from 'express';
 import { container } from '@infrastructure/di/container';
 import { TYPES } from '@infrastructure/di/types';
@@ -14,7 +15,7 @@ export class AuthController {
       if (!token) {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
-      return res.status(200).json({ token });
+      return res.status(200).json(token);
     } catch (error) {
       console.error('Error during login:', error); // Log the error
       return res.status(500).json({ message: 'Internal server error' });
