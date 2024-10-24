@@ -122,6 +122,7 @@
       "backorderedQty",
       "dtos",
       "gallimore",
+      "graphviz",
       "inversify",
       "nufulfillment",
       "openapitools",
@@ -130,7 +131,7 @@
       "skus",
       "unverify",
       "veracore",
-      "wips",
+      "wips"
     ],
   },
   "launch": {

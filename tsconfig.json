@@ -60,7 +60,7 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
-  "include": ["src/**/*.ts", "src/main.ts"],
+  "include": ["src/**/*.ts", "src/main.ts","infrastructure/persistence/utils/**/*"],
   "exclude": [
     "node_modules",
     "dist",
