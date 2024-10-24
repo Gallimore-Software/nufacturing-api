@@ -4,7 +4,7 @@ export interface IJWTService {
    * @param payload - The payload to encode into the JWT token.
    * @returns The signed JWT token.
    */
-  sign(payload: object): string;
+  sign(payload: object): object;
 
   /**
    * Verifies a JWT token.

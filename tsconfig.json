@@ -60,11 +60,7 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/main.ts",
-    "scripts/generate-inventory-item-data.ts"
-  ],
+  "include": ["src/**/*.ts", "src/main.ts", "scripts/*"],
   "exclude": [
     "node_modules",
     "dist",
