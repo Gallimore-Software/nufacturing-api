@@ -21,9 +21,10 @@ export class AuthService {
     email: string,
     password: string
   ): Promise<{
-    token: string;
+    accessToken: string;
     refreshToken: string;
     user: { id: string; email: string; role: string };
+    expiresAt: Date;
   } | null> {
     const user = await this.userRepository.findByEmail(email);
 
@@ -43,16 +44,19 @@ export class AuthService {
     const refreshToken = this.jwtService.signRefreshToken({
       id: user.id.toString(),
     });
+    const accessToken = token.token;
+    const expiresAt = token.expiresAt;
 
     // Return token, refreshToken, and user info
     return {
-      token,
+      accessToken,
       refreshToken,
       user: {
-        id: user.id.toString(), // Convert UniqueEntityID to string
+        id: user.id.toString(),
         email: user.props.email,
         role: user.props.role.getValue(),
       },
+      expiresAt,
     };
   }
 
@@ -68,9 +72,10 @@ export class AuthService {
     password: string;
     phoneNumber: string;
   }): Promise<{
-    token: string;
+    accessToken: string;
     refreshToken: string;
     user: { id: string; email: string; role: string };
+    expiresAt: Date;
   }> {
     // Check if user already exists by email or username
     const existingUser = await this.userRepository.findByEmail(email);
@@ -103,23 +108,28 @@ export class AuthService {
       id: user.id.toString(),
     }); // Convert UniqueEntityID to string
 
+    const accessToken = token.token;
+    const expiresAt = token.expiresAt;
+
     // Return token, refreshToken, and user info
     return {
-      token,
+      accessToken,
       refreshToken,
       user: {
         id: user.id.toString(), // Convert UniqueEntityID to string
         email: user.props.email,
         role: user.props.role.getValue(),
       },
+      expiresAt,
     };
   }
 
   // Refresh token method in AuthService
   async refreshToken(refreshToken: string): Promise<{
-    token: string;
+    accessToken: string;
     refreshToken: string;
     user: { id: string; email: string; role: string };
+    expiresAt: Date;
   } | null> {
     try {
       // Verify the refresh token
@@ -139,7 +149,7 @@ export class AuthService {
       }
 
       // Generate a new access token and refresh token
-      const newToken = this.jwtService.sign({
+      const token = this.jwtService.sign({
         id: user.id.value.toString(), // Convert UniqueEntityID to string
         role: user.props.role.getValue(),
       });
@@ -147,15 +157,19 @@ export class AuthService {
         id: user.id.value.toString(),
       }); // Convert UniqueEntityID to string
 
+      const accessToken = token.token;
+      const expiresAt = token.expiresAt;
+
       // Return the new tokens and user info
       return {
-        token: newToken,
+        accessToken: accessToken,
         refreshToken: newRefreshToken,
         user: {
           id: user.id.value.toString(), // Convert UniqueEntityID to string
           email: user.props.email,
           role: user.props.role.getValue(),
         },
+        expiresAt,
       };
     } catch (error) {
       console.error('Error during token refresh:', error);
