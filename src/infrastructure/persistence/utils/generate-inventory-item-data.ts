@@ -4,11 +4,11 @@ import {
   Category,
   Supplier,
   WarehouseLocation,
-} from '../src/infrastructure/persistence/models/inventory/inventory-model'; // No need for .js, TypeScript will resolve .ts automatically
-import FinishedGoodsModel from '../src/infrastructure/persistence/models/inventory/finished-goods-model'; // Remove .js
-import RawMaterialsModel from '../src/infrastructure/persistence/models/inventory/raw-materials-model'; // Remove .js
-import ComponentsModel from '../src/infrastructure/persistence/models/inventory/components-model'; // Remove .js
-import WIPModel from '../src/infrastructure/persistence/models/inventory/wip-model'; // Remove .js
+} from '../models/inventory/inventory-model'; // No need for .js, TypeScript will resolve .ts automatically
+import FinishedGoodsModel from '../models/inventory/finished-goods-model'; // Remove .js
+import RawMaterialsModel from '../models/inventory/raw-materials-model'; // Remove .js
+import ComponentsModel from '../models/inventory/components-model'; // Remove .js
+import WIPModel from '../models/inventory/wip-model'; // Remove .js
 
 // Connect to MongoDB
 mongoose
@@ -46,7 +46,7 @@ const generateInventoryDataWithSubItems = async () => {
     sku: `SKU${Math.floor(Math.random() * 10000)}`,
     category: category._id,
     type: 'Finished Goods',
-    scientificName: 'Scientificus Example',
+    scientificName: 'Scientific Example',
     picture: 'http://example.com/item.jpg',
     description: 'A sample finished goods inventory item.',
     vendor: supplier._id,
