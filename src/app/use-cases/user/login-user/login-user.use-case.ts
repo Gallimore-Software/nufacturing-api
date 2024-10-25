@@ -51,7 +51,7 @@ export class LoginUserUseCase
       const token = this.jwtService.sign(jwtPayload);
 
       // Return the generated token as a result
-      return right(Result.ok<string>(token));
+      return right(Result.ok<string>(token.accessToken));
     } catch (err) {
       // Handle any unexpected errors
       if (err instanceof Error) {

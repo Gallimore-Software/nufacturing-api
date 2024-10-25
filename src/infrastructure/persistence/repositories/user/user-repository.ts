@@ -81,10 +81,10 @@ export class UserRepository implements IUserRepository {
         role: new UserRole(userModel.role), // Create UserRole from string
         emailVerified: userModel.emailVerified,
         createdAt: new Date(userModel.createdAt), // Ensure this is a Date object
-        isDeleted: userModel.isDeleted ?? false,
+        isDeleted: userModel.isDeleted,
         phoneNumber: userModel.phoneNumber,
       },
-      new UniqueEntityID(userModel._id)
+      new UniqueEntityID(userModel.id)
     ).getValue(); // Convert MongoDB _id to UniqueEntityID
   }
 

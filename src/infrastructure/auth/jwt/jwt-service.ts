@@ -9,18 +9,18 @@ export class JWTService implements IJWTService {
   sign(
     payload: JWTPayload,
     expiresIn: string = '1h'
-  ): { token: string; expiresAt: Date } {
-    const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
+  ): { accessToken: string; expiresAt: Date } {
+    const accessToken = jwt.sign(payload, process.env.JWT_SECRET as string, {
       expiresIn,
     });
 
     // Decode the token to get the expiration timestamp
-    const decoded = jwt.decode(token) as JwtPayload;
+    const decoded = jwt.decode(accessToken) as JwtPayload;
 
     // Convert the expiration to a Date object
     const expiresAt = new Date((decoded.exp || 0) * 1000);
 
-    return { token, expiresAt }; // Return both token and expiration date
+    return { accessToken, expiresAt }; // Return both token and expiration date
   }
 
   // Verify an access token and return its payload

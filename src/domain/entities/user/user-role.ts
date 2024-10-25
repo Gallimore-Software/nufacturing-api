@@ -1,4 +1,3 @@
-// user-role.ts
 export class UserRole {
   private readonly value: string;
 
@@ -18,11 +17,14 @@ export class UserRole {
     UserRole.SUPER_ADMIN,
   ];
 
-  constructor(role: string) {
-    if (!UserRole.validRoles.includes(role)) {
-      throw new Error(`Invalid user role: ${role}`);
+  constructor(role: string | UserRole) {
+    // Check if the provided role is a string or another UserRole instance
+    const roleValue = role instanceof UserRole ? role.getValue() : role;
+
+    if (!UserRole.validRoles.includes(roleValue)) {
+      throw new Error(`Invalid user role: ${roleValue}`);
     }
-    this.value = role;
+    this.value = roleValue;
   }
 
   // Get the string value of the role
