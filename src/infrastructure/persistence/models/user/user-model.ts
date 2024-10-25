@@ -1,7 +1,9 @@
 import { UserRole } from '@domain/entities/user/user-role';
+import { UniqueEntityID } from '@domain/value-objects/unique-identity-id.value';
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IUserModel extends Document {
+  id: UniqueEntityID;
   username: string;
   password: string;
   email: string;
@@ -9,6 +11,7 @@ export interface IUserModel extends Document {
   phoneNumber: string;
   createdAt: Date;
   emailVerified: boolean;
+  isDeleted: boolean;
 }
 
 const userSchema = new Schema<IUserModel>({

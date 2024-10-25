@@ -10,7 +10,7 @@
 //     mockUserRepository = {
 //       delete: jest.fn(),
 //       findById: jest.fn(),
-//     } as any;
+//     } as unknown;
 
 //     deleteUserUseCase = new DeleteUserUseCase(mockUserRepository);
 //   });
@@ -25,7 +25,7 @@
 //       password: 'password123',
 //       role: 'User',
 //       emailVerified: false,
-//     } as any;
+//     } as unknown;
 
 //     const adminUser = { id: 'admin', role: 'Admin' }; // Requesting user (admin)
 
@@ -69,7 +69,7 @@
 //       password: 'password123',
 //       role: 'User',
 //       emailVerified: false,
-//     } as any;
+//     } as unknown;
 
 //     const adminUser = { id: 'admin', role: 'Admin' };
 
@@ -97,7 +97,7 @@
 //       password: 'password123',
 //       role: 'User',
 //       emailVerified: false,
-//     } as any;
+//     } as unknown;
 
 //     const nonAdminUser = { id: 'user', role: 'User' }; // Requesting user (non-admin)
 
@@ -135,7 +135,7 @@
 //       role: 'User',
 //       emailVerified: false,
 //       isDeleted: true, // Assume isDeleted marks a user as "soft deleted"
-//     } as any;
+//     } as unknown;
 
 //     mockUserRepository.findById.mockResolvedValue(mockUser);
 

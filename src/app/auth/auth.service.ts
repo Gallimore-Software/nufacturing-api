@@ -44,19 +44,19 @@ export class AuthService {
     const refreshToken = this.jwtService.signRefreshToken({
       id: user.id.toString(),
     });
-    const accessToken = token.token;
+    const accessToken = token.accessToken;
     const expiresAt = token.expiresAt;
 
     // Return token, refreshToken, and user info
     return {
-      accessToken,
-      refreshToken,
+      accessToken: accessToken,
+      refreshToken: refreshToken,
       user: {
         id: user.id.toString(),
         email: user.props.email,
         role: user.props.role.getValue(),
       },
-      expiresAt,
+      expiresAt: expiresAt,
     };
   }
 
@@ -108,7 +108,7 @@ export class AuthService {
       id: user.id.toString(),
     }); // Convert UniqueEntityID to string
 
-    const accessToken = token.token;
+    const accessToken = token.accessToken;
     const expiresAt = token.expiresAt;
 
     // Return token, refreshToken, and user info
@@ -157,7 +157,7 @@ export class AuthService {
         id: user.id.value.toString(),
       }); // Convert UniqueEntityID to string
 
-      const accessToken = token.token;
+      const accessToken = token.accessToken;
       const expiresAt = token.expiresAt;
 
       // Return the new tokens and user info

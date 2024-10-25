@@ -3,8 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 export class UniqueEntityID {
   private readonly _value: string;
 
-  constructor(id?: string) {
-    this._value = id ? id : uuidv4();
+  constructor(id?: string | UniqueEntityID) {
+    // Check if the provided id is a UniqueEntityID instance
+    if (id instanceof UniqueEntityID) {
+      this._value = id.value;
+    } else {
+      this._value = id ? id : uuidv4();
+    }
   }
 
   get value(): string {

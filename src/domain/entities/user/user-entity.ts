@@ -26,7 +26,7 @@ export class User extends Entity<IUserProps> {
     // If no ID is provided, generate a new UniqueEntityID
     const userId = id ?? new UniqueEntityID();
 
-    const user = new User({ ...props, id: userId }, userId);
+    const user = new User({ ...props }, userId);
     return Result.ok<User>(user);
   }
 
