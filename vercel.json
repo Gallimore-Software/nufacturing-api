@@ -6,16 +6,15 @@
       "use": "@vercel/node",
       "config": {
         "includeFiles": ["src/**/*.ts", "node_modules/**"],
-        "tscOptions": {
-          "project": "tsconfig.json"
-        }
+        "excludeFiles": ["node_modules/unused-package/**"],
+        "maxLambdaSize": "50mb"
       }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/src/main.ts"
+      "dest": "src/main.ts"
     }
   ]
 }
