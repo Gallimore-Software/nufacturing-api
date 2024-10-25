@@ -26,6 +26,7 @@ export class AuthController {
   static async register(req: Request, res: Response): Promise<Response> {
     const authService = container.get<AuthService>(TYPES.AuthService);
     const { username, email, password, phoneNumber } = req.body;
+    console.log(req.body);
 
     try {
       const token = await authService.registerUser({
