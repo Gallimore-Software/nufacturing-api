@@ -1,5 +1,6 @@
+import graphviz from 'graphviz';
+
 declare module 'graphviz' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const graphviz: unknown;
-  export = graphviz;
+  const graphviz: graphviz;
+  export default graphviz;
 }

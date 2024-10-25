@@ -112,7 +112,7 @@ export class UserController {
     const verifyEmailUseCase = container.get(VerifyEmailUseCase);
     try {
       const result = await verifyEmailUseCase.execute(
-        new UniqueEntityID(req.paramsaccessToken)
+        new UniqueEntityID(req.params.accessToken)
       );
       return res.status(200).json({ message: result });
     } catch (error: unknown) {
