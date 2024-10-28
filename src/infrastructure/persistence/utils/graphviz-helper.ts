@@ -1,8 +1,11 @@
 import { existsSync, mkdirSync } from 'fs';
 import graphviz from 'graphviz';
-import { join } from 'path';
+import { fileURLToPath } from 'url';
+import { join, dirname } from 'path';
 
 // Define the path for the output folder relative to the current file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const outputDir = join(__dirname, 'outputs');
 
 // Ensure the 'outputs' folder exists, create if it doesn't
@@ -10,7 +13,7 @@ if (!existsSync(outputDir)) {
   mkdirSync(outputDir);
 }
 
-const g = graphviz.digraph('ERDGraph'); // Directed graph for relationships
+const g = graphviz.digraph('ERDGraph');
 
 // Add entities (nodes) with attributes using record shapes
 const order = g.addNode('Order', {
@@ -56,9 +59,10 @@ g.addEdge(order, customerPayment, { label: 'is paid by' });
 g.addEdge(order, customerBrand, { label: 'is for' });
 g.addEdge(orderDetail, certificateOfComposition, { label: 'has certificate' });
 
+
 // Output the graph to the 'outputs' folder as a PNG file
-const outputPath = join(outputDir, 'orders.png');
-g.output('png', outputPath, (err: unknown) => {
+const outputPath = join(outputDir, 'test.png');
+g.output('png', outputPath, (err) => {
   if (err) {
     console.error('Error generating the diagram:', err);
   } else {
