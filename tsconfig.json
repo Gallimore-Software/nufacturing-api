@@ -9,8 +9,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
+    "noEmit": false, // Set to false to emit compiled files
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -20,7 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "typeRoots": ["node_modules/@types", "@types", "./node_modules/@types"],
     "baseUrl": "./",
-    "outDir": "./dist",
+    "outDir": "./dist", // Output compiled files to the dist directory
     "rootDir": "./",
     "paths": {
       "@app/*": ["src/app/*"],
