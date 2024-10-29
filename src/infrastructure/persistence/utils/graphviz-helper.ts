@@ -2,15 +2,13 @@ import { existsSync, mkdirSync } from 'fs';
 import graphviz from 'graphviz';
 import { fileURLToPath } from 'url';
 import { join, dirname } from 'path';
-import { 
-  InventoryItem, 
-  QuantityPrice, 
+import {
+  InventoryItem,
+  QuantityPrice,
   WarehouseLocation,
   Supplier,
-  Category
-} 
-from '../models/inventory/inventory-model'; // Regular imports work here, using '@' aliases complicates things :)
-
+  Category,
+} from '../models/inventory/inventory-model'; // Regular imports work here, using '@' aliases complicates things :)
 
 // Define the path for the output folder relative to the current file
 const __filename = fileURLToPath(import.meta.url);
@@ -27,11 +25,13 @@ function createERDWithRelationships(fieldLimit = 10) {
   const g = graphviz.digraph('ERDGraph');
 
   // Create InventoryItem node with its fields
-  const inventoryItemFields = `{InventoryItem | ${Object.keys(InventoryItem.schema.paths)
+  const inventoryItemFields = `{InventoryItem | ${Object.keys(
+    InventoryItem.schema.paths
+  )
     .slice(0, fieldLimit)
     .map((path) => {
       const field = InventoryItem.schema.paths[path];
-      const fieldType = field.instance || "Mixed";
+      const fieldType = field.instance || 'Mixed';
       return `+ ${path}: ${fieldType}`;
     })
     .join(' | ')}}`;
@@ -42,10 +42,12 @@ function createERDWithRelationships(fieldLimit = 10) {
   });
 
   // Create QuantityPrice node with its fields
-  const quantityPriceFields = `{QuantityPrice | ${Object.keys(QuantityPrice.schema.paths)
+  const quantityPriceFields = `{QuantityPrice | ${Object.keys(
+    QuantityPrice.schema.paths
+  )
     .map((path) => {
       const field = QuantityPrice.schema.paths[path];
-      const fieldType = field.instance || "Mixed";
+      const fieldType = field.instance || 'Mixed';
       return `+ ${path}: ${fieldType}`;
     })
     .join(' | ')}}`;
@@ -59,7 +61,7 @@ function createERDWithRelationships(fieldLimit = 10) {
   const supplierFields = `{Supplier | ${Object.keys(Supplier.schema.paths)
     .map((path) => {
       const field = Supplier.schema.paths[path];
-      const fieldType = field.instance || "Mixed";
+      const fieldType = field.instance || 'Mixed';
       return `+ ${path}: ${fieldType}`;
     })
     .join(' | ')}}`;
@@ -73,7 +75,7 @@ function createERDWithRelationships(fieldLimit = 10) {
   const categoryFields = `{Category | ${Object.keys(Category.schema.paths)
     .map((path) => {
       const field = Category.schema.paths[path];
-      const fieldType = field.instance || "Mixed";
+      const fieldType = field.instance || 'Mixed';
       return `+ ${path}: ${fieldType}`;
     })
     .join(' | ')}}`;
@@ -81,13 +83,15 @@ function createERDWithRelationships(fieldLimit = 10) {
   g.addNode('Category', {
     shape: 'record',
     label: categoryFields,
-  });  
+  });
 
   // Create WarehouseLocation node with its fields
-  const warehouseLocationFields = `{WarehouseLocation | ${Object.keys(WarehouseLocation.schema.paths)
+  const warehouseLocationFields = `{WarehouseLocation | ${Object.keys(
+    WarehouseLocation.schema.paths
+  )
     .map((path) => {
       const field = WarehouseLocation.schema.paths[path];
-      const fieldType = field.instance || "Mixed";
+      const fieldType = field.instance || 'Mixed';
       return `+ ${path}: ${fieldType}`;
     })
     .join(' | ')}}`;
@@ -95,7 +99,7 @@ function createERDWithRelationships(fieldLimit = 10) {
   g.addNode('WarehouseLocation', {
     shape: 'record',
     label: warehouseLocationFields,
-  });   
+  });
 
   // Add relationships (edge)
   g.addEdge('InventoryItem', 'QuantityPrice', { label: 'has quantity price' });
