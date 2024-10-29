@@ -139,6 +139,7 @@ quantityPriceSchema.pre('save', function (next) {
 
 // Create models for the main inventory and related entities
 const InventoryItem = mongoose.model('InventoryItem', inventoryItemSchema);
+const QuantityPrice = mongoose.model('QuantityPrice', quantityPriceSchema);
 const Category = mongoose.model('Category', categorySchema);
 const Supplier = mongoose.model('Supplier', supplierSchema);
 const WarehouseLocation = mongoose.model(
@@ -146,4 +147,4 @@ const WarehouseLocation = mongoose.model(
   warehouseLocationSchema
 );
 
-export { InventoryItem, Category, Supplier, WarehouseLocation };
+export { InventoryItem, QuantityPrice, Category, Supplier, WarehouseLocation };
