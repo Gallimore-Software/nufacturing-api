@@ -17,6 +17,7 @@
       "path": "submodules/gallimore-devtools",
     },
     {
+      "name": "Ag-Grid Demos",
       "path": "../gallimore-ag-grid-demos",
     },
   ],
@@ -47,44 +48,30 @@
         "changeProcessCWD": true,
       },
       {
-        "directory": "submodules/gallimore-dev-tools",
+        "directory": "submodules/gallimore-devtools",
         "changeProcessCWD": true,
       },
     ],
     "eslint.validate": ["javascript", "typescript", "typescriptreact"],
+
+    // Prettier and Code Formatting
+    "prettier.requireConfig": true,
+    "prettier.useTabs": false,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+
+    // Integrated Testing & Debugging
+    "jest.runMode": "on-demand",
+    "cypress.resolvers": [{ "cypress": "cypress.json" }],
+    "terminal.integrated.env.windows": { "NODE_ENV": "development" },
+    "terminal.integrated.env.linux": { "NODE_ENV": "development" },
+    "terminal.integrated.env.osx": { "NODE_ENV": "development" },
 
     // Code Navigation and Aliases
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "typescript.referencesCodeLens.enabled": true,
     "typescript.implementationsCodeLens.enabled": true,
     "typescript.suggest.autoImports": true,
-
-    // Prettier Configuration
-    "prettier.requireConfig": true,
-    //"prettier.configPath": "./submodules/gallimore-dev-tools/.prettierrc",
-    "prettier.useTabs": false,
-    "prettier.singleQuote": true,
-    "prettier.trailingComma": "all",
-
-    // Integrated Testing & Debugging
-    "jest.autoRun": {
-      "watch": true,
-      "onSave": "test-file",
-    },
-    "cypress.resolvers": [
-      {
-        "cypress": "cypress.json",
-      },
-    ],
-    "terminal.integrated.env.windows": {
-      "NODE_ENV": "development",
-    },
-    "terminal.integrated.env.linux": {
-      "NODE_ENV": "development",
-    },
-    "terminal.integrated.env.osx": {
-      "NODE_ENV": "development",
-    },
 
     // Custom Clean-LLM Architecture Configurations
     "files.associations": {
@@ -95,15 +82,17 @@
       "*.controller.ts": "typescript",
       "*.integration.ts": "typescript",
     },
-    "workbench.editorAssociations": {
-      "*.md": "default",
-    },
+    "workbench.editorAssociations": { "*.md": "default" },
     "explorer.sortOrder": "type",
+
+    // Appearance Customizations
     "workbench.colorCustomizations": {
       "activityBar.background": "#002b36",
       "titleBar.activeBackground": "#073642",
       "titleBar.activeForeground": "#839496",
     },
+
+    // Spell Check and Language Support
     "cSpell.words": [
       "gallimore",
       "inversify",
@@ -131,9 +120,90 @@
       "skus",
       "unverify",
       "veracore",
-      "wips"
+      "wips",
     ],
+
+    // Docker Support for Microservices
+    "docker.dockerComposeFile": [
+      "docker-compose.yml",
+      "submodules/nufacturing/docker-compose.yml",
+      "submodules/nufulfillment-veracore/docker-compose.yml",
+    ],
+    "docker.containers.restart": "on-failure",
+
+    // Git Graph for Branch Visualization
+    "git-graph.repository.commits.loadMoreLimit": 100,
+    "git-graph.defaultColumnVisibility": {
+      "author": true,
+      "date": true,
+      "message": true,
+    },
+
+    // Code Snippets for Consistency
+    "editor.snippets": {
+      "typescript": {
+        "dto": {
+          "prefix": "dto",
+          "body": ["export class ${1:ExampleDTO} {", "  $2", "}"],
+          "description": "Create a Data Transfer Object template",
+        },
+      },
+    },
+
+    // Auto Close Brackets and Quotes
+    "editor.autoClosingBrackets": "always",
+    "editor.autoClosingQuotes": "always",
+    "editor.autoSurround": "brackets",
+
+    // Enhanced Markdown Preview
+    "markdown.preview.fontSize": 14,
+    "markdown.preview.scrollEditorWithPreview": true,
+    "markdown.preview.lineHeight": 1.6,
+
+    // Multi-root Workspace Support
+    "workspaceFolders": [
+      { "name": "API", "path": "." },
+      { "name": "Frontend", "path": "submodules/nufacturing" },
+      {
+        "name": "Fulfillment Integration",
+        "path": "submodules/nufulfillment-veracore",
+      },
+    ],
+
+    // Path IntelliSense for Custom Aliases
+    "typescript.suggest.pathIntelliSense": true,
+
+    // SCSS and CSS Linting with Stylelint
+    "stylelint.enable": true,
+    "stylelint.validate": ["scss", "css"],
+    "stylelint.config": {
+      "extends": "stylelint-config-standard",
+      "rules": {
+        "color-hex-case": "lower",
+        "block-no-empty": true,
+      },
+    },
+
+    // Auto-save Configurations
+    "files.autoSave": "onFocusChange",
+    "files.autoSaveDelay": 1000,
+
+    // Markdown Lint for Documentation Consistency
+    "markdownlint.config": {
+      "default": true,
+      "MD013": false, // Line length
+      "MD029": { "style": "ordered" }, // Ordered list item prefix
+    },
+
+    // Improved Editor Rulers
+    "editor.rulers": [80, 100, 120],
+
+    // Code Spell Checker Configuration
+    "cSpell.enabled": true,
+    "cSpell.language": "en",
+    "cSpell.showStatus": true,
   },
+
   "launch": {
     "compounds": [
       {
@@ -149,9 +219,7 @@
         "program": "${workspaceFolder}/src/main.ts",
         "preLaunchTask": "tsc: build - tsconfig.json",
         "outFiles": ["${workspaceFolder}/dist/**/*.js"],
-        "env": {
-          "NODE_ENV": "development",
-        },
+        "env": { "NODE_ENV": "development" },
         "sourceMaps": true,
         "skipFiles": ["<node_internals>/**"],
       },
@@ -164,6 +232,7 @@
       },
     ],
   },
+
   "tasks": {
     "version": "2.0.0",
     "tasks": [
@@ -191,8 +260,16 @@
         "problemMatcher": ["$jest"],
         "detail": "Run all unit tests in the workspace.",
       },
+      {
+        "label": "docker-compose up",
+        "type": "shell",
+        "command": "docker-compose up",
+        "detail": "Run all services in Docker Compose",
+        "group": "build",
+      },
     ],
   },
+
   "extensions": {
     "recommendations": [
       "dbaeumer.vscode-eslint",
@@ -203,6 +280,11 @@
       "msjsdiag.debugger-for-chrome",
       "cypress.cypress",
       "streetsidesoftware.code-spell-checker",
+      "editorconfig.editorconfig",
+      "stylelint.vscode-stylelint",
+      "github.vscode-pull-request-github",
+      "hediet.vscode-drawio",
+      "pflannery.vscode-versionlens",
     ],
   },
 }
