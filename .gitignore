@@ -35,7 +35,6 @@ Thumbs.db
 *.sln
 
 # npm and Yarn files
-package-lock.json
 yarn.lock
 .pnp/
 .pnp.js
