@@ -75,7 +75,10 @@
     "inversify": "^6.0.2",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
+<<<<<<< HEAD
     "module-alias": "^2.2.3",
+=======
+>>>>>>> development
     "mongodb": "^6.9.0",
     "mongoose": "^8.6.1",
     "node-cron": "^3.0.3",
