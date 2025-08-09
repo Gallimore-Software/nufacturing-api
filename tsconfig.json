@@ -1,0 +1,70 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": false, // Set to false to emit compiled files
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "typeRoots": ["node_modules/@types", "@types", "./node_modules/@types"],
+    "baseUrl": "./",
+    "outDir": "./dist", // Output compiled files to the dist directory
+    "rootDir": "./",
+    "paths": {
+      "@app/*": ["src/app/*"],
+      "@event-handlers/*": ["src/app/event-handlers/*"],
+      "@mappers/*": ["src/app/mappers/*"],
+      "@services/*": ["src/app/services/*"],
+      "@use-cases/*": ["src/app/use-cases/*"],
+      "@domain/*": ["src/domain/*"],
+      "@entities/*": ["src/domain/entities/*"],
+      "@errors/*": ["src/domain/errors/*"],
+      "@events/*": ["src/domain/events/*"],
+      "@repository-interfaces/*": ["src/domain/interfaces/repositories/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
+      "@event-dispatchers/*": ["src/infrastructure/event-dispatchers/*"],
+      "@logging/*": ["src/infrastructure/logging/*"],
+      "@notifications/*": ["src/infrastructure/notifications/*"],
+      "@models/*": ["src/infrastructure/persistence/models/*"],
+      "@repositories/*": ["src/infrastructure/persistence/repositories/*"],
+      "@scheduling/*": ["src/infrastructure/scheduling/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@dtos/*": ["src/interfaces/dtos/*"],
+      "@controllers/*": ["src/interfaces/http/controllers/*"],
+      "@routes/*": ["src/interfaces/http/routes/*"],
+      "@swagger/*": ["src/infrastructure/swagger/*"],
+      "@validation-schemas/*": ["src/interfaces/validation-schemas/*"],
+      "@middleware/*": ["src/interfaces/http/middleware/*"],
+      "@scripts/*": ["scripts/*"],
+      "@utils/*": ["src/utils/*"],
+      "@docs/*": ["docs/*"],
+      "@tests/*": ["__tests__/*"],
+      "@nufacturing/*": ["submodules/nufacturing/src/*"],
+      "@nufulfillment/*": ["submodules/nufulfillment-veracore/src/*"],
+      "@gallimore-devtools/*": ["submodules/gallimore-dev-tools/src/*"]
+    }
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "include": ["src/**/*.ts", "src/main.ts", "scripts/*"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.e2e.ts",
+    "**/__mocks__/**/*"
+  ]
+}

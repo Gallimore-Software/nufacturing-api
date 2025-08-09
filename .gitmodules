@@ -1,6 +1,9 @@
-[submodule "nufacturing"]
-	path = nufacturing
-	url = https://github.com/gallimore-software/nufacturing
-[submodule "clients/nufacturing"]
-	path = clients/nufacturing
-	url = https://github.com/gallimore-software/nufacturing
+[submodule "submodules/nufulfillment-veracore"]
+	path = submodules/nufulfillment-veracore
+	url = git@github.com:Gallimore-Software/nufulfillment-veracore.git
+[submodule "submodules/nufacturing"]
+	path = submodules/nufacturing
+	url = git@github.com:Gallimore-Software/nufacturing.git
+[submodule "submodules/gallimore-devtools"]
+	path = submodules/gallimore-devtools
+	url = git@github.com:Gallimore-Software/gallimore-devtools.git
